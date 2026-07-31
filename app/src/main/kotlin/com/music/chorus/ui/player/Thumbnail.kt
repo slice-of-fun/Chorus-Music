@@ -79,7 +79,6 @@ import coil3.SingletonImageLoader
 import coil3.compose.AsyncImage
 import coil3.request.CachePolicy
 import coil3.request.ImageRequest
-import pushkar.chorus.music.LocalListenTogetherManager
 import pushkar.chorus.music.LocalPlayerConnection
 import pushkar.chorus.music.R
 import pushkar.chorus.music.constants.CropAlbumArtKey
@@ -92,7 +91,6 @@ import pushkar.chorus.music.constants.SeekExtraSeconds
 import pushkar.chorus.music.constants.SwipeThumbnailKey
 import pushkar.chorus.music.constants.ThumbnailCornerRadiusKey
 import pushkar.chorus.music.constants.ThumbnailCornerRadius
-import pushkar.chorus.music.listentogether.RoomRole
 import pushkar.chorus.music.ui.component.CastButton
 import pushkar.chorus.music.utils.rememberEnumPreference
 import pushkar.chorus.music.constants.CanvasThumbnailAnimationKey
@@ -511,9 +509,6 @@ private fun ThumbnailHeader(
     textColor: Color,
     modifier: Modifier = Modifier
 ) {
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val listenTogetherRoleState = listenTogetherManager?.role?.collectAsState(initial = RoomRole.NONE)
-    val isListenTogetherGuest by listenTogetherManager?.guestPlaybackRestricted?.collectAsState(initial = false) ?: remember { mutableStateOf(false) }
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -525,20 +520,11 @@ private fun ThumbnailHeader(
                 .align(Alignment.Center)
                 .padding(horizontal = 48.dp)
         ) {
-            
-            if (listenTogetherRoleState?.value != RoomRole.NONE) {
-                Text(
-                    text = if (listenTogetherRoleState?.value == RoomRole.HOST) "Hosting Listen Together" else "Listening Together",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = textColor
-                )
-            } else {
-                Text(
-                    text = stringResource(R.string.now_playing),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = textColor
-                )
-            }
+            Text(
+                text = stringResource(R.string.now_playing),
+                style = MaterialTheme.typography.titleMedium,
+                color = textColor
+            )
             val playingFrom = albumTitle ?: queueTitle 
             androidx.compose.animation.AnimatedContent(
                 targetState = playingFrom,

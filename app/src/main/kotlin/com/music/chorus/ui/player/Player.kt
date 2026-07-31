@@ -153,7 +153,6 @@ import coil3.request.allowHardware
 import coil3.toBitmap
 import pushkar.chorus.music.LocalDatabase
 import pushkar.chorus.music.LocalDownloadUtil
-import pushkar.chorus.music.LocalListenTogetherManager
 import pushkar.chorus.music.LocalPlayerConnection
 import pushkar.chorus.music.R
 import pushkar.chorus.music.constants.AudioQuality
@@ -180,7 +179,6 @@ import pushkar.chorus.music.db.entities.LyricsEntity
 import pushkar.chorus.music.extensions.SwipeGesture
 import pushkar.chorus.music.extensions.togglePlayPause
 import pushkar.chorus.music.extensions.toggleRepeatMode
-import pushkar.chorus.music.listentogether.RoomRole
 import pushkar.chorus.music.models.MediaMetadata
 import pushkar.chorus.music.playback.ExoDownloadService
 import pushkar.chorus.music.chorusmusic.getConnectedBluetoothDeviceName
@@ -418,10 +416,7 @@ fun BottomSheetPlayer(
     val sliderStyle by rememberEnumPreference(SliderStyleKey, SliderStyle.DEFAULT)
     val squigglySlider by rememberPreference(SquigglySliderKey, defaultValue = false)
     
-    
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val isListenTogetherGuest by listenTogetherManager?.guestPlaybackRestricted?.collectAsState(initial = false) ?: remember { mutableStateOf(false) }
-    
+    val isListenTogetherGuest = false
     
     val castHandler = remember(playerConnection) {
         try {

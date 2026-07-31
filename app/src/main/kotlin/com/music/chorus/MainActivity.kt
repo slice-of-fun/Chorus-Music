@@ -161,8 +161,6 @@ import pushkar.chorus.music.constants.DynamicThemeKey
 import pushkar.chorus.music.constants.EnableHighRefreshRateKey
 import pushkar.chorus.music.constants.FloatingToolbarBottomPadding
 import pushkar.chorus.music.constants.FloatingToolbarHorizontalPadding
-import pushkar.chorus.music.constants.ListenTogetherInTopBarKey
-import pushkar.chorus.music.constants.ListenTogetherUsernameKey
 import pushkar.chorus.music.constants.MiniPlayerBottomSpacing
 import pushkar.chorus.music.constants.MiniPlayerHeight
 import pushkar.chorus.music.constants.NavigationBarAnimationSpec
@@ -251,8 +249,6 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var syncUtils: SyncUtils
 
-    @Inject
-    lateinit var listenTogetherManager: pushkar.chorus.music.listentogether.ListenTogetherManager
     private lateinit var navController: NavHostController
     private var pendingIntent: Intent? = null
 
@@ -264,8 +260,6 @@ class MainActivity : ComponentActivity() {
                 try {
                     playerConnection = PlayerConnection(this@MainActivity, service, database, lifecycleScope)
                     Timber.tag("MainActivity").d("PlayerConnection created successfully")
-                    
-                    listenTogetherManager.setPlayerConnection(playerConnection)
                 } catch (e: Exception) {
                     Timber.tag("MainActivity").e(e, "Failed to create PlayerConnection")
                     
@@ -273,7 +267,6 @@ class MainActivity : ComponentActivity() {
                         delay(500)
                         try {
                             playerConnection = PlayerConnection(this@MainActivity, service, database, lifecycleScope)
-                            listenTogetherManager.setPlayerConnection(playerConnection)
                         } catch (e2: Exception) {
                             Timber.tag("MainActivity").e(e2, "Failed to create PlayerConnection on retry")
                         }
@@ -283,8 +276,6 @@ class MainActivity : ComponentActivity() {
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
-            
-            listenTogetherManager.setPlayerConnection(null)
             playerConnection?.dispose()
             playerConnection = null
         }
@@ -359,9 +350,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        
-        listenTogetherManager.initialize()
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             val locale = dataStore[AppLanguageKey]
@@ -593,14 +581,7 @@ class MainActivity : ComponentActivity() {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val (previousTab, setPreviousTab) = rememberSaveable { mutableStateOf("home") }
 
-                val (listenTogetherInTopBar) = rememberPreference(ListenTogetherInTopBarKey, defaultValue = true)
-                val navigationItems = remember(listenTogetherInTopBar) { 
-                    if (listenTogetherInTopBar) {
-                        Screens.MainScreens.filter { it != Screens.ListenTogether }
-                    } else {
-                        Screens.MainScreens
-                    }
-                }
+                val navigationItems = remember { Screens.MainScreens }
                 val (useNewMiniPlayerDesign) = rememberPreference(UseNewMiniPlayerDesignKey, defaultValue = true)
                 val defaultOpenTab = remember {
                     dataStore[DefaultOpenTabKey].toEnum(defaultValue = NavigationTab.HOME)
@@ -617,7 +598,6 @@ class MainActivity : ComponentActivity() {
                     listOf(
                         Screens.Home.route,
                         Screens.Library.route,
-                        Screens.ListenTogether.route,
                         "settings",
                     )
                 }
@@ -933,7 +913,7 @@ class MainActivity : ComponentActivity() {
                     LocalDownloadUtil provides downloadUtil,
                     LocalShimmerTheme provides getShimmerTheme(),
                     LocalSyncUtils provides syncUtils,
-                    LocalListenTogetherManager provides listenTogetherManager,
+                    LocalListenTogetherManager provides null,
                     LocalGlassEffectConfig provides glassEffectConfig,
                     LocalAppBackdrop provides appBackdrop,
                 ) {

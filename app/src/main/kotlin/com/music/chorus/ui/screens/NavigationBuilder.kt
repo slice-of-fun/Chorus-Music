@@ -52,8 +52,6 @@ import pushkar.chorus.music.ui.screens.settings.AccountSettingsScreen
 import pushkar.chorus.music.ui.screens.settings.StorageSettings
 import pushkar.chorus.music.ui.screens.settings.ThemeScreen
 import pushkar.chorus.music.ui.screens.settings.AiSettings
-
-import pushkar.chorus.music.ui.screens.settings.integrations.ListenTogetherSettings
 import pushkar.chorus.music.ui.screens.settings.UpdateSettings
 import pushkar.chorus.music.chorusmusic.updater.UpdateScreen
 import pushkar.chorus.music.utils.rememberEnumPreference
@@ -106,19 +104,6 @@ fun NavGraphBuilder.navigationBuilder(
         LibraryScreen(navController)
     }
 
-    composable(Screens.ListenTogether.route) {
-        ListenTogetherScreen(navController, showTopBar = false)
-    }
-
-    composable(
-        route = "listen_together_from_topbar",
-    ) {
-        ListenTogetherScreen(navController, showTopBar = true)
-    }
-
-    composable("listen_together/chat") {
-        CommentTogetherScreen(navController)
-    }
 
     composable("history") {
         HistoryScreen(navController)
@@ -453,9 +438,6 @@ fun NavGraphBuilder.navigationBuilder(
         SpotifyImportScreen(navController)
     }
 
-    composable(route = "settings/integrations/listen_together") {
-        ListenTogetherSettings(navController, scrollBehavior)
-    }
 
     composable(
         route = "settings/about?highlightKey={highlightKey}",

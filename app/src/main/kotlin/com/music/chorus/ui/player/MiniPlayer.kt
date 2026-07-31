@@ -102,7 +102,6 @@ import coil3.request.ImageRequest
 import coil3.request.allowHardware
 import coil3.toBitmap
 import pushkar.chorus.music.LocalDatabase
-import pushkar.chorus.music.LocalListenTogetherManager
 import pushkar.chorus.music.LocalPlayerConnection
 import pushkar.chorus.music.R
 import pushkar.chorus.music.constants.CropAlbumArtKey
@@ -116,7 +115,6 @@ import pushkar.chorus.music.constants.SwipeThumbnailKey
 import pushkar.chorus.music.constants.ThumbnailCornerRadius
 import pushkar.chorus.music.constants.UseNewMiniPlayerDesignKey
 import pushkar.chorus.music.db.entities.ArtistEntity
-import pushkar.chorus.music.listentogether.ListenTogetherManager
 import pushkar.chorus.music.models.MediaMetadata
 import pushkar.chorus.music.playback.CastConnectionHandler
 import pushkar.chorus.music.playback.PlayerConnection
@@ -269,9 +267,7 @@ private fun NewMiniPlayer(
     val swipeSensitivity by rememberPreference(SwipeSensitivityKey, 0.73f)
     val swipeThumbnailPref by rememberPreference(SwipeThumbnailKey, true)
     
-    
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val isListenTogetherGuest = listenTogetherManager?.let { it.isGuestPlaybackRestricted } ?: false
+    val isListenTogetherGuest = false
     val swipeThumbnail = swipeThumbnailPref && !isListenTogetherGuest
     
     val layoutDirection = LocalLayoutDirection.current
@@ -445,7 +441,7 @@ private fun NewMiniPlayer(
                     playbackState = playbackState,
                     isCasting = isCasting,
                     castHandler = castHandler,
-                    listenTogetherManager = listenTogetherManager,
+                    listenTogetherManager = null,
                     canSkipPrevious = canSkipPrevious,
                     canSkipNext = canSkipNext,
                     onSurfaceColor = onSurfaceColor,
@@ -613,9 +609,7 @@ private fun LegacyMiniPlayer(
     val swipeSensitivity by rememberPreference(SwipeSensitivityKey, 0.73f)
     val swipeThumbnailPref by rememberPreference(SwipeThumbnailKey, true)
     
-    
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val isListenTogetherGuest = listenTogetherManager?.let { it.isGuestPlaybackRestricted } ?: false
+    val isListenTogetherGuest = false
     val swipeThumbnail = swipeThumbnailPref && !isListenTogetherGuest
 
     val layoutDirection = LocalLayoutDirection.current
@@ -744,7 +738,7 @@ private fun LegacyMiniPlayer(
                 isCasting = isCasting,
                 castHandler = castHandler,
                 playerConnection = playerConnection,
-                listenTogetherManager = listenTogetherManager
+                listenTogetherManager = null
             )
 
             IconButton(

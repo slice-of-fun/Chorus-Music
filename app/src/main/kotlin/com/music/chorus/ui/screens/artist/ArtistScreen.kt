@@ -92,7 +92,6 @@ import com.music.innertube.models.PlaylistItem
 import com.music.innertube.models.SongItem
 import com.music.innertube.models.WatchEndpoint
 import pushkar.chorus.music.LocalDatabase
-import pushkar.chorus.music.LocalListenTogetherManager
 import pushkar.chorus.music.LocalPlayerAwareWindowInsets
 import pushkar.chorus.music.LocalPlayerConnection
 import pushkar.chorus.music.R
@@ -158,8 +157,7 @@ fun ArtistScreen(
     val haptic = LocalHapticFeedback.current
     val coroutineScope = rememberCoroutineScope()
     val playerConnection = LocalPlayerConnection.current ?: return
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val isGuest = listenTogetherManager?.isGuestPlaybackRestricted == true
+    val isGuest = false
     val isPlaying by playerConnection.isEffectivelyPlaying.collectAsState()
     val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
     val artistPage = viewModel.artistPage

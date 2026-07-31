@@ -73,7 +73,6 @@ highlightKey: String? = null) {
     val accountText = stringResource(R.string.account)
     val appearanceText = stringResource(R.string.appearance)
     val playerText = stringResource(R.string.player_and_audio)
-    val listenTogetherText = stringResource(R.string.listen_together)
     val contentText = stringResource(R.string.content)
     val aiLyricsText = stringResource(R.string.ai_lyrics_translation)
     val privacyText = stringResource(R.string.privacy)
@@ -206,16 +205,7 @@ highlightKey: String? = null) {
                     )
                 )
             }
-            if (listenTogetherText.lowercase().contains(searchLower)) {
-                add(
-                    Material3SettingsItem(
-    isHighlighted = (highlightKey == listenTogetherText),
-                        icon = painterResource(R.drawable.group),
-                        title = { Text(listenTogetherText) },
-                        onClick = { navController.navigate(Screens.ListenTogether.route) }
-                    )
-                )
-            }
+
             if (contentText.lowercase().contains(searchLower)) {
                 add(
                     Material3SettingsItem(

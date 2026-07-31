@@ -98,28 +98,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
-            <!-- Listen Together invite link (HTTPS App Link - works after APK installation verification) -->
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="https" />
-                <data android:host="chorusmusic-listen-together.onrender.com" />
-                <data android:pathPrefix="/listen" />
-            </intent-filter>
-
-            <!-- Custom scheme for direct opens from browser (works in ALL browsers) -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="chorusmusic" />
-                <data android:host="listen" />
-            </intent-filter>
 
             <!-- Chorus Music Share Links -->
             <intent-filter android:autoVerify="true">
@@ -298,11 +276,6 @@
             android:name="androidx.work.impl.foreground.SystemForegroundService"
             android:foregroundServiceType="dataSync"
             tools:node="merge" />
-
-        <!-- Receiver for Listen Together notification actions (Approve/Reject) -->
-        <receiver
-            android:name=".listentogether.ListenTogetherActionReceiver"
-            android:exported="false" />
 
         <receiver
             android:name="androidx.media3.session.MediaButtonReceiver"

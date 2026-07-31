@@ -110,7 +110,6 @@ import androidx.media3.common.Player
 import androidx.media3.common.Timeline
 import androidx.media3.exoplayer.source.ShuffleOrder.DefaultShuffleOrder
 import androidx.navigation.NavController
-import pushkar.chorus.music.LocalListenTogetherManager
 import pushkar.chorus.music.LocalPlayerConnection
 import pushkar.chorus.music.R
 import pushkar.chorus.music.constants.ListItemHeight
@@ -121,7 +120,6 @@ import pushkar.chorus.music.constants.UseNewPlayerDesignKey
 import pushkar.chorus.music.extensions.metadata
 import pushkar.chorus.music.extensions.move
 import pushkar.chorus.music.extensions.toggleRepeatMode
-import pushkar.chorus.music.listentogether.RoomRole
 import pushkar.chorus.music.models.MediaMetadata
 import pushkar.chorus.music.ui.component.ActionPromptDialog
 import pushkar.chorus.music.ui.component.BottomSheet
@@ -227,8 +225,7 @@ fun Queue(
     }
 
     
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val isListenTogetherGuest by listenTogetherManager?.guestPlaybackRestricted?.collectAsState(initial = false) ?: remember { mutableStateOf(false) }
+    val isListenTogetherGuest = false
 
     val playerConnection = LocalPlayerConnection.current ?: return
     val isPlaying by playerConnection.isEffectivelyPlaying.collectAsState()

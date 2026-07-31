@@ -73,7 +73,6 @@ import pushkar.chorus.music.constants.GridItemSize
 import pushkar.chorus.music.constants.GridItemsSizeKey
 import pushkar.chorus.music.constants.HidePlayerThumbnailKey
 import pushkar.chorus.music.constants.LibraryFilter
-import pushkar.chorus.music.constants.ListenTogetherInTopBarKey
 import pushkar.chorus.music.constants.LyricsAnimationStyle
 import pushkar.chorus.music.constants.LyricsAnimationStyleKey
 import pushkar.chorus.music.constants.LyricsStandardBlurKey
@@ -292,10 +291,6 @@ highlightKey: String? = null) {
         showRestartDialog = true
     }
 
-    val (listenTogetherInTopBar, onListenTogetherInTopBarChange) = rememberPreference(
-        ListenTogetherInTopBarKey,
-        defaultValue = true
-    )
 
     val (swipeToSong, onSwipeToSongChange) = rememberPreference(
         SwipeToSongKey,
@@ -1847,28 +1842,6 @@ highlightKey: String? = null) {
                         )
                     },
                     onClick = { onSwipeToRemoveSongChange(!swipeToRemoveSong) }
-                ),
-                Material3SettingsItem(
-    isHighlighted = (highlightKey == stringResource(R.string.listen_together_in_top_bar)),
-                    icon = painterResource(R.drawable.group_outlined),
-                    title = { Text(stringResource(R.string.listen_together_in_top_bar)) },
-                    description = { Text(stringResource(R.string.listen_together_in_top_bar_desc)) },
-                    trailingContent = {
-                        Switch(
-                            checked = listenTogetherInTopBar,
-                            onCheckedChange = onListenTogetherInTopBarChange,
-                            thumbContent = {
-                                Icon(
-                                    painter = painterResource(
-                                        id = if (listenTogetherInTopBar) R.drawable.check else R.drawable.close
-                                    ),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(SwitchDefaults.IconSize)
-                                )
-                            }
-                        )
-                    },
-                    onClick = { onListenTogetherInTopBarChange(!listenTogetherInTopBar) }
                 ),
                 Material3SettingsItem(
     isHighlighted = (highlightKey == stringResource(R.string.grid_cell_size)),

@@ -163,14 +163,3 @@
 -keepattributes *Annotation*
 
 
-## Listen Together Serialization
--keep class pushkar.chorus.music.listentogether.** { *; }
--keepclassmembers class pushkar.chorus.music.listentogether.** {
-    *;
-}
--keepclassmembers class pushkar.chorus.music.listentogether.** {
-    *** Companion;
-}
--keepclasseswithmembers class pushkar.chorus.music.listentogether.** {
-    kotlinx.serialization.KSerializer serializer(...);
-}

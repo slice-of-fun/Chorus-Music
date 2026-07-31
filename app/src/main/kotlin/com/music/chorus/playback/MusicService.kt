@@ -245,15 +245,7 @@ class MusicService :
     @Inject
     lateinit var widgetManager: ChorusMusicWidgetManager
 
-    @Inject
-    lateinit var listenTogetherManager: pushkar.chorus.music.listentogether.ListenTogetherManager
-    
-
     private lateinit var audioManager: AudioManager
-    // Wi-Fi Lock: Prevents modern Wi-Fi 6/7 routers from putting the Wi-Fi chip into
-    // low-power sleep mode while music is actively streaming in the background.
-    // Without this, the router's power-saving protocol (Target Wake Time) causes
-    // packet delays, leading to audio buffering or playback stopping after the screen turns off.
     private var wifiLock: android.net.wifi.WifiManager.WifiLock? = null
     private var audioFocusRequest: AudioFocusRequest? = null
     private var lastAudioFocusState = AudioManager.AUDIOFOCUS_NONE
@@ -902,18 +894,12 @@ class MusicService :
 
 
 
-        combine(
-            dataStore.data.map { prefs ->
-                Triple(
-                    prefs[CrossfadeEnabledKey] ?: false,
-                    prefs[CrossfadeDurationKey] ?: 5f,
-                    prefs[CrossfadeGaplessKey] ?: true
-                )
-            },
-            listenTogetherManager.roomState
-        ) { (enabled, duration, gapless), roomState ->
-            
-            Triple(enabled && roomState == null, duration, gapless)
+        dataStore.data.map { prefs ->
+            Triple(
+                prefs[CrossfadeEnabledKey] ?: false,
+                prefs[CrossfadeDurationKey] ?: 5f,
+                prefs[CrossfadeGaplessKey] ?: true
+            )
         }
             .distinctUntilChanged()
             .collect(scope) { (enabled, duration, gapless) ->

@@ -12,8 +12,6 @@ import androidx.room.Room
 import pushkar.chorus.music.constants.MaxSongCacheSizeKey
 import pushkar.chorus.music.db.InternalDatabase
 import pushkar.chorus.music.db.MusicDatabase
-import pushkar.chorus.music.listentogether.ListenTogetherClient
-import pushkar.chorus.music.listentogether.ListenTogetherManager
 import pushkar.chorus.music.utils.dataStore
 import pushkar.chorus.music.utils.get
 import dagger.Module
@@ -130,16 +128,4 @@ object AppModule {
         )
     }
 
-    @Singleton
-    @Provides
-    fun provideListenTogetherClient(
-        @ApplicationContext context: Context,
-    ): ListenTogetherClient = ListenTogetherClient(context)
-
-    @Singleton
-    @Provides
-    fun provideListenTogetherManager(
-        @ApplicationContext context: Context,
-        client: ListenTogetherClient,
-    ): ListenTogetherManager = ListenTogetherManager(client, context)
 }
