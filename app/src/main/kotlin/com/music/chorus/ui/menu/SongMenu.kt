@@ -65,7 +65,6 @@ import coil3.compose.AsyncImage
 import com.music.innertube.YouTube
 import pushkar.chorus.music.LocalDatabase
 import pushkar.chorus.music.LocalDownloadUtil
-import pushkar.chorus.music.LocalListenTogetherManager
 import pushkar.chorus.music.LocalPlayerConnection
 import pushkar.chorus.music.LocalSyncUtils
 import pushkar.chorus.music.R
@@ -119,7 +118,6 @@ fun SongMenu(
         .collectAsState(initial = null)
     val coroutineScope = rememberCoroutineScope()
     val syncUtils = LocalSyncUtils.current
-    val listenTogetherManager = LocalListenTogetherManager.current
     val scope = rememberCoroutineScope()
     
     val (enableExportAsMp3) = rememberPreference(key = EnableExportAsMp3Key, defaultValue = false)
@@ -342,7 +340,7 @@ fun SongMenu(
     val configuration = LocalConfiguration.current
     val isPortrait = configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
-    val isGuest = listenTogetherManager?.isGuestPlaybackRestricted == true
+    val isGuest = false
 
     LazyColumn(
         contentPadding = PaddingValues(
@@ -412,30 +410,6 @@ fun SongMenu(
         item {
             Material3MenuGroup(
                 items = listOfNotNull(
-                    if (listenTogetherManager != null && listenTogetherManager.isGuestPlaybackRestricted) {
-                        Material3MenuItemData(
-                            title = { Text(text = stringResource(R.string.suggest_to_host)) },
-                            icon = {
-                                Icon(
-                                    painter = painterResource(R.drawable.queue_music),
-                                    contentDescription = null,
-                                )
-                            },
-                            onClick = {
-                                val durationMs = if (song.song.duration > 0) song.song.duration.toLong() * 1000 else 180000L
-                                val trackInfo = pushkar.chorus.music.listentogether.TrackInfo(
-                                    id = song.id,
-                                    title = song.song.title,
-                                    artist = orderedArtists.joinToString(", ") { it.name },
-                                    album = song.song.albumName,
-                                    duration = durationMs,
-                                    thumbnail = song.thumbnailUrl
-                                )
-                                listenTogetherManager.suggestTrack(trackInfo)
-                                onDismiss()
-                            }
-                        )
-                    } else null,
                     Material3MenuItemData(
                         title = { Text(text = stringResource(R.string.edit)) },
                         description = { Text(text = stringResource(R.string.edit_song)) },

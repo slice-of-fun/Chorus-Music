@@ -170,7 +170,7 @@ object TidalCanvasProvider {
                             name = resultTitle ?: songValidation ?: albumValidation ?: "",
                             artist = primaryArtist ?: artistValidation ?: "",
                             videoUrl = videoUrl,
-                            albumName = if (types == "TRACKS") albumObj?.get("title")?.jsonPrimitive?.contentOrNull else resultTitle
+                            albumName = if (types == "TRACKS") albumObj.get("title")?.jsonPrimitive?.contentOrNull else resultTitle
                         )
                     }
                 }

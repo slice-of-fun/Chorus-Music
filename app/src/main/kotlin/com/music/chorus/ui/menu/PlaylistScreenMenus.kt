@@ -14,7 +14,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.media3.exoplayer.offline.Download
-import pushkar.chorus.music.LocalListenTogetherManager
 import pushkar.chorus.music.R
 import pushkar.chorus.music.db.entities.Playlist
 import pushkar.chorus.music.db.entities.PlaylistSong
@@ -37,8 +36,7 @@ fun LocalPlaylistMenu(
     onQueue: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val isGuest = listenTogetherManager?.isGuestPlaybackRestricted == true
+    val isGuest = false
 
     val downloadMenuItem = when (downloadState) {
         Download.STATE_COMPLETED -> Material3MenuItemData(
@@ -239,8 +237,7 @@ fun AutoPlaylistMenu(
     onDownload: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val isGuest = listenTogetherManager?.isGuestPlaybackRestricted == true
+    val isGuest = false
 
     val downloadMenuItem = when (downloadState) {
         Download.STATE_COMPLETED -> Material3MenuItemData(
@@ -318,8 +315,7 @@ fun TopPlaylistMenu(
     onDownload: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val isGuest = listenTogetherManager?.isGuestPlaybackRestricted == true
+    val isGuest = false
 
     val downloadMenuItem = when (downloadState) {
         Download.STATE_COMPLETED -> Material3MenuItemData(
@@ -397,8 +393,7 @@ fun CachePlaylistMenu(
     onDownload: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val isGuest = listenTogetherManager?.isGuestPlaybackRestricted == true
+    val isGuest = false
 
     val downloadMenuItem = when (downloadState) {
         Download.STATE_COMPLETED -> Material3MenuItemData(

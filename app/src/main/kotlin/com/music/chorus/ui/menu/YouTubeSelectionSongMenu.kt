@@ -67,8 +67,7 @@ fun YouTubeSelectionSongMenu(
         mutableStateOf(false)
     }
 
-    val listenTogetherManager = pushkar.chorus.music.LocalListenTogetherManager.current
-    val isGuest = listenTogetherManager?.isGuestPlaybackRestricted == true
+    val isGuest = false
 
     var downloadState by remember {
         mutableIntStateOf(Download.STATE_STOPPED)

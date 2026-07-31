@@ -59,7 +59,6 @@ import com.music.innertube.models.SongItem
 import com.music.innertube.utils.completed
 import pushkar.chorus.music.LocalDatabase
 import pushkar.chorus.music.LocalDownloadUtil
-import pushkar.chorus.music.LocalListenTogetherManager
 import pushkar.chorus.music.LocalPlayerConnection
 import pushkar.chorus.music.R
 import pushkar.chorus.music.constants.ListThumbnailSize
@@ -102,8 +101,7 @@ fun YouTubePlaylistMenu(
     val database = LocalDatabase.current
     val downloadUtil = LocalDownloadUtil.current
     val playerConnection = LocalPlayerConnection.current ?: return
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val isGuest = listenTogetherManager?.isGuestPlaybackRestricted == true
+    val isGuest = false
     val dbPlaylist by database.playlistByBrowseId(playlist.id).collectAsState(initial = null)
     val isPinned by database.speedDialDao.isPinned(playlist.id).collectAsState(initial = false)
 

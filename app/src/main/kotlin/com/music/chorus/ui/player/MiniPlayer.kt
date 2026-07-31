@@ -441,7 +441,6 @@ private fun NewMiniPlayer(
                     playbackState = playbackState,
                     isCasting = isCasting,
                     castHandler = castHandler,
-                    listenTogetherManager = null,
                     canSkipPrevious = canSkipPrevious,
                     canSkipNext = canSkipNext,
                     onSurfaceColor = onSurfaceColor,
@@ -737,8 +736,7 @@ private fun LegacyMiniPlayer(
                 playbackState = playbackState,
                 isCasting = isCasting,
                 castHandler = castHandler,
-                playerConnection = playerConnection,
-                listenTogetherManager = null
+                playerConnection = playerConnection
             )
 
             IconButton(
@@ -777,13 +775,12 @@ private fun LegacyPlayPauseButton(
     isCasting: Boolean,
     castHandler: CastConnectionHandler?,
     playerConnection: PlayerConnection,
-    listenTogetherManager: ListenTogetherManager?,
     tint: Color = androidx.compose.material3.LocalContentColor.current
 ) {
     val isPlaying by playerConnection.isPlaying.collectAsState()
     val castIsPlaying by castHandler?.castIsPlaying?.collectAsState() ?: remember { mutableStateOf(false) }
     val effectiveIsPlaying = if (isCasting) castIsPlaying else isPlaying
-    val isListenTogetherGuest = listenTogetherManager?.let { it.isGuestPlaybackRestricted } ?: false
+    val isListenTogetherGuest = false
     val isMuted by playerConnection.isMuted.collectAsState()
 
 
@@ -1165,14 +1162,13 @@ private fun MiniPlayerControls(
     playbackState: Int,
     isCasting: Boolean,
     castHandler: CastConnectionHandler?,
-    listenTogetherManager: ListenTogetherManager?,
     canSkipPrevious: Boolean,
     canSkipNext: Boolean,
     onSurfaceColor: Color,
     primaryColor: Color,
     onPrimaryColor: Color
 ) {
-    val isListenTogetherGuest = listenTogetherManager?.let { it.isGuestPlaybackRestricted } ?: false
+    val isListenTogetherGuest = false
     val isPlaying by playerConnection.isPlaying.collectAsState()
     val castIsPlaying by castHandler?.castIsPlaying?.collectAsState() ?: remember { mutableStateOf(false) }
     val effectiveIsPlaying = if (isCasting) castIsPlaying else isPlaying

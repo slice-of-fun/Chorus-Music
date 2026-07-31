@@ -56,7 +56,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.music.innertube.YouTube
 import pushkar.chorus.music.LocalDatabase
 import pushkar.chorus.music.LocalDownloadUtil
-import pushkar.chorus.music.LocalListenTogetherManager
 import pushkar.chorus.music.LocalPlayerConnection
 import pushkar.chorus.music.R
 import pushkar.chorus.music.constants.EnableExportAsMp3Key
@@ -65,7 +64,6 @@ import pushkar.chorus.music.constants.ExportedSongIdsKey
 import pushkar.chorus.music.constants.ExportingSongIdsKey
 import pushkar.chorus.music.constants.ListItemHeight
 import pushkar.chorus.music.extensions.toggleRepeatMode
-import pushkar.chorus.music.listentogether.RoomRole
 import pushkar.chorus.music.models.MediaMetadata
 import pushkar.chorus.music.models.toMediaMetadata
 import pushkar.chorus.music.playback.ExoDownloadService
@@ -110,8 +108,7 @@ fun OldPlayerMenu(
 
     val download by LocalDownloadUtil.current.getDownload(mediaMetadata.id).collectAsState(initial = null)
 
-    val listenTogetherManager = LocalListenTogetherManager.current
-    val isListenTogetherGuest by listenTogetherManager?.guestPlaybackRestricted?.collectAsState(initial = false) ?: remember { mutableStateOf(false) }
+    val isListenTogetherGuest = false
 
     val currentSong by playerConnection.currentSong.collectAsState(initial = null)
     val librarySong by database.song(mediaMetadata.id).collectAsState(initial = null)
@@ -133,7 +130,6 @@ fun OldPlayerMenu(
     val isExported = remember(exportedSongIds, mediaMetadata.id) { exportedSongIds.split(",").contains(mediaMetadata.id) }
 
     var showChoosePlaylistDialog by rememberSaveable { mutableStateOf(false) }
-    var showListenTogetherDialog by rememberSaveable { mutableStateOf(false) }
     var showSelectArtistDialog by rememberSaveable { mutableStateOf(false) }
     var showPitchTempoDialog by rememberSaveable { mutableStateOf(false) }
     var refetchIconDegree by remember { mutableFloatStateOf(0f) }
@@ -155,12 +151,6 @@ fun OldPlayerMenu(
             listOf(mediaMetadata.id)
         },
         onDismiss = { showChoosePlaylistDialog = false }
-    )
-
-    ListenTogetherDialog(
-        visible = showListenTogetherDialog,
-        mediaMetadata = mediaMetadata,
-        onDismiss = { showListenTogetherDialog = false }
     )
 
     if (showSelectArtistDialog) {
@@ -655,47 +645,6 @@ fun OldPlayerMenu(
                         }
                     )
                 )
-            )
-        }
-
-        item { Spacer(modifier = Modifier.height(12.dp)) }
-
-        
-        item {
-            Material3MenuGroup(
-                items = buildList {
-                    add(
-                        Material3MenuItemData(
-                            title = { Text(text = stringResource(R.string.listen_together)) },
-                            icon = {
-                                Icon(
-                                    painter = painterResource(R.drawable.group),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(24.dp)
-                                )
-                            },
-                            onClick = { showListenTogetherDialog = true }
-                        )
-                    )
-                    if (isListenTogetherGuest) {
-                        add(
-                            Material3MenuItemData(
-                                title = { Text(text = stringResource(R.string.resync)) },
-                                icon = {
-                                    Icon(
-                                        painter = painterResource(R.drawable.replay),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(24.dp)
-                                    )
-                                },
-                                onClick = {
-                                    listenTogetherManager?.requestSync()
-                                    onDismiss()
-                                }
-                            )
-                        )
-                    }
-                }
             )
         }
 

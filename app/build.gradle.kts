@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 import java.net.URL
@@ -193,7 +195,25 @@ android {
             useLegacyPackaging = true
             keepDebugSymbols += listOf(
                 "**/libandroidx.graphics.path.so",
-                "**/libdatastore_shared_counter.so"
+                "**/libdatastore_shared_counter.so",
+                "**/libavcodec.so",
+                "**/libavcodec_neon.so",
+                "**/libavdevice.so",
+                "**/libavdevice_neon.so",
+                "**/libavfilter.so",
+                "**/libavfilter_neon.so",
+                "**/libavformat.so",
+                "**/libavformat_neon.so",
+                "**/libavutil.so",
+                "**/libavutil_neon.so",
+                "**/libc++_shared.so",
+                "**/libffmpegkit.so",
+                "**/libffmpegkit_abidetect.so",
+                "**/libffmpegkit_armv7a_neon.so",
+                "**/libswresample.so",
+                "**/libswresample_neon.so",
+                "**/libswscale.so",
+                "**/libswscale_neon.so"
             )
         }
         resources {
