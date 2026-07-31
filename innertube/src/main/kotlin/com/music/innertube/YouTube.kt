@@ -1572,20 +1572,20 @@ object YouTube {
                     comment = CommentThreadRenderer.Comment(
                         commentRenderer = com.music.innertube.models.comment.CommentRenderer(
                             authorText = com.music.innertube.models.Runs(
-                                runs = listOf(com.music.innertube.models.Run(text = payload.author?.displayName ?: "Unknown", navigationEndpoint = null))
+                                listOf(com.music.innertube.models.Run(text = payload.author?.displayName ?: "Unknown", navigationEndpoint = null))
                             ),
                             authorThumbnail = com.music.innertube.models.Thumbnails(
                                 thumbnails = listOf(com.music.innertube.models.Thumbnail(url = payload.author?.avatarThumbnailUrl ?: "", width = 0, height = 0))
                             ),
                             contentText = com.music.innertube.models.Runs(
-                                runs = listOf(com.music.innertube.models.Run(text = payload.properties?.content?.content ?: "", navigationEndpoint = null))
+                                listOf(com.music.innertube.models.Run(text = payload.properties?.content?.content ?: "", navigationEndpoint = null))
                             ),
                             publishedTimeText = com.music.innertube.models.Runs(
-                                runs = listOf(com.music.innertube.models.Run(text = payload.properties?.publishedTime ?: "", navigationEndpoint = null))
+                                listOf(com.music.innertube.models.Run(text = payload.properties?.publishedTime ?: "", navigationEndpoint = null))
                             ),
                             commentId = commentId,
                             voteCount = com.music.innertube.models.Runs(
-                                runs = listOf(com.music.innertube.models.Run(text = likeCount, navigationEndpoint = null))
+                                listOf(com.music.innertube.models.Run(text = likeCount, navigationEndpoint = null))
                             ),
                             voteStatus = when (toolbarState?.likeState) {
                                 "TOOLBAR_LIKE_STATE_LIKE" -> "UPVOTE"
@@ -1663,20 +1663,20 @@ object YouTube {
 
                 com.music.innertube.models.comment.CommentRenderer(
                     authorText = com.music.innertube.models.Runs(
-                        runs = listOf(com.music.innertube.models.Run(text = payload.author?.displayName ?: "Unknown", navigationEndpoint = null))
+                        listOf(com.music.innertube.models.Run(text = payload.author?.displayName ?: "Unknown", navigationEndpoint = null))
                     ),
                     authorThumbnail = com.music.innertube.models.Thumbnails(
                         thumbnails = listOf(com.music.innertube.models.Thumbnail(url = payload.author?.avatarThumbnailUrl ?: "", width = 0, height = 0))
                     ),
                     contentText = com.music.innertube.models.Runs(
-                        runs = listOf(com.music.innertube.models.Run(text = payload.properties?.content?.content ?: "", navigationEndpoint = null))
+                        listOf(com.music.innertube.models.Run(text = payload.properties?.content?.content ?: "", navigationEndpoint = null))
                     ),
                     publishedTimeText = com.music.innertube.models.Runs(
-                        runs = listOf(com.music.innertube.models.Run(text = payload.properties?.publishedTime ?: "", navigationEndpoint = null))
+                        listOf(com.music.innertube.models.Run(text = payload.properties?.publishedTime ?: "", navigationEndpoint = null))
                     ),
                     commentId = payload.properties?.commentId ?: "reply-${mutation.hashCode()}",
                     voteCount = com.music.innertube.models.Runs(
-                        runs = listOf(com.music.innertube.models.Run(text = likeCount, navigationEndpoint = null))
+                        listOf(com.music.innertube.models.Run(text = likeCount, navigationEndpoint = null))
                     ),
                     voteStatus = when (toolbarState?.likeState) {
                         "TOOLBAR_LIKE_STATE_LIKE" -> "UPVOTE"

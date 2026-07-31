@@ -30,8 +30,8 @@ object NewReleaseAlbumPage {
                     )
                 } ?: return null,
             year =
-                renderer.subtitle.runs
-                    .lastOrNull()
+                renderer.subtitle?.runs
+                    ?.lastOrNull()
                     ?.text
                     ?.toIntOrNull(),
             thumbnail = renderer.thumbnailRenderer.musicThumbnailRenderer?.getThumbnailUrl() ?: return null,
