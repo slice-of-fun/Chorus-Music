@@ -22,42 +22,7 @@
 
 ---
 
-## 📱 App Screenshots
 
-<div align="center">
-  <table style="margin: 0 auto; border-collapse: collapse; border: none;">
-    <tr style="border: none;">
-      <td align="center" style="padding: 12px; border: none;">
-        <strong>🏠 Home Hub</strong><br><br>
-        <img src="Screenshots/sc_1.png" alt="Home Screen" width="220" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"/>
-      </td>
-      <td align="center" style="padding: 12px; border: none;">
-        <strong>💿 Audio Player</strong><br><br>
-        <img src="Screenshots/sc_2.png" alt="Music Player" width="220" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"/>
-      </td>
-      <td align="center" style="padding: 12px; border: none;">
-        <strong>🎤 Live Lyrics</strong><br><br>
-        <img src="Screenshots/sc_3.png" alt="Synchronized Lyrics" width="220" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"/>
-      </td>
-    </tr>
-    <tr style="border: none;">
-      <td align="center" style="padding: 12px; border: none;">
-        <strong>🔍 Discover & Search</strong><br><br>
-        <img src="Screenshots/sc_4.png" alt="Search & Explore" width="220" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"/>
-      </td>
-      <td align="center" style="padding: 12px; border: none;">
-        <strong>📚 Library Manager</strong><br><br>
-        <img src="Screenshots/sc_5.png" alt="Music Library" width="220" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"/>
-      </td>
-      <td align="center" style="padding: 12px; border: none;">
-        <strong>🧠 Chorus Find</strong><br><br>
-        <img src="Screenshots/sc_6.png" alt="Chorus Find" width="220" style="border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);"/>
-      </td>
-    </tr>
-  </table>
-</div>
-
----
 
 ## ⚡ Features at a Glance
 
