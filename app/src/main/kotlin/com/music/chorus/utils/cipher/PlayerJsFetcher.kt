@@ -1,4 +1,4 @@
-﻿package pushkar.chorus.music.utils.cipher
+package pushkar.chorus.music.utils.cipher
 
 import com.music.innertube.YouTube
 import kotlinx.coroutines.Dispatchers
@@ -140,7 +140,7 @@ object PlayerJsFetcher {
             return null
         }
 
-        val body = response.body.string() ?: return null
+        val body = response.body.string()
         val match = PLAYER_HASH_REGEX.find(body)
         return match?.groupValues?.get(1)
     }

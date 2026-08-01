@@ -1,4 +1,4 @@
-﻿package pushkar.chorus.music.ui.screens.settings
+package pushkar.chorus.music.ui.screens.settings
 
 import android.net.Uri
 import android.util.Base64
@@ -191,16 +191,14 @@ class LosslessContributeViewModel @Inject constructor(
                 val response = httpClient.newCall(request).execute()
                 if (response.isSuccessful) {
                     val responseBody = response.body.string()
-                    if (responseBody != null) {
-                        val jsonObject = json.parseToJsonElement(responseBody).jsonObject
-                        val token = jsonObject["access_token"]?.toString()?.replace("\"", "")
-                        
-                        if (token != null) {
-                            accessToken = token
-                            fetchUserProfile()
-                        } else {
-                            _uiState.value = LosslessContributeState.Error("Failed to parse access token.")
-                        }
+                    val jsonObject = json.parseToJsonElement(responseBody).jsonObject
+                    val token = jsonObject["access_token"]?.toString()?.replace("\"", "")
+                    
+                    if (token != null) {
+                        accessToken = token
+                        fetchUserProfile()
+                    } else {
+                        _uiState.value = LosslessContributeState.Error("Failed to parse access token.")
                     }
                 } else {
                     _uiState.value = LosslessContributeState.Error("Authentication failed.")
@@ -224,12 +222,10 @@ class LosslessContributeViewModel @Inject constructor(
             val response = httpClient.newCall(request).execute()
             if (response.isSuccessful) {
                 val body = response.body.string()
-                if (body != null) {
-                    val userObj = json.parseToJsonElement(body).jsonObject
-                    val username = userObj["login"]?.toString()?.replace("\"", "") ?: "Unknown"
-                    val avatar = userObj["avatar_url"]?.toString()?.replace("\"", "") ?: ""
-                    _uiState.value = LosslessContributeState.LoggedIn(username, avatar)
-                }
+                val userObj = json.parseToJsonElement(body).jsonObject
+                val username = userObj["login"]?.toString()?.replace("\"", "") ?: "Unknown"
+                val avatar = userObj["avatar_url"]?.toString()?.replace("\"", "") ?: ""
+                _uiState.value = LosslessContributeState.LoggedIn(username, avatar)
             } else {
                 _uiState.value = LosslessContributeState.Error("Failed to fetch GitHub profile.")
             }
@@ -320,7 +316,7 @@ class LosslessContributeViewModel @Inject constructor(
         val response = httpClient.newCall(request).execute()
         if (!response.isSuccessful) throw Exception("Failed to fork repository")
         
-        val body = response.body.string() ?: throw Exception("Empty response from fork API")
+        val body = response.body.string()
         val obj = json.parseToJsonElement(body).jsonObject
         val owner = obj["owner"]?.jsonObject?.get("login")?.toString()?.replace("\"", "") ?: throw Exception("Fork owner not found")
         val name = obj["name"]?.toString()?.replace("\"", "") ?: TARGET_REPO
@@ -337,7 +333,7 @@ class LosslessContributeViewModel @Inject constructor(
         val response = httpClient.newCall(syncRequest).execute()
         if (!response.isSuccessful) {
             val code = response.code
-            val errorText = response.body.string() ?: ""
+            val errorText = response.body.string()
             if (code == 409) {
                 throw Exception("Your fork has conflicting changes. Please delete the '$forkName' repository from your GitHub account and try again.")
             } else {
@@ -355,7 +351,7 @@ class LosslessContributeViewModel @Inject constructor(
         val refResponse = httpClient.newCall(refRequest).execute()
         if (!refResponse.isSuccessful) throw Exception("Failed to get main branch SHA")
         
-        val refBody = refResponse.body.string() ?: ""
+        val refBody = refResponse.body.string()
         val mainSha = json.parseToJsonElement(refBody).jsonObject["object"]?.jsonObject?.get("sha")?.toString()?.replace("\"", "")
         
         val branchJson = """
@@ -373,7 +369,7 @@ class LosslessContributeViewModel @Inject constructor(
         
         val branchResponse = httpClient.newCall(branchRequest).execute()
         if (!branchResponse.isSuccessful) {
-            val errorText = branchResponse.body.string() ?: ""
+            val errorText = branchResponse.body.string()
             if (!errorText.contains("already exists")) {
                 throw Exception("Failed to create branch at ${branchRequest.url}: $errorText")
             }
@@ -445,7 +441,7 @@ class LosslessContributeViewModel @Inject constructor(
         val prResponse = httpClient.newCall(prRequest).execute()
         if (!prResponse.isSuccessful) throw Exception("Failed to create Pull Request")
         
-        val prBodyStr = prResponse.body.string() ?: ""
+        val prBodyStr = prResponse.body.string()
         return json.parseToJsonElement(prBodyStr).jsonObject["html_url"]?.toString()?.replace("\"", "") ?: ""
     }
 
