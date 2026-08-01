@@ -96,6 +96,7 @@ class HomeViewModel @Inject constructor(
     val selectedChip = MutableStateFlow<HomePage.Chip?>(null)
     private val previousHomePage = MutableStateFlow<HomePage?>(null)
 
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     val aiRecommendedPlaylist = database.playlistsByNameAsc()
         .map { playlists -> playlists.find { it.playlist.name == "Recommended by AI" } }
         .flatMapLatest { playlist -> 
