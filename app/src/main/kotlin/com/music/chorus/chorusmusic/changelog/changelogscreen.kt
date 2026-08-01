@@ -153,9 +153,9 @@ fun ChangelogScreen(
                         val changelogJson = connection.inputStream.bufferedReader().use { it.readText() }
                         val changelogData = JSONObject(changelogJson)
                         
-                        val desc = changelogData.optString("description", null)
-                        val imageUrl = changelogData.optString("image", null)
-                        val warning = changelogData.optString("warning", null)
+                        val desc = changelogData.optString("description").takeIf { it.isNotEmpty() }
+                        val imageUrl = changelogData.optString("image").takeIf { it.isNotEmpty() }
+                        val warning = changelogData.optString("warning").takeIf { it.isNotEmpty() }
                         val changelogArray = changelogData.optJSONArray("changelog")
                         
                         val sections = mutableListOf<ChangelogSection>()
@@ -425,13 +425,8 @@ fun ChangelogScreen(
                                             val annotatedText = item.trim().parseMarkdown()
                                             Row(modifier = Modifier.padding(vertical = 4.dp), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                                                 Box(modifier = Modifier.padding(top = 8.dp).size(6.dp).background(MaterialTheme.colorScheme.primary, CircleShape))
-                                                ClickableText(
+                                                androidx.compose.material3.Text(
                                                     text = annotatedText,
-                                                    onClick = { offset ->
-                                                        annotatedText.getStringAnnotations("URL", offset, offset).firstOrNull()?.let {
-                                                            ContextCompat.startActivity(context, Intent(Intent.ACTION_VIEW, Uri.parse(it.item)), null)
-                                                        }
-                                                    },
                                                     style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface)
                                                 )
                                             }
@@ -528,9 +523,9 @@ private fun loadChangelogFromCache(context: Context, versionTag: String): Cached
         
         CachedChangelogData(
             sections = sections,
-            image = cacheData.optString("image", null).takeIf { !it.isNullOrBlank() },
-            description = cacheData.optString("description", null).takeIf { !it.isNullOrBlank() },
-            warning = cacheData.optString("warning", null).takeIf { !it.isNullOrBlank() }
+            image = cacheData.optString("image").takeIf { it.isNotEmpty() },
+            description = cacheData.optString("description").takeIf { it.isNotEmpty() },
+            warning = cacheData.optString("warning").takeIf { it.isNotEmpty() }
         )
     } catch (e: Exception) { null }
 }

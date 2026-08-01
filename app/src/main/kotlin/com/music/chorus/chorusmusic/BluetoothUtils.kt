@@ -27,10 +27,6 @@ fun isBluetoothHeadphoneConnected(context: Context): Boolean {
 fun getConnectedBluetoothDeviceName(context: Context): String? {
     val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-    
-    val isBluetoothActive = audioManager.isBluetoothA2dpOn || audioManager.isBluetoothScoOn
-    if (!isBluetoothActive) return null
-
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         val audioDevices = audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS)
         

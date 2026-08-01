@@ -67,6 +67,7 @@ fun resetAuthWebViewSession(
     }
 }
 
+@Suppress("DEPRECATION")
 private fun clearWebAuthStorage(context: Context) {
     val appContext = context.applicationContext
     WebStorage.getInstance().deleteAllData()

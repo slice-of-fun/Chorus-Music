@@ -330,9 +330,7 @@ object YTPlayerUtils {
         }
 
         
-        if (mainPlayerResponse == null) {
-            throw Exception("Failed to get player response")
-        }
+
 
         
         
@@ -512,7 +510,7 @@ object YTPlayerUtils {
                 if (currentClient.useWebPoTokens) {
                     try {
                         Timber.tag(logTag).d("Applying n-transform to stream URL for ${currentClient.clientName}")
-                        val transformed = EjsNTransformSolver.transformNParamInUrl(streamUrl!!)
+                        val transformed = EjsNTransformSolver.transformNParamInUrl(streamUrl)
                         if (transformed != streamUrl) {
                             streamUrl = transformed
                             Timber.tag(logTag).d("N-transform applied successfully")
@@ -526,7 +524,7 @@ object YTPlayerUtils {
                 
                 if (currentClient.useWebPoTokens && poToken?.streamingDataPoToken != null) {
                     Timber.tag(logTag).d("Appending pot= parameter to stream URL")
-                    val separator = if ("?" in streamUrl!!) "&" else "?"
+                    val separator = if ("?" in streamUrl) "&" else "?"
                     streamUrl = "${streamUrl}${separator}pot=${poToken.streamingDataPoToken}"
                 }
 
@@ -556,7 +554,7 @@ object YTPlayerUtils {
                     break
                 }
 
-                if (validateStatus(streamUrl!!)) {
+                if (validateStatus(streamUrl)) {
                     
                     Timber.tag(logTag).d("Stream validated successfully with client: ${currentClient.clientName}")
                     PlaybackLogManager.log(PlaybackLogLevel.INFO, "Stream validated", currentClient.clientName)
@@ -572,7 +570,7 @@ object YTPlayerUtils {
 
                         
                         try {
-                            val nTransformed = CipherDeobfuscator.transformNParamInUrl(streamUrl!!)
+                            val nTransformed = CipherDeobfuscator.transformNParamInUrl(streamUrl)
                             if (nTransformed != streamUrl) {
                                 Timber.tag(logTag).d("CipherDeobfuscator n-transform applied, re-validating...")
                                 if (validateStatus(nTransformed)) {

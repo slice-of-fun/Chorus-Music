@@ -130,10 +130,10 @@ fun CommitScreen(
 
                     
                     val authorLogin = if (!obj.isNull("author")) {
-                        obj.getJSONObject("author").optString("login", null)
+                        obj.getJSONObject("author").optString("login").takeIf { it.isNotEmpty() }
                     } else null
                     val authorAvatarUrl = if (!obj.isNull("author")) {
-                        obj.getJSONObject("author").optString("avatar_url", null)
+                        obj.getJSONObject("author").optString("avatar_url").takeIf { it.isNotEmpty() }
                     } else null
 
                     list.add(CommitData(sha, message, authorName, authorAvatarUrl, authorLogin, formattedDate, htmlUrl))
@@ -220,10 +220,8 @@ fun CommitScreen(
                             CommitItem(
                                 commit = commit,
                                 onClick = {
-                                    ContextCompat.startActivity(
-                                        context,
-                                        Intent(Intent.ACTION_VIEW, Uri.parse(commit.htmlUrl)),
-                                        null
+                                    context.startActivity(
+                                        Intent(Intent.ACTION_VIEW, Uri.parse(commit.htmlUrl))
                                     )
                                 }
                             )

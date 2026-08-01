@@ -1257,12 +1257,11 @@ fun Lyrics(
                         
                         val romanizedTextState by item.romanizedTextFlow.collectAsState()
                         val romanizedText = romanizedTextState
-                        val isRomanizedAvailable = romanizedText != null
                         
-                        val mainText = if (romanizeAsMain && isRomanizedAvailable) romanizedText!! else item.text
-                        val subText = if (romanizeAsMain && isRomanizedAvailable) item.text else romanizedText
+                        val mainText = if (romanizeAsMain && romanizedText != null) romanizedText else item.text
+                        val subText = if (romanizeAsMain && romanizedText != null) item.text else romanizedText
                         
-                        val hasWordTimings = if (romanizeAsMain && isRomanizedAvailable) false else item.words?.isNotEmpty() == true
+                        val hasWordTimings = if (romanizeAsMain && romanizedText != null) false else item.words?.isNotEmpty() == true
                         
                         
                         if (hasWordTimings && lyricsAnimationStyle == LyricsAnimationStyle.NONE) {
@@ -1304,7 +1303,7 @@ fun Lyrics(
                                     withStyle(style = SpanStyle(color = wordColor, fontWeight = wordWeight)) {
                                         append(word.text)
                                     }
-                                    if (wordIndex < (item.words.size ?: 0) - 1) append(" ")
+                                    if (wordIndex < item.words.size - 1) append(" ")
                                 }
                             }
                             Text(
@@ -1361,7 +1360,7 @@ fun Lyrics(
                                     withStyle(style = SpanStyle(color = wordColor, fontWeight = wordWeight, shadow = wordShadow)) {
                                         append(word.text)
                                     }
-                                    if (wordIndex < (item.words.size ?: 0) - 1) append(" ")
+                                    if (wordIndex < item.words.size - 1) append(" ")
                                 }
                             }
                             Text(
@@ -1408,7 +1407,7 @@ fun Lyrics(
                                     withStyle(style = SpanStyle(color = wordColor, fontWeight = wordWeight, shadow = wordShadow)) {
                                         append(word.text)
                                     }
-                                    if (wordIndex < (item.words.size ?: 0) - 1) append(" ")
+                                    if (wordIndex < item.words.size - 1) append(" ")
                                 }
                             }
                             Text(
@@ -1464,7 +1463,7 @@ fun Lyrics(
                                             append(word.text)
                                         }
                                     }
-                                    if (wordIndex < (item.words.size ?: 0) - 1) append(" ")
+                                    if (wordIndex < item.words.size - 1) append(" ")
                                 }
                             }
                             Text(text = styledText, fontSize = lyricsTextSize.sp, textAlign = alignment, lineHeight = (lyricsTextSize * lyricsLineSpacing).sp)
@@ -1531,7 +1530,7 @@ fun Lyrics(
                                             append(word.text)
                                         }
                                     }
-                                    if (wordIndex < (item.words.size ?: 0) - 1) append(" ")
+                                    if (wordIndex < item.words.size - 1) append(" ")
                                 }
                             }
                             Text(text = styledText, fontSize = lyricsTextSize.sp, textAlign = alignment, lineHeight = (lyricsTextSize * lyricsLineSpacing.coerceAtMost(1.3f)).sp)
@@ -1585,7 +1584,7 @@ fun Lyrics(
                                     withStyle(style = SpanStyle(color = wordColor, fontWeight = wordWeight, shadow = wordShadow)) {
                                         append(word.text)
                                     }
-                                    if (wordIndex < (item.words.size ?: 0) - 1) append(" ")
+                                    if (wordIndex < item.words.size - 1) append(" ")
                                 }
                             }
                             Text(text = styledText, fontSize = lyricsTextSize.sp, textAlign = alignment, lineHeight = (lyricsTextSize * lyricsLineSpacing.coerceAtMost(1.3f)).sp)
@@ -1600,7 +1599,7 @@ fun Lyrics(
                             val wordData = remember(item.text, item.words, activeDuration) {
                                 if (item.words?.isNotEmpty() == true) {
                                     
-                                    item.words!!.mapIndexed { wordIndex, word ->
+                                    item.words.mapIndexed { wordIndex, word ->
                                         val wordStart = ((word.startTime * 1000).toLong() - item.time).coerceAtLeast(0L)
                                         val wordEnd = ((word.endTime * 1000).toLong() - item.time).coerceAtLeast(wordStart + 50L)
                                         Triple(word.text, wordStart, wordEnd)

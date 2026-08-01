@@ -357,7 +357,7 @@ fun LocalSongScreen(
                                 )
                             }
                         },
-                        colors = TopAppBarDefaults.largeTopAppBarColors(
+                        colors = TopAppBarDefaults.topAppBarColors(
                             containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.88f),
                             scrolledContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.96f),
                         ),
@@ -646,7 +646,7 @@ private fun LocalSongScanSheet(
         !hasStoragePermission -> stringResource(R.string.local_songs_permission_body)
         hasSummary -> stringResource(
             R.string.local_songs_scan_summary,
-            lastSummary!!.scannedSongs,
+            lastSummary.scannedSongs,
             lastSummary.removedSongs,
         )
         else -> stringResource(R.string.local_songs_ready_desc)
