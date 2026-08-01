@@ -111,7 +111,6 @@ object AiRecommendationHelper {
             choices.optJSONObject(0)?.optJSONObject("message")?.optString("content") ?: "[]"
         }
 
-        // Clean output just in case of markdown formatting
         val cleanJsonStr = jsonOutput.replace("```json", "").replace("```", "").trim()
 
         val jsonArray = try {
@@ -123,7 +122,6 @@ object AiRecommendationHelper {
             return@withContext
         }
 
-        // 3. Resolve with InnerTube and Save
         val resolvedSongs = mutableListOf<SongItem>()
         val totalSongs = jsonArray.length()
         onLog?.invoke("Found $totalSongs songs. Searching InnerTube...")
@@ -148,7 +146,6 @@ object AiRecommendationHelper {
             return@withContext
         }
 
-        // 4. Update Playlist
         onLog?.invoke("Updating playlist...")
         var playlist = database.searchPlaylists(PLAYLIST_NAME).firstOrNull()?.find { it.playlist.name == PLAYLIST_NAME }?.playlist
         if (playlist == null) {
