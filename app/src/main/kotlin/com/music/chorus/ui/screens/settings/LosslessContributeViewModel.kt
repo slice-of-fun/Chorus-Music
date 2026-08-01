@@ -1,4 +1,4 @@
-package pushkar.chorus.music.ui.screens.settings
+﻿package pushkar.chorus.music.ui.screens.settings
 
 import android.net.Uri
 import android.util.Base64
@@ -190,7 +190,7 @@ class LosslessContributeViewModel @Inject constructor(
 
                 val response = httpClient.newCall(request).execute()
                 if (response.isSuccessful) {
-                    val responseBody = response.body?.string()
+                    val responseBody = response.body.string()
                     if (responseBody != null) {
                         val jsonObject = json.parseToJsonElement(responseBody).jsonObject
                         val token = jsonObject["access_token"]?.toString()?.replace("\"", "")
@@ -223,7 +223,7 @@ class LosslessContributeViewModel @Inject constructor(
 
             val response = httpClient.newCall(request).execute()
             if (response.isSuccessful) {
-                val body = response.body?.string()
+                val body = response.body.string()
                 if (body != null) {
                     val userObj = json.parseToJsonElement(body).jsonObject
                     val username = userObj["login"]?.toString()?.replace("\"", "") ?: "Unknown"
@@ -320,7 +320,7 @@ class LosslessContributeViewModel @Inject constructor(
         val response = httpClient.newCall(request).execute()
         if (!response.isSuccessful) throw Exception("Failed to fork repository")
         
-        val body = response.body?.string() ?: throw Exception("Empty response from fork API")
+        val body = response.body.string() ?: throw Exception("Empty response from fork API")
         val obj = json.parseToJsonElement(body).jsonObject
         val owner = obj["owner"]?.jsonObject?.get("login")?.toString()?.replace("\"", "") ?: throw Exception("Fork owner not found")
         val name = obj["name"]?.toString()?.replace("\"", "") ?: TARGET_REPO
@@ -337,7 +337,7 @@ class LosslessContributeViewModel @Inject constructor(
         val response = httpClient.newCall(syncRequest).execute()
         if (!response.isSuccessful) {
             val code = response.code
-            val errorText = response.body?.string() ?: ""
+            val errorText = response.body.string() ?: ""
             if (code == 409) {
                 throw Exception("Your fork has conflicting changes. Please delete the '$forkName' repository from your GitHub account and try again.")
             } else {
@@ -355,7 +355,7 @@ class LosslessContributeViewModel @Inject constructor(
         val refResponse = httpClient.newCall(refRequest).execute()
         if (!refResponse.isSuccessful) throw Exception("Failed to get main branch SHA")
         
-        val refBody = refResponse.body?.string() ?: ""
+        val refBody = refResponse.body.string() ?: ""
         val mainSha = json.parseToJsonElement(refBody).jsonObject["object"]?.jsonObject?.get("sha")?.toString()?.replace("\"", "")
         
         val branchJson = """
@@ -373,7 +373,7 @@ class LosslessContributeViewModel @Inject constructor(
         
         val branchResponse = httpClient.newCall(branchRequest).execute()
         if (!branchResponse.isSuccessful) {
-            val errorText = branchResponse.body?.string() ?: ""
+            val errorText = branchResponse.body.string() ?: ""
             if (!errorText.contains("already exists")) {
                 throw Exception("Failed to create branch at ${branchRequest.url}: $errorText")
             }
@@ -426,7 +426,7 @@ class LosslessContributeViewModel @Inject constructor(
     }
 
     private suspend fun createPullRequest(forkOwner: String, forkName: String, branchName: String, songTitle: String, artistName: String, targetPath: String): String {
-        val prTitle = "feat: add lossless track for $songTitle — $artistName"
+        val prTitle = "feat: add lossless track for $songTitle â€” $artistName"
         val prBody = "This Pull Request was submitted automatically via the Chorus Music native app.\n\n### \uD83C\uDFB5 Submission Metadata\n* **Category:** Music\n* **Track URL / Path:** `$targetPath`\n\n### \uD83C\uDFB6 Song Entries\n| Song Title | Artist |\n|---|---|\n| $songTitle | $artistName |"
         
         val prJson = buildJsonObject {
@@ -445,7 +445,7 @@ class LosslessContributeViewModel @Inject constructor(
         val prResponse = httpClient.newCall(prRequest).execute()
         if (!prResponse.isSuccessful) throw Exception("Failed to create Pull Request")
         
-        val prBodyStr = prResponse.body?.string() ?: ""
+        val prBodyStr = prResponse.body.string() ?: ""
         return json.parseToJsonElement(prBodyStr).jsonObject["html_url"]?.toString()?.replace("\"", "") ?: ""
     }
 

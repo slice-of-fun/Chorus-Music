@@ -76,8 +76,8 @@ import androidx.compose.material.icons.filled.PhoneAndroid
 import androidx.compose.material.icons.filled.Speaker
 import androidx.compose.material.icons.filled.Tv
 import androidx.compose.material.icons.filled.Usb
-import androidx.compose.material.icons.filled.VolumeOff
-import androidx.compose.material.icons.filled.VolumeUp
+import androidx.compose.material.Icons.AutoMirrored.Filled.VolumeOff
+import androidx.compose.material.Icons.AutoMirrored.Filled.VolumeUp
 import androidx.compose.material.icons.outlined.Error
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonGroupDefaults
@@ -522,7 +522,7 @@ fun AudioDeviceBottomSheet(onDismiss: () -> Unit, modifier: Modifier = Modifier)
                                                     )
                                                     if (isSelected) {
                                                         Icon(
-                                                            imageVector = Icons.Filled.VolumeUp,
+                                                            imageVector = Icons.AutoMirrored.Filled.VolumeUp,
                                                             contentDescription = null,
                                                             modifier = Modifier.size(16.dp),
                                                             tint = MaterialTheme.colorScheme.secondary
@@ -738,7 +738,7 @@ fun VolumeControlRow(
                     modifier = Modifier.padding(start = 24.dp)
                 ) {
                     Icon(
-                        imageVector = if (currentValue > 0) Icons.Filled.VolumeUp else Icons.Filled.VolumeOff,
+                        imageVector = if (currentValue > 0) Icons.AutoMirrored.Filled.VolumeUp else Icons.AutoMirrored.Filled.VolumeOff,
                         contentDescription = null,
                         tint = if (currentValue / maxVolume > 0.2f) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.size(24.dp)
@@ -1193,7 +1193,7 @@ private fun AudioDeviceRow(
                     modifier = Modifier.padding(end = 4.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Filled.VolumeUp,
+                        imageVector = Icons.AutoMirrored.Filled.VolumeUp,
                         contentDescription = "Volume level",
                         tint = onContainer,
                         modifier = Modifier.size(14.dp)

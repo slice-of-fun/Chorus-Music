@@ -1,4 +1,4 @@
-package pushkar.chorus.music.utils.cipher
+﻿package pushkar.chorus.music.utils.cipher
 
 import android.content.Context
 import android.util.Base64
@@ -87,7 +87,7 @@ object PlayerConfigStore {
             else -> result
         }
         if (bundledConfigs.isEmpty()) {
-            Timber.tag(TAG).e("Bundled $ASSET_NAME missing or invalid — config table starts empty")
+            Timber.tag(TAG).e("Bundled $ASSET_NAME missing or invalid â€” config table starts empty")
         } else {
             Timber.tag(TAG).d("Loaded bundled configs (${bundledConfigs.size} hashes)")
         }
@@ -205,19 +205,19 @@ object PlayerConfigStore {
                     return false
                 }
                 if (!response.isSuccessful) {
-                    Timber.tag(TAG).w("Remote config fetch HTTP ${response.code} — keeping previous configs")
+                    Timber.tag(TAG).w("Remote config fetch HTTP ${response.code} â€” keeping previous configs")
                     return false
                 }
 
-                val body = response.body?.string()
+                val body = response.body.string()
                 if (body.isNullOrEmpty()) {
-                    Timber.tag(TAG).w("Remote config fetch returned empty body — keeping previous configs")
+                    Timber.tag(TAG).w("Remote config fetch returned empty body â€” keeping previous configs")
                     return false
                 }
 
                 val remote = when (val result = PlayerConfigParser.parse(body)) {
                     is PlayerConfigParser.ParseResult.Failure -> {
-                        Timber.tag(TAG).w("Remote configs rejected: ${result.reason} — keeping previous configs")
+                        Timber.tag(TAG).w("Remote configs rejected: ${result.reason} â€” keeping previous configs")
                         return false
                     }
                     is PlayerConfigParser.ParseResult.Success -> {
@@ -231,7 +231,7 @@ object PlayerConfigStore {
                 return applyRemote(remote, body, response.header("ETag").orEmpty())
             }
         } catch (e: Exception) {
-            Timber.tag(TAG).w(e, "Remote config fetch failed: ${e.message} — keeping previous configs")
+            Timber.tag(TAG).w(e, "Remote config fetch failed: ${e.message} â€” keeping previous configs")
             return false
         }
     }

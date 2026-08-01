@@ -1,4 +1,4 @@
-
+﻿
 
 package pushkar.chorus.music.ui.screens.playlist
 
@@ -463,7 +463,7 @@ private fun CachePlaylistHeader(
     modifier: Modifier = Modifier
 ) {
     val playerConnection = LocalPlayerConnection.current ?: return
-    val cacheLength = remember(songs) { songs.fastSumBy { it.song.duration ?: 0 } }
+    val cacheLength = remember(songs) { songs.fastSumBy { it.song.duration } }
 
     Column(
         modifier = modifier
@@ -524,7 +524,7 @@ private fun CachePlaylistHeader(
             text = buildString {
                 append(pluralStringResource(R.plurals.n_song, songs.size, songs.size))
                 if (cacheLength > 0) {
-                    append(" • ")
+                    append(" â€¢ ")
                     append(makeTimeString(cacheLength * 1000L))
                 }
             },
