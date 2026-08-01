@@ -30,7 +30,7 @@ object NewReleaseAlbumPage {
                     )
                 } ?: return null,
             year =
-                renderer.subtitle?.runs
+                renderer.subtitle.runs
                     ?.lastOrNull()
                     ?.text
                     ?.toIntOrNull(),
