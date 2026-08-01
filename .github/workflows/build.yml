@@ -59,7 +59,7 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS || 'androiddebugkey' }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || 'android' }}
         run: |
-          ./gradlew assembleUniversal${{ matrix.flavor }}Release --parallel --build-cache --configuration-cache
+          ./gradlew assembleUniversal${{ matrix.flavor }}Release --build-cache --configuration-cache
 
       - name: Prepare APKs for Upload
         run: |
