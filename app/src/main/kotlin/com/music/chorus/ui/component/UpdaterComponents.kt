@@ -1,3 +1,4 @@
+﻿@file:Suppress("DEPRECATION")
 package pushkar.chorus.music.ui.component
 
 import androidx.compose.foundation.background
@@ -220,26 +221,26 @@ fun String.parseMarkdown(): androidx.compose.ui.text.AnnotatedString {
             match.groups[7] != null -> { // [link](url)
                 val text = match.groups[8]!!.value
                 val url = match.groups[9]!!.value
-                builder.withLink(androidx.compose.ui.text.LinkAnnotation.Url(url)) {
-                    withStyle(SpanStyle(
-                        color = primaryColor,
-                        textDecoration = TextDecoration.Underline
-                    )) {
-                        append(text)
-                    }
+                val startIndex = builder.length
+                builder.withStyle(SpanStyle(
+                    color = primaryColor,
+                    textDecoration = TextDecoration.Underline
+                )) {
+                    append(text)
                 }
+                builder.addStringAnnotation("URL", url, startIndex, builder.length)
             }
             match.groups[10] != null -> { // bare url
                 val url = match.groups[10]!!.value
+                val startIndex = builder.length
                 val fullUrl = if (url.startsWith("http")) url else "https://$url"
-                builder.withLink(androidx.compose.ui.text.LinkAnnotation.Url(fullUrl)) {
-                    withStyle(SpanStyle(
-                        color = primaryColor,
-                        textDecoration = TextDecoration.Underline
-                    )) {
-                        append(url)
-                    }
+                builder.withStyle(SpanStyle(
+                    color = primaryColor,
+                    textDecoration = TextDecoration.Underline
+                )) {
+                    append(url)
                 }
+                builder.addStringAnnotation("URL", fullUrl, startIndex, builder.length)
             }
         }
         currentIndex = match.range.last + 1
@@ -276,8 +277,13 @@ fun ChangelogItem(
                     .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(50))
             )
             androidx.compose.foundation.layout.Spacer(modifier = Modifier.size(16.dp))
-            androidx.compose.material3.Text(
+            ClickableText(
                 text = annotatedText,
+                onClick = { offset ->
+                    annotatedText.getStringAnnotations("URL", offset, offset).firstOrNull()?.let {
+                        ContextCompat.startActivity(context, Intent(Intent.ACTION_VIEW, Uri.parse(it.item)), null)
+                    }
+                },
                 style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurface)
             )
         }

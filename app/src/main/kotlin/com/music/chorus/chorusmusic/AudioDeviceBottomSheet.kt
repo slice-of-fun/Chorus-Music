@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
+﻿@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 
 package pushkar.chorus.music.chorusmusic
 
@@ -522,7 +522,7 @@ fun AudioDeviceBottomSheet(onDismiss: () -> Unit, modifier: Modifier = Modifier)
                                                     )
                                                     if (isSelected) {
                                                         Icon(
-                                                            imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+                                                            imageVector = Icons.Filled.VolumeUp,
                                                             contentDescription = null,
                                                             modifier = Modifier.size(16.dp),
                                                             tint = MaterialTheme.colorScheme.secondary
@@ -738,7 +738,7 @@ fun VolumeControlRow(
                     modifier = Modifier.padding(start = 24.dp)
                 ) {
                     Icon(
-                        imageVector = if (currentValue > 0) Icons.AutoMirrored.Filled.VolumeUp else Icons.AutoMirrored.Filled.VolumeOff,
+                        imageVector = if (currentValue > 0) Icons.Filled.VolumeUp else Icons.Filled.VolumeOff,
                         contentDescription = null,
                         tint = if (currentValue / maxVolume > 0.2f) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.size(24.dp)
@@ -1193,7 +1193,7 @@ private fun AudioDeviceRow(
                     modifier = Modifier.padding(end = 4.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+                        imageVector = Icons.Filled.VolumeUp,
                         contentDescription = "Volume level",
                         tint = onContainer,
                         modifier = Modifier.size(14.dp)
