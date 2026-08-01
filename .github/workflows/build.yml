@@ -57,7 +57,7 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || 'android' }}
         run: |
           # Build universal APKs for FOSS and GMS variants
-          ./gradlew assembleUniversalFossRelease assembleUniversalGmsRelease --build-cache --configuration-cache -Dorg.gradle.jvmargs="-Xmx3g -XX:MaxMetaspaceSize=512m -Dfile.encoding=UTF-8" -Dkotlin.daemon.jvmargs="-Xmx2g"
+          ./gradlew assembleUniversalFossRelease assembleUniversalGmsRelease --build-cache --configuration-cache -Dorg.gradle.jvmargs="-Xmx3g -XX:MaxMetaspaceSize=1g -Dfile.encoding=UTF-8" -Dkotlin.daemon.jvmargs="-Xmx2g"
 
       - name: Prepare APKs for Upload
         run: |
