@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="forgotten_favorites">Forgotten favourites</string>
     <string name="center">Centre</string>
@@ -35,8 +35,8 @@
     <string name="most_played_albums">Most played albums</string>
     <!-- Search -->
     <string name="search">Search</string>
-    <string name="search_yt_music">Search YouTube Music…</string>
-    <string name="search_library">Search library…</string>
+    <string name="search_yt_music">Search YouTube Musicâ€¦</string>
+    <string name="search_library">Search libraryâ€¦</string>
     <string name="filter_library">Library</string>
     <string name="filter_liked">Liked</string>
     <string name="filter_downloaded">Downloaded</string>
@@ -370,9 +370,9 @@
     <string name="spotify_loading_library">Loading Spotify library</string>
     <string name="spotify_no_sources">No Spotify playlists found</string>
     <string name="spotify_import_in_progress">Importing Spotify playlists</string>
-    <string name="spotify_import_progress_step">%1$s • %2$d/%3$d sources • %4$d/%5$d tracks</string>
+    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d sources â€¢ %4$d/%5$d tracks</string>
     <string name="spotify_import_complete">Spotify import complete</string>
-    <string name="spotify_import_summary">%1$d sources • %2$d imported • %3$d failed</string>
+    <string name="spotify_import_summary">%1$d sources â€¢ %2$d imported â€¢ %3$d failed</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d imported</string>
     <string name="spotify_select_all">Select all</string>
     <string name="spotify_clear_selection">Clear</string>
@@ -396,9 +396,9 @@
     <string name="content_sponsor_block_desc">Automatically skip sponsorships, intros, and non-music sections in videos</string>
     <string name="spotify_import_by_link">Import playlist by link</string>
     <string name="spotify_import_by_link_desc">Paste a Spotify playlist link to import it, even if you don\'t own the playlist</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/…</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
     <string name="spotify_add">Add</string>
-    <string name="spotify_invalid_playlist_link">That doesn\'t look like a Spotify playlist link. Use a link such as https://open.spotify.com/playlist/…</string>
+    <string name="spotify_invalid_playlist_link">That doesn\'t look like a Spotify playlist link. Use a link such as https://open.spotify.com/playlist/â€¦</string>
     <string name="service_uptime">Service Uptime</string>
     <string name="service_uptime_desc">Check the status of music providers</string>
     <string name="music_providers">Music Providers</string>
@@ -410,37 +410,12 @@
     <string name="status_checking">Checking...</string>
     <string name="recognition_notification_channel_name">Music recognition</string>
     <string name="recognition_notification_channel_desc">Shows a notification while identifying a song from Quick Settings</string>
-    <string name="recognition_notification_listening">Listening for music…</string>
-    <string name="recognition_notification_processing">Identifying…</string>
+    <string name="recognition_notification_listening">Listening for musicâ€¦</string>
+    <string name="recognition_notification_processing">Identifyingâ€¦</string>
     <string name="recognition_notification_no_match">No match found</string>
     <string name="recognition_notification_failed">Recognition failed</string>
     <string name="listen_on_chorus_music">Listen on Chorus Music</string>
     <string name="qs_tile_music_recognizer">Recognize music</string>
-    <string name="chorus_brain_beta">Chorus Brain (Beta)</string>
-    <string name="chorus_brain_enable">Enable Chorus Brain</string>
-    <string name="chorus_brain_enable_desc">Automatically add AI recommendations based on your listening habits</string>
-    <string name="chorus_brain_profile_statistics">Profile Statistics</string>
-    <string name="chorus_brain_learning_level">Learning Level</string>
-    <string name="chorus_brain_initiate">Initiate</string>
-    <string name="chorus_brain_total_interactions">Total Interactions</string>
-    <string name="chorus_brain_interactions_tracked">%1$d interactions tracked</string>
-    <string name="chorus_brain_discovered_genres">Discovered Genres</string>
-    <string name="chorus_brain_distinct_genres_identified">%1$d distinct genres identified</string>
-    <string name="chorus_brain_analyzed_artists">Analyzed Artists</string>
-    <string name="chorus_brain_artists_mapped">%1$d artists mapped</string>
-    <string name="chorus_brain_data_management">Data Management</string>
-    <string name="chorus_brain_export_profile">Export Profile</string>
-    <string name="chorus_brain_export_profile_desc">Save your neural map to a file</string>
-    <string name="chorus_brain_import_profile">Import Profile</string>
-    <string name="chorus_brain_import_profile_desc">Load a previously saved neural map</string>
-    <string name="chorus_brain_reset_profile">Reset Profile</string>
-    <string name="chorus_brain_reset_profile_desc">Erase all learned data and start over</string>
-    <string name="chorus_brain_reset_neural_profile">Reset Neural Profile</string>
-    <string name="chorus_brain_reset_neural_profile_desc">This will permanently delete all learned preferences. The engine will start learning from scratch.</string>
-    <string name="chorus_brain_profile_exported_successfully">Profile exported successfully</string>
-    <string name="chorus_brain_export_failed">Export failed</string>
-    <string name="chorus_brain_profile_imported_successfully">Profile imported successfully</string>
-    <string name="chorus_brain_import_failed_invalid_file">Import failed: invalid file</string>
     <string name="listenbrainz_scrobbling">ListenBrainz scrobbling</string>
     <string name="listenbrainz_scrobbling_description">Automatically submit the tracks you listen to to ListenBrainz</string>
     <string name="set_listenbrainz_token">Set ListenBrainz Token</string>
@@ -455,7 +430,7 @@
     <string name="last_updated_never">Never</string>
     <string name="cipher_update_success">Extractor mappings updated! Loaded %d players.</string>
     <string name="cipher_update_failed">Failed to update extractor mappings: %s</string>
-    <string name="cipher_updating">Updating extractor configurations…</string>
+    <string name="cipher_updating">Updating extractor configurationsâ€¦</string>
     <string name="hours_label">Hours</string>
     <string name="minutes_label">Minutes</string>
     <string name="seconds_label">Seconds</string>

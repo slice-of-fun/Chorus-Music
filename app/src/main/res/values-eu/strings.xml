@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="export_directory_unavailable">Ezin da gailu honetako esportazio-direktorio batera sartu. Ezarri bat eskuz.</string>
     <string name="home">Hasiera</string>
@@ -30,8 +30,8 @@
     <string name="most_played_artists">Gehien erreproduzitutako artistak</string>
     <string name="most_played_albums">Gehien erreproduzitutako albumak</string>
     <string name="search">Bilatu</string>
-    <string name="search_yt_music">Bilatu YouTube Music-en…</string>
-    <string name="search_library">Bilatu liburutegian…</string>
+    <string name="search_yt_music">Bilatu YouTube Music-enâ€¦</string>
+    <string name="search_library">Bilatu liburutegianâ€¦</string>
     <string name="filter_library">Liburutegia</string>
     <string name="filter_liked">Gogokoak</string>
     <string name="filter_downloaded">Deskargatutakoak</string>
@@ -355,9 +355,9 @@
     <string name="spotify_select_sources">Hautatu Spotify erreprodukzio-zerrendak</string>
     <string name="spotify_import_by_link">Inportatu erreprodukzio-zerrenda esteka bidez</string>
     <string name="spotify_import_by_link_desc">Itsatsi Spotify erreprodukzio-zerrenda baten esteka hura inportatzeko, baita zureak ez diren zerrendak ere</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/…</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
     <string name="spotify_add">Gehitu</string>
-    <string name="spotify_invalid_playlist_link">Horrek ez dirudi Spotify erreprodukzio-zerrenda baten esteka. Erabili https://open.spotify.com/playlist/… gisako esteka bat</string>
+    <string name="spotify_invalid_playlist_link">Horrek ez dirudi Spotify erreprodukzio-zerrenda baten esteka. Erabili https://open.spotify.com/playlist/â€¦ gisako esteka bat</string>
     <string name="spotify_import_selected">Inportatu hautatutakoak</string>
     <string name="spotify_selected_count">%1$d hautatuta</string>
     <string name="spotify_available_count">%1$d iturri erabilgarri</string>
@@ -370,9 +370,9 @@
     <string name="spotify_loading_library">Spotify liburutegia kargatzen</string>
     <string name="spotify_no_sources">Ez da Spotify erreprodukzio-zerrendarik aurkitu</string>
     <string name="spotify_import_in_progress">Spotify erreprodukzio-zerrendak inportatzen</string>
-    <string name="spotify_import_progress_step">%1$s • %2$d/%3$d iturri • %4$d/%5$d pista</string>
+    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d iturri â€¢ %4$d/%5$d pista</string>
     <string name="spotify_import_complete">Spotify inportazioa osatu da</string>
-    <string name="spotify_import_summary">%1$d iturri • %2$d inportatuta • %3$d huts eginda</string>
+    <string name="spotify_import_summary">%1$d iturri â€¢ %2$d inportatuta â€¢ %3$d huts eginda</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d inportatuta</string>
     <string name="spotify_select_all">Hautatu dena</string>
     <string name="spotify_clear_selection">Garbitu</string>
@@ -389,37 +389,12 @@
     <string name="status_checking">Egiaztatzen...</string>
     <string name="recognition_notification_channel_name">Musika-ezagutza</string>
     <string name="recognition_notification_channel_desc">Jakinarazpen bat erakusten du ezarpen azkarretatik abesti bat identifikatzen den bitartean</string>
-    <string name="recognition_notification_listening">Musika entzuten…</string>
-    <string name="recognition_notification_processing">Identifikatzen…</string>
+    <string name="recognition_notification_listening">Musika entzutenâ€¦</string>
+    <string name="recognition_notification_processing">Identifikatzenâ€¦</string>
     <string name="recognition_notification_no_match">Ez da bat datorrenik aurkitu</string>
     <string name="recognition_notification_failed">Ezin izan da ezagutu</string>
     <string name="listen_on_chorus_music">Entzun Chorus Music-en</string>
     <string name="qs_tile_music_recognizer">Ezagutu musika</string>
-    <string name="chorus_brain_beta">Chorus Brain (Beta)</string>
-    <string name="chorus_brain_enable">Gaitu Chorus Brain</string>
-    <string name="chorus_brain_enable_desc">Txertatu automatikoki AAren gomendioak zure entzute-ohituretan oinarrituta</string>
-    <string name="chorus_brain_profile_statistics">Profilaren estatistikak</string>
-    <string name="chorus_brain_learning_level">Ikaskuntza-maila</string>
-    <string name="chorus_brain_initiate">Hasi</string>
-    <string name="chorus_brain_total_interactions">Interakzioak guztira</string>
-    <string name="chorus_brain_interactions_tracked">%1$d interakzioren jarraipena egin da</string>
-    <string name="chorus_brain_discovered_genres">Aurkitutako generoak</string>
-    <string name="chorus_brain_distinct_genres_identified">%1$d genero desberdin identifikatu dira</string>
-    <string name="chorus_brain_analyzed_artists">Aztertutako artistak</string>
-    <string name="chorus_brain_artists_mapped">%1$d artista mapatu dira</string>
-    <string name="chorus_brain_data_management">Datuen kudeaketa</string>
-    <string name="chorus_brain_export_profile">Esportatu profila</string>
-    <string name="chorus_brain_export_profile_desc">Gorde zure mapa neurala fitxategi batean</string>
-    <string name="chorus_brain_import_profile">Inportatu profila</string>
-    <string name="chorus_brain_import_profile_desc">Kargatu aurrez gordetako mapa neural bat</string>
-    <string name="chorus_brain_reset_profile">Berrezarri profila</string>
-    <string name="chorus_brain_reset_profile_desc">Ezabatu ikasitako datu guztiak eta hasi berriro</string>
-    <string name="chorus_brain_reset_neural_profile">Berrezarri profil neurala</string>
-    <string name="chorus_brain_reset_neural_profile_desc">Honek ikasitako hobespen guztiak betiko ezabatuko ditu. Motorra hutsetik ikasten hasiko da.</string>
-    <string name="chorus_brain_profile_exported_successfully">Profila behar bezala esportatu da</string>
-    <string name="chorus_brain_export_failed">Esportazioak huts egin du</string>
-    <string name="chorus_brain_profile_imported_successfully">Profila behar bezala inportatu da</string>
-    <string name="chorus_brain_import_failed_invalid_file">Inportazioak huts egin du: fitxategi baliogabea</string>
     <string name="listenbrainz_scrobbling">ListenBrainz scrobbling-a</string>
     <string name="listenbrainz_scrobbling_description">Bidali automatikoki entzundako pistak ListenBrainz-era</string>
     <string name="set_listenbrainz_token">Ezarri ListenBrainz tokena</string>
@@ -434,7 +409,7 @@
     <string name="last_updated_never">Inoiz ez</string>
     <string name="cipher_update_success">Erauzlearen mapatzeak eguneratu dira! %d erreproduzitzaile kargatu dira.</string>
     <string name="cipher_update_failed">Ezin izan dira erauzlearen mapatzeak eguneratu: %s</string>
-    <string name="cipher_updating">Erauzlearen konfigurazioak eguneratzen…</string>
+    <string name="cipher_updating">Erauzlearen konfigurazioak eguneratzenâ€¦</string>
     <string name="hours_label">Orduak</string>
     <string name="minutes_label">Minutuak</string>
     <string name="seconds_label">Segundoak</string>
