@@ -52,7 +52,6 @@
         android:banner="@mipmap/tv_banner"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
-        android:extractNativeLibs="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -326,21 +325,6 @@
         <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
             android:value="pushkar.chorus.music.cast.CastOptionsProvider" />
-        <!-- Music Widget -->
-        <receiver
-            android:name=".widget.MusicWidgetReceiver"
-            android:exported="true"
-            android:label="@string/widget_music_player">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="pushkar.chorus.music.widget.PLAY_PAUSE" />
-                <action android:name="pushkar.chorus.music.widget.LIKE" />
-                <action android:name="pushkar.chorus.music.widget.UPDATE_WIDGET" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/music_widget_info" />
-        </receiver>
 
         <!-- Playlist Widget -->
         <receiver
@@ -353,22 +337,6 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/playlist_widget_info" />
-        </receiver>
-
-        <!-- Turntable Widget -->
-        <receiver
-            android:name=".widget.TurntableWidgetReceiver"
-            android:exported="true"
-            android:label="@string/widget_turntable">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="pushkar.chorus.music.widget.TURNTABLE_PLAY_PAUSE" />
-                <action android:name="pushkar.chorus.music.widget.TURNTABLE_LIKE" />
-                <action android:name="pushkar.chorus.music.widget.UPDATE_TURNTABLE_WIDGET" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/turntable_widget_info" />
         </receiver>
 
         <activity

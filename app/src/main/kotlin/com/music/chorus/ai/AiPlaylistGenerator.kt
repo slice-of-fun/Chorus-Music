@@ -97,7 +97,7 @@ object AiPlaylistGenerator {
                     return@withContext null
                 }
 
-                val responseString = response.body?.string() ?: return@withContext null
+                val responseString = response.body.string()
                 val responseJson = JSONObject(responseString)
                 val choices = responseJson.optJSONArray("choices") ?: return@withContext null
                 choices.optJSONObject(0)?.optJSONObject("message")?.optString("content") ?: "{}"

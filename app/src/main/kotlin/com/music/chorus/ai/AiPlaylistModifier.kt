@@ -111,7 +111,7 @@ object AiPlaylistModifier {
                     return@withContext
                 }
 
-                val responseString = response.body?.string() ?: return@withContext
+                val responseString = response.body.string()
                 val responseJson = JSONObject(responseString)
                 val choices = responseJson.optJSONArray("choices") ?: return@withContext
                 choices.optJSONObject(0)?.optJSONObject("message")?.optString("content") ?: "{}"
