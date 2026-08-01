@@ -31,7 +31,7 @@ object NewReleaseAlbumPage {
                 } ?: return null,
             year =
                 renderer.subtitle?.runs
-                    .lastOrNull()
+                    ?.lastOrNull()
                     ?.text
                     ?.toIntOrNull(),
             thumbnail = renderer.thumbnailRenderer.musicThumbnailRenderer?.getThumbnailUrl() ?: return null,
