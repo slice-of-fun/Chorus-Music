@@ -10,8 +10,12 @@ on:
 
 jobs:
   build:
-    name: Build APKs
+    name: Build ${{ matrix.flavor }} APK
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        flavor: [Foss, Gms]
+      fail-fast: false
 
     steps:
       - name: Checkout Code
@@ -24,7 +28,11 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '21'
-          cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
@@ -38,7 +46,6 @@ jobs:
             echo "$RELEASE_KEYSTORE_BASE64" | base64 -d > app/keystore/release.keystore
           else
             echo "Signing keystore not provided. Building unsigned or debug build."
-            # Create a mock keystore file to prevent Gradle configuration phase from failing if it checks file existence
             mkdir -p app/keystore
             touch app/keystore/release.keystore
           fi
@@ -46,53 +53,42 @@ jobs:
       - name: Grant Execute Permission to Gradlew
         run: chmod +x gradlew
 
-      - name: Build FOSS & GMS Release APKs
+      - name: Build ${{ matrix.flavor }} Release APK
         env:
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD || 'android' }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS || 'androiddebugkey' }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || 'android' }}
         run: |
-          # Build universal APKs for FOSS and GMS variants
-          ./gradlew assembleUniversalFossRelease assembleUniversalGmsRelease
+          ./gradlew assembleUniversal${{ matrix.flavor }}Release --parallel --build-cache --configuration-cache
 
       - name: Prepare APKs for Upload
         run: |
           mkdir -p build-artifacts
-          # Copy universal FOSS release APK
-          if [ -f app/build/outputs/apk/universalFoss/release/app-universal-foss-release.apk ]; then
-            cp app/build/outputs/apk/universalFoss/release/app-universal-foss-release.apk build-artifacts/ChorusMusic-FOSS-Universal.apk
-          elif [ -f app/build/outputs/apk/fossUniversal/release/app-foss-universal-release.apk ]; then
-            # Alternate layout name path
-            cp app/build/outputs/apk/fossUniversal/release/app-foss-universal-release.apk build-artifacts/ChorusMusic-FOSS-Universal.apk
-          else
-            # Find any APK built under foss release
-            find app/build/outputs/apk/ -name "*release*.apk" -path "*foss*" -exec cp {} build-artifacts/ChorusMusic-FOSS-Universal.apk \;
-          fi
-          
-          # Copy universal GMS release APK
-          if [ -f app/build/outputs/apk/universalGms/release/app-universal-gms-release.apk ]; then
-            cp app/build/outputs/apk/universalGms/release/app-universal-gms-release.apk build-artifacts/ChorusMusic-GMS-Universal.apk
-          elif [ -f app/build/outputs/apk/gmsUniversal/release/app-gms-universal-release.apk ]; then
-            # Alternate layout name path
-            cp app/build/outputs/apk/gmsUniversal/release/app-gms-universal-release.apk build-artifacts/ChorusMusic-GMS-Universal.apk
-          else
-            # Find any APK built under gms release
-            find app/build/outputs/apk/ -name "*release*.apk" -path "*gms*" -exec cp {} build-artifacts/ChorusMusic-GMS-Universal.apk \;
-          fi
+          find app/build/outputs/apk/ -name "*release*.apk" -exec cp {} build-artifacts/ChorusMusic-${{ matrix.flavor }}-Universal.apk \;
 
-      - name: Upload Build Artifacts (Debug/Verify)
+      - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: chorus-music-apks
+          name: chorus-music-apks-${{ matrix.flavor }}
           path: build-artifacts/*
 
+  release:
+    name: Create GitHub Release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
+          pattern: chorus-music-apks-*
+          merge-multiple: true
+
       - name: Create GitHub Release
-        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            build-artifacts/ChorusMusic-FOSS-Universal.apk
-            build-artifacts/ChorusMusic-GMS-Universal.apk
+          files: release-artifacts/*
           draft: false
           prerelease: false
           generate_release_notes: true
