@@ -103,7 +103,7 @@ object ListenBrainzManager {
                     } else {
                         val respBody =
                             try {
-                                resp.body?.string() ?: ""
+                                resp.body.string()
                             } catch (e: Exception) {
                                 "<unable to read>"
                             }
@@ -167,7 +167,7 @@ object ListenBrainzManager {
                     } else {
                         val respBody =
                             try {
-                                resp.body?.string() ?: ""
+                                resp.body.string()
                             } catch (e: Exception) {
                                 "<unable to read>"
                             }

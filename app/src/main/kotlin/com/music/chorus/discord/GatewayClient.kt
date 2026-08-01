@@ -196,7 +196,7 @@ class GatewayClient {
         when (d) {
             is JSONObject -> json.put("d", d)
             is JSONArray -> json.put("d", d)
-            is Map<*, *> -> json.put("d", JSONObject(d as Map<*, *>))
+            is Map<*, *> -> json.put("d", JSONObject(d))
             is Int -> json.put("d", d)
             is String -> json.put("d", d)
             is Boolean -> json.put("d", d)
@@ -215,7 +215,7 @@ class GatewayClient {
             val op = json.getInt("op")
             val d = json.opt("d")
             val s = if (json.has("s") && !json.isNull("s")) json.getInt("s") else null
-            val t = json.optString("t", null)
+            val t = json.optString("t").takeIf { it.isNotEmpty() }
 
             if (s != null && s > liveSeq) {
                 liveSeq = s

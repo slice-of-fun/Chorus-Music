@@ -75,6 +75,7 @@ class ChunkingDataSource(
                 }
                 throw e
             } catch (e: androidx.media3.datasource.DataSourceException) {
+                @Suppress("DEPRECATION")
                 if (e.reason == androidx.media3.datasource.DataSourceException.POSITION_OUT_OF_RANGE) {
                     return C.RESULT_END_OF_INPUT
                 }

@@ -47,8 +47,8 @@ object LosslessAPI {
 
             val response = httpClient.newCall(request).execute()
             if (response.isSuccessful) {
-                val responseBody = response.body?.string()
-                if (responseBody != null) {
+                val responseBody = response.body.string()
+                if (responseBody.isNotEmpty()) {
                     val index = json.decodeFromString<LosslessIndex>(responseBody)
                     cachedIndex = index.items
                     lastFetchTime = now
@@ -117,8 +117,8 @@ object LosslessAPI {
 
             val response = httpClient.newCall(request).execute()
             if (response.isSuccessful) {
-                val responseBody = response.body?.string()
-                if (responseBody != null) {
+                val responseBody = response.body.string()
+                if (responseBody.isNotEmpty()) {
                     return@withContext json.decodeFromString<DonationGoal>(responseBody)
                 }
             }

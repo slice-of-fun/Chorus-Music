@@ -37,7 +37,7 @@ class SponsorBlockRepository @Inject constructor() {
                 return@withContext emptyList()
             }
 
-            val responseBody = response.body?.string() ?: return@withContext emptyList()
+            val responseBody = response.body.string()
             val jsonArray = JSONArray(responseBody)
             
             val segments = mutableListOf<SponsorBlockSegment>()

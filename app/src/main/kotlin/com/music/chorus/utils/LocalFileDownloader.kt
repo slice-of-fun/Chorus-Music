@@ -87,7 +87,7 @@ object LocalFileDownloader {
                 return@withContext
             }
 
-            response.body?.let { body ->
+            response.body.let { body ->
                 val contentLength = body.contentLength()
                 body.byteStream().use { input ->
                     context.contentResolver.openOutputStream(file.uri)?.use { output ->

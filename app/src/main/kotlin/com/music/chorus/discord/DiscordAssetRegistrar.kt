@@ -207,7 +207,7 @@ object DiscordAssetRegistrar {
                 .build()
 
         val response = client.newCall(request).execute()
-        val responseBody = response.body?.string() ?: return null
+        val responseBody = response.body.string()
 
         if (!response.isSuccessful) {
             Timber.tag(TAG).w("external-assets API error %d: %s", response.code, responseBody)
@@ -217,7 +217,7 @@ object DiscordAssetRegistrar {
         val arr = JSONArray(responseBody)
         if (arr.length() == 0) return null
         val obj = arr.getJSONObject(0)
-        return obj.optString("external_asset_path", null)
+        return obj.optString("external_asset_path").takeIf { it.isNotEmpty() }
     }
 
     private suspend fun registerExternalBatch(
@@ -243,7 +243,7 @@ object DiscordAssetRegistrar {
 
             try {
                 val response = client.newCall(request).execute()
-                val responseBody = response.body?.string() ?: return@withContext urls.map { null }
+                val responseBody = response.body.string()
 
                 if (!response.isSuccessful) {
                     Timber.tag(TAG).w("external-assets API error %d: %s", response.code, responseBody)
@@ -252,7 +252,7 @@ object DiscordAssetRegistrar {
 
                 val arr = JSONArray(responseBody)
                 return@withContext (0 until arr.length()).map { i ->
-                    arr.getJSONObject(i).optString("external_asset_path", null)
+                    arr.getJSONObject(i).optString("external_asset_path").takeIf { it.isNotEmpty() }
                 }
             } catch (e: Exception) {
                 Timber.tag(TAG).w(e, "external-assets API call failed")

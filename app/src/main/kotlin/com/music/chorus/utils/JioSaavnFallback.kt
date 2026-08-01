@@ -89,8 +89,8 @@ object JioSaavnFallback {
                         continue
                     }
 
-                    val bodyString = response.body?.string()
-                    if (bodyString == null) {
+                    val bodyString = response.body.string()
+                    if (bodyString.isEmpty()) {
                         continue
                     }
                     val json = JSONObject(bodyString)
