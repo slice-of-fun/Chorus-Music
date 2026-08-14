@@ -156,7 +156,7 @@ fun LibraryScreen(navController: NavController) {
                 
                 Box {
                     ExtendedFloatingActionButton(
-                        text = { Text(stringResource(R.string.import_playlist)) },
+                        text = { Text(stringResource(R.string.action_import)) },
                         icon = { Icon(painter = painterResource(R.drawable.download), contentDescription = "Import playlist") },
                         onClick = { showImportMenu = true },
                         shape = androidx.compose.foundation.shape.CircleShape,

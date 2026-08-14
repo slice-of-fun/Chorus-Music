@@ -310,6 +310,13 @@ fun LibraryPlaylistsScreen(
                                     modifier = itemModifier
                                 )
                             }
+                            AutoPlaylistButton(
+                                title = stringResource(R.string.action_import),
+                                icon = R.drawable.playlist_add,
+                                iconTint = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
+                                onClick = { navController.navigate("settings/spotify_import") },
+                                modifier = itemModifier
+                            )
                             if (showCached) {
                                 AutoPlaylistButton(
                                     title = stringResource(R.string.cached_playlist),
@@ -435,6 +442,13 @@ fun LibraryPlaylistsScreen(
                                     modifier = itemModifier
                                 )
                             }
+                            AutoPlaylistButton(
+                                title = stringResource(R.string.action_import),
+                                icon = R.drawable.playlist_add,
+                                iconTint = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
+                                onClick = { navController.navigate("settings/spotify_import") },
+                                modifier = itemModifier
+                            )
                             if (showCached) {
                                 AutoPlaylistButton(
                                     title = stringResource(R.string.cached_playlist),
