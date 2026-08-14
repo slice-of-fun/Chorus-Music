@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 44,
-    "identityHash": "052ec90b3d26c97e5aafa06cf262e0fe",
+    "identityHash": "4115f8b8f4a6a613e844ff133a93e53e",
     "entities": [
       {
         "tableName": "song",
@@ -1074,120 +1074,6 @@
         }
       },
       {
-        "tableName": "recognition_history",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trackId` TEXT NOT NULL, `title` TEXT NOT NULL, `artist` TEXT NOT NULL, `album` TEXT, `coverArtUrl` TEXT, `coverArtHqUrl` TEXT, `genre` TEXT, `releaseDate` TEXT, `label` TEXT, `shazamUrl` TEXT, `appleMusicUrl` TEXT, `spotifyUrl` TEXT, `isrc` TEXT, `youtubeVideoId` TEXT, `recognizedAt` INTEGER NOT NULL, `liked` INTEGER NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "trackId",
-            "columnName": "trackId",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "title",
-            "columnName": "title",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "artist",
-            "columnName": "artist",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "album",
-            "columnName": "album",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "coverArtUrl",
-            "columnName": "coverArtUrl",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "coverArtHqUrl",
-            "columnName": "coverArtHqUrl",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "genre",
-            "columnName": "genre",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "releaseDate",
-            "columnName": "releaseDate",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "label",
-            "columnName": "label",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "shazamUrl",
-            "columnName": "shazamUrl",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "appleMusicUrl",
-            "columnName": "appleMusicUrl",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "spotifyUrl",
-            "columnName": "spotifyUrl",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "isrc",
-            "columnName": "isrc",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "youtubeVideoId",
-            "columnName": "youtubeVideoId",
-            "affinity": "TEXT"
-          },
-          {
-            "fieldPath": "recognizedAt",
-            "columnName": "recognizedAt",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "liked",
-            "columnName": "liked",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": true,
-          "columnNames": [
-            "id"
-          ]
-        },
-        "indices": [
-          {
-            "name": "index_recognition_history_trackId",
-            "unique": false,
-            "columnNames": [
-              "trackId"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_recognition_history_trackId` ON `${TABLE_NAME}` (`trackId`)"
-          }
-        ]
-      },
-      {
         "tableName": "speed_dial_item",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `secondaryId` TEXT, `title` TEXT NOT NULL, `subtitle` TEXT, `thumbnailUrl` TEXT, `type` TEXT NOT NULL, `explicit` INTEGER NOT NULL, `createDate` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
@@ -1323,7 +1209,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '052ec90b3d26c97e5aafa06cf262e0fe')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4115f8b8f4a6a613e844ff133a93e53e')"
     ]
   }
 }
