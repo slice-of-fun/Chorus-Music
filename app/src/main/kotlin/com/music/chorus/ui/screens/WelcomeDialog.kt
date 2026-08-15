@@ -70,7 +70,7 @@ fun WelcomeDialog(
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Button(
-                    onClick = { uriHandler.openUri("https://github.com/ChorusMusicApp/Chorus-Music") },
+                    onClick = { uriHandler.openUri("https://github.com/slice-of-fun/Chorus-Musicc") },
                     modifier = Modifier.fillMaxWidth().height(50.dp),
                     shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(

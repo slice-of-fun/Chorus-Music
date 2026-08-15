@@ -373,9 +373,7 @@ fun NavGraphBuilder.navigationBuilder(
         AiSettings(navController, scrollBehavior, highlightKey = backStackEntry.arguments?.getString("highlightKey"))
     }
     
-    composable("settings/lossless") {
-        pushkar.chorus.music.ui.screens.settings.LosslessContributeScreen(navController, scrollBehavior)
-    }
+
     
     composable(
         route = "settings/player?highlightKey={highlightKey}",

@@ -163,27 +163,7 @@ highlightKey: String? = null) {
                 )
             }
 
-            val contributeLosslessText = stringResource(R.string.contribute_to_lossless)
-            if (contributeLosslessText.lowercase().contains(searchLower)) {
-                add(
-                    Material3SettingsItem(
-                        isHighlighted = (highlightKey == contributeLosslessText),
-                        customIcon = {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_apple_lossless),
-                                contentDescription = null,
-                                modifier = Modifier.size(24.dp),
-                                tint = if (highlightKey == contributeLosslessText)
-                                    MaterialTheme.colorScheme.primary
-                                else
-                                    MaterialTheme.colorScheme.primary.copy(alpha = 0.9f)
-                            )
-                        },
-                        title = { Text(contributeLosslessText) },
-                        onClick = { navController.navigate("settings/lossless") }
-                    )
-                )
-            }
+
 
             if (appearanceText.lowercase().contains(searchLower)) {
                 add(

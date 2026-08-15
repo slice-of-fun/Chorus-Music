@@ -236,8 +236,7 @@ highlightKey: String? = null) {
 
     var showAudioQualityDialog by remember { mutableStateOf(false) }
     var showDownloadQualityDialog by remember { mutableStateOf(false) }
-    var showLosslessAudioWarning by remember { mutableStateOf(false) }
-    var showLosslessDownloadWarning by remember { mutableStateOf(false) }
+
 
     val (downloadQuality, onDownloadQualityChange) = rememberEnumPreference(
         pushkar.chorus.music.constants.DownloadQualityKey,
@@ -248,20 +247,16 @@ highlightKey: String? = null) {
         EnumDialog(
             onDismiss = { showAudioQualityDialog = false },
             onSelect = {
-                if (it == AudioQuality.LOSSLESS) {
-                    showLosslessAudioWarning = true
-                } else {
-                    onAudioQualityChange(it)
-                }
+                onAudioQualityChange(it)
                 showAudioQualityDialog = false
             },
             title = stringResource(R.string.audio_quality),
             current = audioQuality,
-            values = listOf(AudioQuality.OPUS, AudioQuality.LOSSLESS),
+            values = listOf(AudioQuality.OPUS),
             valueText = {
                 when (it) {
                     AudioQuality.OPUS -> "Opus"
-                    AudioQuality.LOSSLESS -> "Lossless"
+                    else -> "Opus"
                 }
             },
             valueDescription = {
@@ -274,20 +269,16 @@ highlightKey: String? = null) {
         EnumDialog(
             onDismiss = { showDownloadQualityDialog = false },
             onSelect = {
-                if (it == pushkar.chorus.music.constants.DownloadQuality.LOSSLESS) {
-                    showLosslessDownloadWarning = true
-                } else {
-                    onDownloadQualityChange(it)
-                }
+                onDownloadQualityChange(it)
                 showDownloadQualityDialog = false
             },
             title = stringResource(R.string.download_quality_title),
             current = downloadQuality,
-            values = listOf(pushkar.chorus.music.constants.DownloadQuality.YOUTUBE, pushkar.chorus.music.constants.DownloadQuality.LOSSLESS),
+            values = listOf(pushkar.chorus.music.constants.DownloadQuality.YOUTUBE),
             valueText = {
                 when (it) {
                     pushkar.chorus.music.constants.DownloadQuality.YOUTUBE -> "YouTube Music (AAC/Default)"
-                    pushkar.chorus.music.constants.DownloadQuality.LOSSLESS -> "Lossless"
+                    else -> "Unknown"
                 }
             }
         )
@@ -326,58 +317,7 @@ highlightKey: String? = null) {
         }
 
 
-        if (showLosslessAudioWarning) {
-            DefaultDialog(
-                onDismiss = { showLosslessAudioWarning = false },
-                title = { Text("Enable Lossless Audio?") },
-                buttons = {
-                    TextButton(onClick = {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://chorusmusic.fun/donate"))
-                        context.startActivity(intent)
-                    }) {
-                        Text("Donate")
-                    }
-                    TextButton(onClick = { showLosslessAudioWarning = false }) {
-                        Text(stringResource(R.string.cancel))
-                    }
-                    TextButton(onClick = {
-                        showLosslessAudioWarning = false
-                        onAudioQualityChange(AudioQuality.LOSSLESS)
-                    }) {
-                        Text(stringResource(R.string.enable))
-                    }
-                }
-            ) {
-                Text("Lossless is uncompressed music which is higher in size and requires significant server load. Continuous maintenance requires funding. We have a monthly goal of $200 to keep this active.\n\nPlease consider donating!")
-            }
-        }
 
-
-        if (showLosslessDownloadWarning) {
-            DefaultDialog(
-                onDismiss = { showLosslessDownloadWarning = false },
-                title = { Text("Enable Lossless Downloads?") },
-                buttons = {
-                    TextButton(onClick = {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://chorusmusic.fun/donate"))
-                        context.startActivity(intent)
-                    }) {
-                        Text("Donate")
-                    }
-                    TextButton(onClick = { showLosslessDownloadWarning = false }) {
-                        Text(stringResource(R.string.cancel))
-                    }
-                    TextButton(onClick = {
-                        showLosslessDownloadWarning = false
-                        onDownloadQualityChange(pushkar.chorus.music.constants.DownloadQuality.LOSSLESS)
-                    }) {
-                        Text(stringResource(R.string.enable))
-                    }
-                }
-            ) {
-                Text("Lossless downloads require significant server load and bandwidth. Continuous maintenance requires funding. We have a monthly goal of $200 to keep this active.\n\nPlease consider donating!")
-            }
-        }
 
 
 
@@ -434,7 +374,7 @@ highlightKey: String? = null) {
                         Text(
                             when (audioQuality) {
                                 AudioQuality.OPUS -> "Opus"
-                                AudioQuality.LOSSLESS -> "Lossless"
+                                else -> "Opus"
                             }
                         )
                     },
@@ -449,7 +389,7 @@ highlightKey: String? = null) {
                         Text(
                             when (downloadQuality) {
                                 pushkar.chorus.music.constants.DownloadQuality.YOUTUBE -> "YouTube Music (AAC/Default)"
-                                pushkar.chorus.music.constants.DownloadQuality.LOSSLESS -> "Lossless"
+                                else -> "YouTube Music (AAC/Default)"
                             }
                         )
                     },
@@ -457,36 +397,26 @@ highlightKey: String? = null) {
                 ))
 
 
-                val isLosslessSelected = audioQuality == AudioQuality.LOSSLESS
                 add(Material3SettingsItem(
     isHighlighted = (highlightKey == stringResource(R.string.crossfade)),
                     icon = painterResource(R.drawable.linear_scale),
                     title = { Text(stringResource(R.string.crossfade)) },
-                    description = { 
-                        if (isLosslessSelected) {
-                            Text("Crossfade is disabled while using Lossless")
-                        } else {
-                            Text(stringResource(R.string.crossfade_desc)) 
-                        }
-                    },
+                    description = { Text(stringResource(R.string.crossfade_desc)) },
                     showBadge = true,
                     trailingContent = {
                         Switch(
-                            checked = if (isLosslessSelected) false else crossfadeEnabled,
-                            enabled = !isLosslessSelected,
+                            checked = crossfadeEnabled,
                             onCheckedChange = {
-                                if (!isLosslessSelected) {
-                                    if (!crossfadeEnabled) {
-                                        showCrossfadeBetaDialog = true
-                                    } else {
-                                        onCrossfadeEnabledChange(false)
-                                    }
+                                if (!crossfadeEnabled) {
+                                    showCrossfadeBetaDialog = true
+                                } else {
+                                    onCrossfadeEnabledChange(false)
                                 }
                             },
                             thumbContent = {
                                 Icon(
                                     painter = painterResource(
-                                        id = if (!isLosslessSelected && crossfadeEnabled) R.drawable.check else R.drawable.close
+                                        id = if (crossfadeEnabled) R.drawable.check else R.drawable.close
                                     ),
                                     contentDescription = null,
                                     modifier = Modifier.size(SwitchDefaults.IconSize)
@@ -495,16 +425,14 @@ highlightKey: String? = null) {
                         )
                     },
                     onClick = {
-                        if (isLosslessSelected) {
-                            android.widget.Toast.makeText(context, "Crossfade is not available with Lossless audio", android.widget.Toast.LENGTH_SHORT).show()
-                        } else if (!crossfadeEnabled) {
+                        if (!crossfadeEnabled) {
                             showCrossfadeBetaDialog = true
                         } else {
                             onCrossfadeEnabledChange(false)
                         }
                     }
                 ))
-                if (crossfadeEnabled && !isLosslessSelected) {
+                if (crossfadeEnabled) {
                     add(Material3SettingsItem(
     isHighlighted = (highlightKey == stringResource(R.string.crossfade_duration)),
                         icon = painterResource(R.drawable.timer),
