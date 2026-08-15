@@ -257,7 +257,7 @@ fun DiscordSettings(
     val (button1Label) =
         rememberPreference(
             key = DiscordActivityButton1LabelKey,
-            defaultValue = "Listen on YouTube Music",
+            defaultValue = "Listen on Chorus Music",
         )
     val (button1Enabled) =
         rememberPreference(
@@ -272,7 +272,7 @@ fun DiscordSettings(
     val (button2Enabled) =
         rememberPreference(
             key = DiscordActivityButton2EnabledKey,
-            defaultValue = true,
+            defaultValue = false,
         )
     val (button1UrlSource) =
         rememberPreference(
@@ -1183,12 +1183,12 @@ fun RichPresence(
     largeImageCustomUrl: String = "",
     smallImageType: String = "artist",
     smallImageCustomUrl: String = "",
-    button1Label: String = "Listen on YouTube Music",
+    button1Label: String = "Listen on Chorus Music",
     button1Enabled: Boolean = true,
     button1UrlSource: String = "songurl",
     button1CustomUrl: String = "",
     button2Label: String = "Go to Chorus Music",
-    button2Enabled: Boolean = true,
+    button2Enabled: Boolean = false,
     button2UrlSource: String = "custom",
     button2CustomUrl: String = "https://github.com/ChorusMusicApp/Chorus-Music",
     isPlaying: Boolean = false,

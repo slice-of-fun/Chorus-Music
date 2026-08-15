@@ -70,7 +70,7 @@ fun GlassEffectSettings(
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
     val (globalEnabled, onGlobalEnabledChange) = rememberPreference(
-        LiquidGlassGlobalEnabledKey, defaultValue = false
+        LiquidGlassGlobalEnabledKey, defaultValue = true
     )
     val (vibrancy, onVibrancyChange) = rememberPreference(
         LiquidGlassVibrancyKey, defaultValue = 1f
@@ -122,7 +122,7 @@ fun GlassEffectSettings(
         LiquidGlassNavBarEnabledKey, defaultValue = true
     )
     val (useFloatingNavBar, onUseFloatingNavBarChange) = rememberPreference(
-        UseFloatingNavBarKey, defaultValue = false
+        UseFloatingNavBarKey, defaultValue = true
     )
 
     var showVibrancyDialog by rememberSaveable { mutableStateOf(false) }

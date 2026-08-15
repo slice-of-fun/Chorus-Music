@@ -160,8 +160,22 @@ class SpotifyImportRepository @Inject constructor(
             }
         }
 
-    suspend fun addPlaylistByUrl(url: String): SpotifyImportSource.Playlist =
+    suspend fun addPlaylistByUrl(url: String): SpotifyImportSource =
         withContext(Dispatchers.IO) {
+            val parsers = listOf(
+                pushkar.chorus.music.spotifyimport.parsers.SpotifyLinkParser(),
+                pushkar.chorus.music.spotifyimport.parsers.YouTubeLinkParser(),
+                pushkar.chorus.music.spotifyimport.parsers.AppleMusicLinkParser(),
+                pushkar.chorus.music.spotifyimport.parsers.SoundCloudLinkParser(),
+                pushkar.chorus.music.spotifyimport.parsers.JioSaavnLinkParser()
+            )
+
+            val parser = parsers.find { it.supports(url) }
+            if (parser != null) {
+                val parsed = parser.parse(url)
+                return@withContext SpotifyImportSource.UniversalPlaylist(parsed)
+            }
+
             val playlistId = parsePlaylistId(url)
                 ?: throw IllegalArgumentException(context.getString(R.string.spotify_invalid_playlist_link))
             ensureAuthenticated()
@@ -187,7 +201,10 @@ class SpotifyImportRepository @Inject constructor(
         onProgress: (SpotifyImportProgressUi) -> Unit,
     ): SpotifyImportSummaryUi =
         withContext(Dispatchers.IO) {
-            ensureAuthenticated()
+            // Only ensure authenticated if there are non-universal sources
+            if (sources.any { it !is SpotifyImportSource.UniversalPlaylist }) {
+                ensureAuthenticated()
+            }
             val summaries = ArrayList<SpotifyImportSourceSummaryUi>(sources.size)
 
             sources.forEachIndexed { sourceIndex, source ->
@@ -353,6 +370,18 @@ class SpotifyImportRepository @Inject constructor(
         }
 
     private suspend fun fetchAllTracks(source: SpotifyImportSource): List<SpotifyTrack> {
+        if (source is SpotifyImportSource.UniversalPlaylist) {
+            return source.playlist.tracks.map { track ->
+                SpotifyTrack(
+                    id = "", // dummy id
+                    name = track.title,
+                    durationMs = track.durationMs ?: 0L,
+                    explicit = false,
+                    artists = listOf(pushkar.chorus.music.spotify.models.SpotifySimpleArtist(id = "", name = track.artist)),
+                    album = null
+                )
+            }
+        }
         val tracks = ArrayList<SpotifyTrack>()
         var offset = 0
         val limit = 100
@@ -513,6 +542,7 @@ class SpotifyImportRepository @Inject constructor(
                     lastUpdateTime = now,
                     thumbnailUrl = source.thumbnailUrl,
                     isEditable = true,
+                    syncUrl = if (source is SpotifyImportSource.UniversalPlaylist) source.playlist.serviceUrl else null
                 ) ?: PlaylistEntity(
                     id = source.localPlaylistId,
                     name = source.title,
@@ -520,6 +550,7 @@ class SpotifyImportRepository @Inject constructor(
                     lastUpdateTime = now,
                     thumbnailUrl = source.thumbnailUrl,
                     isEditable = true,
+                    syncUrl = if (source is SpotifyImportSource.UniversalPlaylist) source.playlist.serviceUrl else null
                 )
 
             if (existing == null) {
@@ -621,5 +652,17 @@ sealed interface SpotifyImportSource {
         override val thumbnailUrl: String? = null
         override val localPlaylistId: String = "SPOTIFY_LIKED_SONGS"
         override val type: SpotifyImportSourceType = SpotifyImportSourceType.LIKED_SONGS
+    }
+
+    data class UniversalPlaylist(
+        val playlist: pushkar.chorus.music.spotifyimport.parsers.UniversalParsedPlaylist,
+    ) : SpotifyImportSource {
+        override val id: String = "universal:${playlist.id}"
+        override val title: String = playlist.title
+        override val subtitle: String = playlist.subtitle
+        override val thumbnailUrl: String? = playlist.thumbnailUrl
+        override val trackCount: Int? = playlist.trackCount
+        override val localPlaylistId: String = "UNIVERSAL_PLAYLIST_${playlist.id}"
+        override val type: SpotifyImportSourceType = SpotifyImportSourceType.UNIVERSAL_PLAYLIST
     }
 }

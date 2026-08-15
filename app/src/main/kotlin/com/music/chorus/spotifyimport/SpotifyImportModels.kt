@@ -13,6 +13,7 @@ import androidx.compose.runtime.Immutable
 enum class SpotifyImportSourceType {
     PLAYLIST,
     LIKED_SONGS,
+    UNIVERSAL_PLAYLIST,
 }
 
 @Immutable

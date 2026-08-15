@@ -44,9 +44,9 @@ class DiscordRPC(
 ) {
     companion object {
         private const val PAUSE_IMAGE_URL =
-            "https://avatars.githubusercontent.com/u/258176326?s=200&v=4"
+            "https://raw.githubusercontent.com/ChorusMusicApp/Chorus-Music/main/logo.png"
         private const val APP_ICON_URL =
-            "https://avatars.githubusercontent.com/u/258176326?s=200&v=4"
+            "https://raw.githubusercontent.com/ChorusMusicApp/Chorus-Music/main/logo.png"
         private const val TAG = "DiscordRPC"
     }
 
@@ -278,10 +278,10 @@ class DiscordRPC(
     }
 
     private suspend fun resolveButtons(song: Song): List<DiscordPresenceButton> {
-        val button1Label = context.dataStore[DiscordActivityButton1LabelKey] ?: "Listen on YouTube Music"
+        val button1Label = context.dataStore[DiscordActivityButton1LabelKey] ?: "Listen on Chorus Music"
         val button1Enabled = context.dataStore[DiscordActivityButton1EnabledKey] ?: true
         val button2Label = context.dataStore[DiscordActivityButton2LabelKey] ?: "Go to Chorus Music"
-        val button2Enabled = context.dataStore[DiscordActivityButton2EnabledKey] ?: true
+        val button2Enabled = context.dataStore[DiscordActivityButton2EnabledKey] ?: false
         val button1UrlSource = context.dataStore[DiscordActivityButton1UrlSourceKey] ?: "songurl"
         val button1CustomUrl = context.dataStore[DiscordActivityButton1CustomUrlKey] ?: ""
         val button2UrlSource = context.dataStore[DiscordActivityButton2UrlSourceKey] ?: "custom"
@@ -313,7 +313,7 @@ class DiscordRPC(
     ): String? =
         when (source.lowercase()) {
             "songurl" -> {
-                song.youtubeMusicUrl()
+                "https://share.chorusmusic.fun/${song.id}"
             }
 
             "artisturl" -> {

@@ -61,8 +61,8 @@ android {
         val isNightly = project.hasProperty("nightly") && project.property("nightly") == "true"
         buildConfigField("Boolean", "IS_NIGHTLY", isNightly.toString())
 
-        val discordApplicationId = "1518210534070292541"
-        val discordApplicationIdLong = 1518210534070292541L
+        val discordApplicationId = "1538302367584362536"
+        val discordApplicationIdLong = 1538302367584362536L
         val discordRedirectScheme = "discord-$discordApplicationId"
 
         buildConfigField("String", "DISCORD_APPLICATION_ID", "\"$discordApplicationId\"")
@@ -122,9 +122,9 @@ android {
         }
         create("release") {
             storeFile = file("keystore/release.keystore")
-            storePassword = System.getenv("STORE_PASSWORD")
-            keyAlias = System.getenv("KEY_ALIAS")
-            keyPassword = System.getenv("KEY_PASSWORD")
+            storePassword = System.getenv("STORE_PASSWORD") ?: "android"
+            keyAlias = System.getenv("KEY_ALIAS") ?: "release"
+            keyPassword = System.getenv("KEY_PASSWORD") ?: "android"
         }
         getByName("debug") {
             keyAlias = "androiddebugkey"

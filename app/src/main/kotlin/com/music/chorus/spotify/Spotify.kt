@@ -183,9 +183,10 @@ object Spotify {
     private suspend fun graphqlPost(
         operationName: String,
         variables: JsonObject = buildJsonObject {},
+        tokenOverride: String? = null,
     ): JsonObject {
         val token =
-            accessToken ?: throw SpotifyException(401, "Not authenticated").also {
+            tokenOverride ?: accessToken ?: throw SpotifyException(401, "Not authenticated").also {
                 log("E", "GQL $operationName — no token")
             }
 
@@ -756,7 +757,7 @@ object Spotify {
 
     // ── Playlist detail (GQL: fetchPlaylist) ────────────────────────────
 
-    suspend fun playlist(playlistId: String): Result<SpotifyPlaylist> =
+    suspend fun playlist(playlistId: String, tokenOverride: String? = null): Result<SpotifyPlaylist> =
         runCatching {
             val vars =
                 buildJsonObject {
@@ -770,6 +771,7 @@ object Spotify {
                 graphqlPost(
                     operationName = "fetchPlaylist",
                     variables = vars,
+                    tokenOverride = tokenOverride,
                 )
 
             val playlist =
@@ -804,6 +806,7 @@ object Spotify {
         playlistId: String,
         limit: Int = 100,
         offset: Int = 0,
+        tokenOverride: String? = null,
     ): Result<SpotifyPaging<SpotifyPlaylistTrack>> =
         runCatching {
             val vars =
@@ -818,6 +821,7 @@ object Spotify {
                 graphqlPost(
                     operationName = "fetchPlaylist",
                     variables = vars,
+                    tokenOverride = tokenOverride,
                 )
 
             val content =

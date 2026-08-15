@@ -34,7 +34,8 @@ data class PlaylistEntity(
     @ColumnInfo(name = "isAutoSync", defaultValue = false.toString())
     val isAutoSync: Boolean = false,
     @ColumnInfo(name = "isPinned", defaultValue = false.toString())
-    val isPinned: Boolean = false
+    val isPinned: Boolean = false,
+    val syncUrl: String? = null
 ) {
     companion object {
         const val LIKED_PLAYLIST_ID = "LP_LIKED"

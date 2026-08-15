@@ -417,16 +417,16 @@
     <string name="standard_lyrics_blur">Standard lyrics blur</string>
     <string name="listen_together_smart_resync">Smart Network Resync</string>
     <string name="listen_together_smart_resync_desc">Automatically catch up with the host after a connection drop</string>
-    <string name="spotify_import_title">Import From Spotify</string>
+    <string name="spotify_import_title">Import Playlists</string>
     <string name="spotify_import_desc">Connect Spotify, choose playlists, and mirror them into local Chorus Music playlists.</string>
     <string name="spotify_connect">Connect Spotify</string>
     <string name="spotify_refresh">Refresh Spotify library</string>
     <string name="spotify_select_sources">Select Spotify playlists</string>
     <string name="spotify_import_by_link">Import playlist by link</string>
-    <string name="spotify_import_by_link_desc">Paste a Spotify playlist link to import it — even playlists you don\'t own</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/…</string>
+    <string name="spotify_import_by_link_desc">Paste a playlist link (Spotify, YouTube, Apple Music, SoundCloud, JioSaavn) to import it</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/… or https://youtube.com/playlist?list=…</string>
     <string name="spotify_add">Add</string>
-    <string name="spotify_invalid_playlist_link">That doesn\'t look like a Spotify playlist link. Use a link like https://open.spotify.com/playlist/…</string>
+    <string name="spotify_invalid_playlist_link">That doesn\'t look like a supported playlist link. Make sure it\'s a valid URL for Spotify, YouTube, Apple Music, SoundCloud, or JioSaavn.</string>
     <string name="spotify_import_selected">Import selected</string>
     <string name="spotify_selected_count">%1$d selected</string>
     <string name="spotify_available_count">%1$d sources available</string>

@@ -50,6 +50,9 @@ import pushkar.chorus.music.R
 
 import kotlinx.coroutines.delay
 
+import pushkar.chorus.music.ui.utils.glassEffect
+import androidx.compose.foundation.isSystemInDarkTheme
+
 @Composable
 fun DefaultDialog(
     onDismiss: () -> Unit,
@@ -60,14 +63,15 @@ fun DefaultDialog(
     horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
     content: @Composable ColumnScope.() -> Unit,
 ) {
+    val isDark = isSystemInDarkTheme()
     Dialog(
         onDismissRequest = onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Surface(
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier.padding(24.dp).glassEffect(isDark = isDark, alpha = 0.5f, blurRadius = 32f),
             shape = AlertDialogDefaults.shape,
-            color = AlertDialogDefaults.containerColor,
+            color = androidx.compose.ui.graphics.Color.Transparent,
             tonalElevation = AlertDialogDefaults.TonalElevation
         ) {
             Column(
@@ -186,14 +190,15 @@ fun ListDialog(
     modifier: Modifier = Modifier,
     content: LazyListScope.() -> Unit,
 ) {
+    val isDark = isSystemInDarkTheme()
     Dialog(
         onDismissRequest = onDismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
         Surface(
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier.padding(24.dp).glassEffect(isDark = isDark, alpha = 0.5f, blurRadius = 32f),
             shape = AlertDialogDefaults.shape,
-            color = AlertDialogDefaults.containerColor,
+            color = androidx.compose.ui.graphics.Color.Transparent,
             tonalElevation = AlertDialogDefaults.TonalElevation,
         ) {
             Column(

@@ -1362,29 +1362,13 @@ fun LocalPlaylistHeader(
                             downloadState = downloadState,
                             onEdit = onShowEditDialog,
                             onSync = {
-                                scope.launch(Dispatchers.IO) {
-                                    val playlistPage = YouTube.playlist(playlist.playlist.browseId!!)
-                                        .completed()
-                                        .getOrNull() ?: return@launch
-                                    database.transaction {
-                                        clearPlaylist(playlist.id)
-                                        playlistPage.songs
-                                            .map(SongItem::toMediaMetadata)
-                                            .onEach(::insert)
-                                            .mapIndexed { position, song ->
-                                                PlaylistSongMap(
-                                                    songId = song.id,
-                                                    playlistId = playlist.id,
-                                                    position = position,
-                                                    setVideoId = song.setVideoId
-                                                )
-                                            }
-                                            .forEach(::insert)
+                                viewModel.syncPlaylist(
+                                    onDone = {
+                                        scope.launch(Dispatchers.Main) {
+                                            snackbarHostState.showSnackbar(context.getString(R.string.playlist_synced))
+                                        }
                                     }
-                                }
-                                scope.launch(Dispatchers.Main) {
-                                    snackbarHostState.showSnackbar(context.getString(R.string.playlist_synced))
-                                }
+                                )
                             },
                             onDelete = onshowDeletePlaylistDialog,
                             onModifyWithAi = { showAiModifyDialog = true },

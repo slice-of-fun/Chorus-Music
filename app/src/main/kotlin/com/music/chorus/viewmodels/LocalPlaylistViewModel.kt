@@ -44,6 +44,7 @@ constructor(
     @ApplicationContext context: Context,
     private val database: MusicDatabase,
     private val syncUtils: SyncUtils,
+    private val importRepository: pushkar.chorus.music.spotifyimport.SpotifyImportRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     val playlistId = savedStateHandle.get<String>("playlistId")!!
@@ -150,6 +151,49 @@ constructor(
                     addSongToPlaylist(currentPlaylist, listOf(song.id))
                 }
                 _suggestions.value = _suggestions.value.filter { it.id != song.id }
+            }
+        }
+    }
+    fun syncPlaylist(onProgress: (pushkar.chorus.music.spotifyimport.SpotifyImportProgressUi) -> Unit = {}, onDone: () -> Unit = {}) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val p = playlist.value?.playlist ?: return@launch
+            try {
+                if (p.syncUrl != null) {
+                    val source = importRepository.addPlaylistByUrl(p.syncUrl)
+                    // We modify the ID temporarily to overwrite this specific playlist instead of creating a new one
+                    val modifiedSource = when (source) {
+                        is pushkar.chorus.music.spotifyimport.SpotifyImportSource.Playlist -> source.copy(playlist = source.playlist.copy(id = p.id.removePrefix("UNIVERSAL_PLAYLIST_").removePrefix("SPOTIFY_PLAYLIST_")))
+                        is pushkar.chorus.music.spotifyimport.SpotifyImportSource.UniversalPlaylist -> source.copy(playlist = source.playlist.copy(id = p.id.removePrefix("UNIVERSAL_PLAYLIST_")))
+                        else -> source
+                    }
+                    // Wait, instead of hacking the ID, mirrorPlaylist uses localPlaylistId.
+                    // But we can't easily override localPlaylistId in data classes without copying.
+                    // Actually, if it's the exact same link, localPlaylistId will match `p.id` anyway!
+                    importRepository.importSources(listOf(source), onProgress)
+                } else if (p.browseId != null) {
+                    val playlistPage = YouTube.playlist(p.browseId)
+                        .completed()
+                        .getOrNull() ?: return@launch
+                    database.transaction {
+                        clearPlaylist(p.id)
+                        playlistPage.songs
+                            .map(SongItem::toMediaMetadata)
+                            .onEach(::insert)
+                            .mapIndexed { position, song ->
+                                pushkar.chorus.music.db.entities.PlaylistSongMap(
+                                    songId = song.id,
+                                    playlistId = p.id,
+                                    position = position,
+                                    setVideoId = song.setVideoId
+                                )
+                            }
+                            .forEach(::insert)
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                withContext(Dispatchers.Main) { onDone() }
             }
         }
     }

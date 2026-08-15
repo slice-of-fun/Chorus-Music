@@ -23,7 +23,7 @@ import com.materialkolor.dynamiccolor.ColorSpec
 import com.materialkolor.rememberDynamicColorScheme
 import com.materialkolor.score.Score
 
-val DefaultThemeColor = Color(0xFFED5564)
+val DefaultThemeColor = Color.Black
 
 @Composable
 fun chorusmusicTheme(
@@ -33,20 +33,19 @@ fun chorusmusicTheme(
     content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
+    val useSystemDynamicColor = false 
     
-    val useSystemDynamicColor = (themeColor == DefaultThemeColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-
-    
-    val baseColorScheme = if (useSystemDynamicColor) {
+    val baseColorScheme = if (useSystemDynamicColor && themeColor != DefaultThemeColor) {
         
         if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
     } else {
         
+        val style = if (themeColor == DefaultThemeColor) PaletteStyle.Monochrome else PaletteStyle.TonalSpot
         rememberDynamicColorScheme(
             seedColor = themeColor, 
             isDark = darkTheme,
             specVersion = ColorSpec.SpecVersion.SPEC_2025,
-            style = PaletteStyle.TonalSpot 
+            style = style 
         )
     }
 
