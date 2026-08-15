@@ -87,9 +87,9 @@ class DiscordRPC(
 
         val translatedMap = translateSongFields(song)
         val appName = context.getString(R.string.app_name)
-        val namePref = context.dataStore[DiscordActivityNameKey] ?: "APP"
-        val detailsPref = context.dataStore[DiscordActivityDetailsKey] ?: "SONG"
-        val statePref = context.dataStore[DiscordActivityStateKey] ?: "ARTIST"
+        val namePref = context.dataStore[DiscordActivityNameKey] ?: "SONG"
+        val detailsPref = context.dataStore[DiscordActivityDetailsKey] ?: "ARTIST"
+        val statePref = context.dataStore[DiscordActivityStateKey] ?: "ALBUM"
 
         val activityName =
             sourceValue(

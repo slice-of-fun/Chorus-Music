@@ -241,17 +241,17 @@ fun DiscordSettings(
     val (nameSource, onNameSourceChange) =
         rememberEnumPreference(
             key = DiscordActivityNameKey,
-            defaultValue = ActivitySource.APP,
+            defaultValue = ActivitySource.SONG,
         )
     val (detailsSource, onDetailsSourceChange) =
         rememberEnumPreference(
             key = DiscordActivityDetailsKey,
-            defaultValue = ActivitySource.SONG,
+            defaultValue = ActivitySource.ARTIST,
         )
     val (stateSource, onStateSourceChange) =
         rememberEnumPreference(
             key = DiscordActivityStateKey,
-            defaultValue = ActivitySource.ARTIST,
+            defaultValue = ActivitySource.ALBUM,
         )
 
     val (button1Label) =
@@ -1175,9 +1175,9 @@ fun EditablePreference(
 fun RichPresence(
     song: Song?,
     currentPlaybackTimeMillis: Long = 0L,
-    nameSource: ActivitySource = ActivitySource.APP,
-    detailsSource: ActivitySource = ActivitySource.SONG,
-    stateSource: ActivitySource = ActivitySource.ARTIST,
+    nameSource: ActivitySource = ActivitySource.SONG,
+    detailsSource: ActivitySource = ActivitySource.ARTIST,
+    stateSource: ActivitySource = ActivitySource.ALBUM,
     activityType: String = "LISTENING",
     largeImageType: String = "thumbnail",
     largeImageCustomUrl: String = "",
