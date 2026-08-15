@@ -66,67 +66,6 @@ fun WelcomeDialog(
                 // Main Header
                 WelcomeAppCard()
 
-                WelcomeSectionCard(title = "Follow Developer") {
-                    WelcomeActionRow(
-                        icon = painterResource(R.drawable.ic_instagram_new),
-                        title = "Instagram",
-                        subtitle = "@iad1tya",
-                        onClick = { uriHandler.openUri("https://instagram.com/iad1tya") }
-                    )
-                    WelcomeDivider()
-                    WelcomeActionRow(
-                        icon = painterResource(R.drawable.ic_x_new),
-                        title = "X (Twitter)",
-                        subtitle = "@xad1tya",
-                        onClick = { uriHandler.openUri("https://x.com/xad1tya") }
-                    )
-                    WelcomeDivider()
-                    WelcomeActionRow(
-                        icon = painterResource(R.drawable.github),
-                        title = "GitHub",
-                        subtitle = "iad1tya",
-                        onClick = { uriHandler.openUri("https://github.com/iad1tya") }
-                    )
-                }
-
-                WelcomeSectionCard(title = "Support Chorus") {
-                    WelcomeActionRow(
-                        icon = painterResource(R.drawable.coffee),
-                        title = "Buy Me a Coffee",
-                        subtitle = "buymeacoffee.com/iad1tya",
-                        onClick = { uriHandler.openUri("https://buymeacoffee.com/iad1tya") }
-                    )
-                    WelcomeDivider()
-                    WelcomeActionRow(
-                        icon = painterResource(R.drawable.ic_patreon_new),
-                        title = "Patreon",
-                        subtitle = "patreon.com/cw/iad1tya",
-                        onClick = { uriHandler.openUri("https://www.patreon.com/cw/iad1tya") }
-                    )
-                    WelcomeDivider()
-                    WelcomeActionRow(
-                        icon = painterResource(R.drawable.upi_new),
-                        title = "UPI",
-                        subtitle = "iad1tya@upi",
-                        onClick = { uriHandler.openUri("https://intradeus.github.io/http-protocol-redirector/?r=upi://pay?pa=iad1tya@upi&pn=Aditya%20Yadav&am=&tn=Thank%20You%20so%20much%20for%20this%20support") }
-                    )
-                }
-
-                WelcomeSectionCard(title = "Social Community") {
-                    WelcomeActionRow(
-                        icon = painterResource(R.drawable.ic_telegram_new),
-                        title = "Telegram",
-                        subtitle = "t.me/ChorusMusicApp",
-                        onClick = { uriHandler.openUri("https://t.me/ChorusMusicApp") }
-                    )
-                    WelcomeDivider()
-                    WelcomeActionRow(
-                        icon = painterResource(R.drawable.ic_discord_new),
-                        title = "Discord",
-                        subtitle = "discord.gg/EcfV3AxH5c",
-                        onClick = { uriHandler.openUri("https://discord.com/invite/EcfV3AxH5c") }
-                    )
-                }
 
                 Spacer(modifier = Modifier.height(4.dp))
 

@@ -18,11 +18,5 @@ fun Modifier.glassEffect(
     } else {
         Color.White.copy(alpha = alpha)
     }
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        this
-            .background(backgroundColor)
-            .blur(blurRadius.dp)
-    } else {
-        this.background(backgroundColor)
-    }
+    this.background(backgroundColor)
 }
