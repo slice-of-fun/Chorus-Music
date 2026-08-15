@@ -539,6 +539,15 @@ fun LocalPlaylistScreen(
                                 onshowDeletePlaylistDialog = { showDeletePlaylistDialog = true },
                                 onStartSearch = { isSearching = true },
                                 onExport = { exportCsvLauncher.launch("${playlist.playlist.name}_export.csv") },
+                                onSync = {
+                                    viewModel.syncPlaylist(
+                                        onDone = {
+                                            coroutineScope.launch(Dispatchers.Main) {
+                                                snackbarHostState.showSnackbar(context.getString(R.string.playlist_synced))
+                                            }
+                                        }
+                                    )
+                                },
                                 snackbarHostState = snackbarHostState,
                                 modifier = Modifier.animateItem()
                             )
@@ -905,6 +914,7 @@ fun LocalPlaylistHeader(
     onshowDeletePlaylistDialog: () -> Unit,
     onStartSearch: () -> Unit,
     onExport: () -> Unit,
+    onSync: () -> Unit,
     snackbarHostState: SnackbarHostState,
     modifier: Modifier,
 ) {
@@ -1361,15 +1371,7 @@ fun LocalPlaylistHeader(
                             context = context,
                             downloadState = downloadState,
                             onEdit = onShowEditDialog,
-                            onSync = {
-                                viewModel.syncPlaylist(
-                                    onDone = {
-                                        scope.launch(Dispatchers.Main) {
-                                            snackbarHostState.showSnackbar(context.getString(R.string.playlist_synced))
-                                        }
-                                    }
-                                )
-                            },
+                            onSync = onSync,
                             onDelete = onshowDeletePlaylistDialog,
                             onModifyWithAi = { showAiModifyDialog = true },
                             onDownload = {

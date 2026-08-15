@@ -33,6 +33,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.Collator
 import java.util.Locale
 import javax.inject.Inject
@@ -160,25 +161,20 @@ constructor(
             try {
                 if (p.syncUrl != null) {
                     val source = importRepository.addPlaylistByUrl(p.syncUrl)
-                    // We modify the ID temporarily to overwrite this specific playlist instead of creating a new one
                     val modifiedSource = when (source) {
                         is pushkar.chorus.music.spotifyimport.SpotifyImportSource.Playlist -> source.copy(playlist = source.playlist.copy(id = p.id.removePrefix("UNIVERSAL_PLAYLIST_").removePrefix("SPOTIFY_PLAYLIST_")))
                         is pushkar.chorus.music.spotifyimport.SpotifyImportSource.UniversalPlaylist -> source.copy(playlist = source.playlist.copy(id = p.id.removePrefix("UNIVERSAL_PLAYLIST_")))
                         else -> source
                     }
-                    // Wait, instead of hacking the ID, mirrorPlaylist uses localPlaylistId.
-                    // But we can't easily override localPlaylistId in data classes without copying.
-                    // Actually, if it's the exact same link, localPlaylistId will match `p.id` anyway!
                     importRepository.importSources(listOf(source), onProgress)
                 } else if (p.browseId != null) {
                     val playlistPage = YouTube.playlist(p.browseId)
-                        .completed()
                         .getOrNull() ?: return@launch
                     database.transaction {
                         clearPlaylist(p.id)
                         playlistPage.songs
                             .map(SongItem::toMediaMetadata)
-                            .onEach(::insert)
+                            .onEach { insert(it) }
                             .mapIndexed { position, song ->
                                 pushkar.chorus.music.db.entities.PlaylistSongMap(
                                     songId = song.id,
@@ -187,7 +183,7 @@ constructor(
                                     setVideoId = song.setVideoId
                                 )
                             }
-                            .forEach(::insert)
+                            .forEach { insert(it) }
                     }
                 }
             } catch (e: Exception) {

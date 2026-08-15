@@ -20,14 +20,8 @@ class SpotifyLinkParser : UniversalLinkParser {
         val playlistId = PLAYLIST_REFERENCE_REGEX.find(trimmed)?.groupValues?.get(1)
             ?: if (trimmed.matches(BARE_ID_REGEX)) trimmed else throw IllegalArgumentException("Invalid Spotify playlist link")
 
-        // Use anonymous token
         val token = SpotifyAuth.fetchAnonymousToken().getOrThrow().accessToken
-
         val playlist = Spotify.playlist(playlistId, tokenOverride = token).getOrThrow()
-        
-        // Fetch all tracks if we need more than the first 25, but the initial response might just have total count.
-        // For simplicity, we just use the playlistTrackCount if we need to pagination.
-        // Wait, Spotify.playlist returns the playlist details, but tracks might be paged.
         val limit = 100
         val allTracks = mutableListOf<UniversalParsedTrack>()
         var offset = 0
@@ -42,7 +36,7 @@ class SpotifyLinkParser : UniversalLinkParser {
                         UniversalParsedTrack(
                             title = track.name,
                             artist = artists,
-                            durationMs = track.durationMs
+                            durationMs = track.durationMs?.toLong()
                         )
                     )
                 }

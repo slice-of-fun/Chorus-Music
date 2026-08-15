@@ -201,7 +201,6 @@ class SpotifyImportRepository @Inject constructor(
         onProgress: (SpotifyImportProgressUi) -> Unit,
     ): SpotifyImportSummaryUi =
         withContext(Dispatchers.IO) {
-            // Only ensure authenticated if there are non-universal sources
             if (sources.any { it !is SpotifyImportSource.UniversalPlaylist }) {
                 ensureAuthenticated()
             }
@@ -373,9 +372,9 @@ class SpotifyImportRepository @Inject constructor(
         if (source is SpotifyImportSource.UniversalPlaylist) {
             return source.playlist.tracks.map { track ->
                 SpotifyTrack(
-                    id = "", // dummy id
+                    id = "",
                     name = track.title,
-                    durationMs = track.durationMs ?: 0L,
+                    durationMs = track.durationMs?.toInt() ?: 0,
                     explicit = false,
                     artists = listOf(pushkar.chorus.music.spotify.models.SpotifySimpleArtist(id = "", name = track.artist)),
                     album = null

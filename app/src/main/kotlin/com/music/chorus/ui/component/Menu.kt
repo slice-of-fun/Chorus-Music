@@ -60,7 +60,7 @@ fun Material3MenuGroup(
                     .let { mod ->
                         if (item.onClick != null) mod.clickable(onClick = item.onClick) else mod
                     }
-                    .pushkar.chorus.music.ui.utils.glassEffect(isDark = isDark, alpha = 0.2f, blurRadius = 16f),
+                    .com.music.chorus.ui.utils.glassEffect(isDark = isDark, alpha = 0.2f, blurRadius = 16f),
                 shape = shape,
                 colors = item.cardColors ?: CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)

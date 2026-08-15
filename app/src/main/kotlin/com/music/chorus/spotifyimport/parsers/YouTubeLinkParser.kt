@@ -16,11 +16,11 @@ class YouTubeLinkParser : UniversalLinkParser {
         val playlistId = uri.getQueryParameter("list")
             ?: throw IllegalArgumentException("Could not extract playlist ID from YouTube link")
 
-        val playlistPage = YouTube.playlist(playlistId).completed().getOrThrow()
+        val playlistPage = YouTube.playlist(playlistId).getOrThrow()
 
         val tracks = playlistPage.songs.mapNotNull { item ->
             val title = item.title
-            val artist = item.authors.joinToString(", ") { it.name }
+            val artist = item.artists.joinToString(", ") { it.name }
             if (title.isNotBlank()) {
                 UniversalParsedTrack(
                     title = title,
@@ -32,10 +32,10 @@ class YouTubeLinkParser : UniversalLinkParser {
 
         return UniversalParsedPlaylist(
             id = playlistId,
-            title = playlistPage.title ?: "YouTube Playlist",
-            subtitle = playlistPage.author?.name ?: "YouTube",
+            title = playlistPage.playlist.title ?: "YouTube Playlist",
+            subtitle = playlistPage.playlist.author?.name ?: "YouTube",
             trackCount = tracks.size,
-            thumbnailUrl = playlistPage.thumbnail,
+            thumbnailUrl = playlistPage.playlist.thumbnail,
             serviceUrl = url,
             tracks = tracks
         )
