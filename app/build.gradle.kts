@@ -121,19 +121,10 @@ android {
             keyPassword = "android"
         }
         create("release") {
-            val keystoreFile = file("keystore/release.keystore")
-            if (keystoreFile.exists()) {
-                storeFile = keystoreFile
-                storePassword = System.getenv("STORE_PASSWORD") ?: "android"
-                keyAlias = System.getenv("KEY_ALIAS") ?: "release"
-                keyPassword = System.getenv("KEY_PASSWORD") ?: "android"
-            } else {
-                // Fallback to debug keystore for CI or when release keystore is missing
-                storeFile = file("${System.getProperty("user.home")}/.android/debug.keystore")
-                storePassword = "android"
-                keyAlias = "androiddebugkey"
-                keyPassword = "android"
-            }
+            storeFile = file("keystore/release.keystore")
+            storePassword = System.getenv("STORE_PASSWORD") ?: "android"
+            keyAlias = System.getenv("KEY_ALIAS") ?: "release"
+            keyPassword = System.getenv("KEY_PASSWORD") ?: "android"
         }
         getByName("debug") {
             keyAlias = "androiddebugkey"
@@ -149,7 +140,14 @@ android {
             isShrinkResources = true
             isCrunchPngs = false
             isDebuggable = false
-            signingConfig = signingConfigs.getByName("release")
+            
+            // Use the release keystore if it exists, otherwise fallback to the debug keystore for CI
+            signingConfig = if (file("keystore/release.keystore").exists()) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
+            
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
