@@ -52,14 +52,12 @@ highlightKey: String? = null) {
     val client = remember { OkHttpClient() }
     val musicServices = remember {
         mutableStateListOf(
-            ServiceStatus("YouTube Music", { "https://music.youtube.com" }),
-            ServiceStatus("Lossless", { "https://lossless.chorusmusic.fun" })
+            ServiceStatus("YouTube Music", { "https://music.youtube.com" })
         )
     }
 
     val canvasServices = remember {
         mutableStateListOf(
-            ServiceStatus("Chorus Canvas", { "https://canvas.chorusmusic.fun" }),
             ServiceStatus("Tidal Canvas", { "https://api.tidal.com/v1/" })
         )
     }

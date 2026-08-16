@@ -397,7 +397,7 @@ fun SongMenu(
                             val intent = Intent().apply {
                                 action = Intent.ACTION_SEND
                                 type = "text/plain"
-                                putExtra(Intent.EXTRA_TEXT, "https://share.chorusmusic.fun/watch?v=${song.id}")
+                                putExtra(Intent.EXTRA_TEXT, "https://music.youtube.com/watch?v=${song.id}")
                             }
                             context.startActivity(Intent.createChooser(intent, null))
                         }

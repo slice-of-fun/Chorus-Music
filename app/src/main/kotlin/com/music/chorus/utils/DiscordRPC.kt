@@ -313,7 +313,7 @@ class DiscordRPC(
     ): String? =
         when (source.lowercase()) {
             "songurl" -> {
-                "https://share.chorusmusic.fun/${song.id}"
+                "https://music.youtube.com/${song.id}"
             }
 
             "artisturl" -> {
