@@ -34,8 +34,8 @@ jobs:
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
         with:
+          tag_name: v1.0.0
           generate_release_notes: true
           files: app/build/outputs/apk/**/*Release/*.apk
         env:
