@@ -141,11 +141,11 @@ android {
             isCrunchPngs = false
             isDebuggable = false
             
-            // Use the release keystore if it exists, otherwise fallback to the debug keystore for CI
+            // Use the release keystore if it exists, otherwise do not sign the release build (unsigned APK) for CI
             signingConfig = if (file("keystore/release.keystore").exists()) {
                 signingConfigs.getByName("release")
             } else {
-                signingConfigs.getByName("debug")
+                null
             }
             
             proguardFiles(
