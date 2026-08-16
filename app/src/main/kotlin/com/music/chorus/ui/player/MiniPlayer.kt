@@ -119,10 +119,7 @@ import pushkar.chorus.music.models.MediaMetadata
 import pushkar.chorus.music.playback.CastConnectionHandler
 import pushkar.chorus.music.playback.PlayerConnection
 import pushkar.chorus.music.ui.screens.settings.DarkMode
-import pushkar.chorus.music.ui.component.GlassComponent
 
-import pushkar.chorus.music.ui.component.isGlassSupported
-import pushkar.chorus.music.ui.component.liquidGlass
 import pushkar.chorus.music.ui.theme.PlayerColorExtractor
 import pushkar.chorus.music.utils.rememberEnumPreference
 import pushkar.chorus.music.utils.rememberPreference
