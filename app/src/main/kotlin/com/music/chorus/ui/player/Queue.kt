@@ -116,7 +116,7 @@ import pushkar.chorus.music.constants.ListItemHeight
 import pushkar.chorus.music.constants.PlayerBackgroundStyle
 import pushkar.chorus.music.constants.QueueEditLockKey
 import pushkar.chorus.music.constants.ShowCommentButtonKey
-import pushkar.chorus.music.constants.UseNewPlayerDesignKey
+
 import pushkar.chorus.music.extensions.metadata
 import pushkar.chorus.music.extensions.move
 import pushkar.chorus.music.extensions.toggleRepeatMode
@@ -269,10 +269,7 @@ fun Queue(
 
     var locked by rememberPreference(QueueEditLockKey, defaultValue = false)
 
-    val (useNewPlayerDesign, onUseNewPlayerDesignChange) = rememberPreference(
-        UseNewPlayerDesignKey,
-        defaultValue = true
-    )
+
     val (showCommentButton) = rememberPreference(
         ShowCommentButtonKey,
         defaultValue = false
@@ -312,7 +309,6 @@ fun Queue(
             Box(Modifier.fillMaxSize().background(Color.Unspecified))
         },
         collapsedContent = {
-            if (useNewPlayerDesign) {
                 
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
@@ -474,147 +470,6 @@ fun Queue(
                         )
                     }
                 }
-            } else {
-                
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 30.dp, vertical = 12.dp)
-                        .windowInsetsPadding(
-                            WindowInsets.systemBars
-                                .only(WindowInsetsSides.Bottom + WindowInsetsSides.Horizontal),
-                        ),
-                ) {
-                    TextButton(
-                        onClick = { state.expandSoft() },
-                        modifier = Modifier.wrapContentWidth()
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center,
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.apple_queue),
-                                contentDescription = null,
-                                modifier = Modifier.size(40.dp),
-                                tint = TextBackgroundColor
-                            )
-
-
-
-
-
-
-
-
-
-                        }
-                    }
-
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
-                        modifier = Modifier.width(120.dp)
-                    ) {
-                        ToggleButton(
-                            checked = false,
-                            onCheckedChange = {
-                                showAudioDeviceBottomSheet = true
-                            },
-                            shapes = ButtonGroupDefaults.connectedLeadingButtonShapes(),
-                            modifier = Modifier
-                                .height(56.dp)
-                                .weight(1f),
-                            colors = ToggleButtonDefaults.toggleButtonColors(
-                                containerColor = TextBackgroundColor.copy(alpha = 0.2f),
-                                contentColor = TextBackgroundColor,
-                                checkedContainerColor = TextBackgroundColor.copy(alpha = 0.4f),
-                                checkedContentColor = TextBackgroundColor
-                            )
-                        ) {
-                            Icon(
-                                painter = painterResource(
-                                    if (isBluetoothConnected) R.drawable.headset_applemusic else R.drawable.speaker_apple
-                                ),
-                                contentDescription = null,
-                                modifier = Modifier.size(30.dp)
-                            )
-                        }
-
-                        ToggleButton(
-                            checked = sleepTimerEnabled,
-                            onCheckedChange = {
-                                if (!isListenTogetherGuest) {
-                                    if (sleepTimerEnabled) {
-                                        playerConnection.service.sleepTimer.clear()
-                                    } else {
-                                        showSleepTimerDialog = true
-                                    }
-                                }
-                            },
-                            shapes = ButtonGroupDefaults.connectedTrailingButtonShapes(),
-                            modifier = Modifier
-                                .height(56.dp)
-                                .weight(1f),
-                            colors = ToggleButtonDefaults.toggleButtonColors(
-                                containerColor = TextBackgroundColor.copy(alpha = 0.2f),
-                                contentColor = TextBackgroundColor,
-                                checkedContainerColor = TextBackgroundColor.copy(alpha = 0.4f),
-                                checkedContentColor = TextBackgroundColor
-                            )
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.Center
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.sleep_timer),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(30.dp)
-                                )
-                                if (sleepTimerEnabled) {
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    Text(
-                                        text = makeTimeString(sleepTimerTimeLeft),
-                                        style = MaterialTheme.typography.labelSmall,
-                                        color = TextBackgroundColor,
-                                        maxLines = 1
-                                    )
-                                }
-                            }
-                        }
-                    }
-
-                    TextButton(
-                        onClick = {
-                            onToggleLyrics()
-                        },
-                        modifier = Modifier.wrapContentWidth()
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center,
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.apple_music_me),
-                                contentDescription = null,
-                                modifier = Modifier.size(40.dp),
-                                tint = TextBackgroundColor
-                            )
-
-
-
-
-
-
-
-
-
-                        }
-                    }
-                }
-            }
             if (showAudioDeviceBottomSheet) {
                 AudioDeviceBottomSheet(onDismiss = { showAudioDeviceBottomSheet = false })
             }

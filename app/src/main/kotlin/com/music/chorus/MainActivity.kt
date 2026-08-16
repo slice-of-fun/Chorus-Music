@@ -6,9 +6,7 @@ import pushkar.chorus.music.BuildConfig
 import pushkar.chorus.music.ui.screens.settings.RingtoneViewModel
 import pushkar.chorus.music.ui.component.RingtoneTrimmerDialog
 import pushkar.chorus.music.ui.component.RingtoneProgressDialog
-import pushkar.chorus.music.ui.component.AppFloatingNavBar
-import pushkar.chorus.music.ui.component.floatingtabbar.rememberFloatingTabBarScrollConnection
-import pushkar.chorus.music.constants.UseFloatingNavBarKey
+
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.CompositionLocalProvider
@@ -654,17 +652,19 @@ class MainActivity : ComponentActivity() {
                     animationSpec = NavigationBarAnimationSpec,
                     label = "navBarHeight",
                 )
-
-                val (useFloatingNavBar) = rememberPreference(UseFloatingNavBarKey, defaultValue = true)
-                val floatingNavBarScrollConnection = rememberFloatingTabBarScrollConnection()
-
+                
+                val floatingNavBarScrollConnection = remember {
+                    object : androidx.compose.ui.input.nestedscroll.NestedScrollConnection {}
+                }
                 val playerBottomSheetState = rememberBottomSheetState(
                     dismissedBound = 0.dp,
-                    collapsedBound = if (useFloatingNavBar && !showRail && shouldShowNavigationBar) {
-                        0.dp
-                    } else {
+                    collapsedBound = if (!showRail && shouldShowNavigationBar) {
                         bottomInset +
                             (if (!showRail && shouldShowNavigationBar) navPadding else 0.dp) +
+                            (if (useNewMiniPlayerDesign) MiniPlayerBottomSpacing else 0.dp) +
+                            MiniPlayerHeight
+                    } else {
+                        bottomInset +
                             (if (useNewMiniPlayerDesign) MiniPlayerBottomSpacing else 0.dp) +
                             MiniPlayerHeight
                     },
@@ -686,7 +686,7 @@ class MainActivity : ComponentActivity() {
 
                 val playerMediaMetadata = playerConnection?.player?.currentMediaItem?.mediaMetadata
                 val hasDockedPlayerAccessory =
-                    useFloatingNavBar && playerMediaMetadata != null && !showRail && shouldShowNavigationBar
+                    playerMediaMetadata != null && !showRail && shouldShowNavigationBar
 
                 val playerAwareWindowInsets = remember(
                     bottomInset,
@@ -852,14 +852,7 @@ class MainActivity : ComponentActivity() {
                 val showHistoryButton = remember(pauseListenHistory, eventCount) {
                     !(pauseListenHistory && eventCount == 0)
                 }
-
-
-                
                 val baseBg = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
-                val appBackdrop = rememberLayerBackdrop {
-                    drawRect(baseBg)
-                    drawContent()
-                }
 
                 val ringtoneViewModel: RingtoneViewModel = viewModel()
                 val ringtoneUiState by ringtoneViewModel.uiState.collectAsState()
@@ -873,8 +866,6 @@ class MainActivity : ComponentActivity() {
                     LocalDownloadUtil provides downloadUtil,
                     LocalShimmerTheme provides getShimmerTheme(),
                     LocalSyncUtils provides syncUtils,
-
-                    LocalAppBackdrop provides appBackdrop,
                 ) {
 
                     Scaffold(
@@ -997,34 +988,6 @@ class MainActivity : ComponentActivity() {
                                         slideOffset + hideOffset
                                     }
 
-                                    if (useFloatingNavBar) {
-                                        AppFloatingNavBar(
-                                            navigationItems = navigationItems,
-                                            currentRoute = currentRoute,
-                                            onItemClick = onNavItemClick,
-                                            scrollConnection = floatingNavBarScrollConnection,
-                                            pureBlack = pureBlack,
-                                            showPlayerAccessory = hasDockedPlayerAccessory,
-                                            onAccessoryClick = { playerBottomSheetState.expandSoft() },
-                                            modifier = Modifier
-                                                .align(Alignment.BottomCenter)
-                                                .padding(horizontal = 16.dp)
-                                                .padding(bottom = bottomInset + 8.dp)
-                                                .graphicsLayer {
-                                                    val hiddenOffset =
-                                                        size.height + (bottomInset + 8.dp).toPx()
-                                                    val navBarHeightPx = navigationBarHeight.toPx()
-                                                    translationY = if (navBarHeightPx == 0f) {
-                                                        hiddenOffset
-                                                    } else {
-                                                        val progress = playerBottomSheetState.progress.coerceIn(0f, 1f)
-                                                        val slideOffset = hiddenOffset * progress
-                                                        val hideOffset = hiddenOffset * (1 - navBarHeightPx / NavigationBarHeight.toPx())
-                                                        slideOffset + hideOffset
-                                                    }
-                                                }
-                                        )
-                                    } else {
                                         Box(
                                             modifier = Modifier
                                                 .align(Alignment.BottomCenter)
@@ -1072,7 +1035,6 @@ class MainActivity : ComponentActivity() {
                                                 }
                                                 .background(baseBg)
                                         )
-                                    }
                                 }
                             } else {
                                 if (currentRoute != "update" && currentRoute != "ambient_mode" && currentRoute != "uptime" && currentRoute?.startsWith("settings") != true) {
@@ -1100,13 +1062,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .nestedScroll(topAppBarScrollBehavior.nestedScrollConnection)
-                            .then(
-                                if (useFloatingNavBar) {
-                                    Modifier.nestedScroll(floatingNavBarScrollConnection)
-                                } else {
-                                    Modifier
-                                }
-                            )
+                            .nestedScroll(floatingNavBarScrollConnection)
                     ) {
                         Row(Modifier.fillMaxSize()) {
                             val onRailItemClick: (Screens, Boolean) -> Unit = remember(navController, coroutineScope, topAppBarScrollBehavior, playerBottomSheetState) {
@@ -1208,7 +1164,6 @@ class MainActivity : ComponentActivity() {
                                             slideOutHorizontally { it / 8 } + fadeOut(tween(200))
                                     },
                                     modifier = Modifier
-                                        .layerBackdrop(appBackdrop)
                                         .nestedScroll(topAppBarScrollBehavior.nestedScrollConnection)
                                 ) {
                                     navigationBuilder(

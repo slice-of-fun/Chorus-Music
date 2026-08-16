@@ -101,7 +101,7 @@ import pushkar.chorus.music.constants.SwipeToRemoveSongKey
 import pushkar.chorus.music.constants.SwipeToSongKey
 import pushkar.chorus.music.constants.ThumbnailCornerRadiusKey
 
-import pushkar.chorus.music.constants.UseNewPlayerDesignKey
+
 import pushkar.chorus.music.ui.component.ThumbnailCornerRadiusModal
 import pushkar.chorus.music.ui.component.DefaultDialog
 import pushkar.chorus.music.ui.component.EnumDialog
@@ -142,10 +142,6 @@ highlightKey: String? = null) {
         DynamicThemeKey,
         defaultValue = true
     )
-    val (enableLegacyIcon, onEnableLegacyIconChange) = rememberPreference(
-        pushkar.chorus.music.constants.EnableLegacyIconKey,
-        defaultValue = false
-    )
     val (enableHighRefreshRate, onEnableHighRefreshRateChange) = rememberPreference(
         pushkar.chorus.music.constants.EnableHighRefreshRateKey,
         defaultValue = true
@@ -162,38 +158,13 @@ highlightKey: String? = null) {
     val isUsingCustomColor = selectedThemeColorInt != DefaultThemeColor.toArgb()
     val coroutineScope = rememberCoroutineScope()
 
-    fun handleIconChange(legacyEnabled: Boolean) {
-        onEnableLegacyIconChange(legacyEnabled)
-        IconUtils.setIcon(activity, false, legacyEnabled)
-        coroutineScope.launch {
-            val result = snackbarHostState.showSnackbar(
-                message = "Icon updated, restart to apply",
-                actionLabel = "Restart"
-            )
-            if (result == SnackbarResult.ActionPerformed) {
-                val packageManager = activity.packageManager
-                val intent = packageManager.getLaunchIntentForPackage(activity.packageName)
-                val componentName = intent?.component
-                val mainIntent = Intent.makeRestartActivityTask(componentName)
-                activity.startActivity(mainIntent)
-                Runtime.getRuntime().exit(0)
-            }
-        }
-    }
 
 
-    val (useNewPlayerDesign, onUseNewPlayerDesignChange) = rememberPreference(
-        UseNewPlayerDesignKey,
-        defaultValue = true
-    )
     val (showCodecOnPlayer, onShowCodecOnPlayerChange) = rememberPreference(
         pushkar.chorus.music.constants.ShowCodecOnPlayerKey,
         defaultValue = false
     )
-    val (hidePlayerSlider, onHidePlayerSliderChange) = rememberPreference(
-        pushkar.chorus.music.constants.HidePlayerSliderKey,
-        defaultValue = false
-    )
+
     val (hidePlayerThumbnail, onHidePlayerThumbnailChange) = rememberPreference(
         HidePlayerThumbnailKey,
         defaultValue = false
@@ -1000,31 +971,6 @@ highlightKey: String? = null) {
 
                 add(
                     Material3SettingsItem(
-    isHighlighted = (highlightKey == stringResource(R.string.legacy_icon)),
-                        icon = painterResource(R.drawable.legacy_icon_raster),
-                        tintIcon = false,
-                        title = { Text(stringResource(R.string.legacy_icon)) },
-                        description = { Text(stringResource(R.string.legacy_icon_desc)) },
-                        trailingContent = {
-                            Switch(
-                                checked = enableLegacyIcon,
-                                onCheckedChange = { handleIconChange(it) },
-                                thumbContent = {
-                                    Icon(
-                                        painter = painterResource(
-                                            id = if (enableLegacyIcon) R.drawable.check else R.drawable.close
-                                        ),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(SwitchDefaults.IconSize)
-                                    )
-                                }
-                            )
-                        },
-                        onClick = { handleIconChange(!enableLegacyIcon) }
-                    )
-                )
-                add(
-                    Material3SettingsItem(
     isHighlighted = (highlightKey == stringResource(R.string.theme)),
                         icon = painterResource(R.drawable.palette),
                         title = { Text(stringResource(R.string.theme)) },
@@ -1105,7 +1051,6 @@ highlightKey: String? = null) {
                                     PlayerBackgroundStyle.BLUR -> stringResource(R.string.player_background_blur)
                                     PlayerBackgroundStyle.GLOW_ANIMATED -> stringResource(R.string.glow_animated)
                                     PlayerBackgroundStyle.LIVE_MESH -> stringResource(R.string.live_mesh)
-                                    PlayerBackgroundStyle.LIQUID_GLASS -> stringResource(R.string.player_background_liquid_glass)
                                     else -> stringResource(R.string.follow_theme)
                                 }
                             )
@@ -1129,60 +1074,7 @@ highlightKey: String? = null) {
         Material3SettingsGroup(scrollState = scrollState, 
             title = stringResource(R.string.player),
             items = listOfNotNull(
-                Material3SettingsItem(
-    isHighlighted = (highlightKey == "Apple Music Inspired"),
-                    icon = painterResource(R.drawable.palette),
-                    title = { Text("Apple Music Inspired") },
-                    trailingContent = {
-                        Switch(
-                            checked = !useNewPlayerDesign,
-                            onCheckedChange = { isChecked ->
-                                onUseNewPlayerDesignChange(!isChecked)
-                                if (isChecked) {
-                                    onPlayerBackgroundChange(PlayerBackgroundStyle.APPLE_MUSIC)
-                                }
-                            },
-                            thumbContent = {
-                                Icon(
-                                    painter = painterResource(
-                                        id = if (!useNewPlayerDesign) R.drawable.check else R.drawable.close
-                                    ),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(SwitchDefaults.IconSize)
-                                )
-                            }
-                        )
-                    },
-                    onClick = { 
-                        val newAppleMusicInspired = useNewPlayerDesign
-                        onUseNewPlayerDesignChange(!newAppleMusicInspired)
-                        if (newAppleMusicInspired) {
-                            onPlayerBackgroundChange(PlayerBackgroundStyle.APPLE_MUSIC)
-                        }
-                    }
-                ),
-                if (!useNewPlayerDesign) Material3SettingsItem(
-    isHighlighted = (highlightKey == "Hide volume slider"),
-                    icon = painterResource(R.drawable.linear_scale),
-                    title = { Text("Hide volume slider") },
-                    description = { Text("Hide the volume slider on the Apple Music player") },
-                    trailingContent = {
-                        Switch(
-                            checked = hidePlayerSlider,
-                            onCheckedChange = onHidePlayerSliderChange,
-                            thumbContent = {
-                                Icon(
-                                    painter = painterResource(
-                                        id = if (hidePlayerSlider) R.drawable.check else R.drawable.close
-                                    ),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(SwitchDefaults.IconSize)
-                                )
-                            }
-                        )
-                    },
-                    onClick = { onHidePlayerSliderChange(!hidePlayerSlider) }
-                ) else null,
+
                 Material3SettingsItem(
     isHighlighted = (highlightKey == stringResource(R.string.player_background_style)),
                     icon = painterResource(R.drawable.gradient),
@@ -1196,7 +1088,6 @@ highlightKey: String? = null) {
                                 PlayerBackgroundStyle.GLOW_ANIMATED -> stringResource(R.string.glow_animated)
                                 PlayerBackgroundStyle.APPLE_MUSIC -> stringResource(R.string.apple_music)
                                 PlayerBackgroundStyle.LIVE_MESH -> stringResource(R.string.live_mesh)
-                                PlayerBackgroundStyle.LIQUID_GLASS -> stringResource(R.string.player_background_liquid_glass)
                             }
                         )
                     },

@@ -12,6 +12,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.border
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -1200,16 +1202,28 @@ fun HomeScreen(
 
                                 item(key = "quick_picks_list") {
                                     val distinctQuickPicks = quickPicks.distinctBy { it.id }
-                                    HorizontalCenteredHeroCarousel(
-                                        state = rememberCarouselState { distinctQuickPicks.size },
-                                        maxItemWidth = 250.dp,
-                                        itemSpacing = 8.dp,
-                                        contentPadding = PaddingValues(horizontal = 16.dp),
+                                    val pagerState = rememberPagerState(pageCount = { distinctQuickPicks.size })
+                                    HorizontalPager(
+                                        state = pagerState,
+                                        contentPadding = PaddingValues(horizontal = 64.dp),
+                                        pageSpacing = 16.dp,
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .height(290.dp)
                                             .animateItem()
                                     ) { index ->
+                                        val pageOffset = (pagerState.currentPage - index) + pagerState.currentPageOffsetFraction
+                                        val scale = androidx.compose.ui.util.lerp(
+                                            start = 0.85f,
+                                            stop = 1f,
+                                            fraction = 1f - kotlin.math.abs(pageOffset).coerceIn(0f, 1f)
+                                        )
+                                        val alpha = androidx.compose.ui.util.lerp(
+                                            start = 0.5f,
+                                            stop = 1f,
+                                            fraction = 1f - kotlin.math.abs(pageOffset).coerceIn(0f, 1f)
+                                        )
+
                                         val originalSong = distinctQuickPicks[index]
                                         val song by database.song(originalSong.id)
                                             .collectAsState(initial = originalSong)
@@ -1218,8 +1232,13 @@ fun HomeScreen(
                                         Box(
                                             modifier = Modifier
                                                 .fillMaxSize()
-                                                .maskClip(MaterialTheme.shapes.extraLarge)
-                                                .maskBorder(
+                                                .graphicsLayer {
+                                                    scaleX = scale
+                                                    scaleY = scale
+                                                    this.alpha = alpha
+                                                }
+                                                .clip(MaterialTheme.shapes.extraLarge)
+                                                .border(
                                                     BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                                                     MaterialTheme.shapes.extraLarge
                                                 )
