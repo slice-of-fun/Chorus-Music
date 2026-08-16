@@ -35,6 +35,13 @@ jobs:
         with:
           tag_name: v1.0.0
           generate_release_notes: true
+          body: |
+            ### 🎵 Chorus Music - Initial Release
+            * **Ad-Free by Default**: Uninterrupted listening sessions.
+            * **Lossless Audio**: Integrated support for high-fidelity FLAC streams.
+            * **Next-Gen Lyrics**: Precise word-by-word syncing and translations.
+            * **Smart Discovery**: Identify music playing in your surroundings.
+            * **Discord RPC**: Show off what you're listening to on Discord.
           files: app/build/outputs/apk/**/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
