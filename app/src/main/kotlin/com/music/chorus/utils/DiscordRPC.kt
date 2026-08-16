@@ -194,7 +194,7 @@ class DiscordRPC(
                 name = activityName.toDiscordText(maxLength = 128, fallback = appName),
                 type = activityType,
                 details = activityDetails,
-                state = activityState.ifBlank { null },
+                state = activityState?.takeIf { it.isNotBlank() },
                 detailsUrl = baseSongUrl.toDiscordUrl(),
                 assets =
                     DiscordPresenceAssets(
