@@ -207,7 +207,7 @@ fun SuggestionsTabContent(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = "Data from Apple Music",
+                            text = "Data from Chorus Music",
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
                         )
@@ -239,15 +239,17 @@ fun TrendingAppleMusicSection(
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
-            text = "Apple Music Top 100",
+            text = "Chorus Music Top 100",
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.padding(horizontal = 16.dp).padding(top = 32.dp)
         )
-        Text(
-            text = SuggestionRegionSlugToName[countryCode] ?: "Global Charts",
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.padding(horizontal = 16.dp)
-        )
+        if (countryCode != "system") {
+            Text(
+                text = SuggestionRegionSlugToName[countryCode] ?: "Global Charts",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+        }
         HorizontalPager(
             state = pagerState,
             verticalAlignment = Alignment.Top,
@@ -277,7 +279,7 @@ fun TrendingAppleMusicSection(
                         ) {
                             Icon(painterResource(R.drawable.globe_search), null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(24.dp))
                             Spacer(Modifier.width(12.dp))
-                            Text("View more on Apple Music", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
+                            Text("View more on Chorus Music", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
                         }
                     } else if (i < displayTracks.size) {
                         val track = displayTracks[i]

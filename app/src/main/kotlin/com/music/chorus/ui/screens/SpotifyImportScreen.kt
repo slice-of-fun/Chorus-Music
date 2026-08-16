@@ -250,6 +250,23 @@ private fun SpotifyImportDialogs(
         )
     }
 
+    if (state.isLoading && state.progress == null) {
+        DefaultDialog(
+            onDismiss = { },
+            title = { Text(stringResource(R.string.loading)) },
+            buttons = {}
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                CircularProgressIndicator()
+                Text("Please wait...")
+            }
+        }
+    }
+
     state.errorMessage?.let { error ->
         SpotifyErrorDialog(
             message = error,

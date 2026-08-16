@@ -10,7 +10,8 @@ class SpotifyLinkParser : UniversalLinkParser {
     override suspend fun supports(url: String): Boolean {
         val trimmed = url.trim()
         if (trimmed.isEmpty()) return false
-        if (PLAYLIST_REFERENCE_REGEX.find(trimmed) != null) return true
+        val isSpotifyUrl = trimmed.contains("spotify.com", ignoreCase = true) || trimmed.startsWith("spotify:", ignoreCase = true)
+        if (isSpotifyUrl && PLAYLIST_REFERENCE_REGEX.find(trimmed) != null) return true
         if (trimmed.matches(BARE_ID_REGEX)) return true
         return false
     }

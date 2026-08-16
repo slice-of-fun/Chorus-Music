@@ -158,7 +158,7 @@ class SpotifyImportViewModel @Inject constructor(
                         }
                         nextSources to { state ->
                             state.copy(
-                                isAuthenticated = true,
+                                isAuthenticated = state.isAuthenticated,
                                 sources = nextSources.map(SpotifyImportSource::toUi),
                                 selectedSourceIds = state.selectedSourceIds + source.id,
                                 isLoading = false,
