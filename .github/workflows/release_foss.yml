@@ -45,7 +45,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.0.0
-          generate_release_notes: true
+          generate_release_notes: false
           body: |
             ### 🎵 Chorus Music - Initial Release
             * **Ad-Free by Default**: Uninterrupted listening sessions.
