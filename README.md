@@ -63,35 +63,12 @@ Chorus Music is built with modularity and clean architecture principles. The pro
 
 ---
 
-## 🛠️ Build & Installation
+## 💻 Integrations & Under the Hood
 
-### Building from Source
-Ensure you have the latest **Android Studio (Ladybug or newer)** and **JDK 17+** installed.
-
-1. **Clone the project:**
-   ```bash
-   git clone https://github.com/pushkarverse/Chorus-Music.git
-   cd Chorus-Music
-   ```
-
-2. **Configure Local Properties:**
-   Create a `local.properties` file at the root:
-   ```properties
-   sdk.dir=/path/to/your/android/sdk
-   ```
-   *(Make sure to replace with your actual Android SDK path)*
-
-3. **Build Target Variants:**
-   Chorus Music supports **FOSS** (Fully Open Source, no trackers/GMS) and **GMS** (supports Chromecast/Google integrations).
-
-   *   **FOSS Debug Variant:**
-       ```bash
-       ./gradlew assembleUniversalFossDebug
-       ```
-   *   **GMS Debug Variant:**
-       ```bash
-       ./gradlew assembleUniversalGmsDebug
-       ```
+*   **Discord Rich Presence (RPC):** Show off what you're listening to directly on your Discord profile.
+*   **YouTube Link Parsing:** Native capability to intercept and parse YouTube links directly into the app for immediate playback.
+*   **Automated Releases:** Built with robust GitHub Actions workflows for automated FOSS (Free and Open Source Software) releases.
+*   **Modern Android Tech Stack:** Leverages the power of Kotlin and Jetpack Compose to deliver a fluid, high-performance UI experience.
 
 ---
 
