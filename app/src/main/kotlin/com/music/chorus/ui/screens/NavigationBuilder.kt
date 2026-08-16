@@ -38,7 +38,6 @@ import pushkar.chorus.music.ui.screens.search.OnlineSearchResult
 import pushkar.chorus.music.ui.screens.search.SearchScreen
 import pushkar.chorus.music.ui.screens.settings.AboutScreen
 import pushkar.chorus.music.ui.screens.settings.AppearanceSettings
-import pushkar.chorus.music.ui.screens.settings.GlassEffectSettings
 import pushkar.chorus.music.ui.screens.settings.BackupAndRestore
 import pushkar.chorus.music.ui.screens.settings.ContentSettings
 import pushkar.chorus.music.ui.screens.settings.UptimeScreen
@@ -345,10 +344,6 @@ fun NavGraphBuilder.navigationBuilder(
 
     composable("settings/appearance/theme") {
         ThemeScreen(navController)
-    }
-
-    composable("settings/appearance/liquidglass") {
-        GlassEffectSettings(navController, scrollBehavior)
     }
 
     composable(

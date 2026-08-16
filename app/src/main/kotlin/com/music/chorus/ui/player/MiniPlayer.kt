@@ -120,7 +120,7 @@ import pushkar.chorus.music.playback.CastConnectionHandler
 import pushkar.chorus.music.playback.PlayerConnection
 import pushkar.chorus.music.ui.screens.settings.DarkMode
 import pushkar.chorus.music.ui.component.GlassComponent
-import pushkar.chorus.music.ui.component.LocalGlassEffectConfig
+
 import pushkar.chorus.music.ui.component.isGlassSupported
 import pushkar.chorus.music.ui.component.liquidGlass
 import pushkar.chorus.music.ui.theme.PlayerColorExtractor
@@ -302,19 +302,16 @@ private fun NewMiniPlayer(
     
     val isDynamicBackground = miniPlayerBackground != PlayerBackgroundStyle.DEFAULT
     
-    val glassConfig = LocalGlassEffectConfig.current
-    val backgroundColor = if (miniPlayerBackground == PlayerBackgroundStyle.LIQUID_GLASS && glassConfig.isEnabledFor(GlassComponent.MINI_PLAYER) && isGlassSupported()) {
-        Color.Transparent
-    } else if (pureBlack && useDarkTheme) {
+    val backgroundColor = if (pureBlack && useDarkTheme) {
         Color.Black
     } else {
         MaterialTheme.colorScheme.surfaceContainer
     }
     
-    val primaryColor = if (miniPlayerBackground == PlayerBackgroundStyle.LIQUID_GLASS && glassConfig.isEnabledFor(GlassComponent.MINI_PLAYER) && isGlassSupported()) glassConfig.textColor else if (isDynamicBackground) Color.White else MaterialTheme.colorScheme.primary
+    val primaryColor = if (isDynamicBackground) Color.White else MaterialTheme.colorScheme.primary
     val onPrimaryColor = if (isDynamicBackground) Color.Black else MaterialTheme.colorScheme.onPrimary
-    val outlineColor = if (miniPlayerBackground == PlayerBackgroundStyle.LIQUID_GLASS && glassConfig.isEnabledFor(GlassComponent.MINI_PLAYER) && isGlassSupported()) glassConfig.textColor.copy(alpha = 0.5f) else if (isDynamicBackground) Color.White.copy(alpha = 0.5f) else MaterialTheme.colorScheme.outline
-    val onSurfaceColor = if (miniPlayerBackground == PlayerBackgroundStyle.LIQUID_GLASS && glassConfig.isEnabledFor(GlassComponent.MINI_PLAYER) && isGlassSupported()) glassConfig.textColor else if (isDynamicBackground) Color.White else MaterialTheme.colorScheme.onSurface
+    val outlineColor = if (isDynamicBackground) Color.White.copy(alpha = 0.5f) else MaterialTheme.colorScheme.outline
+    val onSurfaceColor = if (isDynamicBackground) Color.White else MaterialTheme.colorScheme.onSurface
     val errorColor = MaterialTheme.colorScheme.error
 
     Box(
@@ -1135,23 +1132,7 @@ private fun MiniPlayerBackgroundLayer(
                 Box(modifier = Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.3f)))
             }
         }
-        PlayerBackgroundStyle.LIQUID_GLASS -> {
-            val glassConfig = LocalGlassEffectConfig.current
-            if (glassConfig.isEnabledFor(GlassComponent.MINI_PLAYER) && isGlassSupported()) {
-                Box(
-                    Modifier
-                        .fillMaxSize()
-                        .liquidGlass(config = glassConfig)
-                )
-            } else if (gradientColors.isNotEmpty()) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Brush.verticalGradient(gradientColors))
-                        .background(Color.Black.copy(alpha = 0.2f))
-                )
-            }
-        }
+
         else -> {}
     }
 }

@@ -26,8 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import pushkar.chorus.music.ui.screens.Screens
-import pushkar.chorus.music.ui.component.LocalGlassEffectConfig
-import pushkar.chorus.music.ui.component.liquidGlass
+
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 
@@ -102,17 +101,12 @@ fun AppNavigationBar(
     slimNav: Boolean = false,
     glassEnabled: Boolean = false
 ) {
-    val glassConfig = LocalGlassEffectConfig.current
-    val containerColor = if (glassEnabled && glassConfig.globalEnabled && glassConfig.navBarEnabled) Color.Transparent else if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
-    val contentColor = if (glassEnabled && glassConfig.globalEnabled && glassConfig.navBarEnabled) glassConfig.textColor else if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
+    val containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer
+    val contentColor = if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
     val haptics = LocalHapticFeedback.current
     val viewConfiguration = LocalViewConfiguration.current
     
-    val navModifier = if (glassEnabled && glassConfig.globalEnabled && glassConfig.navBarEnabled) {
-        modifier.liquidGlass(config = glassConfig)
-    } else {
-        modifier
-    }
+    val navModifier = modifier
     
     NavigationBar(
         modifier = navModifier,

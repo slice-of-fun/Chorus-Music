@@ -50,7 +50,7 @@ import pushkar.chorus.music.R
 
 import kotlinx.coroutines.delay
 
-import pushkar.chorus.music.ui.utils.glassEffect
+
 import androidx.compose.foundation.isSystemInDarkTheme
 
 @Composable
@@ -69,9 +69,9 @@ fun DefaultDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Surface(
-            modifier = Modifier.padding(24.dp).glassEffect(isDark = isDark, alpha = 0.5f, blurRadius = 32f),
+            modifier = Modifier.padding(24.dp),
             shape = AlertDialogDefaults.shape,
-            color = androidx.compose.ui.graphics.Color.Transparent,
+            color = AlertDialogDefaults.containerColor,
             tonalElevation = AlertDialogDefaults.TonalElevation
         ) {
             Column(
@@ -196,9 +196,9 @@ fun ListDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
         Surface(
-            modifier = Modifier.padding(24.dp).glassEffect(isDark = isDark, alpha = 0.5f, blurRadius = 32f),
+            modifier = Modifier.padding(24.dp),
             shape = AlertDialogDefaults.shape,
-            color = androidx.compose.ui.graphics.Color.Transparent,
+            color = AlertDialogDefaults.containerColor,
             tonalElevation = AlertDialogDefaults.TonalElevation,
         ) {
             Column(

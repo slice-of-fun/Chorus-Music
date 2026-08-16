@@ -94,7 +94,7 @@ object DiscordImageResolver {
             }
 
             "appicon" -> {
-                "https://avatars.githubusercontent.com/u/258176326?s=200&v=4"
+                "https://i.imgur.com/k1VPfF9.png"
             }
 
             "custom" -> {

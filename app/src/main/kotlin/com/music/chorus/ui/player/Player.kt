@@ -332,7 +332,7 @@ fun BottomSheetPlayer(
 
     val shouldUseDarkButtonColors = remember(playerBackground, useDarkTheme) {
         when (playerBackground) {
-            PlayerBackgroundStyle.BLUR, PlayerBackgroundStyle.GRADIENT, PlayerBackgroundStyle.GLOW_ANIMATED, PlayerBackgroundStyle.APPLE_MUSIC, PlayerBackgroundStyle.LIVE_MESH, PlayerBackgroundStyle.LIQUID_GLASS -> true
+            PlayerBackgroundStyle.BLUR, PlayerBackgroundStyle.GRADIENT, PlayerBackgroundStyle.GLOW_ANIMATED, PlayerBackgroundStyle.APPLE_MUSIC, PlayerBackgroundStyle.LIVE_MESH -> true
             PlayerBackgroundStyle.DEFAULT -> useDarkTheme
         }
     }
@@ -701,7 +701,7 @@ fun BottomSheetPlayer(
         playerBackground == PlayerBackgroundStyle.GRADIENT ||
         playerBackground == PlayerBackgroundStyle.GLOW_ANIMATED ||
         playerBackground == PlayerBackgroundStyle.APPLE_MUSIC ||
-        playerBackground == PlayerBackgroundStyle.LIVE_MESH || playerBackground == PlayerBackgroundStyle.LIQUID_GLASS -> {
+        playerBackground == PlayerBackgroundStyle.LIVE_MESH -> {
             when (playerButtonsStyle) {
                 PlayerButtonsStyle.DEFAULT -> Pair(Color.White, Color.Black)
                 PlayerButtonsStyle.PRIMARY -> Pair(
@@ -925,7 +925,7 @@ fun BottomSheetPlayer(
         isLocalMedia -> Color.Black
         playerBackground in listOf(PlayerBackgroundStyle.BLUR, PlayerBackgroundStyle.GRADIENT, PlayerBackgroundStyle.GLOW_ANIMATED, PlayerBackgroundStyle.APPLE_MUSIC) ->
             MaterialTheme.colorScheme.surfaceContainer
-        playerBackground == PlayerBackgroundStyle.LIVE_MESH || playerBackground == PlayerBackgroundStyle.LIQUID_GLASS -> Color.Black
+        playerBackground == PlayerBackgroundStyle.LIVE_MESH -> Color.Black
         else ->
             if (useBlackBackground) Color.Black
             else MaterialTheme.colorScheme.surfaceContainer
@@ -1257,7 +1257,7 @@ fun BottomSheetPlayer(
                             }
                         }
                     }
-                    PlayerBackgroundStyle.LIVE_MESH, PlayerBackgroundStyle.LIQUID_GLASS -> {
+                    PlayerBackgroundStyle.LIVE_MESH -> {
                         val infiniteTransition = rememberInfiniteTransition(label = "liveMeshRotation")
                         
                         val anchorRotation by infiniteTransition.animateFloat(
