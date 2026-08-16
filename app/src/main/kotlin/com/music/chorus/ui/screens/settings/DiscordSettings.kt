@@ -292,7 +292,7 @@ fun DiscordSettings(
     val (button2CustomUrl) =
         rememberPreference(
             key = DiscordActivityButton2CustomUrlKey,
-            defaultValue = "https://github.com/ChorusMusicApp/Chorus-Music",
+            defaultValue = "https://github.com/slice-of-fun/Chorus-Music",
         )
 
     val (activityType, onActivityTypeChange) =
@@ -1190,7 +1190,7 @@ fun RichPresence(
     button2Label: String = "Go to Chorus Music",
     button2Enabled: Boolean = false,
     button2UrlSource: String = "custom",
-    button2CustomUrl: String = "https://github.com/ChorusMusicApp/Chorus-Music",
+    button2CustomUrl: String = "https://github.com/slice-of-fun/Chorus-Music",
     isPlaying: Boolean = false,
 ) {
     val context = LocalContext.current

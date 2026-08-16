@@ -144,7 +144,7 @@ fun ChangelogScreen(
                         showingCached = true
                     }
                 } else {
-                    val changelogUrl = URL("https://github.com/ChorusMusicApp/Chorus-Music/releases/download/$tag/changelog.json")
+                    val changelogUrl = URL("https://github.com/slice-of-fun/Chorus-Music/releases/download/$tag/changelog.json")
                     val connection = changelogUrl.openConnection() as HttpURLConnection
                     connection.setRequestProperty("User-Agent", "chorusmusic-Changelog-App")
                     connection.setRequestProperty("Accept", "application/json")

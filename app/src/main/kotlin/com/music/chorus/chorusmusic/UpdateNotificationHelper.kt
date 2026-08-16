@@ -32,9 +32,9 @@ object UpdateNotificationHelper {
 
         
         val apkUrl = if (versionName.contains("nightly", ignoreCase = true)) {
-            "https://nightly.link/ChorusMusicApp/workflows/nightly.yml/main/chorusmusic-gms-nightly.zip"
+            "https://nightly.link/slice-of-fun/Chorus-Music/workflows/nightly.yml/main/chorusmusic-gms-nightly.zip"
         } else {
-            "https://github.com/ChorusMusicApp/Chorus-Music/releases/download/$versionName/chorusmusic.apk"
+            "https://github.com/slice-of-fun/Chorus-Music/releases/download/$versionName/chorusmusic.apk"
         }
         val intent = Intent(Intent.ACTION_VIEW, apkUrl.toUri())
 
