@@ -4,123 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service | Chorus Music</title>
+    <meta name="description" content="Terms of Service for Chorus Music">
+    <link rel="stylesheet" href="../../style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet" />
     <style>
-        
-        :root {
-            --bg-color: #0f172a;
-            --text-color: #f8fafc;
-            --accent-color: #3b82f6;
-            --card-bg: #1e293b;
-            --border-color: #334155;
-        }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
+        .content-section {
             max-width: 800px;
-            margin: 40px 20px;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
+            margin: 60px auto;
+            padding: 0 24px;
         }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #10b981, #3b82f6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .content-section h1 {
+            font-size: 40px;
+            margin-bottom: 8px;
+            color: var(--md-sys-color-on-surface);
         }
-
-        h2 {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            margin-top: 30px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 8px;
-        }
-
-        p {
-            font-weight: 300;
-            font-size: 1.1rem;
-            color: #cbd5e1;
-        }
-
-        a {
-            color: #818cf8;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #c084fc;
-        }
-
         .date {
-            font-size: 0.9rem;
-            color: #94a3b8;
-            margin-bottom: 30px;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 40px;
+            font-size: 14px;
         }
-
-        .back-btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 24px;
-            background: linear-gradient(135deg, #10b981, #3b82f6);
-            color: white;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .content-section h2 {
+            font-size: 24px;
+            color: var(--md-sys-color-primary);
+            margin-top: 40px;
+            margin-bottom: 16px;
         }
-
-        .back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
-            color: white;
+        .content-section p {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .content-section strong {
+            color: var(--md-sys-color-on-surface);
+        }
+        .back-btn-container {
+            margin-top: 60px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
+    
+    <!-- Top App Bar -->
+    <header class="top-app-bar">
+        <div class="top-app-bar-content">
+            <div class="logo">
+                <span class="material-symbols-rounded">music_note</span>
+                <span class="title">Chorus Music</span>
+            </div>
+            <nav class="desktop-nav">
+                <a href="../../index.html" class="nav-link">Home</a>
+                <a href="https://github.com/slice-of-fun/Chorus-Music" target="_blank" class="nav-link">GitHub</a>
+            </nav>
+        </div>
+    </header>
 
-    <div class="container">
-        <h1>Terms of Service</h1>
-        <div class="date">Last Updated: August 2026</div>
+    <main>
+        <section class="content-section">
+            <div class="card elevated-card">
+                <h1>Terms of Service</h1>
+                <div class="date">Last Updated: August 2026</div>
 
-        <p>By using the <strong>Chorus Music</strong> app, you agree to these terms. If you disagree with any part of the terms, you may not use the app.</p>
+                <p>By using the <strong>Chorus Music</strong> app, you agree to these terms. If you disagree with any part of the terms, you may not use the app.</p>
 
-        <h2>1. Fair Use</h2>
-        <p>Chorus Music is a client application. You are responsible for ensuring your use of the app complies with the terms of service of any third-party platforms (like YouTube) that the app interfaces with.</p>
+                <h2>1. Fair Use</h2>
+                <p>Chorus Music is a client application. You are responsible for ensuring your use of the app complies with the terms of service of any third-party platforms (like YouTube) that the app interfaces with.</p>
 
-        <h2>2. As-Is Software</h2>
-        <p>The app is provided "as is", without warranty of any kind, express or implied. The developers of Chorus Music are not responsible for any issues, data loss, or damages arising from the use of the app.</p>
+                <h2>2. As-Is Software</h2>
+                <p>The app is provided "as is", without warranty of any kind, express or implied. The developers of Chorus Music are not responsible for any issues, data loss, or damages arising from the use of the app.</p>
 
-        <h2>3. Open Source</h2>
-        <p>Chorus Music is open-source software. You are free to view, modify, and distribute the source code in accordance with its GPL-3.0 License.</p>
+                <h2>3. Open Source</h2>
+                <p>Chorus Music is open-source software. You are free to view, modify, and distribute the source code in accordance with its GPL-3.0 License.</p>
 
-        <h2>4. Content Liability</h2>
-        <p>Chorus Music does not host any music or content. All media is fetched from public third-party APIs. We are not liable for the content displayed or played through the app.</p>
+                <h2>4. Content Liability</h2>
+                <p>Chorus Music does not host any music or content. All media is fetched from public third-party APIs. We are not liable for the content displayed or played through the app.</p>
 
-        <a href="https://slice-of-fun.github.io/Chorus-Music/" class="back-btn">Return to Home</a>
-    </div>
+                <div class="back-btn-container">
+                    <a href="../../index.html" class="button filled-button">
+                        <span class="material-symbols-rounded">arrow_back</span>
+                        Return to Home
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Chorus Music Contributors. Released under the GPL-3.0 License.</p>
+    </footer>
 
 </body>
 </html>
