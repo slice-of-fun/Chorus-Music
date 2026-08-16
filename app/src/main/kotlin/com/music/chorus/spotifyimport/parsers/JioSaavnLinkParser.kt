@@ -23,18 +23,15 @@ class JioSaavnLinkParser : UniversalLinkParser {
 
         val tracks = mutableListOf<UniversalParsedTrack>()
         
-        // JioSaavn usually has song names in meta tags or specific list items
         val songElements = doc.select(".song-wrap .title a")
         for (elem in songElements) {
             val trackName = elem.text()
-            // Artists are usually in the subtitle or next line
             val artistElem = elem.parent()?.parent()?.select(".subtitle a")?.text() ?: "Unknown Artist"
             if (trackName.isNotBlank()) {
                 tracks.add(UniversalParsedTrack(title = trackName, artist = artistElem))
             }
         }
         
-        // Alternative parsing if UI changed
         if (tracks.isEmpty()) {
             val listItems = doc.select("ol li .content")
             for (item in listItems) {
@@ -46,6 +43,20 @@ class JioSaavnLinkParser : UniversalLinkParser {
             }
         }
         
+        if (tracks.isEmpty()) {
+            val songLinks = doc.select("a[href*=/song/]")
+            for (link in songLinks) {
+                val trackName = link.text()
+                if (trackName.isNotBlank() && trackName.length > 2 && !trackName.equals("Play", ignoreCase = true)) {
+                    tracks.add(UniversalParsedTrack(title = trackName, artist = "Unknown Artist"))
+                }
+            }
+        }
+        
+        val distinctTracks = tracks.distinctBy { it.title }.toMutableList()
+        tracks.clear()
+        tracks.addAll(distinctTracks)
+
         if (tracks.isEmpty()) {
             throw IllegalArgumentException("Could not extract tracks from JioSaavn playlist.")
         }

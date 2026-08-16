@@ -44,9 +44,9 @@ class DiscordRPC(
 ) {
     companion object {
         private const val PAUSE_IMAGE_URL =
-            "https://raw.githubusercontent.com/slice-of-fun/Chorus-Music/main/assets/discord_logo.png"
+            "https://files.catbox.moe/ber0ss.png"
         private const val APP_ICON_URL =
-            "https://raw.githubusercontent.com/slice-of-fun/Chorus-Music/main/assets/discord_logo.png"
+            "https://files.catbox.moe/ber0ss.png"
         private const val TAG = "DiscordRPC"
     }
 
@@ -112,8 +112,8 @@ class DiscordRPC(
                 pref = statePref,
                 song = song,
                 translatedMap = translatedMap,
-                default = song.artists.joinToString { it.name }.ifBlank { appName },
-            ).toDiscordText(maxLength = 128, fallback = appName)
+                default = "",
+            ).toDiscordText(maxLength = 128, fallback = "")
 
         val baseSongUrl = song.youtubeMusicUrl()
         val resolvedImages = DiscordImageResolver.resolveImagesForSong(context, song)
@@ -194,7 +194,7 @@ class DiscordRPC(
                 name = activityName.toDiscordText(maxLength = 128, fallback = appName),
                 type = activityType,
                 details = activityDetails,
-                state = activityState,
+                state = activityState.ifBlank { null },
                 detailsUrl = baseSongUrl.toDiscordUrl(),
                 assets =
                     DiscordPresenceAssets(

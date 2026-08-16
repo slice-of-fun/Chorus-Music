@@ -23,14 +23,36 @@ class SoundCloudLinkParser : UniversalLinkParser {
 
         val tracks = mutableListOf<UniversalParsedTrack>()
         
-        // SoundCloud provides a noscript fallback for bots/SEO with track names
-        val trackElements = doc.select("noscript article[itemprop=track] a[itemprop=url]")
+        val trackElements = doc.select("a[itemprop=url]")
         for (elem in trackElements) {
             val trackName = elem.text()
-            // In SoundCloud noscript, the text is often just the track name, 
-            // and the artist might not be explicitly separated, but we can try to use the playlist author or "SoundCloud"
-            if (trackName.isNotBlank()) {
+            if (trackName.isNotBlank() && !tracks.any { it.title == trackName }) {
                 tracks.add(UniversalParsedTrack(title = trackName, artist = "SoundCloud"))
+            }
+        }
+        
+        if (tracks.isEmpty()) {
+            val html = doc.html()
+            val matches = Regex("""itemprop="url"[^>]*>\s*([^<]+)\s*</a>""").findAll(html)
+            for (match in matches) {
+                val trackName = match.groupValues[1].trim()
+                if (trackName.isNotBlank() && !tracks.any { it.title == trackName }) {
+                    tracks.add(UniversalParsedTrack(title = trackName, artist = "SoundCloud"))
+                }
+            }
+        }
+        if (tracks.isEmpty()) {
+            val html = doc.html()
+            val hydrationMatch = Regex("""window\.__sc_hydration\s*=\s*(\[.*?\]);</script>""").find(html)
+            if (hydrationMatch != null) {
+                val rawJson = hydrationMatch.groupValues[1]
+                val titleMatches = Regex(""""title":"([^"]+)"""").findAll(rawJson)
+                for (match in titleMatches) {
+                    val trackName = match.groupValues[1].trim()
+                    if (trackName.isNotBlank() && !tracks.any { it.title == trackName }) {
+                        tracks.add(UniversalParsedTrack(title = trackName, artist = "SoundCloud"))
+                    }
+                }
             }
         }
         

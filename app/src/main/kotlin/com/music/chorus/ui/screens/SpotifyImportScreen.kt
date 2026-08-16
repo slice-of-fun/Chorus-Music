@@ -127,81 +127,98 @@ private fun spotifyImportItems(
     onSelectSources: () -> Unit,
     onAddByLink: () -> Unit,
 ): List<Material3SettingsItem> {
+    val items = mutableListOf<Material3SettingsItem>()
+    val idle = !state.isLoading && state.progress == null
+
     if (!state.isAuthenticated) {
-        return listOf(
+        items.add(
             Material3SettingsItem(
                 title = { Text(stringResource(R.string.spotify_connect)) },
                 description = { Text(stringResource(R.string.spotify_not_connected)) },
                 icon = painterResource(R.drawable.ic_spotify),
-                enabled = state.progress == null && !state.isLoading,
+                enabled = idle,
                 onClick = onConnect,
-            ),
+            )
+        )
+    } else {
+        items.add(
             Material3SettingsItem(
-                title = { Text(stringResource(R.string.spotify_import_by_link)) },
-                description = { Text(stringResource(R.string.spotify_import_by_link_desc)) },
-                icon = painterResource(R.drawable.link),
-                enabled = state.progress == null && !state.isLoading,
-                onClick = onAddByLink,
-            ),
+                title = {
+                    Text(
+                        if (state.accountName.isNotBlank()) stringResource(R.string.spotify_connected_as, state.accountName)
+                        else stringResource(R.string.spotify_account)
+                    )
+                },
+                description = if (state.isLoading) {
+                    { Text(stringResource(R.string.spotify_loading_library)) }
+                } else null,
+                icon = painterResource(R.drawable.ic_spotify),
+                enabled = true,
+                onClick = null,
+            )
         )
     }
 
-    val idle = !state.isLoading && state.progress == null
-    return listOf(
-        Material3SettingsItem(
-            title = {
-                Text(
-                    if (state.accountName.isNotBlank()) stringResource(R.string.spotify_connected_as, state.accountName)
-                    else stringResource(R.string.spotify_account)
-                )
-            },
-            description = if (state.isLoading) {
-                { Text(stringResource(R.string.spotify_loading_library)) }
-            } else null,
-            icon = painterResource(R.drawable.ic_spotify),
-            enabled = true,
-            onClick = null,
-        ),
-        Material3SettingsItem(
-            title = { Text(stringResource(R.string.spotify_select_sources)) },
-            description = {
-                Text(
-                    if (state.hasSources) stringResource(R.string.spotify_available_count, state.sources.size)
-                    else stringResource(R.string.spotify_no_sources)
-                )
-            },
-            icon = painterResource(R.drawable.playlist_play),
-            enabled = state.hasSources && state.progress == null,
-            onClick = onSelectSources,
-        ),
+    if (state.isAuthenticated || state.hasSources) {
+        items.add(
+            Material3SettingsItem(
+                title = { Text(stringResource(R.string.spotify_select_sources)) },
+                description = {
+                    Text(
+                        if (state.hasSources) stringResource(R.string.spotify_available_count, state.sources.size)
+                        else stringResource(R.string.spotify_no_sources)
+                    )
+                },
+                icon = painterResource(R.drawable.playlist_play),
+                enabled = state.hasSources && idle,
+                onClick = onSelectSources,
+            )
+        )
+    }
+
+    items.add(
         Material3SettingsItem(
             title = { Text(stringResource(R.string.spotify_import_by_link)) },
             description = { Text(stringResource(R.string.spotify_import_by_link_desc)) },
             icon = painterResource(R.drawable.link),
             enabled = idle,
             onClick = onAddByLink,
-        ),
-        Material3SettingsItem(
-            title = { Text(stringResource(R.string.spotify_import_selected)) },
-            description = { Text(stringResource(R.string.spotify_selected_count, state.selectedSourceIds.size)) },
-            icon = painterResource(R.drawable.playlist_add),
-            enabled = state.canImport,
-            onClick = { viewModel.importSelectedSources() },
-        ),
-        Material3SettingsItem(
-            title = { Text(stringResource(R.string.spotify_refresh)) },
-            description = { Text(stringResource(R.string.spotify_import_desc)) },
-            icon = painterResource(R.drawable.sync),
-            enabled = idle,
-            onClick = { viewModel.loadSources() },
-        ),
-        Material3SettingsItem(
-            title = { Text(stringResource(R.string.action_logout)) },
-            icon = painterResource(R.drawable.logout),
-            enabled = idle,
-            onClick = { viewModel.logout() },
-        ),
+        )
     )
+
+    if (state.hasSources) {
+        items.add(
+            Material3SettingsItem(
+                title = { Text(stringResource(R.string.spotify_import_selected)) },
+                description = { Text(stringResource(R.string.spotify_selected_count, state.selectedSourceIds.size)) },
+                icon = painterResource(R.drawable.playlist_add),
+                enabled = state.canImport && idle,
+                onClick = { viewModel.importSelectedSources() },
+            )
+        )
+    }
+
+    if (state.isAuthenticated) {
+        items.add(
+            Material3SettingsItem(
+                title = { Text(stringResource(R.string.spotify_refresh)) },
+                description = { Text(stringResource(R.string.spotify_import_desc)) },
+                icon = painterResource(R.drawable.sync),
+                enabled = idle,
+                onClick = { viewModel.loadSources() },
+            )
+        )
+        items.add(
+            Material3SettingsItem(
+                title = { Text(stringResource(R.string.action_logout)) },
+                icon = painterResource(R.drawable.logout),
+                enabled = idle,
+                onClick = { viewModel.logout() },
+            )
+        )
+    }
+
+    return items
 }
 
 @Composable
@@ -236,7 +253,7 @@ private fun SpotifyImportDialogs(
         )
     }
 
-    if (showSpotifySources && state.isAuthenticated) {
+    if (showSpotifySources && (state.isAuthenticated || state.hasSources)) {
         SpotifySourcePickerSheet(
             state = state,
             onDismiss = onDismissSources,
@@ -296,6 +313,7 @@ private fun SpotifyImportProgressDialog(
 ) {
     DefaultDialog(
         onDismiss = onCancel,
+        properties = androidx.compose.ui.window.DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false, usePlatformDefaultWidth = false),
         title = { Text(stringResource(R.string.spotify_import_in_progress)) },
         buttons = {
             TextButton(onClick = onCancel) {

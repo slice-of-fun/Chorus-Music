@@ -217,7 +217,7 @@ fun ChangelogScreen(
         isFetchingOldReleases = true
         coroutineScope.launch(Dispatchers.IO) {
             try {
-                val releasesUrl = URL("https://api.github.com/repos/ChorusMusicApp/Chorus-Music/releases")
+                val releasesUrl = URL("https://api.github.com/repos/slice-of-fun/Chorus-Music/releases")
                 val connection = releasesUrl.openConnection() as HttpURLConnection
                 connection.setRequestProperty("User-Agent", "chorusmusic-Changelog-App")
                 connection.setRequestProperty("Accept", "application/vnd.github+json")

@@ -657,7 +657,7 @@ suspend fun checkForUpdate(
 ) {
     withContext(Dispatchers.IO) {
         try {
-            val url = URL("https://api.github.com/repos/ChorusMusicApp/Chorus-Music/releases/latest")
+            val url = URL("https://api.github.com/repos/slice-of-fun/Chorus-Music/releases/latest")
             val json = url.openStream().bufferedReader().use { it.readText() }
             val targetRelease = JSONObject(json)
             

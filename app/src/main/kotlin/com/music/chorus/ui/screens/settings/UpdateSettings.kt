@@ -247,19 +247,6 @@ fun UpdateSettings(
             )
         )
         
-        Spacer(modifier = Modifier.height(16.dp))
-        Material3SettingsGroup(scrollState = scrollState, 
-            title = stringResource(R.string.commits),
-            items = listOf(
-                Material3SettingsItem(
-    isHighlighted = (highlightKey == stringResource(R.string.commits)),
-                    icon = painterResource(R.drawable.commit),
-                    title = { Text(stringResource(R.string.commits)) },
-                    description = { Text(stringResource(R.string.view_commit_history)) },
-                    onClick = { navController.navigate("settings/commits") }
-                )
-            )
-        )
 
         Spacer(modifier = Modifier.height(16.dp))
     

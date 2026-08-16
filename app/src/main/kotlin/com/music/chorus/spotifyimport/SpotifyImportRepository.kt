@@ -167,7 +167,8 @@ class SpotifyImportRepository @Inject constructor(
                 pushkar.chorus.music.spotifyimport.parsers.YouTubeLinkParser(),
                 pushkar.chorus.music.spotifyimport.parsers.AppleMusicLinkParser(),
                 pushkar.chorus.music.spotifyimport.parsers.SoundCloudLinkParser(),
-                pushkar.chorus.music.spotifyimport.parsers.JioSaavnLinkParser()
+                pushkar.chorus.music.spotifyimport.parsers.JioSaavnLinkParser(),
+                pushkar.chorus.music.spotifyimport.parsers.AmazonMusicLinkParser()
             )
 
             val parser = parsers.find { it.supports(url) }
