@@ -37,6 +37,7 @@
 *   **Chorus Find:** Identify music playing in your surroundings instantly via advanced audio fingerprinting.
 *   **Chorus Brain:** An intelligent on-device recommendation engine that maps your listening momentum to build the perfect next queue.
 *   **Spotify Import:** Migrating is simple—import your existing Spotify playlists and tracks seamlessly.
+*   **App Widgets:** Control playback right from your home screen with customizable Jetpack Glance widgets.
 
 ### ✍️ Next-Gen Synchronized Lyrics
 *   **Word-by-Word Syncing:** Karaoke-style, precise word highlights.

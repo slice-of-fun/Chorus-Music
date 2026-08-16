@@ -42,6 +42,7 @@ jobs:
             * **Next-Gen Lyrics**: Precise word-by-word syncing and translations.
             * **Smart Discovery**: Identify music playing in your surroundings.
             * **Discord RPC**: Show off what you're listening to on Discord.
+            * **App Widgets**: Control playback right from your home screen.
           files: app/build/outputs/apk/**/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
