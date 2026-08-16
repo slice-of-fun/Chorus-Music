@@ -32,7 +32,7 @@ class YouTubeLinkParser : UniversalLinkParser {
 
         return UniversalParsedPlaylist(
             id = playlistId,
-            title = playlistPage.playlist.title ?: "YouTube Playlist",
+            title = playlistPage.playlist.title,
             subtitle = playlistPage.playlist.author?.name ?: "YouTube",
             trackCount = tracks.size,
             thumbnailUrl = playlistPage.playlist.thumbnail,

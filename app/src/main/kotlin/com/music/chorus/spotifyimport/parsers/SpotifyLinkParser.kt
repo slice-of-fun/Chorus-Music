@@ -37,7 +37,7 @@ class SpotifyLinkParser : UniversalLinkParser {
                         UniversalParsedTrack(
                             title = track.name,
                             artist = artists,
-                            durationMs = track.durationMs?.toLong()
+                            durationMs = track.durationMs.toLong()
                         )
                     )
                 }
