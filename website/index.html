@@ -13,111 +13,102 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet" />
 </head>
 <body>
-    <!-- App Container to simulate an Android Screen -->
-    <div class="app-container">
-        
-        <!-- Top App Bar -->
-        <header class="top-app-bar">
-            <span class="material-symbols-rounded icon-button">menu</span>
-            <h1 class="title">Chorus Music</h1>
-            <a href="https://github.com/pushkarverse/Chorus-Music" target="_blank" class="material-symbols-rounded icon-button">code</a>
-        </header>
+    
+    <!-- Top App Bar -->
+    <header class="top-app-bar">
+        <div class="top-app-bar-content">
+            <div class="logo">
+                <span class="material-symbols-rounded">music_note</span>
+                <span class="title">Chorus Music</span>
+            </div>
+            <nav class="desktop-nav">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="https://github.com/pushkarverse/Chorus-Music" target="_blank" class="nav-link">GitHub</a>
+            </nav>
+        </div>
+    </header>
 
-        <!-- Main Scrollable Content -->
-        <main class="content">
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-text">
+                <h1 class="headline">Hear the Unheard</h1>
+                <p class="body-text">The ultimate, ad-free Android music experience powered by lossless audio, smart synchronization, and multiple lyric backends.</p>
+                <div class="hero-actions">
+                    <a href="https://github.com/pushkarverse/Chorus-Music/releases" target="_blank" class="button filled-button">
+                        <span class="material-symbols-rounded">download</span>
+                        Download APK
+                    </a>
+                    <a href="https://github.com/pushkarverse/Chorus-Music" target="_blank" class="button text-button">
+                        <span class="material-symbols-rounded">code</span>
+                        View Source
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-container">
+                    <img src="Chorus-new.png" alt="Chorus Music Icon" class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <h2 class="section-title">Why Chorus Music?</h2>
             
-            <section class="hero-section">
-                <div class="album-art-placeholder">
-                    <img src="Chorus-new.png" alt="Chorus Music Icon" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+            <div class="features-grid">
+                <div class="card elevated-card">
+                    <div class="card-icon-container">
+                        <span class="material-symbols-rounded card-icon">high_quality</span>
+                    </div>
+                    <h3>Ad-Free & Lossless</h3>
+                    <p>Dive into uninterrupted sessions with integrated support for high-fidelity 16-bit and 24-bit FLAC streams.</p>
                 </div>
-                <h2 class="headline">Hear the Unheard</h2>
-                <p class="body-text">The ultimate, ad-free Android music experience powered by lossless audio.</p>
-                <a href="https://github.com/pushkarverse/Chorus-Music/releases" target="_blank" class="button filled-button">
-                    <span class="material-symbols-rounded">download</span>
-                    Download APK
-                </a>
-            </section>
 
-            <h3 class="section-header">Features</h3>
-
-            <!-- Feature List (Material Cards/List Items) -->
-            <div class="list-item">
-                <div class="list-icon-container">
-                    <span class="material-symbols-rounded">high_quality</span>
+                <div class="card elevated-card">
+                    <div class="card-icon-container">
+                        <span class="material-symbols-rounded card-icon">lyrics</span>
+                    </div>
+                    <h3>Next-Gen Lyrics</h3>
+                    <p>Karaoke-style word-by-word syncing powered by multiple robust engines and real-time AI translations.</p>
                 </div>
-                <div class="list-text">
-                    <div class="list-title">Ad-Free & Lossless</div>
-                    <div class="list-subtitle">16-bit and 24-bit FLAC streams, zero interruptions.</div>
+
+                <div class="card elevated-card">
+                    <div class="card-icon-container">
+                        <span class="material-symbols-rounded card-icon">sports_esports</span>
+                    </div>
+                    <h3>Discord RPC</h3>
+                    <p>Show off what you're listening to directly on your Discord profile with rich presence integration.</p>
+                </div>
+
+                <div class="card elevated-card">
+                    <div class="card-icon-container">
+                        <span class="material-symbols-rounded card-icon">smart_toy</span>
+                    </div>
+                    <h3>Smart Discovery</h3>
+                    <p>Identify surrounding music instantly and let our intelligent on-device engine build your perfect next queue.</p>
                 </div>
             </div>
-
-            <div class="list-item">
-                <div class="list-icon-container">
-                    <span class="material-symbols-rounded">lyrics</span>
-                </div>
-                <div class="list-text">
-                    <div class="list-title">Next-Gen Lyrics</div>
-                    <div class="list-subtitle">Word-by-word syncing and real-time AI translations.</div>
-                </div>
-            </div>
-
-            <div class="list-item">
-                <div class="list-icon-container">
-                    <span class="material-symbols-rounded">sports_esports</span>
-                </div>
-                <div class="list-text">
-                    <div class="list-title">Discord RPC</div>
-                    <div class="list-subtitle">Show off your current track on Discord.</div>
+        </section>
+        
+        <!-- Open Source Section -->
+        <section class="open-source-section">
+            <div class="card surface-container-high center-text">
+                <span class="material-symbols-rounded giant-icon">code_blocks</span>
+                <h2>Fully Open Source</h2>
+                <p>Built with modularity and clean architecture using Kotlin and Jetpack Compose. No trackers, no bloat.</p>
+                <div class="badge-container">
+                    <span class="badge">Kotlin</span>
+                    <span class="badge">Jetpack Compose</span>
+                    <span class="badge">GPL-3.0</span>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <div class="list-item">
-                <div class="list-icon-container">
-                    <span class="material-symbols-rounded">smart_toy</span>
-                </div>
-                <div class="list-text">
-                    <div class="list-title">Smart Discovery</div>
-                    <div class="list-subtitle">Identify music around you instantly.</div>
-                </div>
-            </div>
+    <footer>
+        <p>&copy; 2026 Chorus Music Contributors. Released under the GPL-3.0 License.</p>
+    </footer>
 
-            <!-- Material 3 Card -->
-            <div class="card elevated-card">
-                <div class="card-header">
-                    <span class="material-symbols-rounded card-icon">code_blocks</span>
-                    <h3>Fully Open Source</h3>
-                </div>
-                <p class="body-text">Built with Kotlin and Jetpack Compose. No trackers, entirely FOSS.</p>
-                <div class="card-actions">
-                    <a href="https://github.com/pushkarverse/Chorus-Music" class="button text-button">View Source</a>
-                </div>
-            </div>
-
-            <!-- Spacing for Bottom Nav -->
-            <div style="height: 100px;"></div>
-        </main>
-
-        <!-- Bottom Navigation Bar -->
-        <nav class="bottom-nav">
-            <div class="nav-item active">
-                <div class="nav-indicator">
-                    <span class="material-symbols-rounded">home</span>
-                </div>
-                <span class="nav-label">Home</span>
-            </div>
-            <a href="https://github.com/pushkarverse/Chorus-Music" target="_blank" class="nav-item" style="text-decoration: none;">
-                <div class="nav-indicator">
-                    <span class="material-symbols-rounded">source</span>
-                </div>
-                <span class="nav-label">Code</span>
-            </a>
-            <a href="https://github.com/pushkarverse/Chorus-Music/releases" target="_blank" class="nav-item" style="text-decoration: none;">
-                <div class="nav-indicator">
-                    <span class="material-symbols-rounded">system_update</span>
-                </div>
-                <span class="nav-label">Releases</span>
-            </a>
-        </nav>
-    </div>
 </body>
 </html>
