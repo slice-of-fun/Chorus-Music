@@ -30,7 +30,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build FOSS Release APKs
-        run: ./gradlew assembleFossRelease
+        run: ./gradlew assembleUniversalFossRelease assembleArm64FossRelease assembleArmeabiFossRelease assembleX86FossRelease assembleX86_64FossRelease
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
