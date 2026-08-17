@@ -495,7 +495,9 @@ class MusicService :
                 Intent.ACTION_SCREEN_OFF -> {
                     if (!player.isPlaying) {
                         scope.launch(Dispatchers.IO) {
-                            DiscordPresenceManager.stop()
+                            if (!dataStore.get(pushkar.chorus.music.constants.DiscordShowWhenPausedKey, false)) {
+                                DiscordPresenceManager.stop()
+                            }
                         }
                     }
                 }
@@ -2183,7 +2185,9 @@ class MusicService :
             }
             if (!player.isPlaying && !events.containsAny(Player.EVENT_POSITION_DISCONTINUITY, Player.EVENT_MEDIA_ITEM_TRANSITION)) {
                 scope.launch {
-                    DiscordPresenceManager.stop()
+                    if (!dataStore.get(pushkar.chorus.music.constants.DiscordShowWhenPausedKey, false)) {
+                        DiscordPresenceManager.stop()
+                    }
                 }
             }
         }

@@ -56,8 +56,7 @@
             android:text="@string/tap_to_play"
             android:textSize="13sp"
             android:textColor="@color/widget_on_primary_container"
-            android:alpha="0.7"
-            android:maxLines="1"
+android:maxLines="1"
             android:ellipsize="end"
             android:layout_marginTop="2dp" />
     </LinearLayout>

@@ -54,8 +54,7 @@
                 android:text="@string/choose_something_below"
                 android:textSize="13sp"
                 android:textColor="@color/widget_on_primary_container"
-                android:alpha="0.7"
-                android:maxLines="1"
+android:maxLines="1"
                 android:ellipsize="end" />
 
             <LinearLayout
@@ -88,7 +87,7 @@
                     android:src="@drawable/ic_widget_skip_next"
                     android:contentDescription="@string/next" />
 
-                <View
+                <FrameLayout
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />

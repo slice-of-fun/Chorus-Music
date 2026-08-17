@@ -24,7 +24,7 @@
             android:contentDescription="@string/album_art" />
             
         <!-- Gradient Overlay for Legibility -->
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/widget_bottom_gradient" />
@@ -75,8 +75,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_widget_play"
-                android:tint="#FFFFFF"
-                android:contentDescription="@string/play_pause" />
+android:contentDescription="@string/play_pause" />
 
         </LinearLayout>
     </FrameLayout>

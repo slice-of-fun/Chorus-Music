@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="@drawable/widget_art_circle_bg"
-android:elevation="8dp">
+>
         
         <ImageView
             android:id="@+id/widget_turntable_album_art"
@@ -24,11 +24,11 @@ android:elevation="8dp">
             android:contentDescription="@string/album_art" />
             
         <!-- Subtle dark gradient overlay at the bottom for floating controls -->
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/widget_bottom_gradient"
-            android:alpha="0.8" />
+/>
             
         <!-- Floating Minimalist Controls Container inside the vinyl -->
         <LinearLayout
