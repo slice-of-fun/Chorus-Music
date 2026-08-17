@@ -203,12 +203,12 @@ private fun AboutAppCard() {
                     Image(
                         painter = painterResource(R.drawable.ic_launcher_nobg),
                         contentDescription = null,
-                        colorFilter = ColorFilter.tint(if (isDark) Color.White else Color(0xFFEA3829)),
+                        colorFilter = ColorFilter.tint(if (isDark) Color.White else MaterialTheme.colorScheme.primary),
                         modifier = Modifier.fillMaxSize()
                     )
                 } else {
                     coil3.compose.AsyncImage(
-                        model = "https://avatars.githubusercontent.com/u/147871321?v=4",
+                        model = "https://github.com/pushkarverse.png",
                         contentDescription = null,
                         modifier = Modifier
                             .fillMaxSize()
@@ -221,7 +221,7 @@ private fun AboutAppCard() {
             Spacer(Modifier.height(4.dp))
             
             Text(
-                text = if (rotation <= 90f) "Chorus Music" else "Developed by Aditya",
+                text = if (rotation <= 90f) "Chorus Music" else "Developed by pushkar",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurface,

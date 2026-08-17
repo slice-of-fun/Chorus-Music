@@ -1713,7 +1713,7 @@ class MusicService :
         }
 
         
-        if (dataStore.get(PreventDuplicateTracksInQueueKey, false)) {
+        if (dataStore.get(PreventDuplicateTracksInQueueKey, true)) {
             val itemIds = items.map { it.mediaId }.toSet()
             val indicesToRemove = mutableListOf<Int>()
             val currentIndex = player.currentMediaItemIndex
@@ -1792,7 +1792,7 @@ class MusicService :
 
     fun addToQueue(items: List<MediaItem>) {
         
-        if (dataStore.get(PreventDuplicateTracksInQueueKey, false)) {
+        if (dataStore.get(PreventDuplicateTracksInQueueKey, true)) {
             val itemIds = items.map { it.mediaId }.toSet()
             val indicesToRemove = mutableListOf<Int>()
             val currentIndex = player.currentMediaItemIndex
@@ -2058,7 +2058,7 @@ class MusicService :
                         .filterVideoSongs(dataStore.get(HideVideoSongsKey, false) || dataStore.get(pushkar.chorus.music.constants.DataSaverEnabledKey, false))
                 }
                 if (player.playbackState != STATE_IDLE && mediaItems.isNotEmpty()) {
-                    val filteredMediaItems = if (dataStore.get(PreventDuplicateTracksInQueueKey, false)) {
+                    val filteredMediaItems = if (dataStore.get(PreventDuplicateTracksInQueueKey, true)) {
                         val existingMediaIds = (0 until player.mediaItemCount).map { player.getMediaItemAt(it).mediaId }.toSet()
                         mediaItems.filter { it.mediaId !in existingMediaIds }
                     } else {
