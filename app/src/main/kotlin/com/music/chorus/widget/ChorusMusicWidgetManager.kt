@@ -195,7 +195,7 @@ class ChorusMusicWidgetManager @Inject constructor(
 
         // Set click intents
         views.setOnClickPendingIntent(R.id.widget_album_art, getOpenAppIntent())
-        views.setOnClickPendingIntent(R.id.widget_play_pause_container, getPlayPauseIntent())
+        views.setOnClickPendingIntent(R.id.widget_play_pause, getPlayPauseIntent())
         views.setOnClickPendingIntent(R.id.widget_like_button, getLikeIntent())
 
         return views
@@ -287,7 +287,7 @@ class ChorusMusicWidgetManager @Inject constructor(
 
         // Set click intents
         views.setOnClickPendingIntent(R.id.widget_compact_album_art, getOpenAppIntent())
-        views.setOnClickPendingIntent(R.id.widget_compact_play_container, getPlayPauseIntent())
+        views.setOnClickPendingIntent(R.id.widget_compact_play_pause, getPlayPauseIntent())
 
         return views
     }
@@ -318,14 +318,9 @@ class ChorusMusicWidgetManager @Inject constructor(
         val playPauseIcon = if (isPlaying) R.drawable.ic_widget_pause_low else R.drawable.ic_widget_play_low
         views.setImageViewResource(R.id.widget_wide_play_pause, playPauseIcon)
 
-        // Set like icon - using navigation style (purple)
-        val likeIcon = if (isLiked) R.drawable.ic_widget_heart_nav else R.drawable.ic_widget_heart_outline_nav
-        views.setImageViewResource(R.id.widget_wide_like_button, likeIcon)
-
         // Set click intents
         views.setOnClickPendingIntent(R.id.widget_wide_album_art, getOpenAppIntent())
-        views.setOnClickPendingIntent(R.id.widget_wide_play_container, getPlayPauseIntent())
-        views.setOnClickPendingIntent(R.id.widget_wide_like_button, getLikeIntent())
+        views.setOnClickPendingIntent(R.id.widget_wide_play_pause, getPlayPauseIntent())
 
         return views
     }
@@ -351,7 +346,7 @@ class ChorusMusicWidgetManager @Inject constructor(
 
         // Set click intents
         views.setOnClickPendingIntent(R.id.widget_turntable_album_art, getOpenAppIntent())
-        views.setOnClickPendingIntent(R.id.widget_turntable_play_container, getTurntablePlayPauseIntent())
+        views.setOnClickPendingIntent(R.id.widget_turntable_play_pause, getTurntablePlayPauseIntent())
         views.setOnClickPendingIntent(R.id.widget_turntable_prev_button, getTurntablePreviousIntent())
         views.setOnClickPendingIntent(R.id.widget_turntable_next_button, getTurntableNextIntent())
 
