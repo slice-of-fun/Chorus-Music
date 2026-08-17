@@ -161,7 +161,7 @@ class DiscordRPC(
             if (isPaused) {
                 "Paused"
             } else {
-                resolveSmallText(song, translatedMap, smallImageType, appName)
+                "Playing ${song.song.title} song from $appName"
             }
 
         val buttons = resolveButtons(song)

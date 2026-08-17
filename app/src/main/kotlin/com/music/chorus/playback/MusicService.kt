@@ -2187,8 +2187,13 @@ class MusicService :
                 scope.launch {
                     if (!dataStore.get(pushkar.chorus.music.constants.DiscordShowWhenPausedKey, false)) {
                         DiscordPresenceManager.stop()
+                        lastPresenceToken = null
+                    } else {
+                        ensurePresenceManager()
                     }
                 }
+            } else if (player.isPlaying) {
+                ensurePresenceManager()
             }
         }
 
@@ -2852,7 +2857,7 @@ class MusicService :
     }
 
     private fun ensurePresenceManager() {
-        if (DiscordPresenceManager.lastRpcStartTime != null && lastPresenceToken != null) {
+        if (DiscordPresenceManager.isRunning() && lastPresenceToken != null) {
             if (dataStore.get(EnableDiscordRPCKey, true) && dataStore.get(DiscordTokenKey, "").isNotBlank()) {
                 DiscordPresenceManager.restart()
             }
@@ -2861,7 +2866,7 @@ class MusicService :
 
         scope.launch {
             if (!dataStore.get(EnableDiscordRPCKey, true)) {
-                if (DiscordPresenceManager.lastRpcStartTime != null) {
+                if (DiscordPresenceManager.isRunning()) {
                     try { DiscordPresenceManager.stop() } catch (_: Exception) {}
                     lastPresenceToken = null
                 }
@@ -2870,14 +2875,14 @@ class MusicService :
 
             val key = dataStore.get(DiscordTokenKey, "")
             if (key.isBlank()) {
-                if (DiscordPresenceManager.lastRpcStartTime != null) {
+                if (DiscordPresenceManager.isRunning()) {
                     try { DiscordPresenceManager.stop() } catch (_: Exception) {}
                     lastPresenceToken = null
                 }
                 return@launch
             }
 
-            if (DiscordPresenceManager.lastRpcStartTime != null && lastPresenceToken == key) {
+            if (DiscordPresenceManager.isRunning() && lastPresenceToken == key) {
                 return@launch
             }
 

@@ -5,7 +5,7 @@
     android:minResizeWidth="110dp"
     android:minResizeHeight="122dp"
     android:updatePeriodMillis="1800000"
-    android:previewImage="@mipmap/ic_launcher"
+    android:previewLayout="@layout/widget_playlist"
     android:initialLayout="@layout/widget_playlist"
     android:description="@string/widget_playlists_description"
     android:widgetCategory="home_screen"

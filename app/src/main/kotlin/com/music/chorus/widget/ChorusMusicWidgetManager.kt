@@ -47,7 +47,6 @@ class ChorusMusicWidgetManager @Inject constructor(
     // Cache for album art to avoid reloading
     private var cachedArtworkUri: String? = null
     private var cachedAlbumArt: Bitmap? = null
-    private var cachedCircularAlbumArt: Bitmap? = null
 
     suspend fun updateWidgets(
         title: String,
@@ -62,18 +61,15 @@ class ChorusMusicWidgetManager @Inject constructor(
 
         // Use cached album art if URI hasn't changed, otherwise load new one
         val albumArt: Bitmap?
-        val circularAlbumArt: Bitmap?
-        
+
         if (artworkUri != null && artworkUri == cachedArtworkUri && cachedAlbumArt != null) {
             albumArt = cachedAlbumArt
-            circularAlbumArt = cachedCircularAlbumArt
         } else {
-            albumArt = artworkUri?.let { loadAlbumArt(it, 300) }
-            circularAlbumArt = albumArt?.let { getCircularBitmap(it) }
+            val rawAlbumArt = artworkUri?.let { loadAlbumArt(it, 300) }
+            albumArt = rawAlbumArt?.let { getRoundedBitmap(it) }
             // Update cache
             cachedArtworkUri = artworkUri
             cachedAlbumArt = albumArt
-            cachedCircularAlbumArt = circularAlbumArt
         }
 
         // Update main music player widgets
@@ -101,7 +97,7 @@ class ChorusMusicWidgetManager @Inject constructor(
         val turntableWidgetIds = appWidgetManager.getAppWidgetIds(turntableComponentName)
         if (turntableWidgetIds.isNotEmpty()) {
             val turntableViews = createTurntableRemoteViews(
-                circularAlbumArt,
+                albumArt,
                 isPlaying,
                 isLiked
             )
@@ -134,21 +130,16 @@ class ChorusMusicWidgetManager @Inject constructor(
         val minWidth = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)
         val minHeight = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT)
 
-        // Determine widget size category
-        // 2x2: approximately 110dp x 110dp (compact square)
-        // 4x1: approximately 250dp x 40dp (wide single row)
-        // Full: approximately 250dp x 110dp (default)
         return when {
             minWidth < 180 && minHeight < 100 -> {
-                // 2x2 Compact - Only play button with album art
                 createCompactSquareRemoteViews(albumArt, isPlaying)
             }
+
             minWidth >= 180 && minHeight < 100 -> {
-                // 4x1 Wide - Single row with album art, song info, like and play buttons
                 createCompactWideRemoteViews(title, artist, albumArt, isPlaying, isLiked)
             }
+
             else -> {
-                // Full layout
                 createRemoteViews(title, artist, albumArt, isPlaying, isLiked, duration, currentPosition)
             }
         }
@@ -197,6 +188,8 @@ class ChorusMusicWidgetManager @Inject constructor(
         views.setOnClickPendingIntent(R.id.widget_album_art, getOpenAppIntent())
         views.setOnClickPendingIntent(R.id.widget_play_pause, getPlayPauseIntent())
         views.setOnClickPendingIntent(R.id.widget_like_button, getLikeIntent())
+        views.setOnClickPendingIntent(R.id.widget_skip_next, getNextIntent())
+        views.setOnClickPendingIntent(R.id.widget_skip_previous, getPreviousIntent())
 
         return views
     }
@@ -234,17 +227,17 @@ class ChorusMusicWidgetManager @Inject constructor(
         }
         val rect = RectF(0f, 0f, size.toFloat(), size.toFloat())
         canvas.drawRoundRect(rect, cornerRadius, cornerRadius, paint)
-        
+
         if (squareBitmap != bitmap) {
             squareBitmap.recycle()
         }
-        
+
         return output
     }
 
-    private fun getCircularBitmap(bitmap: Bitmap): Bitmap {
+    private fun getRoundedBitmap(bitmap: Bitmap): Bitmap {
         val size = minOf(bitmap.width, bitmap.height)
-        
+
         // First crop to square
         val xOffset = (bitmap.width - size) / 2
         val yOffset = (bitmap.height - size) / 2
@@ -252,14 +245,14 @@ class ChorusMusicWidgetManager @Inject constructor(
 
         val output = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(output)
-        val paint =
-            Paint().apply {
-                isAntiAlias = true
-                isFilterBitmap = true
-                shader = BitmapShader(squareBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
-            }
-        val radius = size / 2f
-        canvas.drawCircle(radius, radius, radius, paint)
+        val paint = Paint().apply {
+            isAntiAlias = true
+            isFilterBitmap = true
+            shader = BitmapShader(squareBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+        }
+        val radius = size * 0.15f
+        val rect = RectF(0f, 0f, size.toFloat(), size.toFloat())
+        canvas.drawRoundRect(rect, radius, radius, paint)
 
         if (squareBitmap != bitmap) {
             squareBitmap.recycle()
@@ -275,8 +268,7 @@ class ChorusMusicWidgetManager @Inject constructor(
 
         // Set album art with rounded corners
         if (albumArt != null) {
-            val roundedAlbumArt = getRoundedCornerBitmap(albumArt, 48f)
-            views.setImageViewBitmap(R.id.widget_compact_album_art, roundedAlbumArt)
+            views.setImageViewBitmap(R.id.widget_compact_album_art, albumArt)
         } else {
             views.setImageViewBitmap(R.id.widget_compact_album_art, getRoundedDefaultIcon(48f))
         }
@@ -305,12 +297,10 @@ class ChorusMusicWidgetManager @Inject constructor(
         views.setTextViewText(R.id.widget_wide_song_title, title)
         views.setTextViewText(R.id.widget_wide_artist_name, artist)
 
-        // Set album art with rounded corners (48f to match 12dp at ~4x density for 48dp view)
+        // Set album art with rounded corners
         if (albumArt != null) {
-            val roundedAlbumArt = getRoundedCornerBitmap(albumArt, 48f)
-            views.setImageViewBitmap(R.id.widget_wide_album_art, roundedAlbumArt)
+            views.setImageViewBitmap(R.id.widget_wide_album_art, albumArt)
         } else {
-            // Create rounded default icon
             views.setImageViewBitmap(R.id.widget_wide_album_art, getRoundedDefaultIcon(48f))
         }
 
@@ -326,18 +316,16 @@ class ChorusMusicWidgetManager @Inject constructor(
     }
 
     private fun createTurntableRemoteViews(
-        circularAlbumArt: Bitmap?,
+        albumArt: Bitmap?,
         isPlaying: Boolean,
         isLiked: Boolean
     ): RemoteViews {
         val views = RemoteViews(context.packageName, R.layout.widget_turntable)
 
-        // Set circular album art - create circular default icon if no album art
-        if (circularAlbumArt != null) {
-            views.setImageViewBitmap(R.id.widget_turntable_album_art, circularAlbumArt)
+        if (albumArt != null) {
+            views.setImageViewBitmap(R.id.widget_turntable_album_art, albumArt)
         } else {
-            // Load and make the default icon circular
-            views.setImageViewBitmap(R.id.widget_turntable_album_art, getCircularDefaultIcon())
+            views.setImageViewBitmap(R.id.widget_turntable_album_art, getRoundedDefaultIcon(48f))
         }
 
         // Set play/pause icon - using secondary color icons for turntable
@@ -352,86 +340,75 @@ class ChorusMusicWidgetManager @Inject constructor(
 
         return views
     }
-    
-    private fun getCircularDefaultIcon(): Bitmap {
-        // Load the custom turntable default art drawable and convert to bitmap
-        val drawable = context.getDrawable(R.drawable.widget_turntable_default_art)!!
-        val size = 300
-        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, size, size)
-        drawable.draw(canvas)
-        return bitmap
-    }
-    
+
     private fun getRoundedDefaultIcon(cornerRadius: Float): Bitmap {
-        // Get the launcher icon and make it rounded
-        val drawable = context.packageManager.getApplicationIcon(context.packageName)
-        val size = 300
-        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, size, size)
-        drawable.draw(canvas)
-        return getRoundedCornerBitmap(bitmap, cornerRadius)
-    }
+    // Get the launcher icon and make it rounded
+    val drawable = context.packageManager.getApplicationIcon(context.packageName)
+    val size = 300
+    val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap)
+    drawable.setBounds(0, 0, size, size)
+    drawable.draw(canvas)
+    return getRoundedCornerBitmap(bitmap, cornerRadius)
+}
 
-    private fun getOpenAppIntent(): PendingIntent {
-        val intent = Intent(context, MainActivity::class.java)
-        return PendingIntent.getActivity(
-            context,
-            0,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-    }
+private fun getOpenAppIntent(): PendingIntent {
+    val intent = Intent(context, MainActivity::class.java)
+    return PendingIntent.getActivity(
+        context,
+        0,
+        intent,
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+    )
+}
 
-    private fun getPlayPauseIntent(): PendingIntent {
-        val intent = Intent(context, MusicWidgetReceiver::class.java).apply {
-            action = MusicWidgetReceiver.ACTION_PLAY_PAUSE
-        }
-        return PendingIntent.getBroadcast(
-            context,
-            1,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
+private fun getPlayPauseIntent(): PendingIntent {
+    val intent = Intent(context, MusicWidgetReceiver::class.java).apply {
+        action = MusicWidgetReceiver.ACTION_PLAY_PAUSE
     }
+    return PendingIntent.getBroadcast(
+        context,
+        1,
+        intent,
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+    )
+}
 
-    private fun getLikeIntent(): PendingIntent {
-        val intent = Intent(context, MusicWidgetReceiver::class.java).apply {
-            action = MusicWidgetReceiver.ACTION_LIKE
-        }
-        return PendingIntent.getBroadcast(
-            context,
-            2,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
+private fun getLikeIntent(): PendingIntent {
+    val intent = Intent(context, MusicWidgetReceiver::class.java).apply {
+        action = MusicWidgetReceiver.ACTION_LIKE
     }
+    return PendingIntent.getBroadcast(
+        context,
+        2,
+        intent,
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+    )
+}
 
-    private fun getTurntablePlayPauseIntent(): PendingIntent {
-        val intent = Intent(context, TurntableWidgetReceiver::class.java).apply {
-            action = TurntableWidgetReceiver.ACTION_TURNTABLE_PLAY_PAUSE
-        }
-        return PendingIntent.getBroadcast(
-            context,
-            3,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
+private fun getTurntablePlayPauseIntent(): PendingIntent {
+    val intent = Intent(context, TurntableWidgetReceiver::class.java).apply {
+        action = TurntableWidgetReceiver.ACTION_TURNTABLE_PLAY_PAUSE
     }
+    return PendingIntent.getBroadcast(
+        context,
+        3,
+        intent,
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+    )
+}
 
-    private fun getTurntableNextIntent(): PendingIntent {
-        val intent = Intent(context, TurntableWidgetReceiver::class.java).apply {
-            action = TurntableWidgetReceiver.ACTION_TURNTABLE_NEXT
-        }
-        return PendingIntent.getBroadcast(
-            context,
-            4,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
+private fun getTurntableNextIntent(): PendingIntent {
+    val intent = Intent(context, TurntableWidgetReceiver::class.java).apply {
+        action = TurntableWidgetReceiver.ACTION_TURNTABLE_NEXT
     }
+    return PendingIntent.getBroadcast(
+        context,
+        4,
+        intent,
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+    )
+}
 
     private fun getTurntablePreviousIntent(): PendingIntent {
         val intent = Intent(context, TurntableWidgetReceiver::class.java).apply {
@@ -440,6 +417,30 @@ class ChorusMusicWidgetManager @Inject constructor(
         return PendingIntent.getBroadcast(
             context,
             5,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+    }
+
+    private fun getNextIntent(): PendingIntent {
+        val intent = Intent(context, MusicWidgetReceiver::class.java).apply {
+            action = MusicWidgetReceiver.ACTION_NEXT
+        }
+        return PendingIntent.getBroadcast(
+            context,
+            6,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+    }
+
+    private fun getPreviousIntent(): PendingIntent {
+        val intent = Intent(context, MusicWidgetReceiver::class.java).apply {
+            action = MusicWidgetReceiver.ACTION_PREVIOUS
+        }
+        return PendingIntent.getBroadcast(
+            context,
+            7,
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )

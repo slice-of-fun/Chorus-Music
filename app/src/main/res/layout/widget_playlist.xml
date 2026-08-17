@@ -94,7 +94,7 @@ android:maxLines="1"
                     android:src="@drawable/ic_widget_skip_next"
                     android:contentDescription="@string/next" />
 
-                <FrameLayout
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
@@ -167,7 +167,7 @@ android:maxLines="1"
                         android:scaleType="centerCrop"
                         android:contentDescription="@null" />
                 </FrameLayout>
-                <TextView android:id="@+id/widget_playlist_card_1_title" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+                <TextView android:id="@+id/widget_playlist_card_1_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
             </LinearLayout>
 
             <LinearLayout
@@ -192,7 +192,7 @@ android:maxLines="1"
                         android:scaleType="centerCrop"
                         android:contentDescription="@null" />
                 </FrameLayout>
-                <TextView android:id="@+id/widget_playlist_card_2_title" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+                <TextView android:id="@+id/widget_playlist_card_2_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
             </LinearLayout>
 
             <LinearLayout
@@ -217,7 +217,7 @@ android:maxLines="1"
                         android:scaleType="centerCrop"
                         android:contentDescription="@null" />
                 </FrameLayout>
-                <TextView android:id="@+id/widget_playlist_card_3_title" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+                <TextView android:id="@+id/widget_playlist_card_3_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
             </LinearLayout>
 
             <LinearLayout
@@ -241,7 +241,7 @@ android:maxLines="1"
                         android:scaleType="centerCrop"
                         android:contentDescription="@null" />
                 </FrameLayout>
-                <TextView android:id="@+id/widget_playlist_card_4_title" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+                <TextView android:id="@+id/widget_playlist_card_4_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
             </LinearLayout>
         </LinearLayout>
 
@@ -276,7 +276,7 @@ android:maxLines="1"
                         android:scaleType="centerCrop"
                         android:contentDescription="@null" />
                 </FrameLayout>
-                <TextView android:id="@+id/widget_playlist_card_5_title" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+                <TextView android:id="@+id/widget_playlist_card_5_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
             </LinearLayout>
 
             <LinearLayout
@@ -301,7 +301,7 @@ android:maxLines="1"
                         android:scaleType="centerCrop"
                         android:contentDescription="@null" />
                 </FrameLayout>
-                <TextView android:id="@+id/widget_playlist_card_6_title" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+                <TextView android:id="@+id/widget_playlist_card_6_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
             </LinearLayout>
 
             <LinearLayout
@@ -326,7 +326,7 @@ android:maxLines="1"
                         android:scaleType="centerCrop"
                         android:contentDescription="@null" />
                 </FrameLayout>
-                <TextView android:id="@+id/widget_playlist_card_7_title" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+                <TextView android:id="@+id/widget_playlist_card_7_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
             </LinearLayout>
 
             <LinearLayout
@@ -350,7 +350,7 @@ android:maxLines="1"
                         android:scaleType="centerCrop"
                         android:contentDescription="@null" />
                 </FrameLayout>
-                <TextView android:id="@+id/widget_playlist_card_8_title" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+                <TextView android:id="@+id/widget_playlist_card_8_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
