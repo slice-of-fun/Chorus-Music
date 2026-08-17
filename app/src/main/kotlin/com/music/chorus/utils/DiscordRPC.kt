@@ -1,5 +1,3 @@
-
-
 package pushkar.chorus.music.utils
 
 import android.content.Context
@@ -44,9 +42,9 @@ class DiscordRPC(
 ) {
     companion object {
         private const val PAUSE_IMAGE_URL =
-            "https://files.catbox.moe/ber0ss.png"
+            "https://raw.githubusercontent.com/slice-of-fun/Chorus-Music/main/assets/paused.png"
         private const val APP_ICON_URL =
-            "https://files.catbox.moe/ber0ss.png"
+            "https://raw.githubusercontent.com/slice-of-fun/Chorus-Music/main/assets/Chorus-new.png"
         private const val TAG = "DiscordRPC"
     }
 

@@ -30,4 +30,4 @@ fun joinByBullet(vararg str: String?) =
     str
         .filterNot {
             it.isNullOrEmpty()
-        }.joinToString(separator = " • ")
+        }.joinToString(separator = " \u2022 ")

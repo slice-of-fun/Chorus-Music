@@ -1,5 +1,3 @@
-﻿
-
 package pushkar.chorus.music.ui.screens.playlist
 
 import androidx.activity.compose.BackHandler
@@ -138,6 +136,7 @@ fun CachePlaylistScreen(
             SongSortType.ARTIST -> cachedSongs.sortedBy { song ->
                 song.artists.joinToString(separator = "") { it.name }
             }
+
             SongSortType.PLAY_TIME -> cachedSongs.sortedBy { it.song.totalPlayTime }
         }
         if (sortDescending) sorted.reversed() else sorted
@@ -179,7 +178,7 @@ fun CachePlaylistScreen(
         if (query.text.isEmpty()) sortedSongs
         else sortedSongs.filter { song ->
             song.title.contains(query.text, true) ||
-                song.artists.any { it.name.contains(query.text, true) }
+                    song.artists.any { it.name.contains(query.text, true) }
         }
     }
 
@@ -351,6 +350,7 @@ fun CachePlaylistScreen(
                             style = MaterialTheme.typography.titleLarge
                         )
                     }
+
                     isSearching -> {
                         TextField(
                             value = query,
@@ -376,6 +376,7 @@ fun CachePlaylistScreen(
                                 .focusRequester(focusRequester)
                         )
                     }
+
                     else -> {
                         Text(
                             stringResource(R.string.cached_playlist),
@@ -392,9 +393,11 @@ fun CachePlaylistScreen(
                             query = TextFieldValue()
                             focusManager.clearFocus()
                         }
+
                         inSelectMode -> {
                             onExitSelectionMode()
                         }
+
                         else -> {
                             navController.navigateUp()
                         }
@@ -471,7 +474,7 @@ private fun CachePlaylistHeader(
             .padding(top = 16.dp, bottom = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -495,7 +498,7 @@ private fun CachePlaylistHeader(
             }
         }
 
-        
+
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
@@ -519,12 +522,12 @@ private fun CachePlaylistHeader(
 
         Spacer(Modifier.height(8.dp))
 
-        
+
         Text(
             text = buildString {
                 append(pluralStringResource(R.plurals.n_song, songs.size, songs.size))
                 if (cacheLength > 0) {
-                    append(" â€¢ ")
+                    append(" \u2022 ")
                     append(makeTimeString(cacheLength * 1000L))
                 }
             },
@@ -534,7 +537,7 @@ private fun CachePlaylistHeader(
 
         Spacer(Modifier.height(24.dp))
 
-        
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -542,7 +545,7 @@ private fun CachePlaylistHeader(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            
+
             TextButton(
                 onClick = {
                     playerConnection.playQueue(
@@ -574,7 +577,7 @@ private fun CachePlaylistHeader(
                 )
             }
 
-            
+
             TextButton(
                 onClick = {
                     playerConnection.playQueue(
@@ -608,7 +611,7 @@ private fun CachePlaylistHeader(
                 )
             }
 
-            
+
             Surface(
                 onClick = {
                     menuState.show {
@@ -661,9 +664,7 @@ private fun CachePlaylistHeader(
         val staticDescription = remember(songs.size, cacheLength) {
             val name = context.getString(R.string.cached_playlist)
             val trackCountText = context.resources.getQuantityString(R.plurals.n_song, songs.size, songs.size)
-            "$name is your local collection of cached tracks, featuring $trackCountText.${
-                if (cacheLength > 0) " Combined duration is ${makeTimeString(cacheLength * 1000L)}." else ""
-            } These songs are stored on your device for quick access."
+            "$name is your local collection of offline tracks, featuring $trackCountText. These songs are available to play without an internet connection."
         }
 
         Column(

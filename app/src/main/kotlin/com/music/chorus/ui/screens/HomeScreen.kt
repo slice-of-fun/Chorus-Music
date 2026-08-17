@@ -528,7 +528,7 @@ fun DailyDiscoverCard(
                             text = buildString {
                                 append((dailyDiscover.recommendation as? SongItem)?.artists?.joinToString(", ") { it.name } ?: "")
                                 if (playCount > 0) {
-                                    append(" • $playCount $playsString")
+                                    append(" \u2022 $playCount $playsString")
                                 }
                             },
                             style = MaterialTheme.typography.bodyMedium,
@@ -548,7 +548,7 @@ fun DailyDiscoverCard(
                     }
 
                     Text(
-                        text = stringResource(messageRes, "${dailyDiscover.seed.title} • ${dailyDiscover.seed.artists.joinToString(", ") { it.name }}"),
+                        text = stringResource(messageRes, "${dailyDiscover.seed.title} \u2022 ${dailyDiscover.seed.artists.joinToString(", ") { it.name }}"),
                         style = MaterialTheme.typography.bodySmall,
                         fontWeight = androidx.compose.ui.text.font.FontWeight.Medium,
                         color = Color.White.copy(alpha = 0.6f),

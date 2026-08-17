@@ -249,7 +249,7 @@ fun SettingDialoge(
                         color = onSecondaryColor,
                         modifier = Modifier.clickable { uriHandler.openUri("https://slice-of-fun.github.io/Chorus-Music/p/privacy-policy") }.padding(4.dp)
                     )
-                    Text(text = " • ", color = onSecondaryColor, style = MaterialTheme.typography.bodySmall)
+                    Text(text = " \u2022 ", color = onSecondaryColor, style = MaterialTheme.typography.bodySmall)
                     Text(
                         text = "Terms of Service",
                         style = MaterialTheme.typography.bodySmall,

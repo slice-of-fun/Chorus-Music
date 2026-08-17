@@ -46,8 +46,8 @@
 
     <!-- Search -->
     <string name="search">Search</string>
-    <string name="search_yt_music">Search YouTube Music…</string>
-    <string name="search_library">Search library…</string>
+    <string name="search_yt_music">Search Chorus Music...</string>
+    <string name="search_library">Search library...</string>
     <string name="filter_library">Library</string>
     <string name="filter_liked">Liked</string>
     <string name="filter_downloaded">Downloaded</string>
@@ -421,10 +421,10 @@
     <string name="spotify_import_desc">Connect Spotify, choose playlists, and mirror them into local Chorus Music playlists.</string>
     <string name="spotify_connect">Connect Spotify</string>
     <string name="spotify_refresh">Refresh Spotify library</string>
-    <string name="spotify_select_sources">Select Spotify playlists</string>
+    <string name="spotify_select_sources">Select playlists</string>
     <string name="spotify_import_by_link">Import playlist by link</string>
     <string name="spotify_import_by_link_desc">Paste a playlist link (Spotify, YouTube, Apple Music, SoundCloud, JioSaavn) to import it</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/… or https://youtube.com/playlist?list=…</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/... or https://youtube.com/playlist?list=...</string>
     <string name="spotify_add">Add</string>
     <string name="spotify_invalid_playlist_link">That doesn\'t look like a supported playlist link. Make sure it\'s a valid URL for Spotify, YouTube, Apple Music, SoundCloud, or JioSaavn.</string>
     <string name="spotify_import_selected">Import selected</string>
@@ -437,11 +437,11 @@
     <string name="spotify_track_count">%1$d tracks</string>
     <string name="spotify_login_title">Spotify login</string>
     <string name="spotify_loading_library">Loading Spotify library</string>
-    <string name="spotify_no_sources">No Spotify playlists found</string>
-    <string name="spotify_import_in_progress">Importing Spotify playlists</string>
-    <string name="spotify_import_progress_step">%1$s • %2$d/%3$d sources • %4$d/%5$d tracks</string>
-    <string name="spotify_import_complete">Spotify import complete</string>
-    <string name="spotify_import_summary">%1$d sources • %2$d imported • %3$d failed</string>
+    <string name="spotify_no_sources">No playlists found</string>
+    <string name="spotify_import_in_progress">Importing playlists</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d sources &#8226; %4$d/%5$d tracks</string>
+    <string name="spotify_import_complete">Import complete</string>
+    <string name="spotify_import_summary">%1$d sources &#8226; %2$d imported &#8226; %3$d failed</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d imported</string>
     <string name="spotify_select_all">Select all</string>
     <string name="spotify_clear_selection">Clear</string>
@@ -459,8 +459,8 @@
     <!-- Recognition Notification -->
     <string name="recognition_notification_channel_name">Music recognition</string>
     <string name="recognition_notification_channel_desc">Shows a notification while identifying a song from quick settings</string>
-    <string name="recognition_notification_listening">Listening for music…</string>
-    <string name="recognition_notification_processing">Identifying…</string>
+    <string name="recognition_notification_listening">Listening for music...</string>
+    <string name="recognition_notification_processing">Identifying...</string>
     <string name="recognition_notification_no_match">No match found</string>
     <string name="recognition_notification_failed">Recognition failed</string>
     <string name="listen_on_chorus_music">Listen on Chorus Music</string>

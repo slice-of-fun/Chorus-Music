@@ -1973,7 +1973,7 @@ fun BottomSheetPlayer(
                         }
                         val isLossless = codecStr.contains("FLAC") || codecStr.contains("ALAC") || codecStr.contains("WAV")
                         val losslessStr = if (isLossless) "Lossless" else ""
-                        listOf(codecStr, bitrateStr, losslessStr).filter { it.isNotEmpty() }.joinToString(" • ")
+                        listOf(codecStr, bitrateStr, losslessStr).filter { it.isNotEmpty() }.joinToString(" \u2022 ")
                     }
 
                     val isBuffering = playbackState == androidx.media3.common.Player.STATE_BUFFERING

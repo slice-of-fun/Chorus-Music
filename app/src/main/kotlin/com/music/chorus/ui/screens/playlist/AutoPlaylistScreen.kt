@@ -830,7 +830,7 @@ private fun AutoPlaylistHeader(
             text = buildString {
                 append(pluralStringResource(R.plurals.n_song, songs.size, songs.size))
                 if (likeLength > 0) {
-                    append(" • ")
+                    append(" \u2022 ")
                     append(makeTimeString(likeLength * 1000L))
                 }
             },

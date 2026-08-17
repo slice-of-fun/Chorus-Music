@@ -1003,9 +1003,9 @@ fun MediaMetadataListItem(
         subtitle = if (mediaMetadata.suggestedBy != null) {
             buildAnnotatedString {
                 append(mediaMetadata.artists.joinToString { it.name })
-                append(" • ")
+                append(" \u2022 ")
                 append(makeTimeString(mediaMetadata.duration * 1000L))
-                append(" • ")
+                append(" \u2022 ")
                 withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
                     append(mediaMetadata.suggestedBy)
                 }

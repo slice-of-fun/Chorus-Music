@@ -321,11 +321,18 @@ private fun SpotifyImportProgressDialog(
             }
         },
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(stringResource(R.string.spotify_import_progress_step, progress.sourceTitle, progress.completedSources, progress.totalSources, progress.matchedTracks, progress.totalTracks))
-            LinearProgressIndicator(
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            CircularProgressIndicator(
                 progress = { progress.percent.toFloat() / 100f },
-                modifier = Modifier.fillMaxWidth().clip(CircleShape),
+                modifier = Modifier.size(36.dp)
+            )
+            Text(
+                stringResource(R.string.spotify_import_progress_step, progress.sourceTitle, progress.completedSources, progress.totalSources, progress.matchedTracks, progress.totalTracks),
+                modifier = Modifier.weight(1f)
             )
         }
     }

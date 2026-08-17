@@ -1277,7 +1277,7 @@ fun LocalPlaylistHeader(
             text = buildString {
                 append(pluralStringResource(R.plurals.n_song, songCount, songCount))
                 if (playlistLength > 0) {
-                    append(" • ")
+                    append(" \u2022 ")
                     append(makeTimeString(playlistLength * 1000L))
                 }
             },
