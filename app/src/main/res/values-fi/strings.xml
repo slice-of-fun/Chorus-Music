@@ -24,8 +24,8 @@
     <string name="most_played_artists">Eniten soitetut artistit</string>
     <string name="most_played_albums">Eniten soitetut albumit</string>
     <string name="search">Etsi</string>
-    <string name="search_yt_music">Hae YouTube Musicistaâ€¦</string>
-    <string name="search_library">Hae kirjastostaâ€¦</string>
+    <string name="search_yt_music">Hae YouTube Musicista...</string>
+    <string name="search_library">Hae kirjastosta...</string>
     <string name="filter_library">Kirjasto</string>
     <string name="filter_liked">TykÃ¤tty</string>
     <string name="filter_downloaded">Ladattu</string>
@@ -358,9 +358,9 @@
     <string name="spotify_loading_library">Ladataan Spotify-kirjastoa</string>
     <string name="spotify_no_sources">Spotify-soittolistoja ei lÃ¶ytynyt</string>
     <string name="spotify_import_in_progress">Tuodaan Spotify-soittolistoja</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d lÃ¤hdettÃ¤ â€¢ %4$d/%5$d kappaletta</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d lÃ¤hdettÃ¤ &#8226; %4$d/%5$d kappaletta</string>
     <string name="spotify_import_complete">Spotify-tuonti valmis</string>
-    <string name="spotify_import_summary">%1$d lÃ¤hdettÃ¤ â€¢ %2$d tuotu â€¢ %3$d epÃ¤onnistui</string>
+    <string name="spotify_import_summary">%1$d lÃ¤hdettÃ¤ &#8226; %2$d tuotu &#8226; %3$d epÃ¤onnistui</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d tuotu</string>
     <string name="spotify_select_all">Valitse kaikki</string>
     <string name="spotify_clear_selection">TyhjennÃ¤ valinta</string>
@@ -384,9 +384,9 @@
     <string name="content_sponsor_block_desc">Ohita automaattisesti sponsoriosuudet, aloitukset ja videoiden osuudet, jotka eivÃ¤t sisÃ¤llÃ¤ musiikkia</string>
     <string name="spotify_import_by_link">Tuo soittolista linkistÃ¤</string>
     <string name="spotify_import_by_link_desc">LiitÃ¤ Spotify-soittolistan linkki tuodaksesi sen, vaikka soittolista ei olisi omasi</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">LisÃ¤Ã¤</string>
-    <string name="spotify_invalid_playlist_link">TÃ¤mÃ¤ ei vaikuta Spotify-soittolistan linkiltÃ¤. KÃ¤ytÃ¤ linkkiÃ¤, kuten https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">TÃ¤mÃ¤ ei vaikuta Spotify-soittolistan linkiltÃ¤. KÃ¤ytÃ¤ linkkiÃ¤, kuten https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">Palveluiden kÃ¤ytettÃ¤vyys</string>
     <string name="service_uptime_desc">Tarkista musiikkipalveluntarjoajien tila</string>
     <string name="music_providers">Musiikkipalveluntarjoajat</string>
@@ -398,8 +398,8 @@
     <string name="status_checking">Tarkistetaan...</string>
     <string name="recognition_notification_channel_name">Musiikin tunnistus</string>
     <string name="recognition_notification_channel_desc">NÃ¤yttÃ¤Ã¤ ilmoituksen, kun kappaletta tunnistetaan pika-asetuksista</string>
-    <string name="recognition_notification_listening">Kuunnellaan musiikkiaâ€¦</string>
-    <string name="recognition_notification_processing">Tunnistetaanâ€¦</string>
+    <string name="recognition_notification_listening">Kuunnellaan musiikkia...</string>
+    <string name="recognition_notification_processing">Tunnistetaan...</string>
     <string name="recognition_notification_no_match">Vastaavuutta ei lÃ¶ytynyt</string>
     <string name="recognition_notification_failed">Tunnistus epÃ¤onnistui</string>
     <string name="listen_on_chorus_music">Kuuntele Chorus Musicissa</string>
@@ -418,7 +418,7 @@
     <string name="last_updated_never">Ei koskaan</string>
     <string name="cipher_update_success">Poimijan mÃ¤Ã¤ritykset pÃ¤ivitettiin! Ladattiin %d soitinta.</string>
     <string name="cipher_update_failed">Poimijan mÃ¤Ã¤ritysten pÃ¤ivitys epÃ¤onnistui: %s</string>
-    <string name="cipher_updating">PÃ¤ivitetÃ¤Ã¤n poimijan mÃ¤Ã¤rityksiÃ¤â€¦</string>
+    <string name="cipher_updating">PÃ¤ivitetÃ¤Ã¤n poimijan mÃ¤Ã¤rityksiÃ¤...</string>
     <string name="hours_label">Tunnit</string>
     <string name="minutes_label">Minuutit</string>
     <string name="seconds_label">Sekunnit</string>

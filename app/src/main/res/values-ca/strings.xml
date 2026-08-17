@@ -24,8 +24,8 @@
     <string name="most_played_songs">CanÃ§ons mÃ©s reproduÃ¯des</string>
     <string name="most_played_artists">Artistes mÃ©s reproduÃ¯ts</string>
     <string name="most_played_albums">Ã€lbums mÃ©s reproduÃ¯ts</string>
-    <string name="search_yt_music">Cerca a YouTube Musicâ€¦</string>
-    <string name="search_library">Cerca a la colÂ·lecciÃ³â€¦</string>
+    <string name="search_yt_music">Cerca a YouTube Music...</string>
+    <string name="search_library">Cerca a la colÂ·lecciÃ³...</string>
     <string name="filter_liked">Mâ€™ha agradat</string>
     <string name="filter_downloaded">Descarregat</string>
     <string name="filter_songs">CanÃ§ons</string>
@@ -367,9 +367,9 @@
     <string name="spotify_loading_library">Sâ€™estÃ  carregant la colÂ·lecciÃ³ de Spotify</string>
     <string name="spotify_no_sources">No sâ€™ha trobat cap llista de Spotify</string>
     <string name="spotify_import_in_progress">Sâ€™estan important les llistes de Spotify</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d fonts â€¢ %4$d/%5$d pistes</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d fonts &#8226; %4$d/%5$d pistes</string>
     <string name="spotify_import_complete">La importaciÃ³ de Spotify ha finalitzat</string>
-    <string name="spotify_import_summary">%1$d fonts â€¢ %2$d importades â€¢ %3$d errors</string>
+    <string name="spotify_import_summary">%1$d fonts &#8226; %2$d importades &#8226; %3$d errors</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d importades</string>
     <string name="spotify_select_all">Selecciona-ho tot</string>
     <string name="spotify_clear_selection">Neteja la selecciÃ³</string>
@@ -394,9 +394,9 @@
     <string name="content_sponsor_block_desc">Omet automÃ ticament els patrocinis, les introduccions i les seccions sense mÃºsica dels vÃ­deos</string>
     <string name="spotify_import_by_link">Importa una llista de reproducciÃ³ mitjanÃ§ant un enllaÃ§</string>
     <string name="spotify_import_by_link_desc">Enganxeu l\'enllaÃ§ d\'una llista de reproducciÃ³ de Spotify per importar-la, fins i tot si no Ã©s vostra</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Afegeix</string>
-    <string name="spotify_invalid_playlist_link">AixÃ² no sembla un enllaÃ§ d\'una llista de reproducciÃ³ de Spotify. Utilitzeu un enllaÃ§ com ara https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">AixÃ² no sembla un enllaÃ§ d\'una llista de reproducciÃ³ de Spotify. Utilitzeu un enllaÃ§ com ara https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">Temps d\'activitat dels serveis</string>
     <string name="service_uptime_desc">Comproveu l\'estat dels proveÃ¯dors de mÃºsica</string>
     <string name="music_providers">ProveÃ¯dors de mÃºsica</string>
@@ -408,8 +408,8 @@
     <string name="status_checking">S\'estÃ  comprovant...</string>
     <string name="recognition_notification_channel_name">Reconeixement de mÃºsica</string>
     <string name="recognition_notification_channel_desc">Mostra una notificaciÃ³ mentre s\'identifica una canÃ§Ã³ des de la configuraciÃ³ rÃ pida</string>
-    <string name="recognition_notification_listening">S\'estÃ  escoltant la mÃºsicaâ€¦</string>
-    <string name="recognition_notification_processing">S\'estÃ  identificantâ€¦</string>
+    <string name="recognition_notification_listening">S\'estÃ  escoltant la mÃºsica...</string>
+    <string name="recognition_notification_processing">S\'estÃ  identificant...</string>
     <string name="recognition_notification_no_match">No s\'ha trobat cap coincidÃ¨ncia</string>
     <string name="recognition_notification_failed">Ha fallat el reconeixement</string>
     <string name="listen_on_chorus_music">Escolta-ho a Chorus Music</string>
@@ -428,7 +428,7 @@
     <string name="last_updated_never">Mai</string>
     <string name="cipher_update_success">S\'han actualitzat els mapatges de l\'extractor! S\'han carregat %d reproductors.</string>
     <string name="cipher_update_failed">No s\'han pogut actualitzar els mapatges de l\'extractor: %s</string>
-    <string name="cipher_updating">S\'estan actualitzant les configuracions de l\'extractorâ€¦</string>
+    <string name="cipher_updating">S\'estan actualitzant les configuracions de l\'extractor...</string>
     <string name="hours_label">Hores</string>
     <string name="minutes_label">Minuts</string>
     <string name="seconds_label">Segons</string>

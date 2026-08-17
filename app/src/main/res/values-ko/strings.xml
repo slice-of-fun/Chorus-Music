@@ -23,8 +23,8 @@
     <string name="most_played_artists">ê°€ìž¥ ë§Žì´ ìž¬ìƒí•œ ì•„í‹°ìŠ¤íŠ¸</string>
     <string name="most_played_albums">ê°€ìž¥ ë§Žì´ ìž¬ìƒí•œ ì•¨ë²”</string>
     <string name="search">ê²€ìƒ‰</string>
-    <string name="search_yt_music">YouTube Music ê²€ìƒ‰â€¦</string>
-    <string name="search_library">ë³´ê´€í•¨ ê²€ìƒ‰â€¦</string>
+    <string name="search_yt_music">YouTube Music ê²€ìƒ‰...</string>
+    <string name="search_library">ë³´ê´€í•¨ ê²€ìƒ‰...</string>
     <string name="filter_library">ë³´ê´€í•¨</string>
     <string name="filter_liked">ì¢‹ì•„ìš” í‘œì‹œë¨</string>
     <string name="filter_downloaded">ë‹¤ìš´ë¡œë“œë¨</string>
@@ -348,9 +348,9 @@
     <string name="spotify_loading_library">Spotify ë³´ê´€í•¨ ë¶ˆëŸ¬ì˜¤ëŠ” ì¤‘</string>
     <string name="spotify_no_sources">Spotify ìž¬ìƒëª©ë¡ì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤</string>
     <string name="spotify_import_in_progress">Spotify ìž¬ìƒëª©ë¡ ê°€ì ¸ì˜¤ëŠ” ì¤‘</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ ì†ŒìŠ¤ %2$d/%3$dê°œ â€¢ íŠ¸ëž™ %4$d/%5$dê°œ</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; ì†ŒìŠ¤ %2$d/%3$dê°œ &#8226; íŠ¸ëž™ %4$d/%5$dê°œ</string>
     <string name="spotify_import_complete">Spotify ê°€ì ¸ì˜¤ê¸° ì™„ë£Œ</string>
-    <string name="spotify_import_summary">ì†ŒìŠ¤ %1$dê°œ â€¢ %2$dê°œ ê°€ì ¸ì˜´ â€¢ %3$dê°œ ì‹¤íŒ¨</string>
+    <string name="spotify_import_summary">ì†ŒìŠ¤ %1$dê°œ &#8226; %2$dê°œ ê°€ì ¸ì˜´ &#8226; %3$dê°œ ì‹¤íŒ¨</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$dê°œ ê°€ì ¸ì˜´</string>
     <string name="spotify_select_all">ëª¨ë‘ ì„ íƒ</string>
     <string name="spotify_clear_selection">ì„ íƒ í•´ì œ</string>
@@ -374,9 +374,9 @@
     <string name="content_sponsor_block_desc">ë™ì˜ìƒì˜ ìŠ¤í°ì„œì‹­, ì¸íŠ¸ë¡œ ë° ìŒì•…ì´ ì•„ë‹Œ êµ¬ê°„ì„ ìžë™ìœ¼ë¡œ ê±´ë„ˆëœë‹ˆë‹¤</string>
     <string name="spotify_import_by_link">ë§í¬ë¡œ ìž¬ìƒëª©ë¡ ê°€ì ¸ì˜¤ê¸°</string>
     <string name="spotify_import_by_link_desc">Spotify ìž¬ìƒëª©ë¡ ë§í¬ë¥¼ ë¶™ì—¬ë„£ì–´ ê°€ì ¸ì˜¤ì„¸ìš”. ë‚´ê°€ ì†Œìœ í•˜ì§€ ì•Šì€ ìž¬ìƒëª©ë¡ë„ ê°€ì ¸ì˜¬ ìˆ˜ ìžˆìŠµë‹ˆë‹¤</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">ì¶”ê°€</string>
-    <string name="spotify_invalid_playlist_link">ì˜¬ë°”ë¥¸ Spotify ìž¬ìƒëª©ë¡ ë§í¬ê°€ ì•„ë‹Œ ê²ƒ ê°™ìŠµë‹ˆë‹¤. https://open.spotify.com/playlist/â€¦ í˜•ì‹ì˜ ë§í¬ë¥¼ ì‚¬ìš©í•˜ì„¸ìš”</string>
+    <string name="spotify_invalid_playlist_link">ì˜¬ë°”ë¥¸ Spotify ìž¬ìƒëª©ë¡ ë§í¬ê°€ ì•„ë‹Œ ê²ƒ ê°™ìŠµë‹ˆë‹¤. https://open.spotify.com/playlist/... í˜•ì‹ì˜ ë§í¬ë¥¼ ì‚¬ìš©í•˜ì„¸ìš”</string>
     <string name="service_uptime">ì„œë¹„ìŠ¤ ê°€ë™ ìƒíƒœ</string>
     <string name="service_uptime_desc">ìŒì•… ì œê³µìžì˜ ìƒíƒœë¥¼ í™•ì¸í•©ë‹ˆë‹¤</string>
     <string name="music_providers">ìŒì•… ì œê³µìž</string>
@@ -388,8 +388,8 @@
     <string name="status_checking">í™•ì¸ ì¤‘...</string>
     <string name="recognition_notification_channel_name">ìŒì•… ì¸ì‹</string>
     <string name="recognition_notification_channel_desc">ë¹ ë¥¸ ì„¤ì •ì—ì„œ ë…¸ëž˜ë¥¼ ì‹ë³„í•˜ëŠ” ë™ì•ˆ ì•Œë¦¼ì„ í‘œì‹œí•©ë‹ˆë‹¤</string>
-    <string name="recognition_notification_listening">ìŒì•…ì„ ë“£ëŠ” ì¤‘â€¦</string>
-    <string name="recognition_notification_processing">ì‹ë³„ ì¤‘â€¦</string>
+    <string name="recognition_notification_listening">ìŒì•…ì„ ë“£ëŠ” ì¤‘...</string>
+    <string name="recognition_notification_processing">ì‹ë³„ ì¤‘...</string>
     <string name="recognition_notification_no_match">ì¼ì¹˜í•˜ëŠ” ê²°ê³¼ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤</string>
     <string name="recognition_notification_failed">ìŒì•… ì¸ì‹ ì‹¤íŒ¨</string>
     <string name="listen_on_chorus_music">Chorus Musicì—ì„œ ë“£ê¸°</string>
@@ -408,7 +408,7 @@
     <string name="last_updated_never">ì—…ë°ì´íŠ¸ ì•ˆ í•¨</string>
     <string name="cipher_update_success">ì¶”ì¶œê¸° ë§¤í•‘ì´ ì—…ë°ì´íŠ¸ë˜ì—ˆìŠµë‹ˆë‹¤! í”Œë ˆì´ì–´ %dê°œë¥¼ ë¶ˆëŸ¬ì™”ìŠµë‹ˆë‹¤.</string>
     <string name="cipher_update_failed">ì¶”ì¶œê¸° ë§¤í•‘ì„ ì—…ë°ì´íŠ¸í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤: %s</string>
-    <string name="cipher_updating">ì¶”ì¶œê¸° êµ¬ì„± ì—…ë°ì´íŠ¸ ì¤‘â€¦</string>
+    <string name="cipher_updating">ì¶”ì¶œê¸° êµ¬ì„± ì—…ë°ì´íŠ¸ ì¤‘...</string>
     <string name="hours_label">ì‹œê°„</string>
     <string name="minutes_label">ë¶„</string>
     <string name="seconds_label">ì´ˆ</string>

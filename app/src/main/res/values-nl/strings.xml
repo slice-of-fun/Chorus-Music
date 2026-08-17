@@ -24,8 +24,8 @@
     <string name="most_played_artists">Meest afgespeelde artiesten</string>
     <string name="most_played_albums">Meest afgespeelde artiesten</string>
     <string name="search">Zoeken</string>
-    <string name="search_yt_music">Zoeken via YouTube Musicâ€¦</string>
-    <string name="search_library">Zoeken in bibliotheekâ€¦</string>
+    <string name="search_yt_music">Zoeken via YouTube Music...</string>
+    <string name="search_library">Zoeken in bibliotheek...</string>
     <string name="filter_library">Bibliotheek</string>
     <string name="filter_liked">Geliked</string>
     <string name="filter_downloaded">Gedownload</string>
@@ -358,9 +358,9 @@
     <string name="spotify_loading_library">Spotify-bibliotheek laden</string>
     <string name="spotify_no_sources">Geen Spotify-afspeellijsten gevonden</string>
     <string name="spotify_import_in_progress">Bezig met importeren van Spotify-afspeellijsten</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d bronnen â€¢ %4$d/%5$d nummers</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d bronnen &#8226; %4$d/%5$d nummers</string>
     <string name="spotify_import_complete">Importeren van Spotify voltooid</string>
-    <string name="spotify_import_summary">%1$d bronnen â€¢ %2$d geÃ¯mporteerd â€¢ %3$d mislukt</string>
+    <string name="spotify_import_summary">%1$d bronnen &#8226; %2$d geÃ¯mporteerd &#8226; %3$d mislukt</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d geÃ¯mporteerd</string>
     <string name="spotify_select_all">Alles selecteren</string>
     <string name="spotify_clear_selection">Selectie wissen</string>
@@ -384,9 +384,9 @@
     <string name="content_sponsor_block_desc">Sla sponsoring, intro\'s en delen zonder muziek in video\'s automatisch over</string>
     <string name="spotify_import_by_link">Afspeellijst importeren via link</string>
     <string name="spotify_import_by_link_desc">Plak een link naar een Spotify-afspeellijst om deze te importeren, ook als de afspeellijst niet van jou is</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Toevoegen</string>
-    <string name="spotify_invalid_playlist_link">Dit lijkt niet op een link naar een Spotify-afspeellijst. Gebruik een link zoals https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Dit lijkt niet op een link naar een Spotify-afspeellijst. Gebruik een link zoals https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">Beschikbaarheid van services</string>
     <string name="service_uptime_desc">Controleer de status van muziekaanbieders</string>
     <string name="music_providers">Muziekaanbieders</string>
@@ -398,8 +398,8 @@
     <string name="status_checking">Controleren...</string>
     <string name="recognition_notification_channel_name">Muziekherkenning</string>
     <string name="recognition_notification_channel_desc">Toont een melding tijdens het herkennen van een nummer via de snelle instellingen</string>
-    <string name="recognition_notification_listening">Luisteren naar muziekâ€¦</string>
-    <string name="recognition_notification_processing">Herkennenâ€¦</string>
+    <string name="recognition_notification_listening">Luisteren naar muziek...</string>
+    <string name="recognition_notification_processing">Herkennen...</string>
     <string name="recognition_notification_no_match">Geen overeenkomst gevonden</string>
     <string name="recognition_notification_failed">Herkenning mislukt</string>
     <string name="listen_on_chorus_music">Luisteren op Chorus Music</string>
@@ -418,7 +418,7 @@
     <string name="last_updated_never">Nooit</string>
     <string name="cipher_update_success">Extractortoewijzingen bijgewerkt! %d spelers geladen.</string>
     <string name="cipher_update_failed">Bijwerken van extractortoewijzingen mislukt: %s</string>
-    <string name="cipher_updating">Extractorconfiguraties bijwerkenâ€¦</string>
+    <string name="cipher_updating">Extractorconfiguraties bijwerken...</string>
     <string name="hours_label">Uren</string>
     <string name="minutes_label">Minuten</string>
     <string name="seconds_label">Seconden</string>

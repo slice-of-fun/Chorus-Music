@@ -24,8 +24,8 @@
     <string name="most_played_artists">à¨µà¨§à©‡à¨°à©‡ à¨¸à©à¨£à©‡ à¨—à¨ à¨•à¨²à¨¾à¨•à¨¾à¨°</string>
     <string name="most_played_albums">à¨µà¨§à©‡à¨°à©‡ à¨¸à©à¨£à©€à¨†à¨‚ à¨à¨²à¨¬à¨®à¨¾à¨‚</string>
     <string name="search">à¨–à©‹à¨œà©‹</string>
-    <string name="search_yt_music">à¨¯à©‚à¨Ÿà¨¿à¨Šà¨¬ à¨®à¨¿à¨Šà¨œà¨¼à¨¿à¨• à¨–à©‹à¨œà©‹â€¦</string>
-    <string name="search_library">à¨²à¨¾à¨‡à¨¬à©à¨°à©‡à¨°à©€ à¨–à©‹à¨œà©‹â€¦</string>
+    <string name="search_yt_music">à¨¯à©‚à¨Ÿà¨¿à¨Šà¨¬ à¨®à¨¿à¨Šà¨œà¨¼à¨¿à¨• à¨–à©‹à¨œà©‹...</string>
+    <string name="search_library">à¨²à¨¾à¨‡à¨¬à©à¨°à©‡à¨°à©€ à¨–à©‹à¨œà©‹...</string>
     <string name="filter_library">à¨²à¨¾à¨‡à¨¬à©à¨°à©‡à¨°à©€</string>
     <string name="filter_liked">à¨ªà¨¸à©°à¨¦ à¨•à©€à¨¤à©‡</string>
     <string name="filter_downloaded">à¨¡à¨¾à¨Šà¨¨à¨²à©‹à¨¡ à¨•à©€à¨¤à©‡</string>
@@ -308,9 +308,9 @@
     <string name="spotify_loading_library">Spotify à¨²à¨¾à¨‡à¨¬à©à¨°à©‡à¨°à©€ à¨²à©‹à¨¡ à¨¹à©‹ à¨°à¨¹à©€ à¨¹à©ˆ</string>
     <string name="spotify_no_sources">à¨•à©‹à¨ˆ Spotify à¨ªà¨²à©‡à¨²à¨¿à¨¸à¨Ÿ à¨¨à¨¹à©€à¨‚ à¨®à¨¿à¨²à©€</string>
     <string name="spotify_import_in_progress">Spotify à¨ªà¨²à©‡à¨²à¨¿à¨¸à¨Ÿà¨¾à¨‚ à¨¨à©‚à©° à¨…à¨¯à¨¾à¨¤ à¨•à©€à¨¤à¨¾ à¨œà¨¾ à¨°à¨¿à¨¹à¨¾ à¨¹à©ˆ</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d à¨¸à¨°à©‹à¨¤ â€¢ %4$d/%5$d à¨Ÿà¨°à©ˆà¨•</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d à¨¸à¨°à©‹à¨¤ &#8226; %4$d/%5$d à¨Ÿà¨°à©ˆà¨•</string>
     <string name="spotify_import_complete">Spotify à¨…à¨¯à¨¾à¨¤ à¨ªà©‚à¨°à¨¾ à¨¹à©‹à¨‡à¨†</string>
-    <string name="spotify_import_summary">%1$d à¨¸à¨°à©‹à¨¤ â€¢ %2$d à¨…à¨¯à¨¾à¨¤ à¨•à©€à¨¤à©‡ â€¢ %3$d à¨…à¨¸à¨«à¨² à¨°à¨¹à©‡</string>
+    <string name="spotify_import_summary">%1$d à¨¸à¨°à©‹à¨¤ &#8226; %2$d à¨…à¨¯à¨¾à¨¤ à¨•à©€à¨¤à©‡ &#8226; %3$d à¨…à¨¸à¨«à¨² à¨°à¨¹à©‡</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d à¨…à¨¯à¨¾à¨¤ à¨•à©€à¨¤à©‡</string>
     <string name="spotify_select_all">à¨¸à¨­ à¨šà©à¨£à©‹</string>
     <string name="spotify_clear_selection">à¨šà©‹à¨£ à¨¸à¨¾à¨«à¨¼ à¨•à¨°à©‹</string>
@@ -385,9 +385,9 @@
     <string name="auto_skip_next_on_error_desc">à¨†à¨ªà¨£à¨¾ à¨²à¨—à¨¾à¨¤à¨¾à¨° à¨ªà¨²à©‡à¨¬à©ˆà¨• à¨…à¨¨à©à¨­à¨µ à¨¯à¨•à©€à¨¨à©€ à¨¬à¨£à¨¾à¨“</string>
     <string name="spotify_import_by_link">à¨²à¨¿à©°à¨• à¨°à¨¾à¨¹à©€à¨‚ à¨ªà¨²à©‡à¨²à¨¿à¨¸à¨Ÿ à¨‡à©°à¨ªà©‹à¨°à¨Ÿ à¨•à¨°à©‹</string>
     <string name="spotify_import_by_link_desc">Spotify à¨ªà¨²à©‡à¨²à¨¿à¨¸à¨Ÿ à¨¨à©‚à©° à¨‡à©°à¨ªà©‹à¨°à¨Ÿ à¨•à¨°à¨¨ à¨²à¨ˆ à¨‰à¨¸à¨¦à¨¾ à¨²à¨¿à©°à¨• à¨ªà©‡à¨¸à¨Ÿ à¨•à¨°à©‹, à¨‰à¨¹ à¨ªà¨²à©‡à¨²à¨¿à¨¸à¨Ÿ à¨µà©€ à¨œà¨¿à¨¸à¨¦à©‡ à¨¤à©à¨¸à©€à¨‚ à¨®à¨¾à¨²à¨• à¨¨à¨¹à©€à¨‚ à¨¹à©‹</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">à¨œà©‹à©œà©‹</string>
-    <string name="spotify_invalid_playlist_link">à¨‡à¨¹ Spotify à¨ªà¨²à©‡à¨²à¨¿à¨¸à¨Ÿ à¨¦à¨¾ à¨²à¨¿à©°à¨• à¨¨à¨¹à©€à¨‚ à¨²à©±à¨—à¨¦à¨¾à¥¤ https://open.spotify.com/playlist/â€¦ à¨µà¨°à¨—à¨¾ à¨²à¨¿à©°à¨• à¨µà¨°à¨¤à©‹</string>
+    <string name="spotify_invalid_playlist_link">à¨‡à¨¹ Spotify à¨ªà¨²à©‡à¨²à¨¿à¨¸à¨Ÿ à¨¦à¨¾ à¨²à¨¿à©°à¨• à¨¨à¨¹à©€à¨‚ à¨²à©±à¨—à¨¦à¨¾à¥¤ https://open.spotify.com/playlist/... à¨µà¨°à¨—à¨¾ à¨²à¨¿à©°à¨• à¨µà¨°à¨¤à©‹</string>
     <string name="service_uptime">à¨¸à©‡à¨µà¨¾ à¨¦à¨¾ à¨šà¨¾à¨²à©‚ à¨¸à¨®à¨¾à¨‚</string>
     <string name="service_uptime_desc">à¨¸à©°à¨—à©€à¨¤ à¨ªà©à¨°à¨¦à¨¾à¨¤à¨¾à¨µà¨¾à¨‚ à¨¦à©€ à¨¸à¨¥à¨¿à¨¤à©€ à¨œà¨¾à¨‚à¨šà©‹</string>
     <string name="music_providers">à¨¸à©°à¨—à©€à¨¤ à¨ªà©à¨°à¨¦à¨¾à¨¤à¨¾</string>
@@ -399,8 +399,8 @@
     <string name="status_checking">à¨œà¨¾à¨‚à¨š à¨•à©€à¨¤à©€ à¨œà¨¾ à¨°à¨¹à©€ à¨¹à©ˆ...</string>
     <string name="recognition_notification_channel_name">à¨¸à©°à¨—à©€à¨¤ à¨ªà¨›à¨¾à¨£</string>
     <string name="recognition_notification_channel_desc">à¨¤à©à¨°à©°à¨¤ à¨¸à©ˆà¨Ÿà¨¿à©°à¨—à¨¾à¨‚ à¨¤à©‹à¨‚ à¨—à©€à¨¤ à¨¦à©€ à¨ªà¨›à¨¾à¨£ à¨•à¨°à¨¦à©‡ à¨¸à¨®à©‡à¨‚ à¨¸à©‚à¨šà¨¨à¨¾ à¨¦à¨¿à¨–à¨¾à¨‰à¨‚à¨¦à¨¾ à¨¹à©ˆ</string>
-    <string name="recognition_notification_listening">à¨¸à©°à¨—à©€à¨¤ à¨¸à©à¨£à¨¿à¨† à¨œà¨¾ à¨°à¨¿à¨¹à¨¾ à¨¹à©ˆâ€¦</string>
-    <string name="recognition_notification_processing">à¨ªà¨›à¨¾à¨£ à¨•à©€à¨¤à©€ à¨œà¨¾ à¨°à¨¹à©€ à¨¹à©ˆâ€¦</string>
+    <string name="recognition_notification_listening">à¨¸à©°à¨—à©€à¨¤ à¨¸à©à¨£à¨¿à¨† à¨œà¨¾ à¨°à¨¿à¨¹à¨¾ à¨¹à©ˆ...</string>
+    <string name="recognition_notification_processing">à¨ªà¨›à¨¾à¨£ à¨•à©€à¨¤à©€ à¨œà¨¾ à¨°à¨¹à©€ à¨¹à©ˆ...</string>
     <string name="recognition_notification_no_match">à¨•à©‹à¨ˆ à¨®à©‡à¨² à¨¨à¨¹à©€à¨‚ à¨®à¨¿à¨²à¨¿à¨†</string>
     <string name="recognition_notification_failed">à¨ªà¨›à¨¾à¨£ à¨…à¨¸à¨«à¨² à¨°à¨¹à©€</string>
     <string name="listen_on_chorus_music">Chorus Music à¨‰à©±à¨¤à©‡ à¨¸à©à¨£à©‹</string>
@@ -419,7 +419,7 @@
     <string name="last_updated_never">à¨•à¨¦à©‡ à¨¨à¨¹à©€à¨‚</string>
     <string name="cipher_update_success">à¨à¨•à¨¸à¨Ÿà©à¨°à©ˆà¨•à¨Ÿà¨° à¨®à©ˆà¨ªà¨¿à©°à¨— à¨…à©±à¨ªà¨¡à©‡à¨Ÿ à¨¹à©‹ à¨—à¨ˆà¨†à¨‚! %d à¨ªà¨²à©‡à¨…à¨° à¨²à©‹à¨¡ à¨•à©€à¨¤à©‡ à¨—à¨à¥¤</string>
     <string name="cipher_update_failed">à¨à¨•à¨¸à¨Ÿà©à¨°à©ˆà¨•à¨Ÿà¨° à¨®à©ˆà¨ªà¨¿à©°à¨— à¨…à©±à¨ªà¨¡à©‡à¨Ÿ à¨•à¨°à¨¨ à¨µà¨¿à©±à¨š à¨…à¨¸à¨«à¨²: %s</string>
-    <string name="cipher_updating">à¨à¨•à¨¸à¨Ÿà©à¨°à©ˆà¨•à¨Ÿà¨° à¨¸à©°à¨°à¨šà¨¨à¨¾à¨µà¨¾à¨‚ à¨…à©±à¨ªà¨¡à©‡à¨Ÿ à¨•à©€à¨¤à©€à¨†à¨‚ à¨œà¨¾ à¨°à¨¹à©€à¨†à¨‚ à¨¹à¨¨â€¦</string>
+    <string name="cipher_updating">à¨à¨•à¨¸à¨Ÿà©à¨°à©ˆà¨•à¨Ÿà¨° à¨¸à©°à¨°à¨šà¨¨à¨¾à¨µà¨¾à¨‚ à¨…à©±à¨ªà¨¡à©‡à¨Ÿ à¨•à©€à¨¤à©€à¨†à¨‚ à¨œà¨¾ à¨°à¨¹à©€à¨†à¨‚ à¨¹à¨¨...</string>
     <string name="hours_label">à¨˜à©°à¨Ÿà©‡</string>
     <string name="minutes_label">à¨®à¨¿à©°à¨Ÿ</string>
     <string name="seconds_label">à¨¸à¨•à¨¿à©°à¨Ÿ</string>

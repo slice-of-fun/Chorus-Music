@@ -29,8 +29,8 @@
     <string name="most_played_artists">×”××ž× ×™× ×”×›×™ ×ž×•×©×ž×¢×™×</string>
     <string name="most_played_albums">××œ×‘×•×ž×™× ×”×›×™ ×ž×•×©×ž×¢×™×</string>
     <string name="search">×—×™×¤×•×©</string>
-    <string name="search_yt_music">×—×¤×© ×‘×™×•×˜×™×•×‘ ×ž×•×–×™×§×”â€¦</string>
-    <string name="search_library">×—×¤×© ×‘×¡×¤×¨×™×™×”â€¦</string>
+    <string name="search_yt_music">×—×¤×© ×‘×™×•×˜×™×•×‘ ×ž×•×–×™×§×”...</string>
+    <string name="search_library">×—×¤×© ×‘×¡×¤×¨×™×™×”...</string>
     <string name="filter_library">×¡×¤×¨×™×™×”</string>
     <string name="filter_liked">××”×‘×ª×™</string>
     <string name="filter_downloaded">×™×¨×“×•</string>
@@ -261,7 +261,7 @@
     <string name="clear_listen_history_confirm">×”×× ××ª×” ×‘×˜×•×— ×©×‘×¨×¦×•× ×š ×œ× ×§×•×ª ××ª ×›×œ ×”×™×¡×˜×•×¨×™×™×ª ×”×”××–× ×”?</string>
     <string name="search_history">×”×™×¡×˜×•×¨×™×™×ª ×—×™×¤×•×©</string>
     <string name="pause_search_history">×”×©×”×™×™×ª ×”×™×¡×˜×•×¨×™×™×ª ×”×—×™×¤×•×©</string>
-    <string name="clear_search_history">â€¦× ×§×” ××ª ×”×™×¡×˜×•×¨×™×™×ª ×”×—×™×¤×•×©</string>
+    <string name="clear_search_history">...× ×§×” ××ª ×”×™×¡×˜×•×¨×™×™×ª ×”×—×™×¤×•×©</string>
     <string name="clear_search_history_confirm">×”×× ××ª×” ×‘×˜×•×— ×©×‘×¨×¦×•× ×š ×œ×ž×—×•×§ ××ª ×›×œ ×”×™×¡×˜×•×¨×™×™×ª ×”×—×™×¤×•×©?</string>
     <string name="use_login_for_browse">×”×©×ª×ž×© ×‘×›× ×™×¡×” ×›×“×™ ×œ×’×œ×•×© ×‘×ª×•×›×Ÿ</string>
     <string name="use_login_for_browse_desc">×–×” ×™×›×•×œ ×œ×”×©×¤×™×¢ ×¢×œ ×”×ª×•×›×Ÿ ×©×ª×¨××•, ×œ×“×•×’×ž×”, ×™×¦×™×’ ××œ×‘×•×ž×™× ×œ×ž×©×ª×ž×©×™ ×¤×¨×™×ž×™×•× ×‘×œ×‘×“ ×× ××ª× ×ž×—×•×‘×¨×™× ×œ×—×©×‘×•×Ÿ ×¤×¨×™×ž×™×•×</string>
@@ -368,9 +368,9 @@
     <string name="spotify_loading_library">×˜×•×¢×Ÿ ××ª ×¡×¤×¨×™×™×ª Spotify</string>
     <string name="spotify_no_sources">×œ× × ×ž×¦××• ×¤×œ×™×™×œ×™×¡×˜×™× ×©×œ Spotify</string>
     <string name="spotify_import_in_progress">×ž×™×™×‘× ×¤×œ×™×™×œ×™×¡×˜×™× ×©×œ Spotify</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d ×ž×§×•×¨×•×ª â€¢ %4$d/%5$d ×¨×¦×•×¢×•×ª</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d ×ž×§×•×¨×•×ª &#8226; %4$d/%5$d ×¨×¦×•×¢×•×ª</string>
     <string name="spotify_import_complete">×™×™×‘×•× Spotify ×”×•×©×œ×</string>
-    <string name="spotify_import_summary">%1$d ×ž×§×•×¨×•×ª â€¢ %2$d ×™×•×‘××• â€¢ %3$d × ×›×©×œ×•</string>
+    <string name="spotify_import_summary">%1$d ×ž×§×•×¨×•×ª &#8226; %2$d ×™×•×‘××• &#8226; %3$d × ×›×©×œ×•</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d ×™×•×‘××•</string>
     <string name="spotify_select_all">×‘×—×¨ ×”×›×œ</string>
     <string name="spotify_clear_selection">× ×§×” ×‘×—×™×¨×”</string>
@@ -394,9 +394,9 @@
     <string name="content_sponsor_block_desc">×“×™×œ×•×’ ××•×˜×•×ž×˜×™ ×¢×œ ×—×¡×•×™×•×ª, ×¤×ª×™×—×™× ×•×§×˜×¢×™× ×©××™× × ×ž×•×–×™×§×” ×‘×¡×¨×˜×•× ×™×</string>
     <string name="spotify_import_by_link">×™×™×‘×•× ×¤×œ×™×™×œ×™×¡×˜ ×‘××ž×¦×¢×•×ª ×§×™×©×•×¨</string>
     <string name="spotify_import_by_link_desc">×™×© ×œ×”×“×‘×™×§ ×§×™×©×•×¨ ×œ×¤×œ×™×™×œ×™×¡×˜ ×©×œ Spotify ×›×“×™ ×œ×™×™×‘× ××•×ª×•, ×’× ×× ×”×¤×œ×™×™×œ×™×¡×˜ ××™× ×• ×‘×‘×¢×œ×•×ª×š</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">×”×•×¡×¤×”</string>
-    <string name="spotify_invalid_playlist_link">×–×” ×œ× × ×¨××” ×›×ž×• ×§×™×©×•×¨ ×œ×¤×œ×™×™×œ×™×¡×˜ ×©×œ Spotify. ×™×© ×œ×”×©×ª×ž×© ×‘×§×™×©×•×¨ ×›×’×•×Ÿ https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">×–×” ×œ× × ×¨××” ×›×ž×• ×§×™×©×•×¨ ×œ×¤×œ×™×™×œ×™×¡×˜ ×©×œ Spotify. ×™×© ×œ×”×©×ª×ž×© ×‘×§×™×©×•×¨ ×›×’×•×Ÿ https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">×–×ž×™× ×•×ª ×”×©×™×¨×•×ª×™×</string>
     <string name="service_uptime_desc">×‘×“×™×§×ª ×”×ž×¦×‘ ×©×œ ×¡×¤×§×™ ×”×ž×•×–×™×§×”</string>
     <string name="music_providers">×¡×¤×§×™ ×ž×•×–×™×§×”</string>
@@ -408,8 +408,8 @@
     <string name="status_checking">×ž×ª×‘×¦×¢×ª ×‘×“×™×§×”...</string>
     <string name="recognition_notification_channel_name">×–×™×”×•×™ ×ž×•×–×™×§×”</string>
     <string name="recognition_notification_channel_desc">×”×¦×’×ª ×”×ª×¨××” ×‘×ž×”×œ×š ×–×™×”×•×™ ×©×™×¨ ×ž×”×”×’×“×¨×•×ª ×”×ž×”×™×¨×•×ª</string>
-    <string name="recognition_notification_listening">×ž××–×™×Ÿ ×œ×ž×•×–×™×§×”â€¦</string>
-    <string name="recognition_notification_processing">×ž×ª×‘×¦×¢ ×–×™×”×•×™â€¦</string>
+    <string name="recognition_notification_listening">×ž××–×™×Ÿ ×œ×ž×•×–×™×§×”...</string>
+    <string name="recognition_notification_processing">×ž×ª×‘×¦×¢ ×–×™×”×•×™...</string>
     <string name="recognition_notification_no_match">×œ× × ×ž×¦××” ×”×ª××ž×”</string>
     <string name="recognition_notification_failed">×”×–×™×”×•×™ × ×›×©×œ</string>
     <string name="listen_on_chorus_music">×”××–× ×” ×‘-Chorus Music</string>
@@ -428,7 +428,7 @@
     <string name="last_updated_never">×ž×¢×•×œ× ×œ×</string>
     <string name="cipher_update_success">×ž×™×¤×•×™×™ ×”×ž×—×œ×¥ ×¢×•×“×›× ×•! × ×˜×¢× ×• %d × ×’× ×™×.</string>
     <string name="cipher_update_failed">×¢×“×›×•×Ÿ ×ž×™×¤×•×™×™ ×”×ž×—×œ×¥ × ×›×©×œ: %s</string>
-    <string name="cipher_updating">×ª×¦×•×¨×•×ª ×”×ž×—×œ×¥ ×ž×ª×¢×“×›× ×•×ªâ€¦</string>
+    <string name="cipher_updating">×ª×¦×•×¨×•×ª ×”×ž×—×œ×¥ ×ž×ª×¢×“×›× ×•×ª...</string>
     <string name="hours_label">×©×¢×•×ª</string>
     <string name="minutes_label">×“×§×•×ª</string>
     <string name="seconds_label">×©× ×™×•×ª</string>

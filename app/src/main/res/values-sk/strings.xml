@@ -30,8 +30,8 @@
     <string name="most_played_artists">NajhranejÅ¡Ã­ interpreti</string>
     <string name="most_played_albums">NajprehrÃ¡vanejÅ¡ie albumy</string>
     <string name="search">HÄ¾adaÅ¥</string>
-    <string name="search_yt_music">VyhÄ¾adÃ¡vaÅ¥ YouTube Musicâ€¦</string>
-    <string name="search_library">HÄ¾adaÅ¥ v kniÅ¾niciâ€¦</string>
+    <string name="search_yt_music">VyhÄ¾adÃ¡vaÅ¥ YouTube Music...</string>
+    <string name="search_library">HÄ¾adaÅ¥ v kniÅ¾nici...</string>
     <string name="filter_library">KniÅ¾nica</string>
     <string name="filter_liked">ObÄ¾ÃºbenÃ©</string>
     <string name="filter_downloaded">StiahnutÃ©</string>
@@ -379,9 +379,9 @@
     <string name="spotify_loading_library">NaÄÃ­tava sa kniÅ¾nica Spotify</string>
     <string name="spotify_no_sources">NenaÅ¡li sa Å¾iadne playlisty Spotify</string>
     <string name="spotify_import_in_progress">ImportujÃº sa playlisty Spotify</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d zdrojov â€¢ %4$d/%5$d skladieb</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d zdrojov &#8226; %4$d/%5$d skladieb</string>
     <string name="spotify_import_complete">Import zo Spotify je dokonÄenÃ½</string>
-    <string name="spotify_import_summary">%1$d zdrojov â€¢ %2$d importovanÃ½ch â€¢ %3$d zlyhalo</string>
+    <string name="spotify_import_summary">%1$d zdrojov &#8226; %2$d importovanÃ½ch &#8226; %3$d zlyhalo</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d importovanÃ½ch</string>
     <string name="spotify_select_all">VybraÅ¥ vÅ¡etky</string>
     <string name="spotify_clear_selection">VyÄistiÅ¥ vÃ½ber</string>
@@ -405,9 +405,9 @@
     <string name="content_sponsor_block_desc">Automaticky preskakovaÅ¥ sponzorskÃ© pasÃ¡Å¾e, Ãºvody a nehudobnÃ© Äasti videÃ­</string>
     <string name="spotify_import_by_link">ImportovaÅ¥ zoznam skladieb pomocou odkazu</string>
     <string name="spotify_import_by_link_desc">VloÅ¾te odkaz na zoznam skladieb Spotify a importujte ho, aj keÄ vÃ¡m nepatrÃ­</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">PridaÅ¥</string>
-    <string name="spotify_invalid_playlist_link">Toto nevyzerÃ¡ ako odkaz na zoznam skladieb Spotify. PouÅ¾ite odkaz v tvare https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Toto nevyzerÃ¡ ako odkaz na zoznam skladieb Spotify. PouÅ¾ite odkaz v tvare https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">DostupnosÅ¥ sluÅ¾ieb</string>
     <string name="service_uptime_desc">SkontrolovaÅ¥ stav poskytovateÄ¾ov hudby</string>
     <string name="music_providers">Poskytovatelia hudby</string>
@@ -419,8 +419,8 @@
     <string name="status_checking">Kontroluje sa...</string>
     <string name="recognition_notification_channel_name">RozpoznÃ¡vanie hudby</string>
     <string name="recognition_notification_channel_desc">Zobrazuje upozornenie poÄas rozpoznÃ¡vania skladby z rÃ½chlych nastavenÃ­</string>
-    <string name="recognition_notification_listening">PoÄÃºva sa hudbaâ€¦</string>
-    <string name="recognition_notification_processing">RozpoznÃ¡va saâ€¦</string>
+    <string name="recognition_notification_listening">PoÄÃºva sa hudba...</string>
+    <string name="recognition_notification_processing">RozpoznÃ¡va sa...</string>
     <string name="recognition_notification_no_match">NenaÅ¡la sa Å¾iadna zhoda</string>
     <string name="recognition_notification_failed">RozpoznÃ¡vanie zlyhalo</string>
     <string name="listen_on_chorus_music">PoÄÃºvaÅ¥ v Chorus Music</string>
@@ -439,7 +439,7 @@
     <string name="last_updated_never">Nikdy</string>
     <string name="cipher_update_success">Mapovania extraktora boli aktualizovanÃ©! NaÄÃ­tanÃ½ch prehrÃ¡vaÄov: %d.</string>
     <string name="cipher_update_failed">Nepodarilo sa aktualizovaÅ¥ mapovania extraktora: %s</string>
-    <string name="cipher_updating">AktualizujÃº sa konfigurÃ¡cie extraktoraâ€¦</string>
+    <string name="cipher_updating">AktualizujÃº sa konfigurÃ¡cie extraktora...</string>
     <string name="hours_label">Hodiny</string>
     <string name="minutes_label">MinÃºty</string>
     <string name="seconds_label">Sekundy</string>

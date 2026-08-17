@@ -32,8 +32,8 @@
     <string name="most_played_artists">DaÅ¾niausiai klausyti atlikÄ—jai</string>
     <string name="most_played_albums">DaÅ¾niausiai klausyti albumai</string>
     <string name="search">PaieÅ¡ka</string>
-    <string name="search_yt_music">IeÅ¡koti â€žYouTube Musicâ€œâ€¦</string>
-    <string name="search_library">IeÅ¡koti bibliotekojeâ€¦</string>
+    <string name="search_yt_music">IeÅ¡koti â€žYouTube Musicâ€œ...</string>
+    <string name="search_library">IeÅ¡koti bibliotekoje...</string>
     <string name="filter_library">Biblioteka</string>
     <string name="filter_liked">Patiko</string>
     <string name="filter_downloaded">AtsisiÅ³sta</string>
@@ -375,9 +375,9 @@
     <string name="spotify_select_sources">Pasirinkti â€žSpotifyâ€œ grojaraÅ¡Äius</string>
     <string name="spotify_import_by_link">Importuoti grojaraÅ¡tÄ¯ pagal nuorodÄ…</string>
     <string name="spotify_import_by_link_desc">Ä®klijuokite â€žSpotifyâ€œ grojaraÅ¡Äio nuorodÄ…, kad jÄ¯ importuotumÄ—te, net jei grojaraÅ¡tis jums nepriklauso</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">PridÄ—ti</string>
-    <string name="spotify_invalid_playlist_link">Tai nepanaÅ¡u Ä¯ â€žSpotifyâ€œ grojaraÅ¡Äio nuorodÄ…. Naudokite tokiÄ… nuorodÄ… kaip https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Tai nepanaÅ¡u Ä¯ â€žSpotifyâ€œ grojaraÅ¡Äio nuorodÄ…. Naudokite tokiÄ… nuorodÄ… kaip https://open.spotify.com/playlist/...</string>
     <string name="spotify_import_selected">Importuoti pasirinktus</string>
     <string name="spotify_selected_count">Pasirinkta: %1$d</string>
     <string name="spotify_available_count">PasiekiamÅ³ Å¡altiniÅ³: %1$d</string>
@@ -390,9 +390,9 @@
     <string name="spotify_loading_library">Ä®keliama â€žSpotifyâ€œ biblioteka</string>
     <string name="spotify_no_sources">â€žSpotifyâ€œ grojaraÅ¡ÄiÅ³ nerasta</string>
     <string name="spotify_import_in_progress">Importuojami â€žSpotifyâ€œ grojaraÅ¡Äiai</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d Å¡altiniÅ³ â€¢ %4$d/%5$d kÅ«riniÅ³</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d Å¡altiniÅ³ &#8226; %4$d/%5$d kÅ«riniÅ³</string>
     <string name="spotify_import_complete">â€žSpotifyâ€œ importavimas baigtas</string>
-    <string name="spotify_import_summary">%1$d Å¡altiniÅ³ â€¢ importuota: %2$d â€¢ nepavyko: %3$d</string>
+    <string name="spotify_import_summary">%1$d Å¡altiniÅ³ &#8226; importuota: %2$d &#8226; nepavyko: %3$d</string>
     <string name="spotify_source_summary">%1$s: importuota %2$d/%3$d</string>
     <string name="spotify_select_all">Pasirinkti viskÄ…</string>
     <string name="spotify_clear_selection">IÅ¡valyti</string>
@@ -409,8 +409,8 @@
     <string name="status_checking">Tikrinama...</string>
     <string name="recognition_notification_channel_name">Muzikos atpaÅ¾inimas</string>
     <string name="recognition_notification_channel_desc">Rodo praneÅ¡imÄ…, kol daina atpaÅ¾Ä¯stama iÅ¡ sparÄiÅ³jÅ³ nustatymÅ³</string>
-    <string name="recognition_notification_listening">Klausomasi muzikosâ€¦</string>
-    <string name="recognition_notification_processing">AtpaÅ¾Ä¯stamaâ€¦</string>
+    <string name="recognition_notification_listening">Klausomasi muzikos...</string>
+    <string name="recognition_notification_processing">AtpaÅ¾Ä¯stama...</string>
     <string name="recognition_notification_no_match">AtitikmenÅ³ nerasta</string>
     <string name="recognition_notification_failed">AtpaÅ¾inti nepavyko</string>
     <string name="listen_on_chorus_music">Klausytis per â€žChorus Musicâ€œ</string>
@@ -429,7 +429,7 @@
     <string name="last_updated_never">Niekada</string>
     <string name="cipher_update_success">IÅ¡skleidimo priemonÄ—s atitiktys atnaujintos! Ä®kelta leistuvÅ³: %d.</string>
     <string name="cipher_update_failed">Nepavyko atnaujinti iÅ¡skleidimo priemonÄ—s atitikÄiÅ³: %s</string>
-    <string name="cipher_updating">Atnaujinamos iÅ¡skleidimo priemonÄ—s konfigÅ«racijosâ€¦</string>
+    <string name="cipher_updating">Atnaujinamos iÅ¡skleidimo priemonÄ—s konfigÅ«racijos...</string>
     <string name="hours_label">Valandos</string>
     <string name="minutes_label">MinutÄ—s</string>
     <string name="seconds_label">SekundÄ—s</string>

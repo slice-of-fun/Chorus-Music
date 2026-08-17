@@ -23,8 +23,8 @@
     <string name="most_played_artists">æœ€å¸¸æ’­æ”¾çš„éŸ³ä¹äºº</string>
     <string name="most_played_albums">æœ€å¸¸æ’­æ”¾çš„ä¸“è¾‘</string>
     <string name="search">æœç´¢</string>
-    <string name="search_yt_music">æœç´¢ YouTube Musicâ€¦</string>
-    <string name="search_library">æœç´¢åª’ä½“åº“â€¦</string>
+    <string name="search_yt_music">æœç´¢ YouTube Music...</string>
+    <string name="search_library">æœç´¢åª’ä½“åº“...</string>
     <string name="filter_library">åª’ä½“åº“</string>
     <string name="filter_liked">å–œæ¬¢</string>
     <string name="filter_downloaded">å·²ä¸‹è½½</string>
@@ -348,9 +348,9 @@
     <string name="spotify_loading_library">æ­£åœ¨åŠ è½½ Spotify åª’ä½“åº“</string>
     <string name="spotify_no_sources">æœªæ‰¾åˆ° Spotify æ’­æ”¾åˆ—è¡¨</string>
     <string name="spotify_import_in_progress">æ­£åœ¨å¯¼å…¥ Spotify æ’­æ”¾åˆ—è¡¨</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d ä¸ªæ¥æº â€¢ %4$d/%5$d é¦–æ›²ç›®</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d ä¸ªæ¥æº &#8226; %4$d/%5$d é¦–æ›²ç›®</string>
     <string name="spotify_import_complete">Spotify å¯¼å…¥å®Œæˆ</string>
-    <string name="spotify_import_summary">%1$d ä¸ªæ¥æº â€¢ %2$d å·²å¯¼å…¥ â€¢ %3$d å¤±è´¥</string>
+    <string name="spotify_import_summary">%1$d ä¸ªæ¥æº &#8226; %2$d å·²å¯¼å…¥ &#8226; %3$d å¤±è´¥</string>
     <string name="spotify_source_summary">%1$sï¼š%2$d/%3$d å·²å¯¼å…¥</string>
     <string name="spotify_select_all">å…¨é€‰</string>
     <string name="spotify_clear_selection">æ¸…é™¤é€‰æ‹©</string>
@@ -374,9 +374,9 @@
     <string name="content_sponsor_block_desc">è‡ªåŠ¨è·³è¿‡è§†é¢‘ä¸­çš„èµžåŠ©å†…å®¹ã€ç‰‡å¤´å’ŒéžéŸ³ä¹ç‰‡æ®µ</string>
     <string name="spotify_import_by_link">é€šè¿‡é“¾æŽ¥å¯¼å…¥æ’­æ”¾åˆ—è¡¨</string>
     <string name="spotify_import_by_link_desc">ç²˜è´´ Spotify æ’­æ”¾åˆ—è¡¨é“¾æŽ¥å³å¯å¯¼å…¥ï¼Œå³ä½¿è¯¥æ’­æ”¾åˆ—è¡¨ä¸å±žäºŽä½ </string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">æ·»åŠ </string>
-    <string name="spotify_invalid_playlist_link">è¿™ä¼¼ä¹Žä¸æ˜¯ Spotify æ’­æ”¾åˆ—è¡¨é“¾æŽ¥ã€‚è¯·ä½¿ç”¨ç±»ä¼¼ https://open.spotify.com/playlist/â€¦ çš„é“¾æŽ¥</string>
+    <string name="spotify_invalid_playlist_link">è¿™ä¼¼ä¹Žä¸æ˜¯ Spotify æ’­æ”¾åˆ—è¡¨é“¾æŽ¥ã€‚è¯·ä½¿ç”¨ç±»ä¼¼ https://open.spotify.com/playlist/... çš„é“¾æŽ¥</string>
     <string name="service_uptime">æœåŠ¡è¿è¡ŒçŠ¶æ€</string>
     <string name="service_uptime_desc">æ£€æŸ¥éŸ³ä¹æä¾›å•†çš„çŠ¶æ€</string>
     <string name="music_providers">éŸ³ä¹æä¾›å•†</string>
@@ -388,8 +388,8 @@
     <string name="status_checking">æ­£åœ¨æ£€æŸ¥...</string>
     <string name="recognition_notification_channel_name">éŸ³ä¹è¯†åˆ«</string>
     <string name="recognition_notification_channel_desc">é€šè¿‡å¿«æ·è®¾ç½®è¯†åˆ«æ­Œæ›²æ—¶æ˜¾ç¤ºé€šçŸ¥</string>
-    <string name="recognition_notification_listening">æ­£åœ¨è†å¬éŸ³ä¹â€¦</string>
-    <string name="recognition_notification_processing">æ­£åœ¨è¯†åˆ«â€¦</string>
+    <string name="recognition_notification_listening">æ­£åœ¨è†å¬éŸ³ä¹...</string>
+    <string name="recognition_notification_processing">æ­£åœ¨è¯†åˆ«...</string>
     <string name="recognition_notification_no_match">æœªæ‰¾åˆ°åŒ¹é…é¡¹</string>
     <string name="recognition_notification_failed">è¯†åˆ«å¤±è´¥</string>
     <string name="listen_on_chorus_music">åœ¨ Chorus Music ä¸­æ”¶å¬</string>
@@ -408,7 +408,7 @@
     <string name="last_updated_never">ä»Žæœª</string>
     <string name="cipher_update_success">æå–å™¨æ˜ å°„å·²æ›´æ–°ï¼å·²åŠ è½½ %d ä¸ªæ’­æ”¾å™¨ã€‚</string>
     <string name="cipher_update_failed">æ›´æ–°æå–å™¨æ˜ å°„å¤±è´¥ï¼š%s</string>
-    <string name="cipher_updating">æ­£åœ¨æ›´æ–°æå–å™¨é…ç½®â€¦</string>
+    <string name="cipher_updating">æ­£åœ¨æ›´æ–°æå–å™¨é…ç½®...</string>
     <string name="hours_label">å°æ—¶</string>
     <string name="minutes_label">åˆ†é’Ÿ</string>
     <string name="seconds_label">ç§’</string>

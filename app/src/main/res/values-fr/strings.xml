@@ -35,8 +35,8 @@
     <string name="most_played_albums">Albums les plus jouÃ©s</string>
     <!-- Search -->
     <string name="search">Rechercher</string>
-    <string name="search_yt_music">Rechercher sur YouTube Musicâ€¦</string>
-    <string name="search_library">Rechercher dans votre bibliothÃ¨queâ€¦</string>
+    <string name="search_yt_music">Rechercher sur YouTube Music...</string>
+    <string name="search_library">Rechercher dans votre bibliothÃ¨que...</string>
     <string name="filter_library">BibliothÃ¨que</string>
     <string name="filter_liked">Favoris</string>
     <string name="filter_downloaded">TÃ©lÃ©chargÃ©s</string>
@@ -383,9 +383,9 @@
     <string name="spotify_loading_library">Chargement de la bibliothÃ¨que Spotify</string>
     <string name="spotify_no_sources">Aucune playlist Spotify trouvÃ©e</string>
     <string name="spotify_import_in_progress">Importation des playlists Spotify en cours</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d sources â€¢ %4$d/%5$d morceaux</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d sources &#8226; %4$d/%5$d morceaux</string>
     <string name="spotify_import_complete">Importation Spotify terminÃ©e</string>
-    <string name="spotify_import_summary">%1$d sources â€¢ %2$d importÃ©es â€¢ %3$d Ã©chec(s)</string>
+    <string name="spotify_import_summary">%1$d sources &#8226; %2$d importÃ©es &#8226; %3$d Ã©chec(s)</string>
     <string name="spotify_source_summary">%1$s : %2$d/%3$d importÃ©(s)</string>
     <string name="spotify_select_all">Tout sÃ©lectionner</string>
     <string name="spotify_clear_selection">Effacer la sÃ©lection</string>
@@ -410,9 +410,9 @@
     <string name="content_sponsor_block_desc">Ignorer automatiquement les publicitÃ©s, les intros et les passages non musicaux dans les vidÃ©os</string>
     <string name="spotify_import_by_link">Importer une playlist Ã  partir d\'un lien</string>
     <string name="spotify_import_by_link_desc">Collez le lien d\'une playlist Spotify pour l\'importer â€” mÃªme celles dont vous n\'Ãªtes pas propriÃ©taire</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Ajouter</string>
-    <string name="spotify_invalid_playlist_link">Ã‡a ne ressemble pas Ã  un lien vers une playlist Spotify. Utilisez plutÃ´t un lien du type https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Ã‡a ne ressemble pas Ã  un lien vers une playlist Spotify. Utilisez plutÃ´t un lien du type https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">DisponibilitÃ© du service</string>
     <string name="service_uptime_desc">VÃ©rifier le statut des fournisseurs de musique</string>
     <string name="music_providers">Fournisseurs de musique</string>
@@ -424,8 +424,8 @@
     <string name="status_checking">VÃ©rification en cours...</string>
     <string name="recognition_notification_channel_name">Reconnaissance musicale</string>
     <string name="recognition_notification_channel_desc">Affiche une notification lors de l\'identification d\'un titre Ã  partir des rÃ©glages rapides</string>
-    <string name="recognition_notification_listening">Ã€ l\'Ã©coute de la musiqueâ€¦</string>
-    <string name="recognition_notification_processing">Identificationâ€¦</string>
+    <string name="recognition_notification_listening">Ã€ l\'Ã©coute de la musique...</string>
+    <string name="recognition_notification_processing">Identification...</string>
     <string name="recognition_notification_no_match">Aucun rÃ©sultat trouvÃ©</string>
     <string name="recognition_notification_failed">Ã‰chec de la reconnaissance</string>
     <string name="listen_on_chorus_music">Ã‰coutez sur Chorus Music</string>
@@ -444,7 +444,7 @@
     <string name="last_updated_never">Jamais</string>
     <string name="cipher_update_success">Mappages de l\'extracteur mis Ã  jourâ€¯! %d lecteurs chargÃ©s.</string>
     <string name="cipher_update_failed">Ã‰chec de la mise Ã  jour des mappages de l\'extracteurÂ : %s</string>
-    <string name="cipher_updating">Mise Ã  jour des configurations des extracteursâ€¦</string>
+    <string name="cipher_updating">Mise Ã  jour des configurations des extracteurs...</string>
     <string name="hours_label">Heures</string>
     <string name="minutes_label">Minutes</string>
     <string name="seconds_label">Secondes</string>

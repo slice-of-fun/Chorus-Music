@@ -24,8 +24,8 @@
     <string name="most_played_artists">Meistgespielte KÃ¼nstler</string>
     <string name="most_played_albums">Meistgespielte Alben</string>
     <string name="search">Suchen</string>
-    <string name="search_yt_music">YouTube Music durchsuchenâ€¦</string>
-    <string name="search_library">Bibliothek durchsuchenâ€¦</string>
+    <string name="search_yt_music">YouTube Music durchsuchen...</string>
+    <string name="search_library">Bibliothek durchsuchen...</string>
     <string name="filter_library">Bibliothek</string>
     <string name="filter_liked">Mit â€žMag ichâ€œ markiert</string>
     <string name="filter_downloaded">Heruntergeladen</string>
@@ -358,9 +358,9 @@
     <string name="spotify_loading_library">Spotify-Bibliothek wird geladen</string>
     <string name="spotify_no_sources">Keine Spotify-Playlists gefunden</string>
     <string name="spotify_import_in_progress">Spotify-Playlists werden importiert</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d Quellen â€¢ %4$d/%5$d Titel</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d Quellen &#8226; %4$d/%5$d Titel</string>
     <string name="spotify_import_complete">Spotify-Import abgeschlossen</string>
-    <string name="spotify_import_summary">%1$d Quellen â€¢ %2$d importiert â€¢ %3$d fehlgeschlagen</string>
+    <string name="spotify_import_summary">%1$d Quellen &#8226; %2$d importiert &#8226; %3$d fehlgeschlagen</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d importiert</string>
     <string name="spotify_select_all">Alle auswÃ¤hlen</string>
     <string name="spotify_clear_selection">Auswahl lÃ¶schen</string>
@@ -384,9 +384,9 @@
     <string name="content_sponsor_block_desc">Sponsoring, Intros und Abschnitte ohne Musik in Videos automatisch Ã¼berspringen</string>
     <string name="spotify_import_by_link">Playlist Ã¼ber Link importieren</string>
     <string name="spotify_import_by_link_desc">FÃ¼ge den Link zu einer Spotify-Playlist ein, um sie zu importieren, auch wenn sie dir nicht gehÃ¶rt</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">HinzufÃ¼gen</string>
-    <string name="spotify_invalid_playlist_link">Das sieht nicht wie ein Link zu einer Spotify-Playlist aus. Verwende einen Link wie https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Das sieht nicht wie ein Link zu einer Spotify-Playlist aus. Verwende einen Link wie https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">DienstverfÃ¼gbarkeit</string>
     <string name="service_uptime_desc">Status der Musikanbieter Ã¼berprÃ¼fen</string>
     <string name="music_providers">Musikanbieter</string>
@@ -398,8 +398,8 @@
     <string name="status_checking">Wird Ã¼berprÃ¼ft...</string>
     <string name="recognition_notification_channel_name">Musikerkennung</string>
     <string name="recognition_notification_channel_desc">Zeigt eine Benachrichtigung an, wÃ¤hrend ein Song Ã¼ber die Schnelleinstellungen erkannt wird</string>
-    <string name="recognition_notification_listening">Musik wird erfasstâ€¦</string>
-    <string name="recognition_notification_processing">Wird erkanntâ€¦</string>
+    <string name="recognition_notification_listening">Musik wird erfasst...</string>
+    <string name="recognition_notification_processing">Wird erkannt...</string>
     <string name="recognition_notification_no_match">Keine Ãœbereinstimmung gefunden</string>
     <string name="recognition_notification_failed">Erkennung fehlgeschlagen</string>
     <string name="listen_on_chorus_music">Auf Chorus Music anhÃ¶ren</string>
@@ -418,7 +418,7 @@
     <string name="last_updated_never">Nie</string>
     <string name="cipher_update_success">Extractor-Zuordnungen aktualisiert! %d Player geladen.</string>
     <string name="cipher_update_failed">Extractor-Zuordnungen konnten nicht aktualisiert werden: %s</string>
-    <string name="cipher_updating">Extractor-Konfigurationen werden aktualisiertâ€¦</string>
+    <string name="cipher_updating">Extractor-Konfigurationen werden aktualisiert...</string>
     <string name="hours_label">Stunden</string>
     <string name="minutes_label">Minuten</string>
     <string name="seconds_label">Sekunden</string>

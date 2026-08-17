@@ -29,8 +29,8 @@
     <string name="most_played_artists">Najbolj predvajani izvajalci</string>
     <string name="most_played_albums">Najbolj predvajani albumi</string>
     <string name="search">IÅ¡Äi</string>
-    <string name="search_yt_music">Iskanje v YouTube Musicâ€¦</string>
-    <string name="search_library">Iskanje v knjiÅ¾niciâ€¦</string>
+    <string name="search_yt_music">Iskanje v YouTube Music...</string>
+    <string name="search_library">Iskanje v knjiÅ¾nici...</string>
     <string name="filter_library">KnjiÅ¾nica</string>
     <string name="filter_liked">VÅ¡eÄkano</string>
     <string name="filter_downloaded">Preneseno</string>
@@ -395,9 +395,9 @@
     <string name="spotify_loading_library">Nalaganje knjiÅ¾nice Spotify</string>
     <string name="spotify_no_sources">Najdeni niso bili nobeni seznami predvajanja Spotify</string>
     <string name="spotify_import_in_progress">UvaÅ¾anje seznamov predvajanja Spotify</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d virov â€¢ %4$d/%5$d skladb</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d virov &#8226; %4$d/%5$d skladb</string>
     <string name="spotify_import_complete">Uvoz iz Spotifyja je konÄan</string>
-    <string name="spotify_import_summary">%1$d virov â€¢ %2$d uvoÅ¾enih â€¢ %3$d neuspeÅ¡nih</string>
+    <string name="spotify_import_summary">%1$d virov &#8226; %2$d uvoÅ¾enih &#8226; %3$d neuspeÅ¡nih</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d uvoÅ¾enih</string>
     <string name="spotify_select_all">Izberi vse</string>
     <string name="spotify_clear_selection">PoÄisti izbor</string>
@@ -423,9 +423,9 @@
     <string name="content_sponsor_block_desc">Samodejno preskoÄi sponzorske vsebine, uvode in dele videoposnetkov brez glasbe</string>
     <string name="spotify_import_by_link">Uvozi seznam predvajanja prek povezave</string>
     <string name="spotify_import_by_link_desc">Prilepite povezavo do seznama predvajanja Spotify, da ga uvozite, tudi Äe ni v vaÅ¡i lasti</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Dodaj</string>
-    <string name="spotify_invalid_playlist_link">To ni videti kot povezava do seznama predvajanja Spotify. Uporabite povezavo, kot je https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">To ni videti kot povezava do seznama predvajanja Spotify. Uporabite povezavo, kot je https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">ÄŒas delovanja storitev</string>
     <string name="service_uptime_desc">Preverite stanje ponudnikov glasbe</string>
     <string name="music_providers">Ponudniki glasbe</string>
@@ -437,8 +437,8 @@
     <string name="status_checking">Preverjanje ...</string>
     <string name="recognition_notification_channel_name">Prepoznavanje glasbe</string>
     <string name="recognition_notification_channel_desc">PrikaÅ¾e obvestilo med prepoznavanjem skladbe prek hitrih nastavitev</string>
-    <string name="recognition_notification_listening">PosluÅ¡anje glasbe â€¦</string>
-    <string name="recognition_notification_processing">Prepoznavanje â€¦</string>
+    <string name="recognition_notification_listening">PosluÅ¡anje glasbe ...</string>
+    <string name="recognition_notification_processing">Prepoznavanje ...</string>
     <string name="recognition_notification_no_match">Ni najdenih zadetkov</string>
     <string name="recognition_notification_failed">Prepoznavanje ni uspelo</string>
     <string name="listen_on_chorus_music">PosluÅ¡aj v aplikaciji Chorus Music</string>
@@ -457,7 +457,7 @@
     <string name="last_updated_never">Nikoli</string>
     <string name="cipher_update_success">Preslikave ekstraktorja so posodobljene! NaloÅ¾enih predvajalnikov: %d.</string>
     <string name="cipher_update_failed">Posodobitev preslikav ekstraktorja ni uspela: %s</string>
-    <string name="cipher_updating">Posodabljanje konfiguracij ekstraktorja â€¦</string>
+    <string name="cipher_updating">Posodabljanje konfiguracij ekstraktorja ...</string>
     <string name="hours_label">Ure</string>
     <string name="minutes_label">Minute</string>
     <string name="seconds_label">Sekunde</string>

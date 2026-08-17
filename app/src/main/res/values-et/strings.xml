@@ -12,8 +12,8 @@
     <string name="yesterday">Eile</string>
     <string name="most_played_songs">KÃµige rohkem esitatud lood</string>
     <string name="most_played_artists">KÃµige rohkem esitatud esinejad</string>
-    <string name="search_yt_music">Otsi YouTube Musicustâ€¦</string>
-    <string name="search_library">Otsi muusikakogustâ€¦</string>
+    <string name="search_yt_music">Otsi YouTube Musicust...</string>
+    <string name="search_library">Otsi muusikakogust...</string>
     <string name="filter_library">Muusikakogu</string>
     <string name="filter_liked">Meeldivaks mÃ¤rgitud</string>
     <string name="filter_downloaded">Allalaaditud</string>
@@ -358,9 +358,9 @@
     <string name="spotify_loading_library">Spotify muusikakogu laadimine</string>
     <string name="spotify_no_sources">Spotify esitusloendeid ei leitud</string>
     <string name="spotify_import_in_progress">Spotify esitusloendite importimine</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d allikat â€¢ %4$d/%5$d lugu</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d allikat &#8226; %4$d/%5$d lugu</string>
     <string name="spotify_import_complete">Spotify import on lÃµpetatud</string>
-    <string name="spotify_import_summary">%1$d allikat â€¢ %2$d imporditud â€¢ %3$d ebaÃµnnestus</string>
+    <string name="spotify_import_summary">%1$d allikat &#8226; %2$d imporditud &#8226; %3$d ebaÃµnnestus</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d imporditud</string>
     <string name="spotify_select_all">Vali kÃµik</string>
     <string name="spotify_clear_selection">TÃ¼hjenda valik</string>
@@ -384,9 +384,9 @@
     <string name="content_sponsor_block_desc">JÃ¤ta automaatselt vahele sponsorlus, introd ja muusikavÃ¤lised osad videotest</string>
     <string name="spotify_import_by_link">Impordi esitusloend lingi kaudu</string>
     <string name="spotify_import_by_link_desc">Kleebi Spotify esitusloendi link selle importimiseks, isegi kui esitusloend pole sinu oma</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Lisa</string>
-    <string name="spotify_invalid_playlist_link">See ei nÃ¤e vÃ¤lja nagu Spotify esitusloendi link. Kasuta linki nagu https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">See ei nÃ¤e vÃ¤lja nagu Spotify esitusloendi link. Kasuta linki nagu https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">Teenuse tÃ¶Ã¶aeg</string>
     <string name="service_uptime_desc">Kontrolli muusikateenuse pakkujate olekut</string>
     <string name="music_providers">Muusikapakkujad</string>
@@ -398,8 +398,8 @@
     <string name="status_checking">Kontrollimine...</string>
     <string name="recognition_notification_channel_name">Muusika tuvastamine</string>
     <string name="recognition_notification_channel_desc">NÃ¤itab teavitust laulu tuvastamisel kiirseadetest</string>
-    <string name="recognition_notification_listening">Kuulan muusikatâ€¦</string>
-    <string name="recognition_notification_processing">Tuvastamineâ€¦</string>
+    <string name="recognition_notification_listening">Kuulan muusikat...</string>
+    <string name="recognition_notification_processing">Tuvastamine...</string>
     <string name="recognition_notification_no_match">Vastet ei leitud</string>
     <string name="recognition_notification_failed">Tuvastamine ebaÃµnnestus</string>
     <string name="listen_on_chorus_music">Kuula Chorus Musicus</string>
@@ -418,7 +418,7 @@
     <string name="last_updated_never">Mitte kunagi</string>
     <string name="cipher_update_success">Ekstraktori kaardistused vÃ¤rskendatud! Laaditud %d mÃ¤ngijat.</string>
     <string name="cipher_update_failed">Ekstraktori kaardistuste vÃ¤rskendamine ebaÃµnnestus: %s</string>
-    <string name="cipher_updating">Ekstraktori konfiguratsioonide vÃ¤rskendamineâ€¦</string>
+    <string name="cipher_updating">Ekstraktori konfiguratsioonide vÃ¤rskendamine...</string>
     <string name="hours_label">Tundi</string>
     <string name="minutes_label">Minutit</string>
     <string name="seconds_label">Sekundit</string>

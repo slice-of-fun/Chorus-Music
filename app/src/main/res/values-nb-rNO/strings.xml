@@ -24,8 +24,8 @@
     <string name="most_played_artists">Mest spilte artister</string>
     <string name="most_played_albums">Mest spilte album</string>
     <string name="search">SÃ¸k</string>
-    <string name="search_yt_music">SÃ¸k gjennom YouTube Music â€¦</string>
-    <string name="search_library">SÃ¸k gjennom biblioteket â€¦</string>
+    <string name="search_yt_music">SÃ¸k gjennom YouTube Music ...</string>
+    <string name="search_library">SÃ¸k gjennom biblioteket ...</string>
     <string name="filter_library">Bibliotek</string>
     <string name="filter_liked">Likte</string>
     <string name="filter_downloaded">Nedlastede</string>
@@ -355,9 +355,9 @@
     <string name="spotify_loading_library">Laster Spotify-bibliotek</string>
     <string name="spotify_no_sources">Ingen Spotify-spillelister funnet</string>
     <string name="spotify_import_in_progress">Importerer Spotify-spillelister</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d kilder â€¢ %4$d/%5$d spor</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d kilder &#8226; %4$d/%5$d spor</string>
     <string name="spotify_import_complete">Spotify-import fullfÃ¸rt</string>
-    <string name="spotify_import_summary">%1$d kilder â€¢ %2$d importert â€¢ %3$d mislyktes</string>
+    <string name="spotify_import_summary">%1$d kilder &#8226; %2$d importert &#8226; %3$d mislyktes</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d importert</string>
     <string name="spotify_select_all">Velg alle</string>
     <string name="spotify_clear_selection">TÃ¸m valg</string>
@@ -384,9 +384,9 @@
     <string name="use_login_for_browse_desc">Dette kan pÃ¥virke hvilket innhold du ser, og for eksempel vise album som kun er tilgjengelige med Premium hvis du er logget inn med en Premium-konto</string>
     <string name="spotify_import_by_link">Importer spilleliste via lenke</string>
     <string name="spotify_import_by_link_desc">Lim inn en lenke til en Spotify-spilleliste for Ã¥ importere den, ogsÃ¥ spillelister du ikke eier</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Legg til</string>
-    <string name="spotify_invalid_playlist_link">Dette ser ikke ut som en lenke til en Spotify-spilleliste. Bruk en lenke som https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Dette ser ikke ut som en lenke til en Spotify-spilleliste. Bruk en lenke som https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">Tjenestenes oppetid</string>
     <string name="service_uptime_desc">Sjekk statusen til musikkleverandÃ¸rene</string>
     <string name="music_providers">MusikkleverandÃ¸rer</string>
@@ -398,8 +398,8 @@
     <string name="status_checking">Sjekker...</string>
     <string name="recognition_notification_channel_name">Musikkgjenkjenning</string>
     <string name="recognition_notification_channel_desc">Viser et varsel mens en sang identifiseres fra hurtiginnstillingene</string>
-    <string name="recognition_notification_listening">Lytter etter musikkâ€¦</string>
-    <string name="recognition_notification_processing">Identifisererâ€¦</string>
+    <string name="recognition_notification_listening">Lytter etter musikk...</string>
+    <string name="recognition_notification_processing">Identifiserer...</string>
     <string name="recognition_notification_no_match">Fant ingen treff</string>
     <string name="recognition_notification_failed">Gjenkjenningen mislyktes</string>
     <string name="listen_on_chorus_music">Lytt pÃ¥ Chorus Music</string>
@@ -418,7 +418,7 @@
     <string name="last_updated_never">Aldri</string>
     <string name="cipher_update_success">Uttrekkertilordningene er oppdatert! Lastet inn %d spillere.</string>
     <string name="cipher_update_failed">Kunne ikke oppdatere uttrekkertilordningene: %s</string>
-    <string name="cipher_updating">Oppdaterer uttrekkerkonfigurasjoneneâ€¦</string>
+    <string name="cipher_updating">Oppdaterer uttrekkerkonfigurasjonene...</string>
     <string name="hours_label">Timer</string>
     <string name="minutes_label">Minutter</string>
     <string name="seconds_label">Sekunder</string>

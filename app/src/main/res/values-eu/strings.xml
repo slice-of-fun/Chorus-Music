@@ -30,8 +30,8 @@
     <string name="most_played_artists">Gehien erreproduzitutako artistak</string>
     <string name="most_played_albums">Gehien erreproduzitutako albumak</string>
     <string name="search">Bilatu</string>
-    <string name="search_yt_music">Bilatu YouTube Music-enâ€¦</string>
-    <string name="search_library">Bilatu liburutegianâ€¦</string>
+    <string name="search_yt_music">Bilatu YouTube Music-en...</string>
+    <string name="search_library">Bilatu liburutegian...</string>
     <string name="filter_library">Liburutegia</string>
     <string name="filter_liked">Gogokoak</string>
     <string name="filter_downloaded">Deskargatutakoak</string>
@@ -355,9 +355,9 @@
     <string name="spotify_select_sources">Hautatu Spotify erreprodukzio-zerrendak</string>
     <string name="spotify_import_by_link">Inportatu erreprodukzio-zerrenda esteka bidez</string>
     <string name="spotify_import_by_link_desc">Itsatsi Spotify erreprodukzio-zerrenda baten esteka hura inportatzeko, baita zureak ez diren zerrendak ere</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Gehitu</string>
-    <string name="spotify_invalid_playlist_link">Horrek ez dirudi Spotify erreprodukzio-zerrenda baten esteka. Erabili https://open.spotify.com/playlist/â€¦ gisako esteka bat</string>
+    <string name="spotify_invalid_playlist_link">Horrek ez dirudi Spotify erreprodukzio-zerrenda baten esteka. Erabili https://open.spotify.com/playlist/... gisako esteka bat</string>
     <string name="spotify_import_selected">Inportatu hautatutakoak</string>
     <string name="spotify_selected_count">%1$d hautatuta</string>
     <string name="spotify_available_count">%1$d iturri erabilgarri</string>
@@ -370,9 +370,9 @@
     <string name="spotify_loading_library">Spotify liburutegia kargatzen</string>
     <string name="spotify_no_sources">Ez da Spotify erreprodukzio-zerrendarik aurkitu</string>
     <string name="spotify_import_in_progress">Spotify erreprodukzio-zerrendak inportatzen</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d iturri â€¢ %4$d/%5$d pista</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d iturri &#8226; %4$d/%5$d pista</string>
     <string name="spotify_import_complete">Spotify inportazioa osatu da</string>
-    <string name="spotify_import_summary">%1$d iturri â€¢ %2$d inportatuta â€¢ %3$d huts eginda</string>
+    <string name="spotify_import_summary">%1$d iturri &#8226; %2$d inportatuta &#8226; %3$d huts eginda</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d inportatuta</string>
     <string name="spotify_select_all">Hautatu dena</string>
     <string name="spotify_clear_selection">Garbitu</string>
@@ -389,8 +389,8 @@
     <string name="status_checking">Egiaztatzen...</string>
     <string name="recognition_notification_channel_name">Musika-ezagutza</string>
     <string name="recognition_notification_channel_desc">Jakinarazpen bat erakusten du ezarpen azkarretatik abesti bat identifikatzen den bitartean</string>
-    <string name="recognition_notification_listening">Musika entzutenâ€¦</string>
-    <string name="recognition_notification_processing">Identifikatzenâ€¦</string>
+    <string name="recognition_notification_listening">Musika entzuten...</string>
+    <string name="recognition_notification_processing">Identifikatzen...</string>
     <string name="recognition_notification_no_match">Ez da bat datorrenik aurkitu</string>
     <string name="recognition_notification_failed">Ezin izan da ezagutu</string>
     <string name="listen_on_chorus_music">Entzun Chorus Music-en</string>
@@ -409,7 +409,7 @@
     <string name="last_updated_never">Inoiz ez</string>
     <string name="cipher_update_success">Erauzlearen mapatzeak eguneratu dira! %d erreproduzitzaile kargatu dira.</string>
     <string name="cipher_update_failed">Ezin izan dira erauzlearen mapatzeak eguneratu: %s</string>
-    <string name="cipher_updating">Erauzlearen konfigurazioak eguneratzenâ€¦</string>
+    <string name="cipher_updating">Erauzlearen konfigurazioak eguneratzen...</string>
     <string name="hours_label">Orduak</string>
     <string name="minutes_label">Minutuak</string>
     <string name="seconds_label">Segundoak</string>

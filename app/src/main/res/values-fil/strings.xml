@@ -35,8 +35,8 @@
     <string name="most_played_albums">Mga pinaka-pinatugtog na album</string>
     <!-- Search -->
     <string name="search">Maghanap</string>
-    <string name="search_yt_music">Maghanap sa YouTube Musicâ€¦</string>
-    <string name="search_library">Maghanap sa libraryâ€¦</string>
+    <string name="search_yt_music">Maghanap sa YouTube Music...</string>
+    <string name="search_library">Maghanap sa library...</string>
     <string name="filter_library">Library</string>
     <string name="filter_liked">Mga Nagustuhan</string>
     <string name="filter_downloaded">Na-download</string>
@@ -371,9 +371,9 @@
     <string name="spotify_loading_library">Naglo-load ng Spotify library</string>
     <string name="spotify_no_sources">Walang nakitang Spotify playlist</string>
     <string name="spotify_import_in_progress">Nag-iimport ng mga Spotify playlist</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d na source â€¢ %4$d/%5$d na track</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d na source &#8226; %4$d/%5$d na track</string>
     <string name="spotify_import_complete">Kumpleto ang pag-import mula sa Spotify</string>
-    <string name="spotify_import_summary">%1$d na source â€¢ %2$d na-import â€¢ %3$d nabigo</string>
+    <string name="spotify_import_summary">%1$d na source &#8226; %2$d na-import &#8226; %3$d nabigo</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d na-import</string>
     <string name="spotify_select_all">Piliin lahat</string>
     <string name="spotify_clear_selection">I-clear ang pagpili</string>
@@ -397,9 +397,9 @@
     <string name="content_sponsor_block_desc">Awtomatikong laktawan ang mga sponsorship, intro, at bahaging walang musika sa mga video</string>
     <string name="spotify_import_by_link">Mag-import ng playlist gamit ang link</string>
     <string name="spotify_import_by_link_desc">I-paste ang link ng Spotify playlist upang i-import ito, kahit hindi sa iyo ang playlist</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Idagdag</string>
-    <string name="spotify_invalid_playlist_link">Mukhang hindi ito link ng Spotify playlist. Gumamit ng link na tulad ng https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Mukhang hindi ito link ng Spotify playlist. Gumamit ng link na tulad ng https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">Oras ng Pagpapatakbo ng Serbisyo</string>
     <string name="service_uptime_desc">Suriin ang katayuan ng mga provider ng musika</string>
     <string name="music_providers">Mga Provider ng Musika</string>
@@ -411,8 +411,8 @@
     <string name="status_checking">Sinusuri...</string>
     <string name="recognition_notification_channel_name">Pagkilala sa musika</string>
     <string name="recognition_notification_channel_desc">Nagpapakita ng notification habang kinikilala ang isang kanta mula sa mga quick setting</string>
-    <string name="recognition_notification_listening">Nakikinig para sa musikaâ€¦</string>
-    <string name="recognition_notification_processing">Kinikilalaâ€¦</string>
+    <string name="recognition_notification_listening">Nakikinig para sa musika...</string>
+    <string name="recognition_notification_processing">Kinikilala...</string>
     <string name="recognition_notification_no_match">Walang nakitang katugma</string>
     <string name="recognition_notification_failed">Nabigo ang pagkilala</string>
     <string name="listen_on_chorus_music">Pakinggan sa Chorus Music</string>
@@ -431,7 +431,7 @@
     <string name="last_updated_never">Hindi kailanman</string>
     <string name="cipher_update_success">Na-update ang mga mapping ng extractor! Nag-load ng %d player.</string>
     <string name="cipher_update_failed">Nabigong i-update ang mga mapping ng extractor: %s</string>
-    <string name="cipher_updating">Ina-update ang mga configuration ng extractorâ€¦</string>
+    <string name="cipher_updating">Ina-update ang mga configuration ng extractor...</string>
     <string name="hours_label">Mga Oras</string>
     <string name="minutes_label">Mga Minuto</string>
     <string name="seconds_label">Mga Segundo</string>

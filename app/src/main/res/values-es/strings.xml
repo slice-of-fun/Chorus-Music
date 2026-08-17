@@ -28,8 +28,8 @@
     <string name="most_played_artists">Artistas mÃ¡s reproducidos</string>
     <string name="most_played_albums">Ãlbumes mÃ¡s reproducidos</string>
     <string name="search">Buscar</string>
-    <string name="search_yt_music">Buscar en YouTube Musicâ€¦</string>
-    <string name="search_library">Buscar en la bibliotecaâ€¦</string>
+    <string name="search_yt_music">Buscar en YouTube Music...</string>
+    <string name="search_library">Buscar en la biblioteca...</string>
     <string name="filter_library">Biblioteca</string>
     <string name="filter_liked">Me gusta</string>
     <string name="filter_downloaded">Descargado</string>
@@ -368,9 +368,9 @@
     <string name="spotify_loading_library">Cargando biblioteca de Spotify</string>
     <string name="spotify_no_sources">No se encontraron listas de Spotify</string>
     <string name="spotify_import_in_progress">Importando listas de Spotify</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d fuentes â€¢ %4$d/%5$d pistas</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d fuentes &#8226; %4$d/%5$d pistas</string>
     <string name="spotify_import_complete">ImportaciÃ³n de Spotify completada</string>
-    <string name="spotify_import_summary">%1$d fuentes â€¢ %2$d importadas â€¢ %3$d fallidas</string>
+    <string name="spotify_import_summary">%1$d fuentes &#8226; %2$d importadas &#8226; %3$d fallidas</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d importadas</string>
     <string name="spotify_select_all">Seleccionar todo</string>
     <string name="spotify_clear_selection">Limpiar selecciÃ³n</string>
@@ -394,9 +394,9 @@
     <string name="content_sponsor_block_desc">Omitir automÃ¡ticamente patrocinios, introducciones y secciones que no sean de mÃºsica en los videos</string>
     <string name="spotify_import_by_link">Importar lista de reproducciÃ³n mediante enlace</string>
     <string name="spotify_import_by_link_desc">Pega un enlace de una playlist de Spotify para importarla, incluso las playlist que no te pertenezcan</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Agregar</string>
-    <string name="spotify_invalid_playlist_link">Eso no parece ser un link real de una playlist de Spotify. Usa un link como https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Eso no parece ser un link real de una playlist de Spotify. Usa un link como https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">Tiempo de actividad</string>
     <string name="service_uptime_desc">Comprobar el estado de los proveedores de mÃºsica</string>
     <string name="music_providers">Proveedores de mÃºsica</string>
@@ -408,8 +408,8 @@
     <string name="status_checking">Comprobando...</string>
     <string name="recognition_notification_channel_name">Reconocimiento de mÃºsica</string>
     <string name="recognition_notification_channel_desc">Muestra una notificaciÃ³n al identificar una canciÃ³n desde los ajustes rÃ¡pidos</string>
-    <string name="recognition_notification_listening">Escuchando mÃºsicaâ€¦</string>
-    <string name="recognition_notification_processing">Identificandoâ€¦</string>
+    <string name="recognition_notification_listening">Escuchando mÃºsica...</string>
+    <string name="recognition_notification_processing">Identificando...</string>
     <string name="recognition_notification_no_match">No se encontraron coincidencias</string>
     <string name="recognition_notification_failed">Error de reconocimiento</string>
     <string name="listen_on_chorus_music">Escuchar en Chorus Music</string>
@@ -428,7 +428,7 @@
     <string name="last_updated_never">Nunca</string>
     <string name="cipher_update_success">Â¡Asignaciones del extractor actualizadas! Se cargaron %d reproductores.</string>
     <string name="cipher_update_failed">Error al actualizar las asignaciones del extractor: %s</string>
-    <string name="cipher_updating">Actualizando las configuraciones del extractorâ€¦</string>
+    <string name="cipher_updating">Actualizando las configuraciones del extractor...</string>
     <string name="hours_label">Horas</string>
     <string name="minutes_label">Minutos</string>
     <string name="seconds_label">Segundos</string>

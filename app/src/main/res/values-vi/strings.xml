@@ -23,8 +23,8 @@
     <string name="most_played_artists">Nghá»‡ sÄ© Ä‘Æ°á»£c phÃ¡t nhiá»u nháº¥t</string>
     <string name="most_played_albums">Album Ä‘Æ°á»£c phÃ¡t nhiá»u nháº¥t</string>
     <string name="search">TÃ¬m kiáº¿m</string>
-    <string name="search_yt_music">TÃ¬m kiáº¿m trÃªn YouTube Musicâ€¦</string>
-    <string name="search_library">TÃ¬m kiáº¿m trong thÆ° viá»‡nâ€¦</string>
+    <string name="search_yt_music">TÃ¬m kiáº¿m trÃªn YouTube Music...</string>
+    <string name="search_library">TÃ¬m kiáº¿m trong thÆ° viá»‡n...</string>
     <string name="filter_library">ThÆ° viá»‡n</string>
     <string name="filter_liked">ÄÃ£ thÃ­ch</string>
     <string name="filter_downloaded">ÄÃ£ táº£i xuá»‘ng</string>
@@ -342,9 +342,9 @@
     <string name="spotify_loading_library">Äang táº£i thÆ° viá»‡n Spotify</string>
     <string name="spotify_no_sources">KhÃ´ng tÃ¬m tháº¥y danh sÃ¡ch phÃ¡t Spotify nÃ o</string>
     <string name="spotify_import_in_progress">Äang nháº­p danh sÃ¡ch phÃ¡t Spotify</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d nguá»“n â€¢ %4$d/%5$d báº£n nháº¡c</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d nguá»“n &#8226; %4$d/%5$d báº£n nháº¡c</string>
     <string name="spotify_import_complete">QuÃ¡ trÃ¬nh nháº­p tá»« Spotify Ä‘Ã£ hoÃ n táº¥t</string>
-    <string name="spotify_import_summary">%1$d nguá»“n â€¢ %2$d Ä‘Ã£ nháº­p â€¢ %3$d tháº¥t báº¡i</string>
+    <string name="spotify_import_summary">%1$d nguá»“n &#8226; %2$d Ä‘Ã£ nháº­p &#8226; %3$d tháº¥t báº¡i</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d Ä‘Ã£ nháº­p</string>
     <string name="spotify_select_all">Chá»n táº¥t cáº£</string>
     <string name="spotify_clear_selection">XoÃ¡ lá»±a chá»n</string>
@@ -371,9 +371,9 @@
     <string name="content_sponsor_block_desc">Tá»± Ä‘á»™ng bá» qua ná»™i dung tÃ i trá»£, pháº§n giá»›i thiá»‡u vÃ  cÃ¡c Ä‘oáº¡n khÃ´ng cÃ³ nháº¡c trong video</string>
     <string name="spotify_import_by_link">Nháº­p danh sÃ¡ch phÃ¡t báº±ng liÃªn káº¿t</string>
     <string name="spotify_import_by_link_desc">DÃ¡n liÃªn káº¿t danh sÃ¡ch phÃ¡t Spotify Ä‘á»ƒ nháº­p, ká»ƒ cáº£ danh sÃ¡ch phÃ¡t khÃ´ng thuá»™c sá»Ÿ há»¯u cá»§a báº¡n</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">ThÃªm</string>
-    <string name="spotify_invalid_playlist_link">ÄÃ¢y cÃ³ váº» khÃ´ng pháº£i lÃ  liÃªn káº¿t danh sÃ¡ch phÃ¡t Spotify. HÃ£y dÃ¹ng liÃªn káº¿t nhÆ° https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">ÄÃ¢y cÃ³ váº» khÃ´ng pháº£i lÃ  liÃªn káº¿t danh sÃ¡ch phÃ¡t Spotify. HÃ£y dÃ¹ng liÃªn káº¿t nhÆ° https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">Thá»i gian hoáº¡t Ä‘á»™ng cá»§a dá»‹ch vá»¥</string>
     <string name="service_uptime_desc">Kiá»ƒm tra tráº¡ng thÃ¡i cá»§a cÃ¡c nhÃ  cung cáº¥p nháº¡c</string>
     <string name="music_providers">NhÃ  cung cáº¥p nháº¡c</string>
@@ -385,8 +385,8 @@
     <string name="status_checking">Äang kiá»ƒm tra...</string>
     <string name="recognition_notification_channel_name">Nháº­n diá»‡n nháº¡c</string>
     <string name="recognition_notification_channel_desc">Hiá»ƒn thá»‹ thÃ´ng bÃ¡o khi nháº­n diá»‡n bÃ i hÃ¡t tá»« pháº§n cÃ i Ä‘áº·t nhanh</string>
-    <string name="recognition_notification_listening">Äang nghe nháº¡câ€¦</string>
-    <string name="recognition_notification_processing">Äang nháº­n diá»‡nâ€¦</string>
+    <string name="recognition_notification_listening">Äang nghe nháº¡c...</string>
+    <string name="recognition_notification_processing">Äang nháº­n diá»‡n...</string>
     <string name="recognition_notification_no_match">KhÃ´ng tÃ¬m tháº¥y káº¿t quáº£ phÃ¹ há»£p</string>
     <string name="recognition_notification_failed">Nháº­n diá»‡n tháº¥t báº¡i</string>
     <string name="listen_on_chorus_music">Nghe trÃªn Chorus Music</string>
@@ -405,7 +405,7 @@
     <string name="last_updated_never">ChÆ°a bao giá»</string>
     <string name="cipher_update_success">ÄÃ£ cáº­p nháº­t Ã¡nh xáº¡ trÃ¬nh trÃ­ch xuáº¥t! ÄÃ£ táº£i %d trÃ¬nh phÃ¡t.</string>
     <string name="cipher_update_failed">KhÃ´ng thá»ƒ cáº­p nháº­t Ã¡nh xáº¡ trÃ¬nh trÃ­ch xuáº¥t: %s</string>
-    <string name="cipher_updating">Äang cáº­p nháº­t cáº¥u hÃ¬nh trÃ¬nh trÃ­ch xuáº¥tâ€¦</string>
+    <string name="cipher_updating">Äang cáº­p nháº­t cáº¥u hÃ¬nh trÃ¬nh trÃ­ch xuáº¥t...</string>
     <string name="hours_label">Giá»</string>
     <string name="minutes_label">PhÃºt</string>
     <string name="seconds_label">GiÃ¢y</string>

@@ -29,8 +29,8 @@
     <string name="most_played_artists">Artis pli ekoute</string>
     <string name="most_played_albums">Albim pli ekoute</string>
     <string name="search">Rode</string>
-    <string name="search_yt_music">Rode lor YouTube Musicâ€¦</string>
-    <string name="search_library">Rode dan bibliotekâ€¦</string>
+    <string name="search_yt_music">Rode lor YouTube Music...</string>
+    <string name="search_library">Rode dan bibliotek...</string>
     <string name="filter_library">Bibliotek</string>
     <string name="filter_liked">Aprecie</string>
     <string name="filter_downloaded">Telecharze</string>
@@ -354,9 +354,9 @@
     <string name="spotify_select_sources">Seleksionn bann list lekout Spotify</string>
     <string name="spotify_import_by_link">Inport list lekout par lien</string>
     <string name="spotify_import_by_link_desc">Kole lien enn list lekout Spotify pou inport li, mem bann list ki pa pou ou</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Azoute</string>
-    <string name="spotify_invalid_playlist_link">Sa pa paret enn lien list lekout Spotify. Servi enn lien kouma https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Sa pa paret enn lien list lekout Spotify. Servi enn lien kouma https://open.spotify.com/playlist/...</string>
     <string name="spotify_import_selected">Inport seleksion</string>
     <string name="spotify_selected_count">%1$d seleksione</string>
     <string name="spotify_available_count">%1$d sours disponib</string>
@@ -369,9 +369,9 @@
     <string name="spotify_loading_library">Pe sarz bibliotek Spotify</string>
     <string name="spotify_no_sources">Okenn list lekout Spotify pa finn trouve</string>
     <string name="spotify_import_in_progress">Pe inport bann list lekout Spotify</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d sours â€¢ %4$d/%5$d morso</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d sours &#8226; %4$d/%5$d morso</string>
     <string name="spotify_import_complete">Inportasion Spotify fini</string>
-    <string name="spotify_import_summary">%1$d sours â€¢ %2$d inporte â€¢ %3$d fel</string>
+    <string name="spotify_import_summary">%1$d sours &#8226; %2$d inporte &#8226; %3$d fel</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d inporte</string>
     <string name="spotify_select_all">Seleksionn tou</string>
     <string name="spotify_clear_selection">Efase</string>
@@ -388,8 +388,8 @@
     <string name="status_checking">Pe verifie...</string>
     <string name="recognition_notification_channel_name">Rekonesans mizik</string>
     <string name="recognition_notification_channel_desc">Afis enn notifikasion pandan idantifikasion enn sante depi paramet rapid</string>
-    <string name="recognition_notification_listening">Pe ekout mizikâ€¦</string>
-    <string name="recognition_notification_processing">Pe idantifieâ€¦</string>
+    <string name="recognition_notification_listening">Pe ekout mizik...</string>
+    <string name="recognition_notification_processing">Pe idantifie...</string>
     <string name="recognition_notification_no_match">Okenn korespondans pa finn trouve</string>
     <string name="recognition_notification_failed">Rekonesans finn fel</string>
     <string name="listen_on_chorus_music">Ekoute lor Chorus Music</string>
@@ -408,7 +408,7 @@
     <string name="last_updated_never">Zame</string>
     <string name="cipher_update_success">Kart extrakter finn met azour! %d lekter finn sarze.</string>
     <string name="cipher_update_failed">Mizazour kart extrakter finn fel: %s</string>
-    <string name="cipher_updating">Pe met konfigirasion extrakter azourâ€¦</string>
+    <string name="cipher_updating">Pe met konfigirasion extrakter azour...</string>
     <string name="hours_label">Ler</string>
     <string name="minutes_label">Minit</string>
     <string name="seconds_label">Segonn</string>

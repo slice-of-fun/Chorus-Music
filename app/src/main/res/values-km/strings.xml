@@ -29,8 +29,8 @@
     <string name="most_played_artists">ážŸáž·áž›áŸ’áž”áž€ážšážŠáŸ‚áž›áž”áž¶áž“áž…áž¶áž€áŸ‹áž…áŸ’ážšáž¾áž“áž”áŸ†áž•áž»áž</string>
     <string name="most_played_albums">áž¢áž¶áž›áŸ‹áž”áŸŠáž»áž˜ážŠáŸ‚áž›áž”áž¶áž“áž…áž¶áž€áŸ‹áž…áŸ’ážšáž¾áž“áž”áŸ†áž•áž»áž</string>
     <string name="search">ážŸáŸ’ážœáŸ‚áž„ážšáž€</string>
-    <string name="search_yt_music">ážŸáŸ’ážœáŸ‚áž„ážšáž€áž€áŸ’áž“áž»áž„ YouTube Musicâ€¦</string>
-    <string name="search_library">ážŸáŸ’ážœáŸ‚áž„ážšáž€áž€áŸ’áž“áž»áž„áž”ážŽáŸ’ážŽáž¶áž›áŸáž™â€¦</string>
+    <string name="search_yt_music">ážŸáŸ’ážœáŸ‚áž„ážšáž€áž€áŸ’áž“áž»áž„ YouTube Music...</string>
+    <string name="search_library">ážŸáŸ’ážœáŸ‚áž„ážšáž€áž€áŸ’áž“áž»áž„áž”ážŽáŸ’ážŽáž¶áž›áŸáž™...</string>
     <string name="filter_library">áž”ážŽáŸ’ážŽáž¶áž›áŸáž™</string>
     <string name="filter_liked">áž”áž¶áž“áž…áž¼áž›áž…áž·ážáŸ’áž</string>
     <string name="filter_downloaded">áž”áž¶áž“áž‘áž¶áž‰áž™áž€</string>
@@ -345,9 +345,9 @@
     <string name="spotify_select_sources">áž‡áŸ’ážšáž¾ážŸážšáž¾ážŸáž”áž‰áŸ’áž‡áž¸áž…áž¶áž€áŸ‹ Spotify</string>
     <string name="spotify_import_by_link">áž“áž¶áŸ†áž…áž¼áž›áž”áž‰áŸ’áž‡áž¸áž…áž¶áž€áŸ‹ážáž¶áž˜ážáŸ†ážŽ</string>
     <string name="spotify_import_by_link_desc">áž”áž·áž‘áž—áŸ’áž‡áž¶áž”áŸ‹ážáŸ†ážŽáž”áž‰áŸ’áž‡áž¸áž…áž¶áž€áŸ‹ Spotify ážŠáž¾áž˜áŸ’áž”áž¸áž“áž¶áŸ†áž…áž¼áž› áž‘áŸ„áŸ‡áž”áž¸áž‡áž¶áž”áž‰áŸ’áž‡áž¸áž…áž¶áž€áŸ‹áž“áŸ„áŸ‡áž˜áž·áž“áž˜áŸ‚áž“áž‡áž¶ážšáž”ážŸáŸ‹áž¢áŸ’áž“áž€áž€áŸážŠáŸ„áž™</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">áž”áž“áŸ’ážáŸ‚áž˜</string>
-    <string name="spotify_invalid_playlist_link">ážœáž¶áž˜áž·áž“ážŠáž¼áž…áž‡áž¶ážáŸ†ážŽáž”áž‰áŸ’áž‡áž¸áž…áž¶áž€áŸ‹ Spotify áž‘áŸáŸ” áž”áŸ’ážšáž¾ážáŸ†ážŽážŠáž¼áž…áž‡áž¶ https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">ážœáž¶áž˜áž·áž“ážŠáž¼áž…áž‡áž¶ážáŸ†ážŽáž”áž‰áŸ’áž‡áž¸áž…áž¶áž€áŸ‹ Spotify áž‘áŸáŸ” áž”áŸ’ážšáž¾ážáŸ†ážŽážŠáž¼áž…áž‡áž¶ https://open.spotify.com/playlist/...</string>
     <string name="spotify_import_selected">áž“áž¶áŸ†áž…áž¼áž›áž’áž¶ážáž»ážŠáŸ‚áž›áž”áž¶áž“áž‡áŸ’ážšáž¾ážŸážšáž¾ážŸ</string>
     <string name="spotify_selected_count">áž”áž¶áž“áž‡áŸ’ážšáž¾ážŸážšáž¾ážŸ %1$d</string>
     <string name="spotify_available_count">áž˜áž¶áž“áž”áŸ’ážšáž—áž– %1$d</string>
@@ -360,9 +360,9 @@
     <string name="spotify_loading_library">áž€áŸ†áž–áž»áž„áž•áŸ’áž‘áž»áž€áž”ážŽáŸ’ážŽáž¶áž›áŸáž™ Spotify</string>
     <string name="spotify_no_sources">ážšáž€áž˜áž·áž“ážƒáž¾áž‰áž”áž‰áŸ’áž‡áž¸áž…áž¶áž€áŸ‹ Spotify</string>
     <string name="spotify_import_in_progress">áž€áŸ†áž–áž»áž„áž“áž¶áŸ†áž…áž¼áž›áž”áž‰áŸ’áž‡áž¸áž…áž¶áž€áŸ‹ Spotify</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ áž”áŸ’ážšáž—áž– %2$d/%3$d â€¢ áž”áž‘ %4$d/%5$d</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; áž”áŸ’ážšáž—áž– %2$d/%3$d &#8226; áž”áž‘ %4$d/%5$d</string>
     <string name="spotify_import_complete">áž€áž¶ážšáž“áž¶áŸ†áž…áž¼áž›áž–áž¸ Spotify áž”áž¶áž“áž”áž‰áŸ’áž…áž”áŸ‹</string>
-    <string name="spotify_import_summary">áž”áŸ’ážšáž—áž– %1$d â€¢ áž”áž¶áž“áž“áž¶áŸ†áž…áž¼áž› %2$d â€¢ áž”ážšáž¶áž‡áŸáž™ %3$d</string>
+    <string name="spotify_import_summary">áž”áŸ’ážšáž—áž– %1$d &#8226; áž”áž¶áž“áž“áž¶áŸ†áž…áž¼áž› %2$d &#8226; áž”ážšáž¶áž‡áŸáž™ %3$d</string>
     <string name="spotify_source_summary">%1$sáŸ– áž”áž¶áž“áž“áž¶áŸ†áž…áž¼áž› %2$d/%3$d</string>
     <string name="spotify_select_all">áž‡áŸ’ážšáž¾ážŸážšáž¾ážŸáž‘áž¶áŸ†áž„áž¢ážŸáŸ‹</string>
     <string name="spotify_clear_selection">ážŸáž˜áŸ’áž¢áž¶áž</string>
@@ -379,8 +379,8 @@
     <string name="status_checking">áž€áŸ†áž–áž»áž„áž–áž·áž“áž·ážáŸ’áž™...</string>
     <string name="recognition_notification_channel_name">áž€áž¶ážšážŸáž˜áŸ’áž‚áž¶áž›áŸ‹ážáž“áŸ’ážáŸ’ážšáž¸</string>
     <string name="recognition_notification_channel_desc">áž”áž„áŸ’áž áž¶áž‰áž€áž¶ážšáž‡áž¼áž“ážŠáŸ†ážŽáž¹áž„áž–áŸáž›áž€áŸ†áž–áž»áž„ážŸáž˜áŸ’áž‚áž¶áž›áŸ‹áž”áž‘áž…áž˜áŸ’ážšáŸ€áž„áž–áž¸áž€áž¶ážšáž€áŸ†ážŽážáŸ‹ážšáž áŸážŸ</string>
-    <string name="recognition_notification_listening">áž€áŸ†áž–áž»áž„ážŸáŸ’ážáž¶áž”áŸ‹ážšáž€ážáž“áŸ’ážáŸ’ážšáž¸â€¦</string>
-    <string name="recognition_notification_processing">áž€áŸ†áž–áž»áž„ážŸáž˜áŸ’áž‚áž¶áž›áŸ‹â€¦</string>
+    <string name="recognition_notification_listening">áž€áŸ†áž–áž»áž„ážŸáŸ’ážáž¶áž”áŸ‹ážšáž€ážáž“áŸ’ážáŸ’ážšáž¸...</string>
+    <string name="recognition_notification_processing">áž€áŸ†áž–áž»áž„ážŸáž˜áŸ’áž‚áž¶áž›áŸ‹...</string>
     <string name="recognition_notification_no_match">ážšáž€áž˜áž·áž“ážƒáž¾áž‰áž”áž‘ážŠáŸ‚áž›ážáŸ’ážšáž¼ážœáž‚áŸ’áž“áž¶</string>
     <string name="recognition_notification_failed">áž€áž¶ážšážŸáž˜áŸ’áž‚áž¶áž›áŸ‹áž”áž¶áž“áž”ážšáž¶áž‡áŸáž™</string>
     <string name="listen_on_chorus_music">ážŸáŸ’ážáž¶áž”áŸ‹áž›áž¾ Chorus Music</string>
@@ -399,7 +399,7 @@
     <string name="last_updated_never">áž˜áž·áž“ážŠáŸ‚áž›</string>
     <string name="cipher_update_success">áž”áž¶áž“áž’áŸ’ážœáž¾áž”áž…áŸ’áž…áž»áž”áŸ’áž”áž“áŸ’áž“áž—áž¶áž–áž•áŸ‚áž“áž‘áž¸áž§áž”áž€ážšážŽáŸážŸáŸ’ážšáž„áŸ‹áž‘áž·áž“áŸ’áž“áž“áŸáž™! áž”áž¶áž“áž•áŸ’áž‘áž»áž€áž€áž˜áŸ’áž˜ážœáž·áž’áž¸áž…áž¶áž€áŸ‹ %dáŸ”</string>
     <string name="cipher_update_failed">áž€áž¶ážšáž’áŸ’ážœáž¾áž”áž…áŸ’áž…áž»áž”áŸ’áž”áž“áŸ’áž“áž—áž¶áž–áž•áŸ‚áž“áž‘áž¸áž§áž”áž€ážšážŽáŸážŸáŸ’ážšáž„áŸ‹áž‘áž·áž“áŸ’áž“áž“áŸáž™áž”áž¶áž“áž”ážšáž¶áž‡áŸáž™áŸ– %s</string>
-    <string name="cipher_updating">áž€áŸ†áž–áž»áž„áž’áŸ’ážœáž¾áž”áž…áŸ’áž…áž»áž”áŸ’áž”áž“áŸ’áž“áž—áž¶áž–áž€áž¶ážšáž€áŸ†ážŽážáŸ‹ážšáž…áž“áž¶ážŸáž˜áŸ’áž–áŸáž“áŸ’áž’áž§áž”áž€ážšážŽáŸážŸáŸ’ážšáž„áŸ‹áž‘áž·áž“áŸ’áž“áž“áŸáž™â€¦</string>
+    <string name="cipher_updating">áž€áŸ†áž–áž»áž„áž’áŸ’ážœáž¾áž”áž…áŸ’áž…áž»áž”áŸ’áž”áž“áŸ’áž“áž—áž¶áž–áž€áž¶ážšáž€áŸ†ážŽážáŸ‹ážšáž…áž“áž¶ážŸáž˜áŸ’áž–áŸáž“áŸ’áž’áž§áž”áž€ážšážŽáŸážŸáŸ’ážšáž„áŸ‹áž‘áž·áž“áŸ’áž“áž“áŸáž™...</string>
     <string name="hours_label">áž˜áŸ‰áŸ„áž„</string>
     <string name="minutes_label">áž“áž¶áž‘áž¸</string>
     <string name="seconds_label">ážœáž·áž“áž¶áž‘áž¸</string>

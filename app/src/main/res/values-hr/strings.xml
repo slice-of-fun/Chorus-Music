@@ -57,7 +57,7 @@
     <string name="your_youtube_playlists">VaÅ¡e YouTube playliste</string>
     <string name="similar_to">SliÄno kao</string>
     <string name="new_release_albums">Nova izdanja albuma</string>
-    <string name="search_yt_music">PretraÅ¾i YouTube Music â€¦</string>
+    <string name="search_yt_music">PretraÅ¾i YouTube Music ...</string>
     <string name="filter_library">Zbirka</string>
     <string name="filter_liked">SviÄ‘a mi se</string>
     <string name="filter_downloaded">Preuzeto</string>
@@ -225,7 +225,7 @@
     <string name="most_played_artists">NajsluÅ¡aniji izvoÄ‘aÄi</string>
     <string name="most_played_albums">NajsluÅ¡aniji albumi</string>
     <string name="today">Danas</string>
-    <string name="search_library">PretraÅ¾i zbirku â€¦</string>
+    <string name="search_library">PretraÅ¾i zbirku ...</string>
     <string name="filter_all">Sve</string>
     <string name="filter_songs">Pjesme</string>
     <string name="filter_artists">IzvoÄ‘aÄi</string>
@@ -369,9 +369,9 @@
     <string name="spotify_loading_library">UÄitavanje Spotify biblioteke</string>
     <string name="spotify_no_sources">Nije pronaÄ‘ena nijedna Spotify playlista</string>
     <string name="spotify_import_in_progress">Uvoz Spotify playlisti u tijeku</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d izvora â€¢ %4$d/%5$d pjesama</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d izvora &#8226; %4$d/%5$d pjesama</string>
     <string name="spotify_import_complete">Uvoz sa Spotifyja je zavrÅ¡en</string>
-    <string name="spotify_import_summary">%1$d izvora â€¢ %2$d uvezeno â€¢ %3$d neuspjeÅ¡no</string>
+    <string name="spotify_import_summary">%1$d izvora &#8226; %2$d uvezeno &#8226; %3$d neuspjeÅ¡no</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d uvezeno</string>
     <string name="spotify_select_all">Odaberi sve</string>
     <string name="spotify_clear_selection">OÄisti odabir</string>
@@ -395,9 +395,9 @@
     <string name="content_sponsor_block_desc">Automatski preskoÄi sponzorstva, uvode i dijelove koji nisu glazba u videozapisima</string>
     <string name="spotify_import_by_link">Uvoz popisa za reprodukciju putem poveznice</string>
     <string name="spotify_import_by_link_desc">Zalijepite poveznicu na Spotify popis za reprodukciju da biste ga uvezli - Äak i popise za reprodukciju koje ne posjedujete</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Dodati</string>
-    <string name="spotify_invalid_playlist_link">To ne izgleda kao poveznica za Spotify popis za reprodukciju. Upotrijebi poveznicu poput https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">To ne izgleda kao poveznica za Spotify popis za reprodukciju. Upotrijebi poveznicu poput https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">Vrijeme rada usluge</string>
     <string name="service_uptime_desc">Provjerite status glazbenih pruÅ¾atelja usluga</string>
     <string name="music_providers">PruÅ¾atelji glazbenih usluga</string>
@@ -409,8 +409,8 @@
     <string name="status_checking">Provjera...</string>
     <string name="recognition_notification_channel_name">Prepoznavanje glazbe</string>
     <string name="recognition_notification_channel_desc">Prikazuje obavijest prilikom prepoznavanja pjesme iz brzih postavki</string>
-    <string name="recognition_notification_listening">SluÅ¡anje glazbeâ€¦</string>
-    <string name="recognition_notification_processing">Identificiranjeâ€¦</string>
+    <string name="recognition_notification_listening">SluÅ¡anje glazbe...</string>
+    <string name="recognition_notification_processing">Identificiranje...</string>
     <string name="recognition_notification_no_match">Nije pronaÄ‘en nijedan rezultat</string>
     <string name="recognition_notification_failed">Prepoznavanje nije uspjelo</string>
     <string name="listen_on_chorus_music">SluÅ¡ajte na Chorus Musicu</string>
@@ -429,7 +429,7 @@
     <string name="last_updated_never">Nikada</string>
     <string name="cipher_update_success">Mapiranja ekstraktora su aÅ¾urirana! UÄitano je %d reproduktora.</string>
     <string name="cipher_update_failed">AÅ¾uriranje mapiranja ekstraktora nije uspjelo: %s</string>
-    <string name="cipher_updating">AÅ¾uriranje konfiguracija ekstraktoraâ€¦</string>
+    <string name="cipher_updating">AÅ¾uriranje konfiguracija ekstraktora...</string>
     <string name="hours_label">Sati</string>
     <string name="minutes_label">Minute</string>
     <string name="seconds_label">Sekunde</string>

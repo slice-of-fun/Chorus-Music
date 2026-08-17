@@ -25,8 +25,8 @@
     <string name="most_played_artists">Artisti piÃ¹ ascoltati</string>
     <string name="most_played_albums">Album piÃ¹ ascoltati</string>
     <string name="search">Cerca</string>
-    <string name="search_yt_music">Cerca su YouTube Musicâ€¦</string>
-    <string name="search_library">Cerca nella libreriaâ€¦</string>
+    <string name="search_yt_music">Cerca su YouTube Music...</string>
+    <string name="search_library">Cerca nella libreria...</string>
     <string name="filter_library">Libreria</string>
     <string name="filter_liked">Piaciuti</string>
     <string name="filter_downloaded">Scaricati</string>
@@ -367,9 +367,9 @@
     <string name="spotify_loading_library">Caricamento libreria Spotify</string>
     <string name="spotify_no_sources">Nessuna playlist Spotify trovata</string>
     <string name="spotify_import_in_progress">Importazione playlist Spotify in corso</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d fonti â€¢ %4$d/%5$d brani</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d fonti &#8226; %4$d/%5$d brani</string>
     <string name="spotify_import_complete">Importazione da Spotify completata</string>
-    <string name="spotify_import_summary">%1$d fonti â€¢ %2$d importati â€¢ %3$d falliti</string>
+    <string name="spotify_import_summary">%1$d fonti &#8226; %2$d importati &#8226; %3$d falliti</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d importati</string>
     <string name="spotify_select_all">Seleziona tutto</string>
     <string name="spotify_clear_selection">Cancella selezione</string>
@@ -394,9 +394,9 @@
     <string name="content_sponsor_block_desc">Salta automaticamente le sponsorizzazioni, le introduzioni e le sezioni non musicali dei video</string>
     <string name="spotify_import_by_link">Importa playlist tramite link</string>
     <string name="spotify_import_by_link_desc">Incolla il link di una playlist Spotify per importarla, anche se non Ã¨ di tua proprietÃ </string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Aggiungi</string>
-    <string name="spotify_invalid_playlist_link">Questo non sembra essere il link di una playlist Spotify. Usa un link come https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Questo non sembra essere il link di una playlist Spotify. Usa un link come https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">DisponibilitÃ  dei servizi</string>
     <string name="service_uptime_desc">Controlla lo stato dei provider musicali</string>
     <string name="music_providers">Provider musicali</string>
@@ -408,8 +408,8 @@
     <string name="status_checking">Verifica in corso...</string>
     <string name="recognition_notification_channel_name">Riconoscimento musicale</string>
     <string name="recognition_notification_channel_desc">Mostra una notifica durante l\'identificazione di un brano dalle impostazioni rapide</string>
-    <string name="recognition_notification_listening">Ascolto della musica in corsoâ€¦</string>
-    <string name="recognition_notification_processing">Identificazione in corsoâ€¦</string>
+    <string name="recognition_notification_listening">Ascolto della musica in corso...</string>
+    <string name="recognition_notification_processing">Identificazione in corso...</string>
     <string name="recognition_notification_no_match">Nessuna corrispondenza trovata</string>
     <string name="recognition_notification_failed">Riconoscimento non riuscito</string>
     <string name="listen_on_chorus_music">Ascolta su Chorus Music</string>
@@ -428,7 +428,7 @@
     <string name="last_updated_never">Mai</string>
     <string name="cipher_update_success">Mappature dell\'estrattore aggiornate! Caricati %d player.</string>
     <string name="cipher_update_failed">Impossibile aggiornare le mappature dell\'estrattore: %s</string>
-    <string name="cipher_updating">Aggiornamento delle configurazioni dell\'estrattoreâ€¦</string>
+    <string name="cipher_updating">Aggiornamento delle configurazioni dell\'estrattore...</string>
     <string name="hours_label">Ore</string>
     <string name="minutes_label">Minuti</string>
     <string name="seconds_label">Secondi</string>

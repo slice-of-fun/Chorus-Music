@@ -25,8 +25,8 @@
     <string name="most_played_artists">Na healaÃ­ontÃ³irÃ­ is mÃ³ a sheinntear</string>
     <string name="most_played_albums">Na halbaim is mÃ³ a sheinntear</string>
     <string name="search">Cuardaigh</string>
-    <string name="search_yt_music">Cuardaigh YouTube Musicâ€¦</string>
-    <string name="search_library">Cuardaigh an leabharlannâ€¦</string>
+    <string name="search_yt_music">Cuardaigh YouTube Music...</string>
+    <string name="search_library">Cuardaigh an leabharlann...</string>
     <string name="filter_library">Leabharlann</string>
     <plurals name="n_selected">
         <item quantity="two">%d roghnaithe</item>
@@ -383,9 +383,9 @@
     <string name="spotify_select_sources">Roghnaigh seinnliostaÃ­ Spotify</string>
     <string name="spotify_import_by_link">IompÃ³rtÃ¡il seinnliosta trÃ­ nasc</string>
     <string name="spotify_import_by_link_desc">Greamaigh nasc seinnliosta Spotify chun Ã© a iompÃ³rtÃ¡il, fiÃº seinnliostaÃ­ nach leatsa iad</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Cuir leis</string>
-    <string name="spotify_invalid_playlist_link">NÃ­ cosÃºil gur nasc seinnliosta Spotify Ã© sin. ÃšsÃ¡id nasc cosÃºil le https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">NÃ­ cosÃºil gur nasc seinnliosta Spotify Ã© sin. ÃšsÃ¡id nasc cosÃºil le https://open.spotify.com/playlist/...</string>
     <string name="spotify_import_selected">IompÃ³rtÃ¡il na cinn roghnaithe</string>
     <string name="spotify_selected_count">%1$d roghnaithe</string>
     <string name="spotify_available_count">TÃ¡ %1$d fhoinse ar fÃ¡il</string>
@@ -398,9 +398,9 @@
     <string name="spotify_loading_library">Leabharlann Spotify Ã¡ luchtÃº</string>
     <string name="spotify_no_sources">NÃ­or aimsÃ­odh aon seinnliostaÃ­ Spotify</string>
     <string name="spotify_import_in_progress">SeinnliostaÃ­ Spotify Ã¡ n-iompÃ³rtÃ¡il</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d fhoinse â€¢ %4$d/%5$d rian</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d fhoinse &#8226; %4$d/%5$d rian</string>
     <string name="spotify_import_complete">IompÃ³rtÃ¡il Spotify crÃ­ochnaithe</string>
-    <string name="spotify_import_summary">%1$d fhoinse â€¢ %2$d iompÃ³rtÃ¡ilte â€¢ theip ar %3$d</string>
+    <string name="spotify_import_summary">%1$d fhoinse &#8226; %2$d iompÃ³rtÃ¡ilte &#8226; theip ar %3$d</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d iompÃ³rtÃ¡ilte</string>
     <string name="spotify_select_all">Roghnaigh uile</string>
     <string name="spotify_clear_selection">Glan</string>
@@ -417,8 +417,8 @@
     <string name="status_checking">Ã sheiceÃ¡il...</string>
     <string name="recognition_notification_channel_name">Aithint ceoil</string>
     <string name="recognition_notification_channel_desc">TaispeÃ¡nann fÃ³gra agus amhrÃ¡n Ã¡ aithint Ã³ na socruithe tapa</string>
-    <string name="recognition_notification_listening">Ag Ã©isteacht le ceolâ€¦</string>
-    <string name="recognition_notification_processing">Ã aithintâ€¦</string>
+    <string name="recognition_notification_listening">Ag Ã©isteacht le ceol...</string>
+    <string name="recognition_notification_processing">Ã aithint...</string>
     <string name="recognition_notification_no_match">NÃ­or aimsÃ­odh aon mheaitseÃ¡il</string>
     <string name="recognition_notification_failed">Theip ar an aithint</string>
     <string name="listen_on_chorus_music">Ã‰ist ar Chorus Music</string>
@@ -438,7 +438,7 @@
     <string name="last_updated_never">Riamh</string>
     <string name="cipher_update_success">NuashonraÃ­odh mapÃ¡lacha an eastÃ³ra! LuchtaÃ­odh %d seinnteoir.</string>
     <string name="cipher_update_failed">Theip ar mapÃ¡lacha an eastÃ³ra a nuashonrÃº: %s</string>
-    <string name="cipher_updating">CumraÃ­ochtaÃ­ an eastÃ³ra Ã¡ nuashonrÃºâ€¦</string>
+    <string name="cipher_updating">CumraÃ­ochtaÃ­ an eastÃ³ra Ã¡ nuashonrÃº...</string>
     <string name="hours_label">Uaireanta</string>
     <string name="minutes_label">NÃ³imÃ©id</string>
     <string name="seconds_label">SoicindÃ­</string>

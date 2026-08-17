@@ -35,8 +35,8 @@
     <string name="most_played_albums">Ø¨ÛŒØ´ØªØ±ÛŒÙ† Ø¢Ù„Ø¨ÙˆÙ…â€ŒÙ‡Ø§ÛŒ Ù¾Ø®Ø´â€ŒØ´Ø¯Ù‡</string>
     <!-- Search -->
     <string name="search">Ø¬Ø³ØªØ¬Ùˆ</string>
-    <string name="search_yt_music">Ø¬Ø³ØªØ¬Ùˆ Ø¯Ø± ÛŒÙˆØªÛŒÙˆØ¨ Ù…ÙˆØ²ÛŒÚ©â€¦</string>
-    <string name="search_library">Ø¬Ø³ØªØ¬Ùˆ Ø¯Ø± Ú©ØªØ§Ø¨Ø®Ø§Ù†Ù‡â€¦</string>
+    <string name="search_yt_music">Ø¬Ø³ØªØ¬Ùˆ Ø¯Ø± ÛŒÙˆØªÛŒÙˆØ¨ Ù…ÙˆØ²ÛŒÚ©...</string>
+    <string name="search_library">Ø¬Ø³ØªØ¬Ùˆ Ø¯Ø± Ú©ØªØ§Ø¨Ø®Ø§Ù†Ù‡...</string>
     <string name="filter_library">Ú©ØªØ§Ø¨Ø®Ø§Ù†Ù‡</string>
     <string name="filter_liked">Ù¾Ø³Ù†Ø¯ÛŒØ¯Ù‡ Ø´Ø¯Ù‡</string>
     <string name="filter_downloaded">Ø¯Ø§Ù†Ù„ÙˆØ¯ Ø´Ø¯Ù‡</string>
@@ -370,9 +370,9 @@
     <string name="spotify_loading_library">Ø¯Ø± Ø­Ø§Ù„ Ø¨Ø§Ø±Ú¯ÛŒØ±ÛŒ Ú©ØªØ§Ø¨Ø®Ø§Ù†Ù‡ Ø§Ø³Ù¾Ø§ØªÛŒÙØ§ÛŒ</string>
     <string name="spotify_no_sources">Ù‡ÛŒÚ† Ù„ÛŒØ³Øª Ù¾Ø®Ø´ÛŒ Ø¯Ø± Ø§Ø³Ù¾Ø§ØªÛŒÙØ§ÛŒ Ù¾ÛŒØ¯Ø§ Ù†Ø´Ø¯</string>
     <string name="spotify_import_in_progress">Ø¯Ø± Ø­Ø§Ù„ ÙˆØ§Ø±Ø¯ Ú©Ø±Ø¯Ù† Ù„ÛŒØ³Øªâ€ŒÙ‡Ø§ÛŒ Ù¾Ø®Ø´ Ø§Ø³Ù¾Ø§ØªÛŒÙØ§ÛŒ</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d Ù…Ù†Ø¨Ø¹ â€¢ %4$d/%5$d Ø¢Ù‡Ù†Ú¯</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d Ù…Ù†Ø¨Ø¹ &#8226; %4$d/%5$d Ø¢Ù‡Ù†Ú¯</string>
     <string name="spotify_import_complete">ÙˆØ§Ø±Ø¯ Ú©Ø±Ø¯Ù† Ø§Ø·Ù„Ø§Ø¹Ø§Øª Ø§Ø² Ø§Ø³Ù¾Ø§ØªÛŒÙØ§ÛŒ Ø¨Ø§ Ù…ÙˆÙÙ‚ÛŒØª Ù¾Ø§ÛŒØ§Ù† ÛŒØ§ÙØª</string>
-    <string name="spotify_import_summary">%1$d Ù…Ù†Ø¨Ø¹ â€¢ %2$d Ù…ÙˆØ±Ø¯ ÙˆØ§Ø±Ø¯ Ø´Ø¯ â€¢ %3$d Ù…ÙˆØ±Ø¯ Ù†Ø§Ù…ÙˆÙÙ‚</string>
+    <string name="spotify_import_summary">%1$d Ù…Ù†Ø¨Ø¹ &#8226; %2$d Ù…ÙˆØ±Ø¯ ÙˆØ§Ø±Ø¯ Ø´Ø¯ &#8226; %3$d Ù…ÙˆØ±Ø¯ Ù†Ø§Ù…ÙˆÙÙ‚</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d Ù…ÙˆØ±Ø¯ ÙˆØ§Ø±Ø¯ Ø´Ø¯</string>
     <string name="spotify_select_all">Ø§Ù†ØªØ®Ø§Ø¨ Ù‡Ù…Ù‡</string>
     <string name="spotify_clear_selection">Ù¾Ø§Ú© Ú©Ø±Ø¯Ù† Ø§Ù†ØªØ®Ø§Ø¨â€ŒÙ‡Ø§</string>
@@ -397,9 +397,9 @@
     <string name="content_sponsor_block_desc">Ø¨Ø®Ø´â€ŒÙ‡Ø§ÛŒ ØªØ¨Ù„ÛŒØºØ§ØªÛŒØŒ Ù…Ù‚Ø¯Ù…Ù‡â€ŒÙ‡Ø§ Ùˆ Ù‚Ø³Ù…Øªâ€ŒÙ‡Ø§ÛŒ ØºÛŒØ±Ù…ÙˆØ³ÛŒÙ‚ÛŒ ÙˆÛŒØ¯ÛŒÙˆÙ‡Ø§ Ø±Ø§ Ø¨Ù‡â€ŒØ·ÙˆØ± Ø®ÙˆØ¯Ú©Ø§Ø± Ø±Ø¯ Ú©Ù†ÛŒØ¯</string>
     <string name="spotify_import_by_link">Ø¯Ø±ÙˆÙ†â€ŒØ±ÛŒØ²ÛŒ ÙÙ‡Ø±Ø³Øª Ù¾Ø®Ø´ Ø¨Ø§ Ù¾ÛŒÙˆÙ†Ø¯</string>
     <string name="spotify_import_by_link_desc">Ø¨Ø±Ø§ÛŒ Ø¯Ø±ÙˆÙ†â€ŒØ±ÛŒØ²ÛŒØŒ Ù¾ÛŒÙˆÙ†Ø¯ ÛŒÚ© ÙÙ‡Ø±Ø³Øª Ù¾Ø®Ø´ Spotify Ø±Ø§ Ø¬Ø§ÛŒâ€ŒÚ¯Ø°Ø§Ø±ÛŒ Ú©Ù†ÛŒØ¯ØŒ Ø­ØªÛŒ Ø§Ú¯Ø± Ù…Ø§Ù„Ú© Ø¢Ù† Ù†Ø¨Ø§Ø´ÛŒØ¯</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Ø§ÙØ²ÙˆØ¯Ù†</string>
-    <string name="spotify_invalid_playlist_link">Ø§ÛŒÙ† Ù¾ÛŒÙˆÙ†Ø¯ Ø´Ø¨ÛŒÙ‡ Ù¾ÛŒÙˆÙ†Ø¯ ÙÙ‡Ø±Ø³Øª Ù¾Ø®Ø´ Spotify Ù†ÛŒØ³Øª. Ø§Ø² Ù¾ÛŒÙˆÙ†Ø¯ÛŒ Ù…Ø§Ù†Ù†Ø¯ https://open.spotify.com/playlist/â€¦ Ø§Ø³ØªÙØ§Ø¯Ù‡ Ú©Ù†ÛŒØ¯</string>
+    <string name="spotify_invalid_playlist_link">Ø§ÛŒÙ† Ù¾ÛŒÙˆÙ†Ø¯ Ø´Ø¨ÛŒÙ‡ Ù¾ÛŒÙˆÙ†Ø¯ ÙÙ‡Ø±Ø³Øª Ù¾Ø®Ø´ Spotify Ù†ÛŒØ³Øª. Ø§Ø² Ù¾ÛŒÙˆÙ†Ø¯ÛŒ Ù…Ø§Ù†Ù†Ø¯ https://open.spotify.com/playlist/... Ø§Ø³ØªÙØ§Ø¯Ù‡ Ú©Ù†ÛŒØ¯</string>
     <string name="service_uptime">ÙˆØ¶Ø¹ÛŒØª ÙØ¹Ø§Ù„ÛŒØª Ø³Ø±ÙˆÛŒØ³</string>
     <string name="service_uptime_desc">ÙˆØ¶Ø¹ÛŒØª Ø§Ø±Ø§Ø¦Ù‡â€ŒØ¯Ù‡Ù†Ø¯Ú¯Ø§Ù† Ù…ÙˆØ³ÛŒÙ‚ÛŒ Ø±Ø§ Ø¨Ø±Ø±Ø³ÛŒ Ú©Ù†ÛŒØ¯</string>
     <string name="music_providers">Ø§Ø±Ø§Ø¦Ù‡â€ŒØ¯Ù‡Ù†Ø¯Ú¯Ø§Ù† Ù…ÙˆØ³ÛŒÙ‚ÛŒ</string>
@@ -411,8 +411,8 @@
     <string name="status_checking">Ø¯Ø± Ø­Ø§Ù„ Ø¨Ø±Ø±Ø³ÛŒ...</string>
     <string name="recognition_notification_channel_name">ØªØ´Ø®ÛŒØµ Ù…ÙˆØ³ÛŒÙ‚ÛŒ</string>
     <string name="recognition_notification_channel_desc">Ù‡Ù†Ú¯Ø§Ù… Ø´Ù†Ø§Ø³Ø§ÛŒÛŒ ØªØ±Ø§Ù†Ù‡ Ø§Ø² ØªÙ†Ø¸ÛŒÙ…Ø§Øª Ø³Ø±ÛŒØ¹ØŒ ÛŒÚ© Ø§Ø¹Ù„Ø§Ù† Ù†Ù…Ø§ÛŒØ´ Ù…ÛŒâ€ŒØ¯Ù‡Ø¯</string>
-    <string name="recognition_notification_listening">Ø¯Ø± Ø­Ø§Ù„ Ú¯ÙˆØ´ Ø¯Ø§Ø¯Ù† Ø¨Ù‡ Ù…ÙˆØ³ÛŒÙ‚ÛŒâ€¦</string>
-    <string name="recognition_notification_processing">Ø¯Ø± Ø­Ø§Ù„ Ø´Ù†Ø§Ø³Ø§ÛŒÛŒâ€¦</string>
+    <string name="recognition_notification_listening">Ø¯Ø± Ø­Ø§Ù„ Ú¯ÙˆØ´ Ø¯Ø§Ø¯Ù† Ø¨Ù‡ Ù…ÙˆØ³ÛŒÙ‚ÛŒ...</string>
+    <string name="recognition_notification_processing">Ø¯Ø± Ø­Ø§Ù„ Ø´Ù†Ø§Ø³Ø§ÛŒÛŒ...</string>
     <string name="recognition_notification_no_match">Ù‡ÛŒÚ† Ù…ÙˆØ±Ø¯ Ù…Ù†Ø·Ø¨Ù‚ÛŒ ÛŒØ§ÙØª Ù†Ø´Ø¯</string>
     <string name="recognition_notification_failed">ØªØ´Ø®ÛŒØµ Ù†Ø§Ù…ÙˆÙÙ‚ Ø¨ÙˆØ¯</string>
     <string name="listen_on_chorus_music">Ø¯Ø± Chorus Music Ú¯ÙˆØ´ Ø¯Ù‡ÛŒØ¯</string>
@@ -431,7 +431,7 @@
     <string name="last_updated_never">Ù‡Ø±Ú¯Ø²</string>
     <string name="cipher_update_success">Ù†Ú¯Ø§Ø´Øªâ€ŒÙ‡Ø§ÛŒ Ø§Ø³ØªØ®Ø±Ø§Ø¬â€ŒÚ¯Ø± Ø¨Ù‡â€ŒØ±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒ Ø´Ø¯Ù†Ø¯! %d Ù¾Ø®Ø´â€ŒÚ©Ù†Ù†Ø¯Ù‡ Ø¨Ø§Ø±Ú¯Ø°Ø§Ø±ÛŒ Ø´Ø¯.</string>
     <string name="cipher_update_failed">Ø¨Ù‡â€ŒØ±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒ Ù†Ú¯Ø§Ø´Øªâ€ŒÙ‡Ø§ÛŒ Ø§Ø³ØªØ®Ø±Ø§Ø¬â€ŒÚ¯Ø± Ù†Ø§Ù…ÙˆÙÙ‚ Ø¨ÙˆØ¯: %s</string>
-    <string name="cipher_updating">Ø¯Ø± Ø­Ø§Ù„ Ø¨Ù‡â€ŒØ±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒ Ù¾ÛŒÚ©Ø±Ø¨Ù†Ø¯ÛŒâ€ŒÙ‡Ø§ÛŒ Ø§Ø³ØªØ®Ø±Ø§Ø¬â€ŒÚ¯Ø±â€¦</string>
+    <string name="cipher_updating">Ø¯Ø± Ø­Ø§Ù„ Ø¨Ù‡â€ŒØ±ÙˆØ²Ø±Ø³Ø§Ù†ÛŒ Ù¾ÛŒÚ©Ø±Ø¨Ù†Ø¯ÛŒâ€ŒÙ‡Ø§ÛŒ Ø§Ø³ØªØ®Ø±Ø§Ø¬â€ŒÚ¯Ø±...</string>
     <string name="hours_label">Ø³Ø§Ø¹Øª</string>
     <string name="minutes_label">Ø¯Ù‚ÛŒÙ‚Ù‡</string>
     <string name="seconds_label">Ø«Ø§Ù†ÛŒÙ‡</string>

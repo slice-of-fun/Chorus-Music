@@ -34,8 +34,8 @@
     <string name="most_played_albums">En Ã§ok dinlenen albÃ¼mler</string>
     <!-- Search -->
     <string name="search">Arama</string>
-    <string name="search_yt_music">YouTube MÃ¼zik\'te Araâ€¦</string>
-    <string name="search_library">KÃ¼tÃ¼phanede araâ€¦</string>
+    <string name="search_yt_music">YouTube MÃ¼zik\'te Ara...</string>
+    <string name="search_library">KÃ¼tÃ¼phanede ara...</string>
     <string name="filter_library">KÃ¼tÃ¼phane</string>
     <string name="filter_liked">BeÄŸenilenler</string>
     <string name="filter_downloaded">Ä°ndirilenler</string>
@@ -378,9 +378,9 @@
     <string name="spotify_loading_library">Spotify kÃ¼tÃ¼phanesi yÃ¼kleniyor</string>
     <string name="spotify_no_sources">Spotify Ã§alma listesi bulunamadÄ±</string>
     <string name="spotify_import_in_progress">Spotify Ã§alma listeleri iÃ§e aktarÄ±lÄ±yor</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d kaynak â€¢ %4$d/%5$d parÃ§a</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d kaynak &#8226; %4$d/%5$d parÃ§a</string>
     <string name="spotify_import_complete">Spotify iÃ§e aktarma tamamlandÄ±</string>
-    <string name="spotify_import_summary">%1$d kaynak â€¢ %2$d iÃ§e aktarÄ±ldÄ± â€¢ %3$d baÅŸarÄ±sÄ±z</string>
+    <string name="spotify_import_summary">%1$d kaynak &#8226; %2$d iÃ§e aktarÄ±ldÄ± &#8226; %3$d baÅŸarÄ±sÄ±z</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d iÃ§e aktarÄ±ldÄ±</string>
     <string name="spotify_select_all">TÃ¼mÃ¼nÃ¼ seÃ§</string>
     <string name="spotify_clear_selection">SeÃ§imi temizle</string>
@@ -403,9 +403,9 @@
     <string name="content_sponsor_block_desc">Videolardaki sponsorluklarÄ±, giriÅŸleri ve mÃ¼zik dÄ±ÅŸÄ± bÃ¶lÃ¼mleri otomatik olarak atla</string>
     <string name="spotify_import_by_link">BaÄŸlantÄ±yla Ã§alma listesi iÃ§e aktar</string>
     <string name="spotify_import_by_link_desc">Size ait olmayanlar dÃ¢hil olmak Ã¼zere bir Ã§alma listesini iÃ§e aktarmak iÃ§in Spotify baÄŸlantÄ±sÄ±nÄ± yapÄ±ÅŸtÄ±rÄ±n</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Ekle</string>
-    <string name="spotify_invalid_playlist_link">Bu, Spotify Ã§alma listesi baÄŸlantÄ±sÄ±na benzemiyor. https://open.spotify.com/playlist/â€¦ biÃ§iminde bir baÄŸlantÄ± kullanÄ±n</string>
+    <string name="spotify_invalid_playlist_link">Bu, Spotify Ã§alma listesi baÄŸlantÄ±sÄ±na benzemiyor. https://open.spotify.com/playlist/... biÃ§iminde bir baÄŸlantÄ± kullanÄ±n</string>
     <string name="service_uptime">Hizmet Ã‡alÄ±ÅŸma SÃ¼resi</string>
     <string name="service_uptime_desc">MÃ¼zik saÄŸlayÄ±cÄ±larÄ±nÄ±n durumunu kontrol edin</string>
     <string name="music_providers">MÃ¼zik SaÄŸlayÄ±cÄ±larÄ±</string>
@@ -417,8 +417,8 @@
     <string name="status_checking">Kontrol ediliyor...</string>
     <string name="recognition_notification_channel_name">MÃ¼zik tanÄ±ma</string>
     <string name="recognition_notification_channel_desc">HÄ±zlÄ± ayarlardan bir ÅŸarkÄ± tanÄ±mlanÄ±rken bildirim gÃ¶sterir</string>
-    <string name="recognition_notification_listening">MÃ¼zik dinleniyorâ€¦</string>
-    <string name="recognition_notification_processing">TanÄ±mlanÄ±yorâ€¦</string>
+    <string name="recognition_notification_listening">MÃ¼zik dinleniyor...</string>
+    <string name="recognition_notification_processing">TanÄ±mlanÄ±yor...</string>
     <string name="recognition_notification_no_match">EÅŸleÅŸme bulunamadÄ±</string>
     <string name="recognition_notification_failed">TanÄ±ma baÅŸarÄ±sÄ±z oldu</string>
     <string name="listen_on_chorus_music">Chorus Music\'te dinle</string>
@@ -437,7 +437,7 @@
     <string name="last_updated_never">HiÃ§bir zaman</string>
     <string name="cipher_update_success">AyÄ±klayÄ±cÄ± eÅŸlemeleri gÃ¼ncellendi! %d oynatÄ±cÄ± yÃ¼klendi.</string>
     <string name="cipher_update_failed">AyÄ±klayÄ±cÄ± eÅŸlemeleri gÃ¼ncellenemedi: %s</string>
-    <string name="cipher_updating">AyÄ±klayÄ±cÄ± yapÄ±landÄ±rmalarÄ± gÃ¼ncelleniyorâ€¦</string>
+    <string name="cipher_updating">AyÄ±klayÄ±cÄ± yapÄ±landÄ±rmalarÄ± gÃ¼ncelleniyor...</string>
     <string name="hours_label">Saat</string>
     <string name="minutes_label">Dakika</string>
     <string name="seconds_label">Saniye</string>

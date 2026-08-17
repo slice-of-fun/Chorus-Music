@@ -29,8 +29,8 @@
     <string name="most_played_artists">Meischtgspielti KÃ¼nschtler</string>
     <string name="most_played_albums">Meischtgspielti Albe</string>
     <string name="search">Sueche</string>
-    <string name="search_yt_music">YouTube Music durchsuecheâ€¦</string>
-    <string name="search_library">Bibliothek durchsuecheâ€¦</string>
+    <string name="search_yt_music">YouTube Music durchsueche...</string>
+    <string name="search_library">Bibliothek durchsueche...</string>
     <string name="filter_library">Bibliothek</string>
     <string name="filter_liked">GfÃ¤llt</string>
     <string name="filter_downloaded">Abeglade</string>
@@ -354,9 +354,9 @@
     <string name="spotify_select_sources">Spotify-Abspiellischte uswÃ¤hle</string>
     <string name="spotify_import_by_link">Abspiellischta Ã¼ber Link importiere</string>
     <string name="spotify_import_by_link_desc">Fieg e Link zu ere Spotify-Abspiellischta ii, um si z importiere, au wenn si der nit ghÃ¶rt</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Hinzuefiege</string>
-    <string name="spotify_invalid_playlist_link">Das gseht nit wie e Link zu ere Spotify-Abspiellischta us. Bruch e Link wie https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Das gseht nit wie e Link zu ere Spotify-Abspiellischta us. Bruch e Link wie https://open.spotify.com/playlist/...</string>
     <string name="spotify_import_selected">Uswahl importiere</string>
     <string name="spotify_selected_count">%1$d uswÃ¤hlt</string>
     <string name="spotify_available_count">%1$d Quelle verfÃ¼gbar</string>
@@ -369,9 +369,9 @@
     <string name="spotify_loading_library">Spotify-Bibliothek wird glade</string>
     <string name="spotify_no_sources">Kei Spotify-Abspiellischte gfunde</string>
     <string name="spotify_import_in_progress">Spotify-Abspiellischte wÃ¤rde importiert</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d Quelle â€¢ %4$d/%5$d Titel</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d Quelle &#8226; %4$d/%5$d Titel</string>
     <string name="spotify_import_complete">Spotify-Import fertig</string>
-    <string name="spotify_import_summary">%1$d Quelle â€¢ %2$d importiert â€¢ %3$d fÃ¤hlgschlage</string>
+    <string name="spotify_import_summary">%1$d Quelle &#8226; %2$d importiert &#8226; %3$d fÃ¤hlgschlage</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d importiert</string>
     <string name="spotify_select_all">Alli uswÃ¤hle</string>
     <string name="spotify_clear_selection">Uswahl ufhebe</string>
@@ -388,8 +388,8 @@
     <string name="status_checking">Wird prÃ¼eft...</string>
     <string name="recognition_notification_channel_name">MÃ¼sigerchennig</string>
     <string name="recognition_notification_channel_desc">Zeigt e Benachrichtigung, wÃ¤hrend Ã¼ber d SchnÃ¤llistellige es Lied erkannt wird</string>
-    <string name="recognition_notification_listening">Lose nach MÃ¼sigâ€¦</string>
-    <string name="recognition_notification_processing">Wird erkanntâ€¦</string>
+    <string name="recognition_notification_listening">Lose nach MÃ¼sig...</string>
+    <string name="recognition_notification_processing">Wird erkannt...</string>
     <string name="recognition_notification_no_match">Kei Treffer gfunde</string>
     <string name="recognition_notification_failed">Erchennig fÃ¤hlgschlage</string>
     <string name="listen_on_chorus_music">Uf Chorus Music lose</string>
@@ -408,7 +408,7 @@
     <string name="last_updated_never">Nie</string>
     <string name="cipher_update_success">Extractor-Zueordnige aktualisiert! %d Player glade.</string>
     <string name="cipher_update_failed">Extractor-Zueordnige hei nit chenne aktualisiert wÃ¤rde: %s</string>
-    <string name="cipher_updating">Extractor-Konfiguratione wÃ¤rde aktualisiertâ€¦</string>
+    <string name="cipher_updating">Extractor-Konfiguratione wÃ¤rde aktualisiert...</string>
     <string name="hours_label">Stunde</string>
     <string name="minutes_label">Minute</string>
     <string name="seconds_label">Sekunde</string>

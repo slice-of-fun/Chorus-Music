@@ -23,8 +23,8 @@
     <string name="most_played_artists">Artis yang paling sering diputar</string>
     <string name="most_played_albums">Album yang paling sering diputar</string>
     <string name="search">Mencari</string>
-    <string name="search_yt_music">Cari di YouTube Musicâ€¦</string>
-    <string name="search_library">Cari di pustakaâ€¦</string>
+    <string name="search_yt_music">Cari di YouTube Music...</string>
+    <string name="search_library">Cari di pustaka...</string>
     <string name="filter_library">Pustaka</string>
     <string name="filter_liked">Disukai</string>
     <string name="filter_downloaded">Diunduh</string>
@@ -348,9 +348,9 @@
     <string name="spotify_loading_library">Memuat pustaka Spotify</string>
     <string name="spotify_no_sources">Tidak ada daftar putar Spotify yang ditemukan</string>
     <string name="spotify_import_in_progress">Mengimpor daftar putar Spotify</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d sumber â€¢ %4$d/%5$d lagu</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d sumber &#8226; %4$d/%5$d lagu</string>
     <string name="spotify_import_complete">Impor Spotify selesai</string>
-    <string name="spotify_import_summary">%1$d sumber â€¢ %2$d diimpor â€¢ %3$d gagal</string>
+    <string name="spotify_import_summary">%1$d sumber &#8226; %2$d diimpor &#8226; %3$d gagal</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d diimpor</string>
     <string name="spotify_select_all">Pilih semua</string>
     <string name="spotify_clear_selection">Bersihkan</string>
@@ -374,9 +374,9 @@
     <string name="content_sponsor_block_desc">Secara otomatis melewati sponsor, intro, dan bagian nonmusik dalam video</string>
     <string name="spotify_import_by_link">Impor playlist melalui tautan</string>
     <string name="spotify_import_by_link_desc">Tempel tautan playlist Spotify untuk mengimpornya, termasuk playlist yang bukan milik Anda</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">Tambah</string>
-    <string name="spotify_invalid_playlist_link">Itu tampaknya bukan tautan playlist Spotify. Gunakan tautan seperti https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Itu tampaknya bukan tautan playlist Spotify. Gunakan tautan seperti https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">Waktu Aktif Layanan</string>
     <string name="service_uptime_desc">Periksa status penyedia musik</string>
     <string name="music_providers">Penyedia Musik</string>
@@ -388,8 +388,8 @@
     <string name="status_checking">Memeriksa...</string>
     <string name="recognition_notification_channel_name">Pengenalan musik</string>
     <string name="recognition_notification_channel_desc">Menampilkan notifikasi saat mengidentifikasi lagu dari setelan cepat</string>
-    <string name="recognition_notification_listening">Mendengarkan musikâ€¦</string>
-    <string name="recognition_notification_processing">Mengidentifikasiâ€¦</string>
+    <string name="recognition_notification_listening">Mendengarkan musik...</string>
+    <string name="recognition_notification_processing">Mengidentifikasi...</string>
     <string name="recognition_notification_no_match">Tidak ditemukan kecocokan</string>
     <string name="recognition_notification_failed">Pengenalan gagal</string>
     <string name="listen_on_chorus_music">Dengarkan di Chorus Music</string>
@@ -408,7 +408,7 @@
     <string name="last_updated_never">Belum pernah</string>
     <string name="cipher_update_success">Pemetaan ekstraktor diperbarui! %d pemutar dimuat.</string>
     <string name="cipher_update_failed">Gagal memperbarui pemetaan ekstraktor: %s</string>
-    <string name="cipher_updating">Memperbarui konfigurasi ekstraktorâ€¦</string>
+    <string name="cipher_updating">Memperbarui konfigurasi ekstraktor...</string>
     <string name="hours_label">Jam</string>
     <string name="minutes_label">Menit</string>
     <string name="seconds_label">Detik</string>

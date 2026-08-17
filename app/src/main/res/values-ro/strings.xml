@@ -24,8 +24,8 @@
     <string name="most_played_artists">Cei mai redaÈ›i artiÈ™ti</string>
     <string name="most_played_albums">Cele mai redate albume</string>
     <string name="search">CautÄƒ</string>
-    <string name="search_yt_music">CautÄƒ pe YouTube Musicâ€¦</string>
-    <string name="search_library">CautÄƒ Ã®n bibliotecÄƒâ€¦</string>
+    <string name="search_yt_music">CautÄƒ pe YouTube Music...</string>
+    <string name="search_library">CautÄƒ Ã®n bibliotecÄƒ...</string>
     <string name="filter_library">BibliotecÄƒ</string>
     <string name="filter_liked">Apreciate</string>
     <string name="filter_downloaded">DescÄƒrcate</string>
@@ -369,9 +369,9 @@
     <string name="spotify_loading_library">Se Ã®ncarcÄƒ biblioteca Spotify</string>
     <string name="spotify_no_sources">Nu s-au gÄƒsit playlisturi Spotify</string>
     <string name="spotify_import_in_progress">Se importÄƒ playlisturile Spotify</string>
-    <string name="spotify_import_progress_step">%1$s â€¢ %2$d/%3$d surse â€¢ %4$d/%5$d piese</string>
+    <string name="spotify_import_progress_step">%1$s &#8226; %2$d/%3$d surse &#8226; %4$d/%5$d piese</string>
     <string name="spotify_import_complete">Importul din Spotify s-a Ã®ncheiat</string>
-    <string name="spotify_import_summary">%1$d surse â€¢ %2$d importate â€¢ %3$d eÈ™uate</string>
+    <string name="spotify_import_summary">%1$d surse &#8226; %2$d importate &#8226; %3$d eÈ™uate</string>
     <string name="spotify_source_summary">%1$s: %2$d/%3$d importate</string>
     <string name="spotify_select_all">SelecteazÄƒ tot</string>
     <string name="spotify_clear_selection">CurÄƒÈ›Äƒ selecÈ›ia</string>
@@ -395,9 +395,9 @@
     <string name="content_sponsor_block_desc">Omite automat sponsorizÄƒrile, introducerile È™i secÈ›iunile fÄƒrÄƒ muzicÄƒ din videoclipuri</string>
     <string name="spotify_import_by_link">ImportÄƒ lista de redare prin link</string>
     <string name="spotify_import_by_link_desc">InsereazÄƒ linkul unei liste de redare Spotify pentru a o importa, inclusiv listele de redare care nu Ã®È›i aparÈ›in</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/...</string>
     <string name="spotify_add">AdaugÄƒ</string>
-    <string name="spotify_invalid_playlist_link">Acesta nu pare sÄƒ fie linkul unei liste de redare Spotify. FoloseÈ™te un link precum https://open.spotify.com/playlist/â€¦</string>
+    <string name="spotify_invalid_playlist_link">Acesta nu pare sÄƒ fie linkul unei liste de redare Spotify. FoloseÈ™te un link precum https://open.spotify.com/playlist/...</string>
     <string name="service_uptime">Disponibilitatea serviciilor</string>
     <string name="service_uptime_desc">VerificÄƒ starea furnizorilor de muzicÄƒ</string>
     <string name="music_providers">Furnizori de muzicÄƒ</string>
@@ -409,8 +409,8 @@
     <string name="status_checking">Se verificÄƒ...</string>
     <string name="recognition_notification_channel_name">RecunoaÈ™terea muzicii</string>
     <string name="recognition_notification_channel_desc">AfiÈ™eazÄƒ o notificare Ã®n timpul identificÄƒrii unei melodii din setÄƒrile rapide</string>
-    <string name="recognition_notification_listening">Se ascultÄƒ muzicaâ€¦</string>
-    <string name="recognition_notification_processing">Se identificÄƒâ€¦</string>
+    <string name="recognition_notification_listening">Se ascultÄƒ muzica...</string>
+    <string name="recognition_notification_processing">Se identificÄƒ...</string>
     <string name="recognition_notification_no_match">Nu s-a gÄƒsit nicio potrivire</string>
     <string name="recognition_notification_failed">RecunoaÈ™terea a eÈ™uat</string>
     <string name="listen_on_chorus_music">AscultÄƒ Ã®n Chorus Music</string>
@@ -429,7 +429,7 @@
     <string name="last_updated_never">NiciodatÄƒ</string>
     <string name="cipher_update_success">MapÄƒrile extractorului au fost actualizate! S-au Ã®ncÄƒrcat %d playere.</string>
     <string name="cipher_update_failed">Actualizarea mapÄƒrilor extractorului a eÈ™uat: %s</string>
-    <string name="cipher_updating">Se actualizeazÄƒ configuraÈ›iile extractoruluiâ€¦</string>
+    <string name="cipher_updating">Se actualizeazÄƒ configuraÈ›iile extractorului...</string>
     <string name="hours_label">Ore</string>
     <string name="minutes_label">Minute</string>
     <string name="seconds_label">Secunde</string>
