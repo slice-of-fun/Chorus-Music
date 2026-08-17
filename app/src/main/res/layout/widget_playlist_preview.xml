@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="top"
     android:padding="8dp"
-    android:theme="@style/Theme.Widget.chorusmusic">
+>
 
     <!-- Top Player Section (Pill Style) -->
     <LinearLayout
@@ -21,7 +21,7 @@
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:background="@drawable/widget_art_circle_bg"
-            android:clipToOutline="true">
+>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -124,7 +124,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/widget_art_circle_bg"
-                android:clipToOutline="true">
+>
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -132,7 +132,7 @@
                     android:src="@drawable/playlist_play"
                     android:contentDescription="@null" />
             </FrameLayout>
-            <TextView style="@style/MetrolistPlaylistWidgetCardTitle" android:textColor="@color/widget_on_primary_container" android:text="@string/widget_playlists" />
+            <TextView android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" android:text="@string/widget_playlists" />
         </LinearLayout>
 
         <LinearLayout
@@ -148,7 +148,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/widget_art_circle_bg"
-                android:clipToOutline="true">
+>
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -156,7 +156,7 @@
                     android:src="@drawable/ic_widget_heart_nav"
                     android:contentDescription="@null" />
             </FrameLayout>
-            <TextView style="@style/MetrolistPlaylistWidgetCardTitle" android:textColor="@color/widget_on_primary_container" android:text="@string/liked_songs" />
+            <TextView android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" android:text="@string/liked_songs" />
         </LinearLayout>
 
         <LinearLayout
@@ -172,7 +172,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/widget_art_circle_bg"
-                android:clipToOutline="true">
+>
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -180,7 +180,7 @@
                     android:src="@drawable/cached"
                     android:contentDescription="@null" />
             </FrameLayout>
-            <TextView style="@style/MetrolistPlaylistWidgetCardTitle" android:textColor="@color/widget_on_primary_container" android:text="@string/downloaded_songs" />
+            <TextView android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" android:text="@string/downloaded_songs" />
         </LinearLayout>
 
         <LinearLayout
@@ -195,7 +195,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/widget_art_circle_bg"
-                android:clipToOutline="true">
+>
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -203,7 +203,7 @@
                     android:src="@drawable/trending_up"
                     android:contentDescription="@null" />
             </FrameLayout>
-            <TextView style="@style/MetrolistPlaylistWidgetCardTitle" android:textColor="@color/widget_on_primary_container" android:text="@string/my_top" />
+            <TextView android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" android:text="@string/my_top" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

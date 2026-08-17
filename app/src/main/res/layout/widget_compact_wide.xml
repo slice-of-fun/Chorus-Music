@@ -10,14 +10,14 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:gravity="center_vertical"
-    android:theme="@style/Theme.Widget.chorusmusic">
+>
 
     <!-- Album Art - Circular -->
     <FrameLayout
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:background="@drawable/widget_art_circle_bg"
-        android:clipToOutline="true">
+>
         
         <ImageView
             android:id="@+id/widget_wide_album_art"

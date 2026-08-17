@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    android:theme="@style/Theme.Widget.chorusmusic">
+>
 
     <!-- Card Background with Clipping -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/widget_pill_bg"
-        android:clipToOutline="true">
+>
 
         <!-- Edge-to-Edge Album Art -->
         <ImageView

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    android:theme="@style/Theme.Widget.chorusmusic">
+>
 
     <!-- Card Background -->
     <LinearLayout
@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:layout_marginBottom="16dp"
             android:background="@drawable/widget_art_circle_bg"
-            android:clipToOutline="true">
+>
 
             <ImageView
                 android:id="@+id/widget_album_art"

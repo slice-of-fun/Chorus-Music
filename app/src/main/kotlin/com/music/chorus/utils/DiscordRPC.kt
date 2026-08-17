@@ -42,9 +42,9 @@ class DiscordRPC(
 ) {
     companion object {
         private const val PAUSE_IMAGE_URL =
-            "https://raw.githubusercontent.com/slice-of-fun/Chorus-Music/main/assets/paused.png"
+            "https://files.catbox.moe/pv3t2t.png"
         private const val APP_ICON_URL =
-            "https://raw.githubusercontent.com/slice-of-fun/Chorus-Music/main/assets/Chorus-new.png"
+            "https://files.catbox.moe/ber0ss.png"
         private const val TAG = "DiscordRPC"
     }
 

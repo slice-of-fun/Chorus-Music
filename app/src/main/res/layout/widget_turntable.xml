@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:theme="@style/Theme.Widget.chorusmusic">
+>
 
     <!-- Floating Circular Album Art (The "Vinyl") -->
     <FrameLayout
@@ -13,8 +13,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="@drawable/widget_art_circle_bg"
-        android:clipToOutline="true"
-        android:elevation="8dp">
+android:elevation="8dp">
         
         <ImageView
             android:id="@+id/widget_turntable_album_art"
