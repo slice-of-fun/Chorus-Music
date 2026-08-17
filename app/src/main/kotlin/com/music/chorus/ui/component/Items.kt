@@ -853,7 +853,7 @@ fun PlaylistListItem(
                 val painter = when (playlist.playlist.name) {
                     stringResource(R.string.liked) -> R.drawable.favorite_border
                     stringResource(R.string.offline) -> R.drawable.offline
-                    stringResource(R.string.cached_playlist) -> R.drawable.cached
+                    stringResource(R.string.cached_playlist) -> R.drawable.offline
                     
                     stringResource(R.string.uploaded_playlist) -> R.drawable.backup
                     else -> if (autoPlaylist) R.drawable.trending_up else R.drawable.ic_launcher_nobg
@@ -963,7 +963,7 @@ fun PlaylistGridItem(
                 val painter = when (playlist.playlist.name) {
                     stringResource(R.string.liked) -> R.drawable.favorite_border
                     stringResource(R.string.offline) -> R.drawable.offline
-                    stringResource(R.string.cached_playlist) -> R.drawable.cached
+                    stringResource(R.string.cached_playlist) -> R.drawable.offline
                     
                     stringResource(R.string.uploaded_playlist) -> R.drawable.backup
                     else -> if (autoPlaylist) R.drawable.trending_up else R.drawable.ic_launcher_nobg

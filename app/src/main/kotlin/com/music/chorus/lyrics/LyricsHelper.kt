@@ -78,12 +78,13 @@ constructor(
 
         return coroutineScope {
             val channel = Channel<LyricsWithProvider?>(providers.size)
+            val cleanTitle = pushkar.chorus.music.lyrics.LyricsUtils.cleanSongTitleForLyrics(mediaMetadata.title)
             providers.forEach { provider ->
                 launch {
                     try {
                         val result = provider.getLyrics(
                             mediaMetadata.id,
-                            mediaMetadata.title,
+                            cleanTitle,
                             mediaMetadata.artists.joinToString { it.name },
                             mediaMetadata.duration,
                             mediaMetadata.album?.title,
@@ -143,6 +144,7 @@ constructor(
             return
         }
 
+        val cleanTitle = pushkar.chorus.music.lyrics.LyricsUtils.cleanSongTitleForLyrics(songTitle)
         val isNetworkAvailable = try {
             networkConnectivity.isCurrentlyConnected()
         } catch (e: Exception) {

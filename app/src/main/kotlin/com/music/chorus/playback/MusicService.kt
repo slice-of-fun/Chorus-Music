@@ -2058,10 +2058,19 @@ class MusicService :
                         .filterVideoSongs(dataStore.get(HideVideoSongsKey, false) || dataStore.get(pushkar.chorus.music.constants.DataSaverEnabledKey, false))
                 }
                 if (player.playbackState != STATE_IDLE && mediaItems.isNotEmpty()) {
-                    player.addMediaItems(mediaItems)
-                    if (player.shuffleModeEnabled) {
-                        val shufflePlaylistFirst = dataStore.get(ShufflePlaylistFirstKey, false)
-                        applyShuffleOrder(player.currentMediaItemIndex, player.mediaItemCount, shufflePlaylistFirst)
+                    val filteredMediaItems = if (dataStore.get(PreventDuplicateTracksInQueueKey, false)) {
+                        val existingMediaIds = (0 until player.mediaItemCount).map { player.getMediaItemAt(it).mediaId }.toSet()
+                        mediaItems.filter { it.mediaId !in existingMediaIds }
+                    } else {
+                        mediaItems
+                    }
+
+                    if (filteredMediaItems.isNotEmpty()) {
+                        player.addMediaItems(filteredMediaItems)
+                        if (player.shuffleModeEnabled) {
+                            val shufflePlaylistFirst = dataStore.get(ShufflePlaylistFirstKey, false)
+                            applyShuffleOrder(player.currentMediaItemIndex, player.mediaItemCount, shufflePlaylistFirst)
+                        }
                     }
                 }
             }

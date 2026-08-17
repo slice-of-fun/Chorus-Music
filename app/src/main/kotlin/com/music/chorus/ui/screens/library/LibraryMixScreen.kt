@@ -362,7 +362,7 @@ fun LibraryMixScreen(
                             if (showCached) {
                                 AutoPlaylistButton(
                                     title = stringResource(R.string.cached_playlist),
-                                    icon = R.drawable.cached,
+                                    icon = R.drawable.offline,
                                     iconTint = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
                                     onClick = { navController.navigate("cache_playlist/cached") },
                                     modifier = itemModifier
@@ -620,7 +620,7 @@ fun LibraryMixScreen(
                             if (showCached) {
                                 AutoPlaylistButton(
                                     title = stringResource(R.string.cached_playlist),
-                                    icon = R.drawable.cached,
+                                    icon = R.drawable.offline,
                                     iconTint = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
                                     onClick = { navController.navigate("cache_playlist/cached") },
                                     modifier = itemModifier

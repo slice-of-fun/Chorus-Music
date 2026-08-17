@@ -505,7 +505,7 @@ private fun CachePlaylistHeader(
             modifier = Modifier.padding(horizontal = 24.dp)
         ) {
             Icon(
-                painter = painterResource(R.drawable.cached),
+                painter = painterResource(R.drawable.offline),
                 contentDescription = null,
                 modifier = Modifier.size(28.dp),
                 tint = MaterialTheme.colorScheme.primary

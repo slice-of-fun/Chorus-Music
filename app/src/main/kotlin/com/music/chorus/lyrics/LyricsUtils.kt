@@ -569,8 +569,17 @@ object LyricsUtils {
         return lines.lastIndex
     }
 
-    
-    
+    fun cleanSongTitleForLyrics(title: String): String {
+        return title
+            .replace(Regex("\\(.*?\\)"), "")
+            .replace(Regex("\\[.*?\\]"), "")
+            .replace(Regex(" - Title Track.*", RegexOption.IGNORE_CASE), "")
+            .replace(Regex(" - Instrumental.*", RegexOption.IGNORE_CASE), "")
+            .replace(Regex(" - From .*?", RegexOption.IGNORE_CASE), "")
+            .replace(Regex("(?i) feat\\..*"), "")
+            .substringBefore(" - ")
+            .trim()
+    }
 
     fun katakanaToRomaji(katakana: String?): String {
         if (katakana.isNullOrEmpty()) return ""

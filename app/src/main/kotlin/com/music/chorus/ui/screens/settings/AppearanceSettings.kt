@@ -1779,7 +1779,7 @@ highlightKey: String? = null) {
                 ),
                 Material3SettingsItem(
     isHighlighted = (highlightKey == stringResource(R.string.show_downloaded_playlist)),
-                    icon = painterResource(R.drawable.offline),
+                    icon = painterResource(R.drawable.download),
                     title = { Text(stringResource(R.string.show_downloaded_playlist)) },
                     trailingContent = {
                         Switch(
@@ -1842,7 +1842,7 @@ highlightKey: String? = null) {
                 ),
                 Material3SettingsItem(
     isHighlighted = (highlightKey == stringResource(R.string.show_cached_playlist)),
-                    icon = painterResource(R.drawable.cached),
+                    icon = painterResource(R.drawable.offline),
                     title = { Text(stringResource(R.string.show_cached_playlist)) },
                     trailingContent = {
                         Switch(

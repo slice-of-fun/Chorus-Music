@@ -91,7 +91,7 @@ fun SettingDialoge(
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)
                 ) {
                     Spacer(modifier = Modifier.size(24.dp))
-                    
+
                     Text(
                         text = "Chorus Music",
                         style = MaterialTheme.typography.titleLarge.copy(
@@ -205,7 +205,7 @@ fun SettingDialoge(
                             ),
                             Material3SettingsItem(
                                 title = { Text("YouTube Music Sync") },
-                                icon = painterResource(R.drawable.cached),
+                                icon = painterResource(R.drawable.refresh),
                                 trailingContent = {
                                     Switch(
                                         checked = ytmSync,
@@ -231,7 +231,13 @@ fun SettingDialoge(
                         Material3SettingsItem(
                             title = { Text("About") },
                             icon = painterResource(R.drawable.info),
-                            trailingContent = { Text(BuildConfig.VERSION_NAME, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant) },
+                            trailingContent = {
+                                Text(
+                                    BuildConfig.VERSION_NAME,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            },
                             onClick = { onNavigate("settings/about") }
                         )
                     )
@@ -247,14 +253,16 @@ fun SettingDialoge(
                         text = "Privacy Policy",
                         style = MaterialTheme.typography.bodySmall,
                         color = onSecondaryColor,
-                        modifier = Modifier.clickable { uriHandler.openUri("https://slice-of-fun.github.io/Chorus-Music/p/privacy-policy") }.padding(4.dp)
+                        modifier = Modifier.clickable { uriHandler.openUri("https://slice-of-fun.github.io/Chorus-Music/p/privacy-policy") }
+                            .padding(4.dp)
                     )
                     Text(text = " \u2022 ", color = onSecondaryColor, style = MaterialTheme.typography.bodySmall)
                     Text(
                         text = "Terms of Service",
                         style = MaterialTheme.typography.bodySmall,
                         color = onSecondaryColor,
-                        modifier = Modifier.clickable { uriHandler.openUri("https://slice-of-fun.github.io/Chorus-Music/p/toc") }.padding(4.dp)
+                        modifier = Modifier.clickable { uriHandler.openUri("https://slice-of-fun.github.io/Chorus-Music/p/toc") }
+                            .padding(4.dp)
                     )
                 }
             }

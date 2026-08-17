@@ -295,7 +295,7 @@ fun LibraryPlaylistsScreen(
                             if (showDownloaded) {
                                 AutoPlaylistButton(
                                     title = stringResource(R.string.offline),
-                                    icon = R.drawable.offline,
+                                    icon = R.drawable.download,
                                     iconTint = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
                                     onClick = { navController.navigate("auto_playlist/downloaded") },
                                     modifier = itemModifier
@@ -320,7 +320,7 @@ fun LibraryPlaylistsScreen(
                             if (showCached) {
                                 AutoPlaylistButton(
                                     title = stringResource(R.string.cached_playlist),
-                                    icon = R.drawable.cached,
+                                    icon = R.drawable.offline,
                                     iconTint = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
                                     onClick = { navController.navigate("cache_playlist/cached") },
                                     modifier = itemModifier
@@ -427,7 +427,7 @@ fun LibraryPlaylistsScreen(
                             if (showDownloaded) {
                                 AutoPlaylistButton(
                                     title = stringResource(R.string.offline),
-                                    icon = R.drawable.offline,
+                                    icon = R.drawable.download,
                                     iconTint = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
                                     onClick = { navController.navigate("auto_playlist/downloaded") },
                                     modifier = itemModifier
@@ -452,7 +452,7 @@ fun LibraryPlaylistsScreen(
                             if (showCached) {
                                 AutoPlaylistButton(
                                     title = stringResource(R.string.cached_playlist),
-                                    icon = R.drawable.cached,
+                                    icon = R.drawable.offline,
                                     iconTint = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
                                     onClick = { navController.navigate("cache_playlist/cached") },
                                     modifier = itemModifier

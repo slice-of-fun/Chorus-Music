@@ -5,15 +5,15 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@drawable/widget_background"
-    android:padding="16dp"
+    android:padding="20dp"
     android:gravity="center_vertical"
     android:theme="@style/Theme.Widget.chorusmusic">
 
     <!-- Album Art Section (Left) -->
     <ImageView
         android:id="@+id/widget_album_art"
-        android:layout_width="88dp"
-        android:layout_height="88dp"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"
         android:contentDescription="@string/album_art" />
@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:orientation="vertical">
 
         <!-- Top Row: Song Info -->
@@ -31,14 +31,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:id="@+id/widget_song_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/not_playing"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/widget_text_primary"
                 android:maxLines="1"
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/tap_to_play"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:textColor="@color/widget_text_secondary"
                 android:maxLines="1"
                 android:ellipsize="end"
@@ -60,20 +60,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false" android:orientation="horizontal"
+            android:baselineAligned="false" 
+            android:orientation="horizontal"
             android:gravity="center_vertical">
 
             <!-- Like Button -->
             <FrameLayout
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
                 android:background="@drawable/widget_like_button_bg">
 
                 <ImageButton
                     android:id="@+id/widget_like_button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="12dp"
+                    android:padding="14dp"
                     android:scaleType="fitCenter"
                     android:background="@android:color/transparent"
                     android:src="@drawable/ic_widget_heart_outline_nav"
@@ -84,15 +85,15 @@
             <FrameLayout
                 android:id="@+id/widget_play_pause_container"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="52dp"
                 android:layout_weight="1"
                 android:layout_marginStart="12dp"
                 android:background="@drawable/widget_play_pill_bg">
 
                 <ImageView
                     android:id="@+id/widget_play_pause"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_widget_play"
                     android:contentDescription="@string/play_pause" />
@@ -103,8 +104,8 @@
         <!-- Bottom Row: Progress Bar -->
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="6dp"
-            android:layout_marginTop="12dp">
+            android:layout_height="8dp"
+            android:layout_marginTop="16dp">
 
             <ImageView
                 android:id="@+id/widget_progress_track"
