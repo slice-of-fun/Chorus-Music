@@ -270,16 +270,22 @@ private fun SpotifyImportDialogs(
     if (state.isLoading && state.progress == null) {
         DefaultDialog(
             onDismiss = { },
+            properties = androidx.compose.ui.window.DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false, usePlatformDefaultWidth = false),
             title = { Text(stringResource(R.string.loading)) },
             buttons = {}
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+                modifier = Modifier.fillMaxWidth()
             ) {
-                CircularProgressIndicator()
-                Text("Please wait...")
+                CircularProgressIndicator(
+                    modifier = Modifier.size(36.dp)
+                )
+                Text(
+                    "Please wait...",
+                    modifier = Modifier.weight(1f)
+                )
             }
         }
     }

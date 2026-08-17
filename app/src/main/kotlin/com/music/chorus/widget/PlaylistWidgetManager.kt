@@ -327,7 +327,6 @@ class PlaylistWidgetManager @Inject constructor(
         visiblePicks.forEachIndexed { index, item ->
             val slot = cardSlots[index]
             views.setTextViewText(slot.titleId, item.title)
-            views.setImageViewResource(slot.playIconId, R.drawable.ic_widget_play_low)
             views.setImageViewBitmap(
                 slot.artworkId,
                 item.thumbnailUrl
@@ -336,7 +335,6 @@ class PlaylistWidgetManager @Inject constructor(
                     ?: getFallbackArtwork(item, 30f),
             )
             views.setOnClickPendingIntent(slot.containerId, getOpenTargetIntent(item))
-            views.setOnClickPendingIntent(slot.playContainerId, getPlayTargetIntent(item))
         }
     }
     // Pick the widget size bucket for the shortcut grid

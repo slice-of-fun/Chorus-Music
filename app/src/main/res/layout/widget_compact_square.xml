@@ -1,43 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Compact 2x2 Widget - Album art with play button overlay -->
+<!-- Compact Square Widget - Floating Art Card -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/widget_background"
     android:padding="8dp"
     android:theme="@style/Theme.Widget.chorusmusic">
 
-    <!-- Album Art Container -->
+    <!-- Card Background with Clipping -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/widget_pill_bg"
+        android:clipToOutline="true">
 
+        <!-- Edge-to-Edge Album Art -->
         <ImageView
             android:id="@+id/widget_compact_album_art"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/music_note"
             android:contentDescription="@string/album_art" />
+            
+        <!-- Gradient Overlay for Legibility -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/widget_bottom_gradient" />
 
-        <!-- Play Button Overlay - Center -->
-        <FrameLayout
-            android:id="@+id/widget_compact_play_container"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:background="@drawable/widget_play_button_circular">
+        <!-- Controls & Text Overlay -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
 
+            <!-- Song Info -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:id="@+id/widget_song_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/not_playing"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/widget_artist_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tap_to_play"
+                    android:textSize="13sp"
+                    android:textColor="#DDDDDD"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <!-- Minimal Play Button -->
             <ImageView
                 android:id="@+id/widget_compact_play_pause"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_widget_play_low"
+                android:src="@drawable/ic_widget_play"
+                android:tint="#FFFFFF"
                 android:contentDescription="@string/play_pause" />
-        </FrameLayout>
 
+        </LinearLayout>
     </FrameLayout>
-
 </FrameLayout>
