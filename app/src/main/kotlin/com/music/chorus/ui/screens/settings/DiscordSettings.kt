@@ -1206,7 +1206,7 @@ fun RichPresence(
     ): String? =
         when (source.lowercase()) {
             "songurl" -> {
-                song?.song?.id?.let { "https://music.youtube.com/watch?v=$it" }
+                song?.song?.id?.let { "https://slice-of-fun.github.io/Chorus-Music/?v=$it" }
             }
 
             "artisturl" -> {

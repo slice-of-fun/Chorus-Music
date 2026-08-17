@@ -33,25 +33,7 @@ object DiscordAssetRegistrar {
             if (imageUrl == null) return@withContext null
 
             val parsed = parseImageType(imageUrl)
-            when (parsed) {
-                is ImageType.Snowflake,
-                is ImageType.MpPrefix,
-                is ImageType.DiscordCdn,
-                -> {
-                    return@withContext parsed.value
-                }
-
-                is ImageType.ExternalUrl -> {
-                    cache[imageUrl]?.let { return@withContext "mp:$it" }
-                    val registered = registerExternal(accessToken, imageUrl) ?: return@withContext null
-                    cache[imageUrl] = registered
-                    return@withContext "mp:$registered"
-                }
-
-                is ImageType.Raw -> {
-                    return@withContext parsed.value
-                }
-            }
+            return@withContext parsed.value
         }
 
     suspend fun resolveImages(
@@ -60,64 +42,13 @@ object DiscordAssetRegistrar {
         smallImage: String?,
     ): Pair<String?, String?> =
         withContext(Dispatchers.IO) {
-            mutex.withLock {
-                val urlsToRegister = mutableListOf<Pair<String, String>>()
+            val largeType = largeImage?.let { parseImageType(it) }
+            val smallType = smallImage?.let { parseImageType(it) }
 
-                val largeType = largeImage?.let { parseImageType(it) }
-                val smallType = smallImage?.let { parseImageType(it) }
+            val resolvedLarge = largeType?.value
+            val resolvedSmall = smallType?.value
 
-                if (largeType is ImageType.ExternalUrl && !cache.containsKey(largeImage)) {
-                    urlsToRegister.add("large" to largeImage)
-                }
-                if (smallType is ImageType.ExternalUrl && !cache.containsKey(smallImage)) {
-                    urlsToRegister.add("small" to smallImage)
-                }
-
-                val registrationMap = mutableMapOf<String, String>()
-
-                if (urlsToRegister.isNotEmpty()) {
-                    val urls = urlsToRegister.map { it.second }
-                    try {
-                        val results = registerExternalBatch(accessToken, urls)
-                        for (i in results.indices) {
-                            val key = urlsToRegister[i].first
-                            val registeredPath = results[i]
-                            if (registeredPath != null) {
-                                cache[urlsToRegister[i].second] = registeredPath
-                                registrationMap[key] = registeredPath
-                            }
-                        }
-                    } catch (e: Exception) {
-                        Timber.tag(TAG).w(e, "Failed to register external assets")
-                    }
-                }
-
-                val resolvedLarge =
-                    when (largeType) {
-                        is ImageType.ExternalUrl -> {
-                            val cached = cache[largeImage]
-                            if (cached != null) "mp:$cached" else null
-                        }
-
-                        else -> {
-                            largeType?.value
-                        }
-                    }
-
-                val resolvedSmall =
-                    when (smallType) {
-                        is ImageType.ExternalUrl -> {
-                            val cached = cache[smallImage]
-                            if (cached != null) "mp:$cached" else null
-                        }
-
-                        else -> {
-                            smallType?.value
-                        }
-                    }
-
-                resolvedLarge to resolvedSmall
-            }
+            resolvedLarge to resolvedSmall
         }
 
     fun clearCache() {
@@ -188,75 +119,4 @@ object DiscordAssetRegistrar {
         return ImageType.ExternalUrl(image)
     }
 
-    private fun registerExternal(
-        accessToken: String,
-        imageUrl: String,
-    ): String? {
-        val json =
-            JSONObject().apply {
-                put("urls", JSONArray(listOf(imageUrl)))
-            }
-        val body = json.toString().toRequestBody("application/json".toMediaType())
-        val authHeader = if (accessToken.contains(".")) accessToken else "Bearer $accessToken"
-        val request =
-            Request
-                .Builder()
-                .url("$API_BASE/applications/${BuildConfig.DISCORD_APPLICATION_ID}/external-assets")
-                .addHeader("Authorization", authHeader)
-                .post(body)
-                .build()
-
-        val response = client.newCall(request).execute()
-        val responseBody = response.body.string()
-
-        if (!response.isSuccessful) {
-            Timber.tag(TAG).w("external-assets API error %d: %s", response.code, responseBody)
-            return null
-        }
-
-        val arr = JSONArray(responseBody)
-        if (arr.length() == 0) return null
-        val obj = arr.getJSONObject(0)
-        return obj.optString("external_asset_path").takeIf { it.isNotEmpty() }
-    }
-
-    private suspend fun registerExternalBatch(
-        accessToken: String,
-        urls: List<String>,
-    ): List<String?> =
-        withContext(Dispatchers.IO) {
-            if (urls.isEmpty()) return@withContext emptyList()
-
-            val json =
-                JSONObject().apply {
-                    put("urls", JSONArray(urls))
-                }
-            val body = json.toString().toRequestBody("application/json".toMediaType())
-            val authHeader = if (accessToken.contains(".")) accessToken else "Bearer $accessToken"
-            val request =
-                Request
-                    .Builder()
-                    .url("$API_BASE/applications/${BuildConfig.DISCORD_APPLICATION_ID}/external-assets")
-                    .addHeader("Authorization", authHeader)
-                    .post(body)
-                    .build()
-
-            try {
-                val response = client.newCall(request).execute()
-                val responseBody = response.body.string()
-
-                if (!response.isSuccessful) {
-                    Timber.tag(TAG).w("external-assets API error %d: %s", response.code, responseBody)
-                    return@withContext urls.map { null }
-                }
-
-                val arr = JSONArray(responseBody)
-                return@withContext (0 until arr.length()).map { i ->
-                    arr.getJSONObject(i).optString("external_asset_path").takeIf { it.isNotEmpty() }
-                }
-            } catch (e: Exception) {
-                Timber.tag(TAG).w(e, "external-assets API call failed")
-                urls.map { null }
-            }
-        }
 }

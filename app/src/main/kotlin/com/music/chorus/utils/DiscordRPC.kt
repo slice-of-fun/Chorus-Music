@@ -311,7 +311,10 @@ class DiscordRPC(
     ): String? =
         when (source.lowercase()) {
             "songurl" -> {
-                "https://music.youtube.com/${song.id}"
+                song.song.id
+                    .takeUnless { song.song.isLocal || it.isLocalMediaId() }
+                    ?.let { "https://slice-of-fun.github.io/Chorus-Music/?v=$it" }
+                    ?: "https://github.com/slice-of-fun/Chorus-Music"
             }
 
             "artisturl" -> {
