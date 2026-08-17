@@ -76,7 +76,7 @@ android:gravity="center"
                 android:src="@drawable/ic_widget_heart_outline_nav"
                 android:contentDescription="@string/like" />
 
-            <Space
+            <FrameLayout
                 android:layout_width="24dp"
                 android:layout_height="wrap_content" />
 
@@ -88,7 +88,7 @@ android:gravity="center"
                 android:src="@drawable/ic_widget_play"
                 android:contentDescription="@string/play_pause" />
 
-            <Space
+            <FrameLayout
                 android:layout_width="24dp"
                 android:layout_height="wrap_content" />
 

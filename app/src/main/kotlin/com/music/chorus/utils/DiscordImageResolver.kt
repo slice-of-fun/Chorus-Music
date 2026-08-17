@@ -94,7 +94,7 @@ object DiscordImageResolver {
             }
 
             "appicon" -> {
-                "https://files.catbox.moe/ber0ss.png"
+                "https://raw.githubusercontent.com/slice-of-fun/Chorus-Music/main/assets/Chorus-new.png"
             }
 
             "custom" -> {

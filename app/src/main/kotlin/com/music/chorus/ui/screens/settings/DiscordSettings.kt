@@ -1288,7 +1288,7 @@ fun RichPresence(
                             val largeImageModel =
                                 when (largeImageType.lowercase()) {
                                     "thumbnail" -> song?.song?.thumbnailUrl
-                                    "artist" -> song?.artists?.firstOrNull()?.thumbnailUrl
+                                    "artist" -> song?.artists?.firstOrNull()?.thumbnailUrl ?: song?.song?.thumbnailUrl
                                     "appicon" -> R.mipmap.ic_launcher
                                     "custom" -> largeImageCustomUrl.ifBlank { song?.song?.thumbnailUrl }
                                     else -> song?.song?.thumbnailUrl
@@ -1318,11 +1318,11 @@ fun RichPresence(
                             val smallModel =
                                 when (smallImageType.lowercase()) {
                                     "thumbnail" -> songThumb
-                                    "artist" -> artistThumb
+                                    "artist" -> artistThumb ?: songThumb
                                     "appicon" -> R.mipmap.ic_launcher
                                     "custom" -> smallImageCustomUrl.takeIf { it.isNotBlank() } ?: songThumb
                                     "dontshow", "none" -> null
-                                    else -> artistThumb
+                                    else -> artistThumb ?: songThumb
                                 }
                             smallModel?.let {
                                 Box(
