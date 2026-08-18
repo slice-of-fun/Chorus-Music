@@ -224,6 +224,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
+import pushkar.chorus.music.extensions.toMediaItem
 import timber.log.Timber
 import java.net.URLDecoder
 import java.net.URLEncoder

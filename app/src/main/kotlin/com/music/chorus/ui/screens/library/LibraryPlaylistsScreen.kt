@@ -511,15 +511,25 @@ fun LibraryPlaylistsScreen(
             }
         }
 
-        HideOnScrollFAB(
-            lazyListState = lazyListState,
-            lazyGridState = lazyGridState,
-            icon = R.drawable.add,
-            text = stringResource(R.string.create_playlist),
-            onClick = {
-                showCreatePlaylistDialog = true
-            }
-        )
+        if (viewType == LibraryViewType.LIST) {
+            HideOnScrollFAB(
+                lazyListState = lazyListState,
+                icon = R.drawable.add,
+                text = stringResource(R.string.create_playlist),
+                onClick = {
+                    showCreatePlaylistDialog = true
+                }
+            )
+        } else {
+            HideOnScrollFAB(
+                lazyGridState = lazyGridState,
+                icon = R.drawable.add,
+                text = stringResource(R.string.create_playlist),
+                onClick = {
+                    showCreatePlaylistDialog = true
+                }
+            )
+        }
 
         if (showCreatePlaylistDialog) {
             CreatePlaylistDialog(
