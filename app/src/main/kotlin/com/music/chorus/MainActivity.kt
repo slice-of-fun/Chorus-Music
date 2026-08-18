@@ -1427,11 +1427,11 @@ class MainActivity : ComponentActivity() {
 
             lifecycleScope.launch(Dispatchers.IO) {
                 val items = when (targetType) {
-                    "liked" -> database.likedSongsByCreateDateAsc().firstOrNull()?.map { it.toMediaItem() }
-                    "downloaded" -> database.downloadedSongsByCreateDateAsc().firstOrNull()?.map { it.toMediaItem() }
+                    "liked" -> database.likedSongsByCreateDateAsc().firstOrNull()?.map { it.toMediaItem().build() }
+                    "downloaded" -> database.downloadedSongsByCreateDateAsc().firstOrNull()?.map { it.toMediaItem().build() }
                     "offline" -> null
-                    "top" -> database.mostPlayedSongs(0L, limit = 50).firstOrNull()?.map { it.toMediaItem() }
-                    "local" -> database.playlistSongs(targetId).firstOrNull()?.map { it.song.toMediaItem() }
+                    "top" -> database.mostPlayedSongs(0L, limit = 50).firstOrNull()?.map { it.toMediaItem().build() }
+                    "local" -> database.playlistSongs(targetId).firstOrNull()?.map { it.song.toMediaItem().build() }
                     else -> null
                 }
 

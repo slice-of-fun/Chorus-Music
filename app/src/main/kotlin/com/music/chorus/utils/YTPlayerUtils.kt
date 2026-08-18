@@ -430,9 +430,10 @@ object YTPlayerUtils {
         var finalPlaybackData: PlaybackData? = null
 
         kotlinx.coroutines.coroutineScope {
+            val scope = this
             val channel = kotlinx.coroutines.channels.Channel<PlaybackData>(kotlinx.coroutines.channels.Channel.BUFFERED)
             val jobs = clientsToTry.map { (clientIndex, client) ->
-                launch(kotlinx.coroutines.Dispatchers.IO) {
+                scope.launch(kotlinx.coroutines.Dispatchers.IO) {
                     try {
                         var streamUrl: String? = null
                         var streamExpiresInSeconds: Int? = null
@@ -512,7 +513,7 @@ object YTPlayerUtils {
                 }
             }
 
-            launch {
+            scope.launch {
                 jobs.forEach { it.join() }
                 channel.close()
             }
