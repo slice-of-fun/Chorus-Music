@@ -419,6 +419,9 @@ class PlaylistWidgetManager @Inject constructor(
                     targetId = PlaylistWidgetReceiver.TARGET_TYPE_DOWNLOADED,
                     title = context.getString(R.string.offline),
                     thumbnailUrl = downloadedSongs.firstOrNull()?.thumbnailUrl,
+                    fallbackIconRes = R.drawable.music_note,
+                ),
+            )
         }
 
         if (topSongs.isNotEmpty()) {

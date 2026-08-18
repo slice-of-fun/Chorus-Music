@@ -224,8 +224,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.net.URLDecoder
 import java.net.URLEncoder
@@ -1428,11 +1426,11 @@ class MainActivity : ComponentActivity() {
 
             lifecycleScope.launch(Dispatchers.IO) {
                 val items = when (targetType) {
-                    "liked" -> database.songs().getByLiked().firstOrNull()?.map { it.toMediaItem() }
-                    "downloaded" -> database.songs().getDownloadedSongs().firstOrNull()?.map { it.song.toMediaItem() }
+                    "liked" -> database.likedSongsByCreateDateAsc().firstOrNull()?.map { it.toMediaItem() }
+                    "downloaded" -> database.downloadedSongsByCreateDateAsc().firstOrNull()?.map { it.toMediaItem() }
                     "offline" -> null
-                    "top" -> database.songs().getTopSongs().firstOrNull()?.map { it.song.toMediaItem() }
-                    "local" -> database.playlistSongMap().getSongsForPlaylist(targetId).firstOrNull()?.map { it.toMediaItem() }
+                    "top" -> database.mostPlayedSongs(0L, limit = 50).firstOrNull()?.map { it.toMediaItem() }
+                    "local" -> database.playlistSongs(targetId).firstOrNull()?.map { it.song.toMediaItem() }
                     else -> null
                 }
 
