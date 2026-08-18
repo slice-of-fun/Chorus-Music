@@ -479,12 +479,12 @@ object YTPlayerUtils {
                                         var isValid = false
                                         if (clientIndex == STREAM_FALLBACK_CLIENTS.size - 1 || isPrivatelyOwned) {
                                             isValid = true
-                                        } else if (validateStatus(streamUrl!!)) {
+                                        } else if (validateStatus(streamUrl!!, client)) {
                                             isValid = true
                                         } else if (client.useWebPoTokens) {
                                             try {
                                                 val nTransformed = CipherDeobfuscator.transformNParamInUrl(streamUrl!!)
-                                                if (nTransformed != streamUrl && validateStatus(nTransformed)) {
+                                                if (nTransformed != streamUrl && validateStatus(nTransformed, client)) {
                                                     streamUrl = nTransformed
                                                     isValid = true
                                                 }
@@ -508,6 +508,7 @@ object YTPlayerUtils {
                             }
                         }
                     } catch (e: Exception) {
+                        if (e is kotlinx.coroutines.CancellationException) throw e
                         Timber.tag(logTag).e(e, "Concurrent fetch failed for client")
                     }
                 }
@@ -537,6 +538,7 @@ object YTPlayerUtils {
         Timber.tag(logTag).d("Successfully obtained playback data from concurrent fetch")
         finalPlaybackData!!
     }.onFailure { e ->
+        if (e is kotlinx.coroutines.CancellationException) throw e
         Timber.tag(logTag).e(e, "Playback resolution failed")
         PlaybackLogManager.log(PlaybackLogLevel.ERROR, "Playback failed", "${e::class.simpleName}: ${e.message}")
     }
@@ -575,28 +577,41 @@ object YTPlayerUtils {
         return format
     }
     
-    private fun validateStatus(url: String): Boolean {
+    private suspend fun validateStatus(url: String, client: YouTubeClient): Boolean {
         Timber.tag(logTag).d("Validating stream URL status")
-        try {
+        return kotlinx.coroutines.suspendCancellableCoroutine { cont ->
             val requestBuilder = okhttp3.Request.Builder()
-                .head()
+                .get()
                 .url(url)
-                .header("User-Agent", YouTubeClient.USER_AGENT_WEB)
+                .header("User-Agent", client.userAgent)
+                .header("Range", "bytes=0-1023")
 
-            
             YouTube.cookie?.let { cookie ->
                 requestBuilder.addHeader("Cookie", cookie)
             }
 
-            val response = httpClient.newCall(requestBuilder.build()).execute()
-            val isSuccessful = response.isSuccessful
-            Timber.tag(logTag).d("Stream URL validation result: ${if (isSuccessful) "Success" else "Failed"} (${response.code})")
-            return isSuccessful
-        } catch (e: Exception) {
-            Timber.tag(logTag).e(e, "Stream URL validation failed with exception")
-            reportException(e)
+            val call = httpClient.newCall(requestBuilder.build())
+            cont.invokeOnCancellation { call.cancel() }
+
+            call.enqueue(object : okhttp3.Callback {
+                override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                    response.use {
+                        val isSuccessful = it.isSuccessful
+                        Timber.tag(logTag).d("Stream URL validation result: ${if (isSuccessful) "Success" else "Failed"} (${it.code})")
+                        if (cont.isActive) {
+                            cont.resume(isSuccessful) {}
+                        }
+                    }
+                }
+
+                override fun onFailure(call: okhttp3.Call, e: java.io.IOException) {
+                    Timber.tag(logTag).e(e, "Stream URL validation failed with exception")
+                    if (cont.isActive) {
+                        cont.resume(false) {}
+                    }
+                }
+            })
         }
-        return false
     }
     data class SignatureTimestampResult(
         val timestamp: Int?,

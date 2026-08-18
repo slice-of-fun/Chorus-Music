@@ -81,69 +81,70 @@ object JioSaavnFallback {
                     Timber.tag("JioSaavnFallback").d("Requesting URL: $url")
                     val request = Request.Builder().url(url).build()
 
-                    val response = client.newCall(request).execute()
-                    if (!response.isSuccessful) {
-                        Timber.tag("JioSaavnFallback").e("JioSaavn request failed for $domain: ${response.code}")
-                        continue
-                    }
+                    client.newCall(request).execute().use { response ->
+                        if (!response.isSuccessful) {
+                            Timber.tag("JioSaavnFallback").e("JioSaavn request failed for $domain: ${response.code}")
+                            return@use
+                        }
 
-                    val bodyString = response.body.string()
-                    if (bodyString.isEmpty()) {
-                        continue
-                    }
-                    val json = JSONObject(bodyString)
+                        val bodyString = response.body?.string() ?: return@use
+                        if (bodyString.isEmpty()) {
+                            return@use
+                        }
+                        val json = JSONObject(bodyString)
 
-                    if (json.getBoolean("success")) {
-                        val dataObj = json.optJSONObject("data")
-                        val results = dataObj?.optJSONArray("results") ?: json.optJSONArray("data")?.let { 
-                            if (it.length() > 0) it.getJSONObject(0).optJSONArray("results") else null 
-                        } ?: json.getJSONObject("data").getJSONArray("results")
-                        
-                        for (i in 0 until results.length()) {
-                            val result = results.getJSONObject(i)
-                            val resultName = result.optString("name", "")
+                        if (json.getBoolean("success")) {
+                            val dataObj = json.optJSONObject("data")
+                            val results = dataObj?.optJSONArray("results") ?: json.optJSONArray("data")?.let { 
+                                if (it.length() > 0) it.getJSONObject(0).optJSONArray("results") else null 
+                            } ?: json.getJSONObject("data").getJSONArray("results")
                             
-                            val titleMatches = expectedTitle.isEmpty() || strictTitleMatch(expectedTitle, resultName)
-                            
-                            var artistMatches = false
-                            if (expectedArtist.isEmpty()) {
-                                artistMatches = true
-                            } else {
-                                val artistsObj = result.optJSONObject("artists")
-                                if (artistsObj != null) {
-                                    val primaryArtists = artistsObj.optJSONArray("primary")
-                                    val allArtists = artistsObj.optJSONArray("all")
-                                    
-                                    val checkArtists = { arr: org.json.JSONArray? ->
-                                        if (arr != null) {
-                                            for (j in 0 until arr.length()) {
-                                                val aName = arr.getJSONObject(j).optString("name", "")
-                                                if (strictArtistMatch(expectedArtist, aName)) {
-                                                    artistMatches = true
-                                                    break
+                            for (i in 0 until results.length()) {
+                                val result = results.getJSONObject(i)
+                                val resultName = result.optString("name", "")
+                                
+                                val titleMatches = expectedTitle.isEmpty() || strictTitleMatch(expectedTitle, resultName)
+                                
+                                var artistMatches = false
+                                if (expectedArtist.isEmpty()) {
+                                    artistMatches = true
+                                } else {
+                                    val artistsObj = result.optJSONObject("artists")
+                                    if (artistsObj != null) {
+                                        val primaryArtists = artistsObj.optJSONArray("primary")
+                                        val allArtists = artistsObj.optJSONArray("all")
+                                        
+                                        val checkArtists = { arr: org.json.JSONArray? ->
+                                            if (arr != null) {
+                                                for (j in 0 until arr.length()) {
+                                                    val aName = arr.getJSONObject(j).optString("name", "")
+                                                    if (strictArtistMatch(expectedArtist, aName)) {
+                                                        artistMatches = true
+                                                        break
+                                                    }
                                                 }
                                             }
                                         }
+                                        checkArtists(primaryArtists)
+                                        if (!artistMatches) checkArtists(allArtists)
                                     }
-                                    checkArtists(primaryArtists)
-                                    if (!artistMatches) checkArtists(allArtists)
-                                }
-                                
-                                if (!artistMatches) {
-                                    val primaryStr = result.optString("primaryArtists", "")
-                                    val singersStr = result.optString("singers", "")
-                                    if (strictArtistMatch(expectedArtist, primaryStr) || strictArtistMatch(expectedArtist, singersStr)) {
-                                        artistMatches = true
+                                    
+                                    if (!artistMatches) {
+                                        val primaryStr = result.optString("primaryArtists", "")
+                                        val singersStr = result.optString("singers", "")
+                                        if (strictArtistMatch(expectedArtist, primaryStr) || strictArtistMatch(expectedArtist, singersStr)) {
+                                            artistMatches = true
+                                        }
                                     }
                                 }
-                            }
 
-                            if (titleMatches && artistMatches) {
-                                val downloadUrls = result.optJSONArray("downloadUrl")
-                                if (downloadUrls != null && downloadUrls.length() > 0) {
-                                    Timber.tag("JioSaavnFallback").d("Found incredibly strict match for $expectedTitle by $expectedArtist from $domain")
-                                    val bestQualityUrlObj = downloadUrls.getJSONObject(downloadUrls.length() - 1)
-                                    return bestQualityUrlObj.getString("url")
+                                if (titleMatches && artistMatches) {
+                                    val downloadUrls = result.optJSONArray("downloadUrl")
+                                    if (downloadUrls != null && downloadUrls.length() > 0) {
+                                        Timber.tag("JioSaavnFallback").d("Found incredibly strict match for $expectedTitle by $expectedArtist from $domain")
+                                        val bestQualityUrlObj = downloadUrls.getJSONObject(downloadUrls.length() - 1)
+                                        return bestQualityUrlObj.getString("url")
+                                    }
                                 }
                             }
                         }

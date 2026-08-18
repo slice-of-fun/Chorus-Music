@@ -3003,6 +3003,7 @@ class MusicService :
             }.getOrElse { throwable ->
                 when (throwable) {
                     is PlaybackException -> throw throwable
+                    is kotlinx.coroutines.CancellationException -> throw java.io.InterruptedIOException()
 
                     is java.net.ConnectException, is java.net.UnknownHostException -> {
                         throw PlaybackException(
