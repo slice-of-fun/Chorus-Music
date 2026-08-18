@@ -222,7 +222,10 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.net.URLDecoder
 import java.net.URLEncoder
@@ -320,6 +323,7 @@ class MainActivity : ComponentActivity() {
         if (::navController.isInitialized) {
             handleDeepLinkIntent(intent, navController)
             handleAssistantSearchIntent(intent, navController)
+            handleWidgetIntent(intent, navController)
         } else {
             pendingIntent = intent
         }
@@ -815,22 +819,29 @@ class MainActivity : ComponentActivity() {
                     if (pendingIntent != null) {
                         handleDeepLinkIntent(pendingIntent!!, navController)
                         handleAssistantSearchIntent(pendingIntent!!, navController)
+                        handleWidgetIntent(pendingIntent!!, navController)
                         pendingIntent = null
                     } else if (intent != null && (intent.action == Intent.ACTION_VIEW || intent.action == Intent.ACTION_SEND)) {
                         handleDeepLinkIntent(intent, navController)
 
                     } else if (intent != null && intent.action == android.provider.MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH) {
                         handleAssistantSearchIntent(intent, navController)
+                        
+                    } else if (intent != null && intent.action == "pushkar.chorus.music.action.OPEN_WIDGET_TARGET") {
+                        handleWidgetIntent(intent, navController)
                     }
                 }
 
                 DisposableEffect(Unit) {
-                    val listener = Consumer<Intent> { intent ->
+                    val listener = androidx.core.util.Consumer<Intent> { intent ->
                         if (intent.action == Intent.ACTION_VIEW || intent.action == Intent.ACTION_SEND) {
                             handleDeepLinkIntent(intent, navController)
 
                         } else if (intent.action == android.provider.MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH) {
                             handleAssistantSearchIntent(intent, navController)
+                            
+                        } else if (intent.action == "pushkar.chorus.music.action.OPEN_WIDGET_TARGET") {
+                            handleWidgetIntent(intent, navController)
                         }
                     }
 
@@ -1387,7 +1398,56 @@ class MainActivity : ComponentActivity() {
     ) {
         if (intent.action == android.provider.MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH) {
             val query = intent.getStringExtra(android.app.SearchManager.QUERY) ?: return
-            navController.navigate("search/${URLEncoder.encode(query, "UTF-8")}")
+            navController.navigate("search/${java.net.URLEncoder.encode(query, "UTF-8")}")
+        }
+    }
+
+    private fun handleWidgetIntent(
+        intent: Intent,
+        navController: NavHostController,
+    ) {
+        if (intent.action == "pushkar.chorus.music.action.OPEN_WIDGET_TARGET") {
+            val targetType = intent.getStringExtra("extra_widget_target_type") ?: return
+            val targetId = intent.getStringExtra("extra_widget_target_id") ?: return
+
+            val route = when (targetType) {
+                "liked" -> "auto_playlist/Liked"
+                "downloaded" -> "auto_playlist/downloaded"
+                "offline" -> "cache_playlist/cached"
+                "top" -> "top_playlist"
+                "local" -> "local_playlist/$targetId"
+                "online" -> "online_playlist/$targetId"
+                else -> ""
+            }
+
+            if (route.isNotEmpty()) {
+                navController.navigate(route) {
+                    launchSingleTop = true
+                }
+            }
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                val items = when (targetType) {
+                    "liked" -> database.songs().getByLiked().firstOrNull()?.map { it.toMediaItem() }
+                    "downloaded" -> database.songs().getDownloadedSongs().firstOrNull()?.map { it.song.toMediaItem() }
+                    "offline" -> null
+                    "top" -> database.songs().getTopSongs().firstOrNull()?.map { it.song.toMediaItem() }
+                    "local" -> database.playlistSongMap().getSongsForPlaylist(targetId).firstOrNull()?.map { it.toMediaItem() }
+                    else -> null
+                }
+
+                if (!items.isNullOrEmpty()) {
+                    withContext(Dispatchers.Main) {
+                        playerConnection?.playQueue(
+                            pushkar.chorus.music.playback.queues.ListQueue(
+                                title = "",
+                                items = items,
+                                startIndex = 0
+                            )
+                        )
+                    }
+                }
+            }
         }
     }
 }

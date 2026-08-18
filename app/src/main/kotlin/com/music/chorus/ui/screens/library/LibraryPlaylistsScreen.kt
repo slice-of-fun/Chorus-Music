@@ -109,6 +109,7 @@ fun LibraryPlaylistsScreen(
     val coroutineScope = rememberCoroutineScope()
 
     var viewType by rememberEnumPreference(PlaylistViewTypeKey, LibraryViewType.GRID)
+    var showCreatePlaylistDialog by rememberSaveable { mutableStateOf(false) }
     val (sortType, onSortTypeChange) = rememberEnumPreference(
         PlaylistSortTypeKey,
         PlaylistSortType.CREATE_DATE
@@ -508,6 +509,22 @@ fun LibraryPlaylistsScreen(
                     }
                 }
             }
+        }
+
+        HideOnScrollFAB(
+            lazyListState = lazyListState,
+            lazyGridState = lazyGridState,
+            icon = painterResource(R.drawable.add),
+            text = stringResource(R.string.create_playlist),
+            onClick = {
+                showCreatePlaylistDialog = true
+            }
+        )
+
+        if (showCreatePlaylistDialog) {
+            CreatePlaylistDialog(
+                onDismiss = { showCreatePlaylistDialog = false }
+            )
         }
     }
 }

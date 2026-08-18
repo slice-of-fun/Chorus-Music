@@ -140,6 +140,7 @@ class PlaylistWidgetReceiver : AppWidgetProvider() {
         const val TARGET_TYPE_ONLINE = "online"
         const val TARGET_TYPE_LIKED = "liked"
         const val TARGET_TYPE_DOWNLOADED = "downloaded"
+        const val TARGET_TYPE_OFFLINE = "offline"
         const val TARGET_TYPE_TOP = "top"
     }
 }

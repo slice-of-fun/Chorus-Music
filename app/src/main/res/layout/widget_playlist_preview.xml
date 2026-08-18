@@ -10,6 +10,7 @@
 
     <!-- Top Player Section (Pill Style) -->
     <LinearLayout
+        android:id="@+id/widget_playlist_player_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -23,10 +24,11 @@
             android:background="@drawable/widget_art_circle_bg"
 >
             <ImageView
+                android:id="@+id/widget_playlist_album_art"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/music_note"
+                android:background="#22FFFFFF"
                 android:contentDescription="@string/album_art" />
         </FrameLayout>
 
@@ -38,6 +40,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/widget_playlist_song_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/not_playing"
@@ -48,6 +51,7 @@
                 android:ellipsize="end" />
 
             <TextView
+                android:id="@+id/widget_playlist_artist_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -65,144 +69,289 @@ android:maxLines="1"
                 android:gravity="center_vertical">
 
                 <ImageView
+                    android:id="@+id/widget_playlist_prev_container"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:padding="6dp"
-                    android:src="@drawable/ic_widget_skip_previous"
+                    android:background="#22FFFFFF"
                     android:contentDescription="@string/previous" />
 
                 <ImageView
+                    android:id="@+id/widget_playlist_play_pause"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:src="@drawable/ic_widget_play"
+                    android:background="#22FFFFFF"
                     android:contentDescription="@string/play_pause" />
 
                 <ImageView
+                    android:id="@+id/widget_playlist_next_container"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:padding="6dp"
-                    android:src="@drawable/ic_widget_skip_next"
+                    android:background="#22FFFFFF"
                     android:contentDescription="@string/next" />
 
-                <FrameLayout
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
                 <ImageView
+                    android:id="@+id/widget_playlist_like_button"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:padding="6dp"
-                    android:src="@drawable/ic_widget_heart_outline_nav"
+                    android:background="#22FFFFFF"
                     android:contentDescription="@string/like" />
             </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginTop="8dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/widget_progress_track"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@null" />
+                <ImageView
+                    android:id="@+id/widget_playlist_progress_fill"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/widget_progress_clip"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@null" />
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Quick Picks Preview Section -->
+    <!-- Quick Picks Section -->
     <LinearLayout
+        android:id="@+id/widget_playlist_quick_picks_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:orientation="horizontal"
-        android:gravity="start">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/widget_playlist_row_1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/widget_pill_bg"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:gravity="center">
-            <FrameLayout
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/widget_art_circle_bg"
+            android:orientation="horizontal"
+            android:gravity="start">
+
+            <LinearLayout
+                android:id="@+id/widget_playlist_card_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/widget_pill_bg"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:gravity="center">
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/widget_art_circle_bg"
 >
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/playlist_play"
-                    android:contentDescription="@null" />
-            </FrameLayout>
-            <TextView android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" android:text="@string/widget_playlists" />
+                    <ImageView
+                        android:id="@+id/widget_playlist_card_1_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+                <TextView android:id="@+id/widget_playlist_card_1_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/widget_playlist_card_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/widget_pill_bg"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:gravity="center">
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/widget_art_circle_bg"
+>
+                    <ImageView
+                        android:id="@+id/widget_playlist_card_2_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+                <TextView android:id="@+id/widget_playlist_card_2_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/widget_playlist_card_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/widget_pill_bg"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:gravity="center">
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/widget_art_circle_bg"
+>
+                    <ImageView
+                        android:id="@+id/widget_playlist_card_3_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+                <TextView android:id="@+id/widget_playlist_card_3_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/widget_playlist_card_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/widget_pill_bg"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:gravity="center">
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/widget_art_circle_bg"
+>
+                    <ImageView
+                        android:id="@+id/widget_playlist_card_4_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+                <TextView android:id="@+id/widget_playlist_card_4_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/widget_playlist_row_2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/widget_pill_bg"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:gravity="center">
-            <FrameLayout
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/widget_art_circle_bg"
->
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_widget_heart_nav"
-                    android:contentDescription="@null" />
-            </FrameLayout>
-            <TextView android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" android:text="@string/liked_songs" />
-        </LinearLayout>
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:visibility="gone">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/widget_pill_bg"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:gravity="center">
-            <FrameLayout
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/widget_art_circle_bg"
+            <LinearLayout
+                android:id="@+id/widget_playlist_card_5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/widget_pill_bg"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:gravity="center">
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/widget_art_circle_bg"
 >
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/cached"
-                    android:contentDescription="@null" />
-            </FrameLayout>
-            <TextView android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" android:text="@string/downloaded_songs" />
-        </LinearLayout>
+                    <ImageView
+                        android:id="@+id/widget_playlist_card_5_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+                <TextView android:id="@+id/widget_playlist_card_5_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/widget_pill_bg"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:gravity="center">
-            <FrameLayout
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/widget_art_circle_bg"
+            <LinearLayout
+                android:id="@+id/widget_playlist_card_6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/widget_pill_bg"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:gravity="center">
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/widget_art_circle_bg"
 >
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/trending_up"
-                    android:contentDescription="@null" />
-            </FrameLayout>
-            <TextView android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" android:text="@string/my_top" />
+                    <ImageView
+                        android:id="@+id/widget_playlist_card_6_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+                <TextView android:id="@+id/widget_playlist_card_6_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/widget_playlist_card_7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/widget_pill_bg"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:gravity="center">
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/widget_art_circle_bg"
+>
+                    <ImageView
+                        android:id="@+id/widget_playlist_card_7_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+                <TextView android:id="@+id/widget_playlist_card_7_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/widget_playlist_card_8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/widget_pill_bg"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:gravity="center">
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/widget_art_circle_bg"
+>
+                    <ImageView
+                        android:id="@+id/widget_playlist_card_8_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+                <TextView android:id="@+id/widget_playlist_card_8_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="12sp" android:maxLines="2" android:ellipsize="end" android:gravity="center" android:textColor="@color/widget_on_primary_container" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

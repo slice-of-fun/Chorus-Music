@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Default circular art for turntable widget preview -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Circular gradient background -->
+    <!-- Rounded rectangle gradient background -->
     <item>
-        <shape android:shape="oval">
+        <shape android:shape="rectangle">
+            <corners android:radius="48dp" />
             <gradient
                 android:angle="135"
                 android:startColor="#283A4D"

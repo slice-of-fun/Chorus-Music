@@ -340,17 +340,22 @@
                 android:resource="@xml/playlist_widget_info" />
         </receiver>
 
-        <!-- Glance Music Widget -->
+        <!-- Compact Music Widget -->
         <receiver
-            android:name=".widget.MusicGlanceWidgetReceiver"
+            android:name=".widget.CompactWidgetReceiver"
             android:exported="true"
-            android:label="Chorus Glance Widget">
+            android:label="Compact Music Player">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="pushkar.chorus.music.widget.PLAY_PAUSE" />
+                <action android:name="pushkar.chorus.music.widget.LIKE" />
+                <action android:name="pushkar.chorus.music.widget.NEXT" />
+                <action android:name="pushkar.chorus.music.widget.PREVIOUS" />
+                <action android:name="pushkar.chorus.music.widget.UPDATE_WIDGET" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/glance_music_widget_info" />
+                android:resource="@xml/compact_widget_info" />
         </receiver>
 
         <activity

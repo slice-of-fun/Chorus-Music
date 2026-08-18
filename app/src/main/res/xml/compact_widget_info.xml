@@ -4,9 +4,10 @@
     android:minHeight="40dp"
     android:minResizeWidth="110dp"
     android:minResizeHeight="40dp"
+    android:maxResizeHeight="80dp"
     android:updatePeriodMillis="1800000"
-    android:previewLayout="@layout/widget_music_player_preview"
-    android:initialLayout="@layout/widget_music_player"
+    android:previewLayout="@layout/widget_compact_wide"
+    android:initialLayout="@layout/widget_compact_wide"
     android:description="@string/widget_description"
     android:widgetCategory="home_screen"
-    android:resizeMode="horizontal|vertical" />
+    android:resizeMode="horizontal" />

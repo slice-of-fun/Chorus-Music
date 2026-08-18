@@ -413,230 +413,127 @@ object YTPlayerUtils {
             else -> -1
         }
 
-        for (clientIndex in (startIndex until STREAM_FALLBACK_CLIENTS.size)) {
-            
-            format = null
-            streamUrl = null
-            streamExpiresInSeconds = null
-
-            
-            val client: YouTubeClient
-            if (clientIndex == -1) {
-                
-                client = MAIN_CLIENT
-                streamPlayerResponse = retryMainPlayerResponse ?: mainPlayerResponse
-                Timber.tag(logTag).d("Trying stream from MAIN_CLIENT: ${client.clientName}")
+        val clientsToTry = (startIndex until STREAM_FALLBACK_CLIENTS.size).mapNotNull { clientIndex ->
+            val client = if (clientIndex == -1) {
+                usedAgeRestrictedClient ?: MAIN_CLIENT
             } else {
-                
-                client = STREAM_FALLBACK_CLIENTS[clientIndex]
-                Timber.tag(logTag).d("Trying fallback client ${clientIndex + 1}/${STREAM_FALLBACK_CLIENTS.size}: ${client.clientName}")
-                PlaybackLogManager.log(PlaybackLogLevel.DEBUG, "Trying fallback [${clientIndex + 1}/${STREAM_FALLBACK_CLIENTS.size}]", client.clientName)
-
-                if (client.loginRequired && !isLoggedIn && YouTube.cookie == null) {
-                    
-                    Timber.tag(logTag).d("Skipping client ${client.clientName} - requires login but user is not logged in")
-                    continue
-                }
-
-                
-                if (client.useWebPoTokens && poToken == null && sessionId != null) {
-                    Timber.tag(logTag).d("Lazily generating PoToken for fallback web client: ${client.clientName}")
-                    try {
-                        poToken = poTokenGenerator.getWebClientPoToken(videoId, sessionId)
-                    } catch (e: Exception) {
-                        Timber.tag(logTag).e(e, "Lazy PoToken generation failed")
-                    }
-                }
-
-                Timber.tag(logTag).d("Fetching player response for fallback client: ${client.clientName}")
-                
-                val clientPoToken = if (client.useWebPoTokens) poToken?.playerRequestPoToken else null
-                
-                val clientSigTimestamp = if (wasOriginallyAgeRestricted) null else signatureTimestamp.timestamp
-                streamPlayerResponse =
-                    YouTube.player(videoId, playlistId, client, clientSigTimestamp, clientPoToken)
-                        .onFailure {
-                            Timber.tag(logTag).e(it, "player() request FAILED for %s", client.clientName)
-                        }.getOrNull()
+                STREAM_FALLBACK_CLIENTS[clientIndex]
             }
+            if (client.loginRequired && !isLoggedIn && YouTube.cookie == null) {
+                null
+            } else {
+                Pair(clientIndex, client)
+            }
+        }
 
-            
-            if (streamPlayerResponse?.playabilityStatus?.status == "OK") {
-                Timber.tag(logTag).d("Player response status OK for client: ${if (clientIndex == -1) MAIN_CLIENT.clientName else STREAM_FALLBACK_CLIENTS[clientIndex].clientName}")
-                PlaybackLogManager.log(PlaybackLogLevel.INFO, "Player response OK", if (clientIndex == -1) MAIN_CLIENT.clientName else STREAM_FALLBACK_CLIENTS[clientIndex].clientName)
+        var finalPlaybackData: PlaybackData? = null
 
-                
-                val hasDirectUrls = streamPlayerResponse.streamingData?.adaptiveFormats
-                    ?.any { !it.url.isNullOrEmpty() } == true
-                val hasSignatureCipher = streamPlayerResponse.streamingData?.adaptiveFormats
-                    ?.any { !it.signatureCipher.isNullOrEmpty() || !it.cipher.isNullOrEmpty() } == true
-
-                Timber.tag(logTag).d("URL check: hasDirectUrls=$hasDirectUrls, hasSignatureCipher=$hasSignatureCipher")
-
-                
-                val responseToUse = streamPlayerResponse
-
-                format =
-                    findFormat(
-                        responseToUse,
-                        audioQuality,
-                        connectivityManager,
-                    )
-
-                if (format == null) {
-                    Timber.tag(logTag).d("No suitable format found for client: ${if (clientIndex == -1) MAIN_CLIENT.clientName else STREAM_FALLBACK_CLIENTS[clientIndex].clientName}")
-                    continue
-                }
-
-                Timber.tag(logTag).d("Format found: ${format.mimeType}, bitrate: ${format.bitrate}")
-
-                streamUrl = findUrlOrNull(format, videoId, responseToUse, skipNewPipe = wasOriginallyAgeRestricted)
-                if (streamUrl == null) {
-                    Timber.tag(logTag).d("Stream URL not found for format")
-                    continue
-                }
-
-                
-                val currentClient = if (clientIndex == -1) {
-                    usedAgeRestrictedClient ?: MAIN_CLIENT
-                } else {
-                    STREAM_FALLBACK_CLIENTS[clientIndex]
-                }
-
-                
-                val isPrivatelyOwnedTrack = streamPlayerResponse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
-
-                
-                if (currentClient.useWebPoTokens) {
+        kotlinx.coroutines.coroutineScope {
+            val channel = kotlinx.coroutines.channels.Channel<PlaybackData>(kotlinx.coroutines.channels.Channel.BUFFERED)
+            val jobs = clientsToTry.map { (clientIndex, client) ->
+                kotlinx.coroutines.launch(kotlinx.coroutines.Dispatchers.IO) {
                     try {
-                        Timber.tag(logTag).d("Applying n-transform to stream URL for ${currentClient.clientName}")
-                        val transformed = EjsNTransformSolver.transformNParamInUrl(streamUrl)
-                        if (transformed != streamUrl) {
-                            streamUrl = transformed
-                            Timber.tag(logTag).d("N-transform applied successfully")
-                        }
-                    } catch (e: Exception) {
-                        Timber.tag(logTag).e(e, "N-transform failed: ${e.message}")
-                    }
-                }
-
-                
-                
-                if (currentClient.useWebPoTokens && poToken?.streamingDataPoToken != null) {
-                    Timber.tag(logTag).d("Appending pot= parameter to stream URL")
-                    val separator = if ("?" in streamUrl) "&" else "?"
-                    streamUrl = "${streamUrl}${separator}pot=${poToken.streamingDataPoToken}"
-                }
-
-                streamExpiresInSeconds = streamPlayerResponse.streamingData?.expiresInSeconds
-                if (streamExpiresInSeconds == null) {
-                    Timber.tag(logTag).d("Stream expiration time not found")
-                    continue
-                }
-
-                Timber.tag(logTag).d("Stream expires in: $streamExpiresInSeconds seconds")
-
-                
-                val urlHost = try { java.net.URL(streamUrl).host } catch (e: Exception) { "unknown" }
-                Timber.tag(logTag).d("Stream URL host: $urlHost, pot length: ${poToken?.streamingDataPoToken?.length ?: 0}")
-
-                
-                val isPrivatelyOwned = streamPlayerResponse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
-
-                if (clientIndex == STREAM_FALLBACK_CLIENTS.size - 1 || isPrivatelyOwned) {
-                    
-                    if (isPrivatelyOwned) {
-                        Timber.tag(logTag).d("Skipping validation for privately owned track: ${currentClient.clientName}")
-                    } else {
-                        Timber.tag(logTag).d("Using last fallback client without validation: ${STREAM_FALLBACK_CLIENTS[clientIndex].clientName}")
-                    }
-                    Log.i(TAG, "Playback: client=${currentClient.clientName}, videoId=$videoId, private=$isPrivatelyOwned")
-                    break
-                }
-
-                if (validateStatus(streamUrl)) {
-                    
-                    Timber.tag(logTag).d("Stream validated successfully with client: ${currentClient.clientName}")
-                    PlaybackLogManager.log(PlaybackLogLevel.INFO, "Stream validated", currentClient.clientName)
-                    
-                    Log.i(TAG, "Playback: client=${currentClient.clientName}, videoId=$videoId")
-                    break
-                } else {
-                    Timber.tag(logTag).d("Stream validation failed for client: ${currentClient.clientName}")
-
-                    
-                    if (currentClient.useWebPoTokens) {
-                        var nTransformWorked = false
-
+                        var streamUrl: String? = null
+                        var streamExpiresInSeconds: Int? = null
+                        var format: PlayerResponse.StreamingData.Format? = null
                         
-                        try {
-                            val nTransformed = CipherDeobfuscator.transformNParamInUrl(streamUrl)
-                            if (nTransformed != streamUrl) {
-                                Timber.tag(logTag).d("CipherDeobfuscator n-transform applied, re-validating...")
-                                if (validateStatus(nTransformed)) {
-                                    Timber.tag(logTag).d("N-transformed URL VALIDATED OK!")
-                                    streamUrl = nTransformed
-                                    nTransformWorked = true
-                                    Log.i(TAG, "Playback: client=${currentClient.clientName}, videoId=$videoId (cipher n-transform)")
+                        val clientPoToken = if (client.useWebPoTokens) {
+                            if (poToken == null && sessionId != null) {
+                                try {
+                                    poTokenGenerator.getWebClientPoToken(videoId, sessionId)
+                                } catch (e: Exception) { null }
+                            } else poToken
+                        } else null
+
+                        val clientSigTimestamp = if (wasOriginallyAgeRestricted) null else signatureTimestamp.timestamp
+                        
+                        val streamPlayerResponse = if (clientIndex == -1 && retryMainPlayerResponse != null) {
+                            retryMainPlayerResponse
+                        } else if (clientIndex == -1 && mainPlayerResponse.playabilityStatus.status == "OK") {
+                            mainPlayerResponse
+                        } else {
+                            YouTube.player(videoId, playlistId, client, clientSigTimestamp, clientPoToken?.playerRequestPoToken).getOrNull()
+                        }
+
+                        if (streamPlayerResponse?.playabilityStatus?.status == "OK") {
+                            val responseToUse = streamPlayerResponse
+                            format = findFormat(responseToUse, audioQuality, connectivityManager)
+                            if (format != null) {
+                                streamUrl = findUrlOrNull(format, videoId, responseToUse, skipNewPipe = wasOriginallyAgeRestricted)
+                                if (streamUrl != null) {
+                                    if (client.useWebPoTokens) {
+                                        try {
+                                            val transformed = EjsNTransformSolver.transformNParamInUrl(streamUrl!!)
+                                            if (transformed != streamUrl) streamUrl = transformed
+                                        } catch (e: Exception) {}
+                                        if (clientPoToken?.streamingDataPoToken != null) {
+                                            val separator = if ("?" in streamUrl!!) "&" else "?"
+                                            streamUrl = "${streamUrl}${separator}pot=${clientPoToken.streamingDataPoToken}"
+                                        }
+                                    }
+                                    streamExpiresInSeconds = streamPlayerResponse.streamingData?.expiresInSeconds
+                                    if (streamExpiresInSeconds != null) {
+                                        val isPrivatelyOwned = streamPlayerResponse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
+                                        var isValid = false
+                                        if (clientIndex == STREAM_FALLBACK_CLIENTS.size - 1 || isPrivatelyOwned) {
+                                            isValid = true
+                                        } else if (validateStatus(streamUrl!!)) {
+                                            isValid = true
+                                        } else if (client.useWebPoTokens) {
+                                            try {
+                                                val nTransformed = CipherDeobfuscator.transformNParamInUrl(streamUrl!!)
+                                                if (nTransformed != streamUrl && validateStatus(nTransformed)) {
+                                                    streamUrl = nTransformed
+                                                    isValid = true
+                                                }
+                                            } catch (e: Exception) {}
+                                        }
+
+                                        if (isValid) {
+                                            channel.send(
+                                                PlaybackData(
+                                                    audioConfig = audioConfig ?: streamPlayerResponse.playerConfig?.audioConfig,
+                                                    videoDetails = videoDetails ?: streamPlayerResponse.videoDetails,
+                                                    playbackTracking = playbackTracking ?: streamPlayerResponse.playbackTracking,
+                                                    format = format!!,
+                                                    streamUrl = streamUrl!!,
+                                                    streamExpiresInSeconds = streamExpiresInSeconds!!
+                                                )
+                                            )
+                                        }
+                                    }
                                 }
                             }
-                        } catch (e: Exception) {
-                            Timber.tag(logTag).e(e, "CipherDeobfuscator n-transform error")
                         }
-
-                        if (nTransformWorked) break
+                    } catch (e: Exception) {
+                        Timber.tag(logTag).e(e, "Concurrent fetch failed for client")
                     }
                 }
-            } else {
-                val status = streamPlayerResponse?.playabilityStatus?.status ?: "Unknown"
-                val reason = streamPlayerResponse?.playabilityStatus?.reason ?: "No reason"
-                Timber.tag(logTag).d("Player response status not OK: $status, reason: $reason")
-                PlaybackLogManager.log(PlaybackLogLevel.WARNING, "Client failed: ${client.clientName}", "$status: $reason")
-                
-                
-                Timber.tag(logTag).d("Player response status not OK: ${streamPlayerResponse?.playabilityStatus?.status}, reason: ${streamPlayerResponse?.playabilityStatus?.reason}")
+            }
+
+            kotlinx.coroutines.launch {
+                jobs.forEach { it.join() }
+                channel.close()
+            }
+
+            for (result in channel) {
+                finalPlaybackData = result
+                jobs.forEach { it.cancel() }
+                break
             }
         }
 
-        if (streamPlayerResponse == null) {
+        if (finalPlaybackData == null) {
             Timber.tag(logTag).e("Bad stream player response - all clients failed")
-            throw Exception("Bad stream player response")
-        }
-
-        if (streamPlayerResponse.playabilityStatus.status != "OK") {
-            val errorReason = streamPlayerResponse.playabilityStatus.reason
-            Timber.tag(logTag).e("Playability status not OK: $errorReason")
             throw PlaybackException(
-                errorReason,
+                "All fallback clients failed to resolve stream",
                 null,
                 PlaybackException.ERROR_CODE_REMOTE_ERROR
             )
         }
 
-        if (streamExpiresInSeconds == null) {
-            Timber.tag(logTag).e("Missing stream expire time")
-            throw Exception("Missing stream expire time")
-        }
-
-        if (format == null) {
-            Timber.tag(logTag).e("Could not find format")
-            throw Exception("Could not find format")
-        }
-
-        if (streamUrl == null) {
-            Timber.tag(logTag).e("Could not find stream url")
-            throw Exception("Could not find stream url")
-        }
-
-        Timber.tag(logTag).d("Successfully obtained playback data with format: ${format.mimeType}, bitrate: ${format.bitrate}")
-        PlaybackData(
-            audioConfig,
-            videoDetails,
-            playbackTracking,
-            format,
-            streamUrl,
-            streamExpiresInSeconds,
-        )
+        Timber.tag(logTag).d("Successfully obtained playback data from concurrent fetch")
+        finalPlaybackData!!
     }.onFailure { e ->
         Timber.tag(logTag).e(e, "Playback resolution failed")
         PlaybackLogManager.log(PlaybackLogLevel.ERROR, "Playback failed", "${e::class.simpleName}: ${e.message}")

@@ -13,11 +13,9 @@ object JioSaavnFallback {
     private val client = OkHttpClient()
 
     private val SERVERS = listOf(
-        "jiosaavn-api.pc-adityadav9532.workers.dev",
-        "jiosaavn-api.mac-adityadav9532.workers.dev",
+        "api.music.vispark.in",
         "saavn.sumit.co",
-        "jiosaavn-apix.arcadopredator.workers.dev",
-        "api.music.vispark.in"
+        "saavn.dev"
     )
 
     private fun getDomains(context: Context): List<String> {
@@ -163,6 +161,11 @@ object JioSaavnFallback {
         if (result == null && artist.isNotEmpty()) {
             Timber.tag("JioSaavnFallback").d("Strict search with artist failed, trying title only for search query: $title")
             result = searchSaavn(title, title, artist)
+        }
+        
+        if (result == null) {
+            Timber.tag("JioSaavnFallback").d("Strict search failed completely, trying relaxed match for search query: $title")
+            result = searchSaavn(title, title, "")
         }
         
         return@withContext result

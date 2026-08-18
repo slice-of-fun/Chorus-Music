@@ -301,8 +301,21 @@ class PlaylistWidgetManager @Inject constructor(
         quickPicks: List<QuickPick>,
     ) {
         val maxItems = maxQuickPicksForSize(options)
-        val displayCount = balancedDisplayCount(quickPicks.size, maxItems)
-        val visiblePicks = quickPicks.take(displayCount)
+        
+        val actualPicks = if (quickPicks.isEmpty() && maxItems >= 4) {
+            listOf(
+                QuickPick("liked", PlaylistWidgetReceiver.TARGET_TYPE_LIKED, "", "Liked Songs", null, R.drawable.ic_widget_heart_nav),
+                QuickPick("downloaded", PlaylistWidgetReceiver.TARGET_TYPE_DOWNLOADED, "", "Downloaded", null, R.drawable.music_note),
+                QuickPick("offline", PlaylistWidgetReceiver.TARGET_TYPE_OFFLINE, "", "Offline", null, R.drawable.offline),
+                QuickPick("top", PlaylistWidgetReceiver.TARGET_TYPE_TOP, "", "Top Tracks", null, R.drawable.stats),
+                QuickPick("local", PlaylistWidgetReceiver.TARGET_TYPE_LOCAL, "", "Local Files", null, R.drawable.music_note)
+            )
+        } else {
+            quickPicks
+        }
+        
+        val displayCount = balancedDisplayCount(actualPicks.size, maxItems)
+        val visiblePicks = actualPicks.take(displayCount)
         val visibleSlots = (0 until displayCount).toSet()
         val reservedEmptySlots = reservedEmptySlotsFor(displayCount)
 
@@ -337,7 +350,7 @@ class PlaylistWidgetManager @Inject constructor(
             views.setOnClickPendingIntent(slot.containerId, getOpenTargetIntent(item))
         }
     }
-    // Pick the widget size bucket for the shortcut grid
+
     private fun maxQuickPicksForSize(options: Bundle): Int {
         val minWidth = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH)
         val minHeight = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT)
@@ -349,8 +362,6 @@ class PlaylistWidgetManager @Inject constructor(
             else -> 4
         }
     }
-    // The widget intentionally avoids an incomplete second row:
-    // show up to 4 playlists in one row, collapse 5-7 to 4, and only use two rows when 8 are available
     private fun balancedDisplayCount(available: Int, maxItems: Int): Int {
         val capped = minOf(available, maxItems, 8)
         return when {
@@ -385,6 +396,42 @@ class PlaylistWidgetManager @Inject constructor(
 
         fun add(item: QuickPick) {
             if (seen.add(item.key)) result += item
+        }
+
+        if (likedSongs.isNotEmpty()) {
+            add(
+                QuickPick(
+                    key = "auto:liked",
+                    targetType = PlaylistWidgetReceiver.TARGET_TYPE_LIKED,
+                    targetId = PlaylistWidgetReceiver.TARGET_TYPE_LIKED,
+                    title = context.getString(R.string.liked_songs),
+                    thumbnailUrl = likedSongs.firstOrNull()?.thumbnailUrl,
+                    fallbackIconRes = R.drawable.ic_widget_heart_nav,
+                ),
+            )
+        }
+
+        if (downloadedSongs.isNotEmpty()) {
+            add(
+                QuickPick(
+                    key = "auto:downloaded",
+                    targetType = PlaylistWidgetReceiver.TARGET_TYPE_DOWNLOADED,
+                    targetId = PlaylistWidgetReceiver.TARGET_TYPE_DOWNLOADED,
+                    title = context.getString(R.string.offline),
+                    thumbnailUrl = downloadedSongs.firstOrNull()?.thumbnailUrl,
+        }
+
+        if (topSongs.isNotEmpty()) {
+            add(
+                QuickPick(
+                    key = "auto:top50",
+                    targetType = PlaylistWidgetReceiver.TARGET_TYPE_TOP,
+                    targetId = "50",
+                    title = context.getString(R.string.my_top),
+                    thumbnailUrl = topSongs.firstOrNull()?.thumbnailUrl,
+                    fallbackIconRes = R.drawable.trending_up,
+                ),
+            )
         }
 
         speedDialItems
@@ -429,45 +476,6 @@ class PlaylistWidgetManager @Inject constructor(
         savedPlaylists
             .filter { it.playlist.browseId != null && !it.playlist.isLocal }
             .forEach { add(it.toQuickPick()) }
-
-        if (likedSongs.isNotEmpty()) {
-            add(
-                QuickPick(
-                    key = "auto:liked",
-                    targetType = PlaylistWidgetReceiver.TARGET_TYPE_LIKED,
-                    targetId = PlaylistWidgetReceiver.TARGET_TYPE_LIKED,
-                    title = context.getString(R.string.liked_songs),
-                    thumbnailUrl = likedSongs.firstOrNull()?.thumbnailUrl,
-                    fallbackIconRes = R.drawable.ic_widget_heart_nav,
-                ),
-            )
-        }
-
-        if (downloadedSongs.isNotEmpty()) {
-            add(
-                QuickPick(
-                    key = "auto:downloaded",
-                    targetType = PlaylistWidgetReceiver.TARGET_TYPE_DOWNLOADED,
-                    targetId = PlaylistWidgetReceiver.TARGET_TYPE_DOWNLOADED,
-                    title = context.getString(R.string.downloaded_songs),
-                    thumbnailUrl = downloadedSongs.firstOrNull()?.thumbnailUrl,
-                    fallbackIconRes = R.drawable.offline,
-                ),
-            )
-        }
-
-        if (topSongs.isNotEmpty()) {
-            add(
-                QuickPick(
-                    key = "auto:top50",
-                    targetType = PlaylistWidgetReceiver.TARGET_TYPE_TOP,
-                    targetId = "50",
-                    title = context.getString(R.string.my_top),
-                    thumbnailUrl = topSongs.firstOrNull()?.thumbnailUrl,
-                    fallbackIconRes = R.drawable.trending_up,
-                ),
-            )
-        }
 
         result
     }

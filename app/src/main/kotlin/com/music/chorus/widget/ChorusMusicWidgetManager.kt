@@ -92,6 +92,16 @@ class ChorusMusicWidgetManager @Inject constructor(
             }
         }
 
+        // Update compact widgets
+        val compactComponentName = ComponentName(context, CompactWidgetReceiver::class.java)
+        val compactWidgetIds = appWidgetManager.getAppWidgetIds(compactComponentName)
+        if (compactWidgetIds.isNotEmpty()) {
+            compactWidgetIds.forEach { widgetId ->
+                val views = createCompactWideRemoteViews(title, artist, albumArt, isPlaying, isLiked)
+                appWidgetManager.updateAppWidget(widgetId, views)
+            }
+        }
+
         // Update turntable widgets
         val turntableComponentName = ComponentName(context, TurntableWidgetReceiver::class.java)
         val turntableWidgetIds = appWidgetManager.getAppWidgetIds(turntableComponentName)
@@ -342,15 +352,15 @@ class ChorusMusicWidgetManager @Inject constructor(
     }
 
     private fun getRoundedDefaultIcon(cornerRadius: Float): Bitmap {
-    // Get the launcher icon and make it rounded
-    val drawable = context.packageManager.getApplicationIcon(context.packageName)
-    val size = 300
-    val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
-    val canvas = Canvas(bitmap)
-    drawable.setBounds(0, 0, size, size)
-    drawable.draw(canvas)
-    return getRoundedCornerBitmap(bitmap, cornerRadius)
-}
+        val drawable = androidx.core.content.ContextCompat.getDrawable(context, R.drawable.widget_turntable_default_art)
+            ?: context.packageManager.getApplicationIcon(context.packageName)
+        val size = 300
+        val bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, size, size)
+        drawable.draw(canvas)
+        return getRoundedCornerBitmap(bitmap, cornerRadius)
+    }
 
 private fun getOpenAppIntent(): PendingIntent {
     val intent = Intent(context, MainActivity::class.java)
