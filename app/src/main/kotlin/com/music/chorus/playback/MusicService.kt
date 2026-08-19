@@ -3205,10 +3205,15 @@ class MusicService :
                 songUrlCache["${mediaId}_${lockedQuality.name}"] =
                     streamUrl to System.currentTimeMillis() + (nonNullPlayback.streamExpiresInSeconds * 1000L)
 
+                val headers = mutableMapOf("User-Agent" to nonNullPlayback.userAgent)
+                YouTube.cookie?.let { cookie ->
+                    headers["Cookie"] = cookie
+                }
+
                 return@Factory dataSpec.buildUpon()
                     .setKey(targetCacheKey)
                     .setUri(streamUrl.toUri())
-                    .setHttpRequestHeaders(mapOf("User-Agent" to nonNullPlayback.userAgent))
+                    .setHttpRequestHeaders(headers)
                     .build()
             }
         }
