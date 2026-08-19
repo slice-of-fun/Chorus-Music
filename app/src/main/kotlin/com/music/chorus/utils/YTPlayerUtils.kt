@@ -80,7 +80,7 @@ object YTPlayerUtils {
     private val poTokenGenerator = PoTokenGenerator()
 
 
-    private val MAIN_CLIENT: YouTubeClient = TVHTML5_SIMPLY_EMBEDDED_PLAYER
+    private val MAIN_CLIENT: YouTubeClient = IOS
 
 
     private val METADATA_CLIENT: YouTubeClient = WEB_REMIX
@@ -520,6 +520,12 @@ object YTPlayerUtils {
                                         val resolvedExpiry =
                                             responseToUse!!.streamingData?.expiresInSeconds ?: 21600
                                         streamExpiresInSeconds = resolvedExpiry
+
+                                        val cpn = (1..16).map {
+                                            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"[kotlin.random.Random.nextInt(64)]
+                                        }.joinToString("")
+                                        val separator = if ("?" in streamUrl!!) "&" else "?"
+                                        streamUrl = "${streamUrl}${separator}cpn=$cpn"
 
                                         val isPrivatelyOwned = responseToUse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
                                         var isValid = false
