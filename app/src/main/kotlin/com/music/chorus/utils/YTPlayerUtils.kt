@@ -80,7 +80,7 @@ object YTPlayerUtils {
     private val poTokenGenerator = PoTokenGenerator()
 
 
-    private val MAIN_CLIENT: YouTubeClient = IOS
+    private val MAIN_CLIENT: YouTubeClient = TVHTML5_SIMPLY_EMBEDDED_PLAYER
 
 
     private val METADATA_CLIENT: YouTubeClient = WEB_REMIX
