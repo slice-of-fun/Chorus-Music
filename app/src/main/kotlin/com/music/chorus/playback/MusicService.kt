@@ -129,6 +129,7 @@ import okhttp3.Dns
 import java.net.InetAddress
 import java.net.Inet4Address
 import java.net.Inet6Address
+import com.music.innertube.models.YouTubeClient
 import pushkar.chorus.music.db.MusicDatabase
 import pushkar.chorus.music.db.entities.Event
 import pushkar.chorus.music.db.entities.FormatEntity
@@ -2830,7 +2831,7 @@ class MusicService :
                                     } ?: response.request
                                 }
                                 .build()
-                        ).setUserAgent(YouTube.client.userAgent)
+                        ).setUserAgent(YouTubeClient.WEB_CREATOR.userAgent)
                     )
             ).setCacheWriteDataSinkFactory(null)
             .setFlags(FLAG_IGNORE_CACHE_ON_ERROR)
