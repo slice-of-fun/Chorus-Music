@@ -354,10 +354,7 @@ private fun SpotifyLoginSheet(
     var captured by remember { mutableStateOf(false) }
     var isPageLoading by remember { mutableStateOf(true) }
 
-    // Chrome desktop UA — removes the "wv" (WebView) indicator that Spotify's login page
-    // uses to detect embedded WebViews and silently suppress OTP delivery.
-    val desktopChromeUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+
 
     DisposableEffect(Unit) {
         onDispose {
@@ -413,8 +410,11 @@ private fun SpotifyLoginSheet(
                         settings.setSupportZoom(true)
                         settings.builtInZoomControls = true
                         settings.displayZoomControls = false
-                        // Override the UA to remove the "wv" WebView fingerprint.
-                        settings.userAgentString = desktopChromeUserAgent
+                        // Override the UA to remove WebView fingerprints so Spotify allows OTP
+                        // and Google allows email OAuth login.
+                        settings.userAgentString = settings.userAgentString
+                            .replace("; wv", "")
+                            .replace("Version/4.0 ", "")
                         webViewClient = object : WebViewClient() {
                             private fun captureCookies(url: String?): Boolean {
                                 if (captured) return true
