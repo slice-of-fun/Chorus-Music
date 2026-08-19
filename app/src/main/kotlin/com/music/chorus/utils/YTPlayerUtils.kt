@@ -80,7 +80,7 @@ object YTPlayerUtils {
     private val poTokenGenerator = PoTokenGenerator()
 
 
-    private val MAIN_CLIENT: YouTubeClient = IOS
+    private val MAIN_CLIENT: YouTubeClient = ANDROID_VR_1_61_48
 
 
     private val METADATA_CLIENT: YouTubeClient = WEB_REMIX
