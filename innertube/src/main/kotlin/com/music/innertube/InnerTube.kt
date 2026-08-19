@@ -60,7 +60,7 @@ class InnerTube {
             httpClient.close()
             httpClient = createClient()
         }
-    
+
     var proxyAuth: String? = null
 
     var ipVersion: IpVersion = IpVersion.IPV4
@@ -100,18 +100,18 @@ class InnerTube {
                         java.util.concurrent.TimeUnit.MINUTES
                     )
                 )
-                
+
                 // Timeout configurations
                 connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
                 readTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
                 writeTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
-                
+
                 // Enable HTTP/2 for better performance
                 protocols(listOf(okhttp3.Protocol.HTTP_2, okhttp3.Protocol.HTTP_1_1))
-                
+
                 // Retry on connection failure
                 retryOnConnectionFailure(true)
-                
+
                 // Cache configuration for better performance
                 cache(
                     okhttp3.Cache(
@@ -119,7 +119,7 @@ class InnerTube {
                         maxSize = 50L * 1024L * 1024L // 50 MB
                     )
                 )
-                
+
                 // Apply IP version filtering
                 dns(object : Dns {
                     override fun lookup(hostname: String): List<InetAddress> {
@@ -136,7 +136,7 @@ class InnerTube {
                 this@InnerTube.proxy?.let { proxyConfig ->
                     proxy(proxyConfig)
                 }
-                
+
                 // Apply proxy authentication
                 this@InnerTube.proxyAuth?.let { auth ->
                     proxyAuthenticator { _, response ->
@@ -168,7 +168,10 @@ class InnerTube {
         contentType(ContentType.Application.Json)
         headers {
             append("X-Goog-Api-Format-Version", "1")
-            append("X-YouTube-Client-Name", client.clientId /* Not a typo. The Client-Name header does contain the client id. */)
+            append(
+                "X-YouTube-Client-Name",
+                client.clientId /* Not a typo. The Client-Name header does contain the client id. */
+            )
             append("X-YouTube-Client-Version", client.clientVersion)
             append("X-Origin", YouTubeClient.ORIGIN_YOUTUBE_MUSIC)
             append("Referer", YouTubeClient.REFERER_YOUTUBE_MUSIC)
@@ -187,11 +190,6 @@ class InnerTube {
         parameter("prettyPrint", false)
     }
 
-    /**
-     * Simple retry wrapper for transient IO errors (socket aborts, timeouts).
-     * Retries the given block up to [maxAttempts] times with exponential backoff.
-     * Cancellation is respected since [delay] will throw if the coroutine is cancelled.
-     */
     private suspend fun <T> withRetry(
         maxAttempts: Int = 3,
         initialDelay: Long = 500L,
@@ -242,6 +240,7 @@ class InnerTube {
         playlistId: String?,
         signatureTimestamp: Int?,
         poToken: String? = null,
+        cpn: String? = null,
     ) = withRetry {
         httpClient.post("player") {
             ytClient(client, setLogin = true)
@@ -258,6 +257,7 @@ class InnerTube {
                     },
                     videoId = videoId,
                     playlistId = playlistId,
+                    cpn = cpn,
                     playbackContext = if (client.useSignatureTimestamp && signatureTimestamp != null) {
                         PlayerBody.PlaybackContext(
                             PlayerBody.PlaybackContext.ContentPlaybackContext(
@@ -626,7 +626,7 @@ class InnerTube {
             )
         }
     }
-    
+
     suspend fun getUploadCustomThumbnailLink(
         client: YouTubeClient,
         contentLength: Int

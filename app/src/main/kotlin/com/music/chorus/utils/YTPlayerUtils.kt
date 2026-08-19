@@ -261,6 +261,10 @@ object YTPlayerUtils {
     ): Result<PlaybackData> = runCatching {
         Timber.tag(logTag).d("Fetching player response for videoId: $videoId, playlistId: $playlistId")
         PlaybackLogManager.log(PlaybackLogLevel.INFO, "Resolving playback data", "Video: $videoId")
+        
+        val playbackCpn = (1..16).map {
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"[kotlin.random.Random.nextInt(64)]
+        }.joinToString("")
 
 
         val isUploadedTrack = playlistId == "MLPT" || playlistId?.contains("MLPT") == true
@@ -295,7 +299,8 @@ object YTPlayerUtils {
             playlistId,
             MAIN_CLIENT,
             signatureTimestamp.timestamp,
-            poToken?.playerRequestPoToken
+            poToken?.playerRequestPoToken,
+            playbackCpn
         ).getOrThrow()
 
 
@@ -490,7 +495,8 @@ object YTPlayerUtils {
                                     playlistId,
                                     client,
                                     clientSigTimestamp,
-                                    clientPoToken?.playerRequestPoToken
+                                    clientPoToken?.playerRequestPoToken,
+                                    playbackCpn
                                 ).getOrNull()
                             }
 
@@ -521,11 +527,10 @@ object YTPlayerUtils {
                                             responseToUse!!.streamingData?.expiresInSeconds ?: 21600
                                         streamExpiresInSeconds = resolvedExpiry
 
-                                        val cpn = (1..16).map {
-                                            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"[kotlin.random.Random.nextInt(64)]
-                                        }.joinToString("")
                                         val separator = if ("?" in streamUrl!!) "&" else "?"
-                                        streamUrl = "${streamUrl}${separator}cpn=$cpn"
+                                        if (!streamUrl!!.contains("cpn=")) {
+                                            streamUrl = "${streamUrl}${separator}cpn=$playbackCpn"
+                                        }
 
                                         val isPrivatelyOwned = responseToUse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
                                         var isValid = false
