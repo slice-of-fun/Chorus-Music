@@ -199,7 +199,8 @@ object YTPlayerUtils {
                                 playbackTracking = null,
                                 format = format,
                                 streamUrl = track.url,
-                                streamExpiresInSeconds = 3600
+                                streamExpiresInSeconds = 3600,
+                                userAgent = com.music.innertube.models.YouTubeClient.WEB_CREATOR.userAgent
                             )
                             return@withTimeoutOrNull Result.success(resolvedPlaybackData)
                         } else {
@@ -421,7 +422,8 @@ object YTPlayerUtils {
                             playbackTracking = playbackTracking,
                             format = mockFormat,
                             streamUrl = fallbackUrl,
-                            streamExpiresInSeconds = (System.currentTimeMillis() / 1000).toInt() + 3600
+                            streamExpiresInSeconds = (System.currentTimeMillis() / 1000).toInt() + 3600,
+                            userAgent = com.music.innertube.models.YouTubeClient.WEB_CREATOR.userAgent
                         )
                     }
                 }
