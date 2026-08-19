@@ -455,11 +455,6 @@ object YTPlayerUtils {
             val scope = this
             val channel =
                 kotlinx.coroutines.channels.Channel<PlaybackData>(kotlinx.coroutines.channels.Channel.BUFFERED)
-            // High-priority clients that we trust enough to skip the validateStatus probe.
-            // These are the most reliable clients; skipping the probe removes a major
-            // bottleneck that previously caused all songs to fail when YouTube rejected
-            // the pre-flight HEAD request (bot-detection, geo-blocks, transient 403s).
-            val HIGH_PRIORITY_CLIENT_COUNT = 3
 
             val jobs = clientsToTry.map { (clientIndex, client) ->
                 scope.launch(kotlinx.coroutines.Dispatchers.IO) {
@@ -520,19 +515,16 @@ object YTPlayerUtils {
                                             }
                                         }
                                         val resolvedExpiry =
-                                            streamPlayerResponse.streamingData?.expiresInSeconds ?: 21600
+                                            responseToUse!!.streamingData?.expiresInSeconds ?: 21600
                                         streamExpiresInSeconds = resolvedExpiry
 
-                                        val isPrivatelyOwned =
-                                            streamPlayerResponse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
-                                        val isHighPriorityClient =
-                                            clientIndex == -1 || clientIndex < HIGH_PRIORITY_CLIENT_COUNT
-                                        var isValid =
-                                            isHighPriorityClient || clientIndex == STREAM_FALLBACK_CLIENTS.size - 1 || isPrivatelyOwned
-                                        if (!isValid) {
-                                            if (validateStatus(streamUrl!!, client)) {
-                                                isValid = true
-                                            } else if (client.useWebPoTokens) {
+                                        val isPrivatelyOwned = responseToUse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
+                                        var isValid = false
+                                        if (clientIndex == STREAM_FALLBACK_CLIENTS.size - 1 || isPrivatelyOwned) {
+                                            isValid = true
+                                        } else if (validateStatus(streamUrl!!, client)) {
+                                            isValid = true
+                                        } else if (client.useWebPoTokens) {
                                                 try {
                                                     val nTransformed =
                                                         CipherDeobfuscator.transformNParamInUrl(streamUrl!!)
@@ -546,17 +538,16 @@ object YTPlayerUtils {
                                                     }
                                                 } catch (e: Exception) {
                                                 }
-                                            }
                                         }
 
                                         if (isValid) {
                                             channel.send(
                                                 PlaybackData(
                                                     audioConfig = audioConfig
-                                                        ?: streamPlayerResponse.playerConfig?.audioConfig,
-                                                    videoDetails = videoDetails ?: streamPlayerResponse.videoDetails,
+                                                        ?: responseToUse.playerConfig?.audioConfig,
+                                                    videoDetails = videoDetails ?: responseToUse.videoDetails,
                                                     playbackTracking = playbackTracking
-                                                        ?: streamPlayerResponse.playbackTracking,
+                                                        ?: responseToUse.playbackTracking,
                                                     format = format!!,
                                                     streamUrl = streamUrl!!,
                                                     streamExpiresInSeconds = streamExpiresInSeconds!!
