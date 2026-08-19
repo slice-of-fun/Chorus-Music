@@ -2831,7 +2831,7 @@ class MusicService :
                                     } ?: response.request
                                 }
                                 .build()
-                        ).setUserAgent(YouTubeClient.WEB_CREATOR.userAgent)
+                        )
                     )
             ).setCacheWriteDataSinkFactory(null)
             .setFlags(FLAG_IGNORE_CACHE_ON_ERROR)

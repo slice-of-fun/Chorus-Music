@@ -80,7 +80,7 @@ object YTPlayerUtils {
     private val poTokenGenerator = PoTokenGenerator()
 
 
-    private val MAIN_CLIENT: YouTubeClient = ANDROID_VR_1_43_32
+    private val MAIN_CLIENT: YouTubeClient = IOS
 
 
     private val METADATA_CLIENT: YouTubeClient = WEB_REMIX
@@ -523,7 +523,7 @@ object YTPlayerUtils {
 
                                         val isPrivatelyOwned = responseToUse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
                                         var isValid = false
-                                        if (clientIndex == STREAM_FALLBACK_CLIENTS.size - 1 || isPrivatelyOwned) {
+                                        if (isPrivatelyOwned) {
                                             isValid = true
                                         } else if (validateStatus(streamUrl!!, client)) {
                                             isValid = true
