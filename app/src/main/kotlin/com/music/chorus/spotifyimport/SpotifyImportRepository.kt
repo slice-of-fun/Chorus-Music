@@ -377,7 +377,12 @@ class SpotifyImportRepository @Inject constructor(
                     name = track.title,
                     durationMs = track.durationMs?.toInt() ?: 0,
                     explicit = false,
-                    artists = listOf(pushkar.chorus.music.spotify.models.SpotifySimpleArtist(id = "", name = track.artist)),
+                    artists = listOf(
+                        pushkar.chorus.music.spotify.models.SpotifySimpleArtist(
+                            id = "",
+                            name = track.artist
+                        )
+                    ),
                     album = null
                 )
             }
@@ -398,6 +403,7 @@ class SpotifyImportRepository @Inject constructor(
                             total = paging.total,
                         )
                     }
+
                     is SpotifyImportSource.Playlist -> {
                         val paging = spotifyCallWithTokenRetry {
                             Spotify.playlistTracks(
@@ -422,14 +428,6 @@ class SpotifyImportRepository @Inject constructor(
         return tracks
     }
 
-    /**
-     * Extracts a Spotify playlist id from any of the forms a user might paste:
-     *  - a share URL: https://open.spotify.com/playlist/{id}?si=...
-     *  - a localized URL: https://open.spotify.com/intl-de/playlist/{id}
-     *  - a URI: spotify:playlist:{id}
-     *  - a bare base62 id
-     * Returns null when the input is not a recognizable playlist reference.
-     */
     private fun parsePlaylistId(input: String): String? {
         val trimmed = input.trim()
         if (trimmed.isEmpty()) return null
@@ -499,33 +497,51 @@ class SpotifyImportRepository @Inject constructor(
         track: SpotifyTrack,
         index: Int,
     ): MatchedTrack? {
-        val searchResult = YouTube.search(
-            query = SpotifyMapper.buildSearchQuery(track),
-            filter = YouTube.SearchFilter.FILTER_SONG,
-        ).getOrElse { error ->
-            if (error is CancellationException) {
+        var lastError: Throwable? = null
+        for (attempt in 0 until MAX_MATCH_RETRIES) {
+            if (attempt > 0) {
+                val delayMs = (1000L shl (attempt - 1)).coerceAtMost(4000L)
+                kotlinx.coroutines.delay(delayMs)
+            }
+            try {
+                val searchResult = YouTube.search(
+                    query = SpotifyMapper.buildSearchQuery(track),
+                    filter = YouTube.SearchFilter.FILTER_SONG,
+                ).getOrElse { error ->
+                    if (error is CancellationException) throw error
+                    throw error
+                }
+                val candidates = searchResult.items
+                    .filterIsInstance<SongItem>()
+                    .distinctBy { it.id }
+
+                val best = mapperMutex.withLock {
+                    candidates.maxByOrNull { candidate ->
+                        SpotifyMapper.matchScore(
+                            spotifyTitle = track.name,
+                            spotifyArtist = track.artists.joinToString(" ") { it.name },
+                            spotifyDurationMs = track.durationMs,
+                            candidateTitle = candidate.title,
+                            candidateArtist = candidate.artists.joinToString(" ") { it.name },
+                            candidateDurationSec = candidate.duration,
+                        )
+                    }
+                } ?: return null
+
+                return MatchedTrack(index = index, metadata = best.toMediaMetadata())
+            } catch (error: CancellationException) {
                 throw error
+            } catch (error: Throwable) {
+                lastError = error
+                val isRetryable = error !is IllegalArgumentException
+                if (!isRetryable || attempt == MAX_MATCH_RETRIES - 1) {
+                    reportException(error)
+                    return null
+                }
             }
-            return null
         }
-        val candidates = searchResult.items
-            .filterIsInstance<SongItem>()
-            .distinctBy { it.id }
-
-        val best = mapperMutex.withLock {
-            candidates.maxByOrNull { candidate ->
-                SpotifyMapper.matchScore(
-                    spotifyTitle = track.name,
-                    spotifyArtist = track.artists.joinToString(" ") { it.name },
-                    spotifyDurationMs = track.durationMs,
-                    candidateTitle = candidate.title,
-                    candidateArtist = candidate.artists.joinToString(" ") { it.name },
-                    candidateDurationSec = candidate.duration,
-                )
-            }
-        } ?: return null
-
-        return MatchedTrack(index = index, metadata = best.toMediaMetadata())
+        lastError?.let { reportException(it) }
+        return null
     }
 
     private suspend fun mirrorPlaylist(
@@ -559,10 +575,13 @@ class SpotifyImportRepository @Inject constructor(
                 update(entity)
             }
 
+            // Insert / update song metadata BEFORE deleting old mappings so that
+            // an interrupted transaction never leaves the playlist completely empty.
             tracks.forEach { metadata ->
                 insert(metadata)
             }
 
+            // Now it is safe to clear the old mapping rows and re-insert in order.
             clearPlaylist(source.localPlaylistId)
             tracks.forEachIndexed { index, metadata ->
                 insert(
@@ -609,6 +628,7 @@ class SpotifyImportRepository @Inject constructor(
     companion object {
         private const val MAX_CONCURRENT_MATCHES = 4
         private const val MAX_CONCURRENT_SPOTIFY_COUNT_REQUESTS = 4
+        private const val MAX_MATCH_RETRIES = 3
         private const val TOKEN_EXPIRY_GRACE_MS = 60_000L
         private val PLAYLIST_REFERENCE_REGEX = Regex("""playlist[/:]([A-Za-z0-9]+)""")
         private val BARE_ID_REGEX = Regex("""[A-Za-z0-9]{16,}""")

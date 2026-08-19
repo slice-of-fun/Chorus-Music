@@ -1,0 +1,25 @@
+{
+  "description": "This release contains critical playback, playlist import, and Spotify login fixes that make the app significantly more reliable.",
+  "image": "",
+  "changelog": [
+    {
+      "title": "🔴 Critical Fixes",
+      "items": [
+        "Song playback restored — fixed stream client pre-flight probe blocking all fallback clients",
+        "Stream URL expiry null no longer silently discards valid URLs (defaults to 6 hours)",
+        "30-second timeout on URL resolver prevents IO thread deadlock when multiple songs load simultaneously",
+        "Partially downloaded tracks no longer trigger unnecessary network re-fetches"
+      ]
+    },
+    {
+      "title": "🟠 Import & Login",
+      "items": [
+        "Playlist import: track search retries 3× with backoff before dropping a song",
+        "Playlist import: interrupted transactions no longer leave playlists empty",
+        "Spotify login (phone): Chrome desktop User-Agent removes WebView fingerprint — OTP SMS now delivered",
+        "Spotify login (email): security-verification redirect correctly handled, login completes",
+        "Spotify login: loading indicator shown during OTP and verification pages"
+      ]
+    }
+  ]
+}

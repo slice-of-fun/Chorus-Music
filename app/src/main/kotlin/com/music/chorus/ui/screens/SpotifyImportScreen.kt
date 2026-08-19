@@ -352,6 +352,12 @@ private fun SpotifyLoginSheet(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var webView by remember { mutableStateOf<WebView?>(null) }
     var captured by remember { mutableStateOf(false) }
+    var isPageLoading by remember { mutableStateOf(true) }
+
+    // Chrome desktop UA — removes the "wv" (WebView) indicator that Spotify's login page
+    // uses to detect embedded WebViews and silently suppress OTP delivery.
+    val desktopChromeUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 
     DisposableEffect(Unit) {
         onDispose {
@@ -387,6 +393,11 @@ private fun SpotifyLoginSheet(
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
+            // Loading indicator visible during page transitions, OTP screens,
+            // and the post-email security-verification flow.
+            if (isPageLoading) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            }
             AndroidView(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -402,6 +413,8 @@ private fun SpotifyLoginSheet(
                         settings.setSupportZoom(true)
                         settings.builtInZoomControls = true
                         settings.displayZoomControls = false
+                        // Override the UA to remove the "wv" WebView fingerprint.
+                        settings.userAgentString = desktopChromeUserAgent
                         webViewClient = object : WebViewClient() {
                             private fun captureCookies(url: String?): Boolean {
                                 if (captured) return true
@@ -424,10 +437,15 @@ private fun SpotifyLoginSheet(
                                 url: String?,
                                 favicon: android.graphics.Bitmap?,
                             ) {
+                                isPageLoading = true
                                 captureCookies(url)
                             }
 
                             override fun onPageFinished(view: WebView, url: String?) {
+                                isPageLoading = false
+                                // Try capturing on every page-finish, including the
+                                // security-verification confirmation and the final
+                                // open.spotify.com landing after email auth.
                                 captureCookies(url)
                             }
                         }
@@ -452,6 +470,10 @@ private fun readSpotifyCookies(
     val urls = linkedSetOf(
         "https://open.spotify.com",
         "https://accounts.spotify.com",
+        // Captures cookies on the security-verification page that Spotify shows
+        // when it detects an unusual login (e.g. email auth). Without this the
+        // captureCookies call after completing verification would find nothing.
+        "https://challenge.spotify.com",
         "https://spotify.com",
     )
     currentUrl?.toSpotifyCookieOrigin()?.let(urls::add)
