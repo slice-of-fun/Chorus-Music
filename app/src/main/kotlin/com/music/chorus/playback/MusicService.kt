@@ -3205,7 +3205,11 @@ class MusicService :
                 songUrlCache["${mediaId}_${lockedQuality.name}"] =
                     streamUrl to System.currentTimeMillis() + (nonNullPlayback.streamExpiresInSeconds * 1000L)
 
-                return@Factory dataSpec.buildUpon().setKey(targetCacheKey).setUri(streamUrl.toUri()).build()
+                return@Factory dataSpec.buildUpon()
+                    .setKey(targetCacheKey)
+                    .setUri(streamUrl.toUri())
+                    .setHttpRequestHeaders(mapOf("User-Agent" to nonNullPlayback.userAgent))
+                    .build()
             }
         }
     }

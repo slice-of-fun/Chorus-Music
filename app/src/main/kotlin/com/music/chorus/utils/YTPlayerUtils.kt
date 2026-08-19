@@ -106,6 +106,7 @@ object YTPlayerUtils {
         val format: PlayerResponse.StreamingData.Format,
         val streamUrl: String,
         val streamExpiresInSeconds: Int,
+        val userAgent: String,
     )
 
     suspend fun playerResponseForPlayback(
@@ -541,18 +542,18 @@ object YTPlayerUtils {
                                         }
 
                                         if (isValid) {
-                                            channel.send(
-                                                PlaybackData(
-                                                    audioConfig = audioConfig
-                                                        ?: responseToUse.playerConfig?.audioConfig,
-                                                    videoDetails = videoDetails ?: responseToUse.videoDetails,
-                                                    playbackTracking = playbackTracking
-                                                        ?: responseToUse.playbackTracking,
-                                                    format = format!!,
-                                                    streamUrl = streamUrl!!,
-                                                    streamExpiresInSeconds = streamExpiresInSeconds!!
-                                                )
+                                            val playbackData = PlaybackData(
+                                                audioConfig = audioConfig
+                                                    ?: responseToUse.playerConfig?.audioConfig,
+                                                videoDetails = videoDetails ?: responseToUse.videoDetails,
+                                                playbackTracking = playbackTracking
+                                                    ?: responseToUse.playbackTracking,
+                                                format = format!!,
+                                                streamUrl = streamUrl!!,
+                                                streamExpiresInSeconds = streamExpiresInSeconds!!,
+                                                userAgent = client.userAgent
                                             )
+                                            channel.send(playbackData)
                                         }
                                     }
                                 }
