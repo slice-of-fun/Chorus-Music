@@ -99,6 +99,7 @@ data class YouTubeClient(
             loginRequired = false,
             useSignatureTimestamp = true,
             isEmbedded = true,
+            useWebPoTokens = true,
         )
 
         val IOS = YouTubeClient(

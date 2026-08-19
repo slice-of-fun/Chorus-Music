@@ -2822,6 +2822,18 @@ class MusicService :
                                         }
                                     }
                                 })
+                                .addNetworkInterceptor { chain ->
+                                    val request = chain.request()
+                                    val ua = request.header("User-Agent")
+                                    if (ua == null || ua.startsWith("okhttp", ignoreCase = true)) {
+                                        val newRequest = request.newBuilder()
+                                            .header("User-Agent", com.music.innertube.models.YouTubeClient.WEB_REMIX.userAgent)
+                                            .build()
+                                        chain.proceed(newRequest)
+                                    } else {
+                                        chain.proceed(request)
+                                    }
+                                }
                                 .proxy(YouTube.proxy)
                                 .proxyAuthenticator { _, response ->
                                     YouTube.proxyAuth?.let { auth ->
