@@ -529,7 +529,7 @@ object YTPlayerUtils {
 
                                         val isPrivatelyOwned = responseToUse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
                                         var isValid = false
-                                        if (isPrivatelyOwned) {
+                                        if (isPrivatelyOwned || client == MAIN_CLIENT) {
                                             isValid = true
                                         } else if (validateStatus(streamUrl!!, client)) {
                                             isValid = true

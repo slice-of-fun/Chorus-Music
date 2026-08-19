@@ -2827,7 +2827,7 @@ class MusicService :
                                     val ua = request.header("User-Agent")
                                     if (ua == null || ua.startsWith("okhttp", ignoreCase = true)) {
                                         val newRequest = request.newBuilder()
-                                            .header("User-Agent", com.music.innertube.models.YouTubeClient.WEB_REMIX.userAgent)
+                                            .header("User-Agent", com.music.innertube.models.YouTubeClient.IOS.userAgent)
                                             .build()
                                         chain.proceed(newRequest)
                                     } else {
