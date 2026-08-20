@@ -2825,17 +2825,24 @@ class MusicService :
                                 .addNetworkInterceptor { chain ->
                                     val request = chain.request()
                                     val ua = request.header("User-Agent")
-                                    if (ua == null || ua.startsWith("okhttp", ignoreCase = true)) {
-                                        val newRequest = request.newBuilder()
+                                    
+                                    val newRequest = if (ua == null || ua.startsWith("okhttp", ignoreCase = true)) {
+                                        request.newBuilder()
                                             .header(
                                                 "User-Agent",
-                                                com.music.innertube.models.YouTubeClient.ANDROID_VR_1_61_48.userAgent
+                                                com.music.innertube.models.YouTubeClient.IOS.userAgent
                                             )
                                             .build()
-                                        chain.proceed(newRequest)
                                     } else {
-                                        chain.proceed(request)
+                                        request
                                     }
+                                    
+                                    Timber.tag(TAG).e("EXOPLAYER_REQUEST_URL: ${newRequest.url}")
+                                    newRequest.headers.forEach { (name, value) ->
+                                        Timber.tag(TAG).e("EXOPLAYER_HEADER: $name: $value")
+                                    }
+                                    
+                                    chain.proceed(newRequest)
                                 }
                                 .proxy(YouTube.proxy)
                                 .proxyAuthenticator { _, response ->
