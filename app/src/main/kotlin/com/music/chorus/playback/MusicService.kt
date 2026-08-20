@@ -472,7 +472,7 @@ class MusicService :
     private var silenceSkipJob: Job? = null
 
 
-    private val songUrlCache = HashMap<String, Pair<String, Long>>()
+    private val songUrlCache = HashMap<String, Triple<String, Long, String>>()
 
 
     private val bypassCacheForQualityChange = mutableSetOf<String>()
@@ -1685,16 +1685,16 @@ class MusicService :
 
                                     YouTube.next(WatchEndpoint(videoId = currentSong.id))
                                         .getOrNull()?.relatedEndpoint?.let { relatedEndpoint ->
-                                        YouTube.related(relatedEndpoint).onSuccess { relatedPage ->
-                                            val relatedItems = relatedPage.songs
-                                                .filter { it.id != currentSong.id }
-                                                .map { it.toMediaItem() }
-                                            if (relatedItems.isNotEmpty()) {
-                                                automixItems.value = relatedItems
+                                            YouTube.related(relatedEndpoint).onSuccess { relatedPage ->
+                                                val relatedItems = relatedPage.songs
+                                                    .filter { it.id != currentSong.id }
+                                                    .map { it.toMediaItem() }
+                                                if (relatedItems.isNotEmpty()) {
+                                                    automixItems.value = relatedItems
 
+                                                }
                                             }
                                         }
-                                    }
                                 }
                             }
                         }
@@ -2827,7 +2827,10 @@ class MusicService :
                                     val ua = request.header("User-Agent")
                                     if (ua == null || ua.startsWith("okhttp", ignoreCase = true)) {
                                         val newRequest = request.newBuilder()
-                                            .header("User-Agent", com.music.innertube.models.YouTubeClient.ANDROID_VR_1_61_48.userAgent)
+                                            .header(
+                                                "User-Agent",
+                                                com.music.innertube.models.YouTubeClient.ANDROID_VR_1_61_48.userAgent
+                                            )
                                             .build()
                                         chain.proceed(newRequest)
                                     } else {
@@ -3060,18 +3063,23 @@ class MusicService :
 
                 if (playerCache.isCached(mediaId, dataSpec.position, CHUNK_LENGTH)) {
                     songUrlCache["${mediaId}_${lockedQuality.name}"]?.takeIf { it.second > System.currentTimeMillis() }
-                        ?.let {
+                        ?.let { (url, _, ua) ->
                             scope.launch(Dispatchers.IO) { recoverSong(mediaId, isOfflinePlayback = true) }
-                            return@Factory dataSpec.withUri(it.first.toUri())
+                            val headers = mutableMapOf("User-Agent" to ua)
+                            YouTube.cookie?.let { headers["Cookie"] = it }
+                            return@Factory dataSpec.buildUpon().setUri(url.toUri()).setHttpRequestHeaders(headers)
+                                .build()
                         }
                     Timber.tag(TAG).w("Ghost cache entry for $mediaId, re-fetching")
                     playerCache.removeResource(mediaId)
                 }
 
                 songUrlCache["${mediaId}_${lockedQuality.name}"]?.takeIf { it.second > System.currentTimeMillis() }
-                    ?.let {
+                    ?.let { (url, _, ua) ->
                         scope.launch(Dispatchers.IO) { recoverSong(mediaId, isOfflinePlayback = true) }
-                        return@Factory dataSpec.withUri(it.first.toUri())
+                        val headers = mutableMapOf("User-Agent" to ua)
+                        YouTube.cookie?.let { headers["Cookie"] = it }
+                        return@Factory dataSpec.buildUpon().setUri(url.toUri()).setHttpRequestHeaders(headers).build()
                     }
             } else {
                 Timber.tag("MusicService").i("BYPASSING CACHE for $mediaId due to quality change")
@@ -3215,7 +3223,11 @@ class MusicService :
                 val streamUrl = nonNullPlayback.streamUrl
 
                 songUrlCache["${mediaId}_${lockedQuality.name}"] =
-                    streamUrl to System.currentTimeMillis() + (nonNullPlayback.streamExpiresInSeconds * 1000L)
+                    Triple(
+                        streamUrl,
+                        System.currentTimeMillis() + (nonNullPlayback.streamExpiresInSeconds * 1000L),
+                        nonNullPlayback.userAgent
+                    )
 
                 val headers = mutableMapOf("User-Agent" to nonNullPlayback.userAgent)
                 YouTube.cookie?.let { cookie ->
@@ -4338,9 +4350,9 @@ class MusicService :
                             knownDurationMs = dbSong?.song?.duration?.let { if (it > 0) it * 1000L else null }
                         )
 
-                        playbackData.getOrNull()?.streamUrl?.let { streamUrl ->
+                        playbackData.getOrNull()?.let { pd ->
                             songUrlCache["${mediaId}_${audioQuality.name}"] =
-                                Pair(streamUrl, System.currentTimeMillis() + 1000 * 60 * 60)
+                                Triple(pd.streamUrl, System.currentTimeMillis() + 1000 * 60 * 60, pd.userAgent)
                             Timber.tag(TAG).d("Preloaded stream for $mediaId")
                         }
                     }

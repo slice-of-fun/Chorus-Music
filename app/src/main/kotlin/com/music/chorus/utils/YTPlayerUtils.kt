@@ -80,12 +80,13 @@ object YTPlayerUtils {
     private val poTokenGenerator = PoTokenGenerator()
 
 
-    private val MAIN_CLIENT: YouTubeClient = ANDROID_VR_1_61_48
+    private val MAIN_CLIENT: YouTubeClient = IOS
 
 
     private val METADATA_CLIENT: YouTubeClient = WEB_REMIX
 
     private val STREAM_FALLBACK_CLIENTS: Array<YouTubeClient> = arrayOf(
+        IOS,
         ANDROID_VR_1_61_48,
         WEB_REMIX,
         TVHTML5_SIMPLY_EMBEDDED_PLAYER,
@@ -94,7 +95,6 @@ object YTPlayerUtils {
         IPADOS,
         ANDROID_VR_NO_AUTH,
         MOBILE,
-        IOS,
         WEB,
         WEB_CREATOR
     )
@@ -261,7 +261,7 @@ object YTPlayerUtils {
     ): Result<PlaybackData> = runCatching {
         Timber.tag(logTag).d("Fetching player response for videoId: $videoId, playlistId: $playlistId")
         PlaybackLogManager.log(PlaybackLogLevel.INFO, "Resolving playback data", "Video: $videoId")
-        
+
         val playbackCpn = (1..16).map {
             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"[kotlin.random.Random.nextInt(64)]
         }.joinToString("")
@@ -532,26 +532,27 @@ object YTPlayerUtils {
                                             streamUrl = "${streamUrl}${separator}cpn=$playbackCpn"
                                         }
 
-                                        val isPrivatelyOwned = responseToUse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
+                                        val isPrivatelyOwned =
+                                            responseToUse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
                                         var isValid = false
                                         if (isPrivatelyOwned || client == MAIN_CLIENT) {
                                             isValid = true
                                         } else if (validateStatus(streamUrl!!, client)) {
                                             isValid = true
                                         } else if (client.useWebPoTokens) {
-                                                try {
-                                                    val nTransformed =
-                                                        CipherDeobfuscator.transformNParamInUrl(streamUrl!!)
-                                                    if (nTransformed != streamUrl && validateStatus(
-                                                            nTransformed,
-                                                            client
-                                                        )
-                                                    ) {
-                                                        streamUrl = nTransformed
-                                                        isValid = true
-                                                    }
-                                                } catch (e: Exception) {
+                                            try {
+                                                val nTransformed =
+                                                    CipherDeobfuscator.transformNParamInUrl(streamUrl!!)
+                                                if (nTransformed != streamUrl && validateStatus(
+                                                        nTransformed,
+                                                        client
+                                                    )
+                                                ) {
+                                                    streamUrl = nTransformed
+                                                    isValid = true
                                                 }
+                                            } catch (e: Exception) {
+                                            }
                                         }
 
                                         if (isValid) {
