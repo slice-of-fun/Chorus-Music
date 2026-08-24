@@ -42,18 +42,22 @@ jobs:
           -Pandroid.injected.signing.key.alias=$SIGNING_KEY_ALIAS \
           -Pandroid.injected.signing.key.password=$SIGNING_KEY_PASSWORD
 
+    - name: Rename APK
+      run: |
+        mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/Chorus-Music.apk
+
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: Chorus-Music-APK
-        path: app/build/outputs/apk/release/*.apk
+        path: app/build/outputs/apk/release/Chorus-Music.apk
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: "build-${{ github.run_number }}"
-        name: "Build #${{ github.run_number }}"
-        files: app/build/outputs/apk/release/*.apk
+        name: "Chorus Music (Build #${{ github.run_number }})"
+        files: app/build/outputs/apk/release/Chorus-Music.apk
         draft: false
         prerelease: false
       env:
