@@ -613,7 +613,7 @@ object YTPlayerUtils {
             val requestBuilder = okhttp3.Request.Builder()
                 .head()
                 .url(url)
-                .header("User-Agent", YouTubeClient.USER_AGENT_WEB)
+                .header("User-Agent", client.userAgent)
 
             YouTube.cookie?.let { cookie ->
                 requestBuilder.addHeader("Cookie", cookie)

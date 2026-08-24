@@ -251,3 +251,7 @@ graphify-out/
 graph.html
 !app/libs/discord_partner_sdk.aar
 *.zip
+
+# Ignored analysis repositories
+core/
+Echo-Music/
