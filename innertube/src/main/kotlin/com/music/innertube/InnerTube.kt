@@ -166,6 +166,9 @@ class InnerTube {
 
     private fun HttpRequestBuilder.ytClient(client: YouTubeClient, setLogin: Boolean = false) {
         contentType(ContentType.Application.Json)
+        if (client.apiKey != null) {
+            parameter("key", client.apiKey)
+        }
         headers {
             append("X-Goog-Api-Format-Version", "1")
             append(
