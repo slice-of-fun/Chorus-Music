@@ -2833,17 +2833,7 @@ class MusicService :
                                     val ua = request.header("User-Agent")
                                     var newRequest = request
                                     
-                                    if (newRequest.url.host.contains("googlevideo.com")) {
-                                        newRequest = newRequest.newBuilder()
-                                            .header("User-Agent", com.music.innertube.models.YouTubeClient.IOS.userAgent)
-                                            .build()
-                                            
-                                        if (newRequest.header("Range") == null) {
-                                            newRequest = newRequest.newBuilder()
-                                                .header("Range", "bytes=0-")
-                                                .build()
-                                        }
-                                    } else if (ua == null || ua.startsWith("okhttp", ignoreCase = true) || ua.contains("ExoPlayerLib")) {
+                                    if (ua == null || ua.startsWith("okhttp", ignoreCase = true) || ua.contains("ExoPlayerLib")) {
                                         newRequest = request.newBuilder()
                                             .header("User-Agent", com.music.innertube.models.YouTubeClient.WEB_REMIX.userAgent)
                                             .build()
