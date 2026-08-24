@@ -68,25 +68,13 @@ android {
         buildConfigField("String", "DISCORD_APPLICATION_ID", "\"$discordApplicationId\"")
         buildConfigField("long", "DISCORD_APPLICATION_ID_LONG", "${discordApplicationIdLong}L")
         buildConfigField("String", "DISCORD_REDIRECT_SCHEME", "\"$discordRedirectScheme\"")
+        buildConfigField("Boolean", "CAST_AVAILABLE", "false")
         manifestPlaceholders["discordRedirectScheme"] = discordRedirectScheme
     }
 
 
-    flavorDimensions += listOf("abi", "variant")
+    flavorDimensions += listOf("abi")
     productFlavors {
-        // FOSS variant (default) - F-Droid compatible, no Google Play Services
-        create("foss") {
-            dimension = "variant"
-            isDefault = true
-            buildConfigField("Boolean", "CAST_AVAILABLE", "false")
-        }
-
-        // GMS variant - with Google Cast support (requires Google Play Services)
-        create("gms") {
-            dimension = "variant"
-            buildConfigField("Boolean", "CAST_AVAILABLE", "true")
-        }
-
         create("universal") {
             dimension = "abi"
             buildConfigField("String", "ARCHITECTURE", "\"universal\"")
@@ -94,22 +82,23 @@ android {
         create("arm64") {
             dimension = "abi"
             buildConfigField("String", "ARCHITECTURE", "\"arm64\"")
-            ndk { abiFilters.add("arm64-v8a") }
+            ndk {
+                abiFilters.add("arm64-v8a")
+            }
         }
-        create("armeabi") {
+        create("arm32") {
             dimension = "abi"
-            buildConfigField("String", "ARCHITECTURE", "\"armeabi\"")
-            ndk { abiFilters.add("armeabi-v7a") }
-        }
-        create("x86") {
-            dimension = "abi"
-            buildConfigField("String", "ARCHITECTURE", "\"x86\"")
-            ndk { abiFilters.add("x86") }
+            buildConfigField("String", "ARCHITECTURE", "\"arm32\"")
+            ndk {
+                abiFilters.add("armeabi-v7a")
+            }
         }
         create("x86_64") {
             dimension = "abi"
             buildConfigField("String", "ARCHITECTURE", "\"x86_64\"")
-            ndk { abiFilters.add("x86_64") }
+            ndk {
+                abiFilters.add("x86_64")
+            }
         }
     }
 
@@ -268,14 +257,14 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 
 dependencies {
     // Firebase - GMS flavor only (excluded from F-Droid / FOSS builds)
-    "gmsImplementation"(platform("com.google.firebase:firebase-bom:33.1.0"))
-    "gmsImplementation"("com.google.firebase:firebase-analytics")
-    "gmsImplementation"("com.google.firebase:firebase-crashlytics")
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics")
 
     // Google Drive Sync - GMS flavor only
-    "gmsImplementation"(libs.play.services.auth)
-    "gmsImplementation"(libs.google.api.client.android)
-    "gmsImplementation"(libs.google.api.services.drive) {
+    implementation(libs.play.services.auth)
+    implementation(libs.google.api.client.android)
+    implementation(libs.google.api.services.drive) {
         exclude(group = "org.apache.httpcomponents")
     }
 
@@ -326,9 +315,9 @@ dependencies {
     implementation(libs.media3.okhttp)
 
     // Google Cast - only included in GMS flavor (not available in F-Droid/FOSS builds)
-    "gmsImplementation"(libs.media3.cast)
-    "gmsImplementation"(libs.mediarouter)
-    "gmsImplementation"(libs.cast.framework)
+    implementation(libs.media3.cast)
+    implementation(libs.mediarouter)
+    implementation(libs.cast.framework)
 
     implementation(libs.room.runtime)
     implementation(libs.kuromoji.ipadic)

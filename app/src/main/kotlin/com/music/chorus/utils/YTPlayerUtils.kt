@@ -272,6 +272,8 @@ object YTPlayerUtils {
         }
     }
 
+
+
     private suspend fun resolvePlaybackData(
         videoId: String,
         playlistId: String? = null,
@@ -422,7 +424,8 @@ object YTPlayerUtils {
                         // Guests without a PoToken: lead with the best PoToken-free client.
                         !potBackedPrimary && !isLoggedIn ->
                             STREAM_FALLBACK_CLIENTS.first { !it.useWebPoTokens }
-                        else -> MAIN_CLIENT
+
+                                                    else -> MAIN_CLIENT
                     }
                 )
             }
