@@ -70,36 +70,8 @@ android {
         buildConfigField("String", "DISCORD_REDIRECT_SCHEME", "\"$discordRedirectScheme\"")
         buildConfigField("Boolean", "CAST_AVAILABLE", "false")
         manifestPlaceholders["discordRedirectScheme"] = discordRedirectScheme
-    }
-
-
-    flavorDimensions += listOf("abi")
-    productFlavors {
-        create("universal") {
-            dimension = "abi"
-            buildConfigField("String", "ARCHITECTURE", "\"universal\"")
-        }
-        create("arm64") {
-            dimension = "abi"
-            buildConfigField("String", "ARCHITECTURE", "\"arm64\"")
-            ndk {
-                abiFilters.add("arm64-v8a")
-            }
-        }
-        create("arm32") {
-            dimension = "abi"
-            buildConfigField("String", "ARCHITECTURE", "\"arm32\"")
-            ndk {
-                abiFilters.add("armeabi-v7a")
-            }
-        }
-        create("x86_64") {
-            dimension = "abi"
-            buildConfigField("String", "ARCHITECTURE", "\"x86_64\"")
-            ndk {
-                abiFilters.add("x86_64")
-            }
-        }
+        
+        buildConfigField("String", "ARCHITECTURE", "\"universal\"")
     }
 
     signingConfigs {
