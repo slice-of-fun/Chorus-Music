@@ -2720,7 +2720,13 @@ class MusicService :
         incrementRetryCount(mediaId)
 
 
-        songUrlCache.remove("${mediaId}_${audioQuality.name}")
+        // Feed the failing client into YTPlayerUtils' circuit breaker so the next
+        // resolution deprioritizes it instead of handing us the same dead URL again.
+        songUrlCache.keys.filter { it.startsWith("${mediaId}_") }.forEach { key ->
+            songUrlCache.remove(key)?.third?.let { failedUserAgent ->
+                YTPlayerUtils.reportClientPlaybackFailure(failedUserAgent)
+            }
+        }
         Timber.tag(TAG).d("Cleared cached URL for $mediaId")
 
 
@@ -2825,23 +2831,35 @@ class MusicService :
                                 .addNetworkInterceptor { chain ->
                                     val request = chain.request()
                                     val ua = request.header("User-Agent")
-                                    
-                                    val newRequest = if (ua == null || ua.startsWith("okhttp", ignoreCase = true)) {
+
+                                    var newRequest = if (ua == null || ua.startsWith("okhttp", ignoreCase = true)) {
                                         request.newBuilder()
                                             .header(
                                                 "User-Agent",
-                                                com.music.innertube.models.YouTubeClient.IOS.userAgent
+                                                com.music.innertube.models.YouTubeClient.WEB_REMIX.userAgent
                                             )
                                             .build()
                                     } else {
                                         request
                                     }
-                                    
+
+                                    // Native YouTube clients always send a Range header.
+                                    // ExoPlayer omits it for a fresh open at position 0,
+                                    // and googlevideo has been rejecting such full-content
+                                    // GETs with 403 while accepting ranged requests.
+                                    if (newRequest.url.host.contains("googlevideo.com") &&
+                                        newRequest.header("Range") == null
+                                    ) {
+                                        newRequest = newRequest.newBuilder()
+                                            .header("Range", "bytes=0-")
+                                            .build()
+                                    }
+
                                     Timber.tag(TAG).e("EXOPLAYER_REQUEST_URL: ${newRequest.url}")
                                     newRequest.headers.forEach { (name, value) ->
                                         Timber.tag(TAG).e("EXOPLAYER_HEADER: $name: $value")
                                     }
-                                    
+
                                     chain.proceed(newRequest)
                                 }
                                 .proxy(YouTube.proxy)
