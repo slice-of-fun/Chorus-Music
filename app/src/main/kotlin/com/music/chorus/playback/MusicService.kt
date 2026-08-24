@@ -2831,22 +2831,21 @@ class MusicService :
                                 .addNetworkInterceptor { chain ->
                                     val request = chain.request()
                                     val ua = request.header("User-Agent")
-
-                                    var newRequest = if (ua == null || ua.startsWith("okhttp", ignoreCase = true)) {
+                                    var newRequest = if (ua == null || ua.startsWith(
+                                            "okhttp",
+                                            ignoreCase = true
+                                        ) || ua.contains("ExoPlayerLib")
+                                    ) {
                                         request.newBuilder()
                                             .header(
                                                 "User-Agent",
-                                                com.music.innertube.models.YouTubeClient.WEB_REMIX.userAgent
+                                                com.music.innertube.models.YouTubeClient.IOS.userAgent
                                             )
                                             .build()
                                     } else {
                                         request
                                     }
 
-                                    // Native YouTube clients always send a Range header.
-                                    // ExoPlayer omits it for a fresh open at position 0,
-                                    // and googlevideo has been rejecting such full-content
-                                    // GETs with 403 while accepting ranged requests.
                                     if (newRequest.url.host.contains("googlevideo.com") &&
                                         newRequest.header("Range") == null
                                     ) {
