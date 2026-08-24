@@ -52,11 +52,17 @@ jobs:
         name: Chorus-Music-APK
         path: app/build/outputs/apk/release/Chorus-Music.apk
 
+    - name: Get Version Name
+      id: get_version
+      run: |
+        VERSION_NAME=$(grep -oP 'versionName\s*=\s*"\K[^"]+' app/build.gradle.kts)
+        echo "version=$VERSION_NAME" >> $GITHUB_OUTPUT
+
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: "build-${{ github.run_number }}"
-        name: "Chorus Music (Build #${{ github.run_number }})"
+        tag_name: "v${{ steps.get_version.outputs.version }}"
+        name: "Chorus Music - v${{ steps.get_version.outputs.version }}"
         files: app/build/outputs/apk/release/Chorus-Music.apk
         draft: false
         prerelease: false
