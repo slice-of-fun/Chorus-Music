@@ -612,9 +612,10 @@ object YTPlayerUtils {
         Timber.tag(logTag).d("Validating stream URL status")
         return kotlinx.coroutines.suspendCancellableCoroutine { cont ->
             val requestBuilder = okhttp3.Request.Builder()
-                .head()
+                .get()
                 .url(url)
                 .header("User-Agent", client.userAgent)
+                .header("Range", "bytes=0-1")
 
             YouTube.cookie?.let { cookie ->
                 requestBuilder.addHeader("Cookie", cookie)
