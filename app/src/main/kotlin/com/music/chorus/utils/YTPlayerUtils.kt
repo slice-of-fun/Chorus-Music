@@ -82,32 +82,26 @@ object YTPlayerUtils {
     private val poTokenGenerator = PoTokenGenerator()
 
 
-    // WEB_REMIX is the only client family with reliable PoToken support (PoTokenWebView).
-    // iOS-family clients (IOS/IPADOS) are rejected by googlevideo with 403 unless a
-    // PO token is present, so they must never be preferred.
-    private val MAIN_CLIENT: YouTubeClient = WEB_REMIX
-
+    private val MAIN_CLIENT: YouTubeClient = ANDROID_VR_1_43_32
 
     private val METADATA_CLIENT: YouTubeClient = WEB_REMIX
 
     private val STREAM_FALLBACK_CLIENTS: Array<YouTubeClient> = arrayOf(
-        WEB_REMIX,
         ANDROID_VR_1_61_48,
+        WEB_REMIX,
         TVHTML5_SIMPLY_EMBEDDED_PLAYER,
         TVHTML5,
         ANDROID_CREATOR,
-        MOBILE,
-        WEB,
-        WEB_CREATOR,
         IPADOS,
+        ANDROID_VR_NO_AUTH,
+        MOBILE,
         IOS,
-        ANDROID_VR_NO_AUTH
+        WEB,
+        WEB_CREATOR
     )
 
     private const val CLIENT_COOLDOWN_MS = 10 * 60 * 1000L
 
-    // Circuit breaker keyed by User-Agent: clients whose stream URL failed during
-    // playback (403) are deprioritized for a cooldown period.
     private val clientCooldowns = java.util.concurrent.ConcurrentHashMap<String, Long>()
 
     fun reportClientPlaybackFailure(userAgent: String?) {
@@ -273,7 +267,6 @@ object YTPlayerUtils {
     }
 
 
-
     private suspend fun resolvePlaybackData(
         videoId: String,
         playlistId: String? = null,
@@ -425,7 +418,7 @@ object YTPlayerUtils {
                         !potBackedPrimary && !isLoggedIn ->
                             STREAM_FALLBACK_CLIENTS.first { !it.useWebPoTokens }
 
-                                                    else -> MAIN_CLIENT
+                        else -> MAIN_CLIENT
                     }
                 )
             }
@@ -511,29 +504,11 @@ object YTPlayerUtils {
                 val isPrivatelyOwned =
                     responseToUse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
 
-                // PoToken-backed URLs are cryptographically bound to the session — trust
-                // them. Everything else must pass a probe that exactly mirrors the first
-                // playback request (same UA, same Range header), because googlevideo
-                // accepts small range probes on tokenless URLs but rejects real playback.
                 var isValid = false
                 if (isPrivatelyOwned || (client.useWebPoTokens && clientPoToken?.streamingDataPoToken != null)) {
                     isValid = true
                 } else if (validateStatus(streamUrl, client)) {
                     isValid = true
-                } else if (client.useWebPoTokens) {
-                    try {
-                        val nTransformed =
-                            CipherDeobfuscator.transformNParamInUrl(streamUrl)
-                        if (nTransformed != streamUrl && validateStatus(
-                                nTransformed,
-                                client
-                            )
-                        ) {
-                            streamUrl = nTransformed
-                            isValid = true
-                        }
-                    } catch (e: Exception) {
-                    }
                 }
 
                 if (!isValid) return@withTimeout null
@@ -554,8 +529,6 @@ object YTPlayerUtils {
 
         var finalPlaybackData: PlaybackData? = null
 
-        // Phase 1: give the highest-priority healthy client a solo attempt so a fast but
-        // unreliable client cannot win a race it would lose at playback time.
         if (clientsToTry.isNotEmpty()) {
             finalPlaybackData = try {
                 tryResolveForClient(clientsToTry.first())
@@ -639,13 +612,9 @@ object YTPlayerUtils {
         Timber.tag(logTag).d("Validating stream URL status")
         return kotlinx.coroutines.suspendCancellableCoroutine { cont ->
             val requestBuilder = okhttp3.Request.Builder()
-                .get()
+                .head()
                 .url(url)
-                .header("User-Agent", client.userAgent)
-                // Mirror the first playback request exactly (ExoPlayer sends bytes=0-
-                // for a fresh open after the interceptor fix). A probe that differs
-                // from playback is how tokenless URLs slipped through as false positives.
-                .header("Range", "bytes=0-")
+                .header("User-Agent", YouTubeClient.USER_AGENT_WEB)
 
             YouTube.cookie?.let { cookie ->
                 requestBuilder.addHeader("Cookie", cookie)
