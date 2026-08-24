@@ -506,7 +506,7 @@ object YTPlayerUtils {
                     responseToUse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
 
                 var isValid = false
-                if (isPrivatelyOwned || (client.useWebPoTokens && clientPoToken?.streamingDataPoToken != null)) {
+                if (isPrivatelyOwned) {
                     isValid = true
                 } else if (validateStatus(streamUrl, client)) {
                     isValid = true
