@@ -2831,26 +2831,21 @@ class MusicService :
                                 .addNetworkInterceptor { chain ->
                                     val request = chain.request()
                                     val ua = request.header("User-Agent")
-                                    var newRequest = if (ua == null || ua.startsWith(
-                                            "okhttp",
-                                            ignoreCase = true
-                                        ) || ua.contains("ExoPlayerLib")
-                                    ) {
-                                        request.newBuilder()
-                                            .header(
-                                                "User-Agent",
-                                                com.music.innertube.models.YouTubeClient.IOS.userAgent
-                                            )
-                                            .build()
-                                    } else {
-                                        request
-                                    }
-
-                                    if (newRequest.url.host.contains("googlevideo.com") &&
-                                        newRequest.header("Range") == null
-                                    ) {
+                                    var newRequest = request
+                                    
+                                    if (newRequest.url.host.contains("googlevideo.com")) {
                                         newRequest = newRequest.newBuilder()
-                                            .header("Range", "bytes=0-")
+                                            .header("User-Agent", com.music.innertube.models.YouTubeClient.IOS.userAgent)
+                                            .build()
+                                            
+                                        if (newRequest.header("Range") == null) {
+                                            newRequest = newRequest.newBuilder()
+                                                .header("Range", "bytes=0-")
+                                                .build()
+                                        }
+                                    } else if (ua == null || ua.startsWith("okhttp", ignoreCase = true) || ua.contains("ExoPlayerLib")) {
+                                        newRequest = request.newBuilder()
+                                            .header("User-Agent", com.music.innertube.models.YouTubeClient.WEB_REMIX.userAgent)
                                             .build()
                                     }
 
@@ -3092,7 +3087,7 @@ class MusicService :
                             val headers = mutableMapOf("User-Agent" to ua)
                             YouTube.cookie?.let { headers["Cookie"] = it }
                             return@Factory dataSpec.buildUpon().setUri(url.toUri()).setHttpRequestHeaders(headers)
-                                .build()
+                                .build().subrange(dataSpec.uriPositionOffset, CHUNK_LENGTH)
                         }
                     Timber.tag(TAG).w("Ghost cache entry for $mediaId, re-fetching")
                     playerCache.removeResource(mediaId)
@@ -3104,6 +3099,7 @@ class MusicService :
                         val headers = mutableMapOf("User-Agent" to ua)
                         YouTube.cookie?.let { headers["Cookie"] = it }
                         return@Factory dataSpec.buildUpon().setUri(url.toUri()).setHttpRequestHeaders(headers).build()
+                            .subrange(dataSpec.uriPositionOffset, CHUNK_LENGTH)
                     }
             } else {
                 Timber.tag("MusicService").i("BYPASSING CACHE for $mediaId due to quality change")
@@ -3263,6 +3259,7 @@ class MusicService :
                     .setUri(streamUrl.toUri())
                     .setHttpRequestHeaders(headers)
                     .build()
+                    .subrange(dataSpec.uriPositionOffset, CHUNK_LENGTH)
             }
         }
     }
