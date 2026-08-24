@@ -501,9 +501,6 @@ object YTPlayerUtils {
                 if (!streamUrl.contains("cpn=")) {
                     streamUrl = "${streamUrl}${separator}cpn=$playbackCpn"
                 }
-                if (!streamUrl.contains("range=")) {
-                    streamUrl = "${streamUrl}&range=0-${format.contentLength ?: 10000000}"
-                }
 
                 val isPrivatelyOwned =
                     responseToUse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
@@ -615,10 +612,9 @@ object YTPlayerUtils {
         Timber.tag(logTag).d("Validating stream URL status")
         return kotlinx.coroutines.suspendCancellableCoroutine { cont ->
             val requestBuilder = okhttp3.Request.Builder()
-                .get()
+                .head()
                 .url(url)
                 .header("User-Agent", client.userAgent)
-                .header("Range", "bytes=0-1")
 
             YouTube.cookie?.let { cookie ->
                 requestBuilder.addHeader("Cookie", cookie)
