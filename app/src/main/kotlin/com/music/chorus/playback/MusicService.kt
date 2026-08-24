@@ -2832,10 +2832,17 @@ class MusicService :
                                     val request = chain.request()
                                     val ua = request.header("User-Agent")
                                     var newRequest = request
-                                    
-                                    if (ua == null || ua.startsWith("okhttp", ignoreCase = true) || ua.contains("ExoPlayerLib")) {
+
+                                    if (ua == null || ua.startsWith(
+                                            "okhttp",
+                                            ignoreCase = true
+                                        ) || ua.contains("ExoPlayerLib")
+                                    ) {
                                         newRequest = request.newBuilder()
-                                            .header("User-Agent", com.music.innertube.models.YouTubeClient.WEB_REMIX.userAgent)
+                                            .header(
+                                                "User-Agent",
+                                                com.music.innertube.models.YouTubeClient.WEB_REMIX.userAgent
+                                            )
                                             .build()
                                     }
 
@@ -4299,11 +4306,9 @@ class MusicService :
         const val CHANNEL_ID = "music_channel_01"
         const val NOTIFICATION_ID = 888
         const val ERROR_CODE_NO_STREAM = 1000001
-        const val CHUNK_LENGTH = 512 * 1024L
+        const val CHUNK_LENGTH = 100 * 1024 * 1024L
         const val PERSISTENT_QUEUE_FILE = "persistent_queue.data"
         const val PERSISTENT_AUTOMIX_FILE = "persistent_automix.data"
-
-        /** How far ahead of the crossfade trigger to start buffering the incoming track. */
         const val PREBUFFER_LEAD_MS = 3000L
         const val PERSISTENT_PLAYER_STATE_FILE = "persistent_player_state.data"
         const val MAX_CONSECUTIVE_ERR = 5
