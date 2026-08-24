@@ -539,7 +539,6 @@ object YTPlayerUtils {
             }
         }
 
-        // Phase 2: race the remaining fallback clients concurrently.
         if (finalPlaybackData == null && clientsToTry.size > 1) {
             for (client in clientsToTry.drop(1)) {
                 try {
