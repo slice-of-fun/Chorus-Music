@@ -3060,9 +3060,7 @@ class MusicService :
                 songUrlCache["${mediaId}_${lockedQuality.name}"]?.takeIf { it.second > System.currentTimeMillis() }
                     ?.let {
                         scope.launch(Dispatchers.IO) { recoverSong(mediaId, isOfflinePlayback = true) }
-                        val headers = mutableMapOf("User-Agent" to it.third)
-                        YouTube.cookie?.let { c -> headers["Cookie"] = c }
-                        return@Factory dataSpec.buildUpon().setUri(it.first.toUri()).setHttpRequestHeaders(headers).build()
+                        return@Factory dataSpec.withUri(it.first.toUri())
                     }
             } else {
                 Timber.tag("MusicService").i("BYPASSING CACHE for $mediaId due to quality change")

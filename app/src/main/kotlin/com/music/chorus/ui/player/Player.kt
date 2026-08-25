@@ -1792,8 +1792,25 @@ fun BottomSheetPlayer(
 
             Spacer(Modifier.height(24.dp))
 
-            when (sliderStyle) {
-                SliderStyle.DEFAULT -> {
+            if (playbackState == Player.STATE_BUFFERING && (sliderPosition ?: effectivePosition) <= 0L) {
+                androidx.compose.foundation.layout.Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp)
+                        .padding(horizontal = PlayerHorizontalPadding + 14.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    androidx.compose.material3.LinearProgressIndicator(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(4.dp),
+                        color = textButtonColor,
+                        trackColor = textButtonColor.copy(alpha = 0.2f)
+                    )
+                }
+            } else {
+                when (sliderStyle) {
+                    SliderStyle.DEFAULT -> {
                     Slider(
                         value = (sliderPosition ?: effectivePosition).toFloat(),
                         valueRange = 0f..(if (duration == C.TIME_UNSET) 0f else duration.toFloat()),
@@ -1937,6 +1954,7 @@ fun BottomSheetPlayer(
                         },
                         modifier = Modifier.padding(horizontal = PlayerHorizontalPadding)
                     )
+                }
                 }
             }
             Spacer(Modifier.height(4.dp))
@@ -2273,21 +2291,29 @@ fun BottomSheetPlayer(
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.Center
                                 ) {
-                                    Icon(
-                                        painter = painterResource(
-                                            if (isListenTogetherGuest) {
-                                                if (isMuted) R.drawable.volume_off else R.drawable.volume_up
+                                    if (playbackState == Player.STATE_BUFFERING) {
+                                        androidx.compose.material3.CircularProgressIndicator(
+                                            color = iconButtonColor,
+                                            modifier = Modifier.size(36.dp),
+                                            strokeWidth = 3.dp
+                                        )
+                                    } else {
+                                        Icon(
+                                            painter = painterResource(
+                                                if (isListenTogetherGuest) {
+                                                    if (isMuted) R.drawable.volume_off else R.drawable.volume_up
+                                                } else {
+                                                    if (effectiveIsPlaying) R.drawable.pause else R.drawable.play
+                                                }
+                                            ),
+                                            contentDescription = if (isListenTogetherGuest) {
+                                                if (isMuted) stringResource(R.string.unmute) else stringResource(R.string.mute)
                                             } else {
-                                                if (effectiveIsPlaying) R.drawable.pause else R.drawable.play
-                                            }
-                                        ),
-                                        contentDescription = if (isListenTogetherGuest) {
-                                            if (isMuted) stringResource(R.string.unmute) else stringResource(R.string.mute)
-                                        } else {
-                                            if (effectiveIsPlaying) stringResource(R.string.pause) else stringResource(R.string.play)
-                                        },
-                                        modifier = Modifier.size(36.dp)
-                                    )
+                                                if (effectiveIsPlaying) stringResource(R.string.pause) else stringResource(R.string.play)
+                                            },
+                                            modifier = Modifier.size(36.dp)
+                                        )
+                                    }
                                 }
                             }
 

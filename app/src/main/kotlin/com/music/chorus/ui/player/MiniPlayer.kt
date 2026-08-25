@@ -794,18 +794,26 @@ private fun LegacyPlayPauseButton(
             }
         },
     ) {
-        Icon(
-            painter = painterResource(
-                when {
-                    isListenTogetherGuest -> if (isMuted) R.drawable.volume_off else R.drawable.volume_up
-                    playbackState == Player.STATE_ENDED -> R.drawable.replay
-                    effectiveIsPlaying -> R.drawable.pause
-                    else -> R.drawable.play
-                }
-            ),
-            contentDescription = null,
-            tint = tint,
-        )
+        if (playbackState == Player.STATE_BUFFERING) {
+            androidx.compose.material3.CircularProgressIndicator(
+                color = tint,
+                modifier = Modifier.size(24.dp),
+                strokeWidth = 2.dp
+            )
+        } else {
+            Icon(
+                painter = painterResource(
+                    when {
+                        isListenTogetherGuest -> if (isMuted) R.drawable.volume_off else R.drawable.volume_up
+                        playbackState == Player.STATE_ENDED -> R.drawable.replay
+                        effectiveIsPlaying -> R.drawable.pause
+                        else -> R.drawable.play
+                    }
+                ),
+                contentDescription = null,
+                tint = tint,
+            )
+        }
     }
 }
 
@@ -1211,19 +1219,27 @@ private fun MiniPlayerControls(
                     .background(primaryColor)
             )
 
-            Icon(
-                painter = painterResource(
-                    when {
-                        isListenTogetherGuest -> if (isMuted) R.drawable.volume_off else R.drawable.volume_up
-                        playbackState == Player.STATE_ENDED -> R.drawable.replay
-                        effectiveIsPlaying -> R.drawable.pause
-                        else -> R.drawable.play
-                    }
-                ),
-                contentDescription = null,
-                tint = onPrimaryColor,
-                modifier = Modifier.size(24.dp)
-            )
+            if (playbackState == Player.STATE_BUFFERING) {
+                androidx.compose.material3.CircularProgressIndicator(
+                    color = onPrimaryColor,
+                    modifier = Modifier.size(24.dp),
+                    strokeWidth = 2.dp
+                )
+            } else {
+                Icon(
+                    painter = painterResource(
+                        when {
+                            isListenTogetherGuest -> if (isMuted) R.drawable.volume_off else R.drawable.volume_up
+                            playbackState == Player.STATE_ENDED -> R.drawable.replay
+                            effectiveIsPlaying -> R.drawable.pause
+                            else -> R.drawable.play
+                        }
+                    ),
+                    contentDescription = null,
+                    tint = onPrimaryColor,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
         }
 
         Spacer(modifier = Modifier.width(12.dp))
