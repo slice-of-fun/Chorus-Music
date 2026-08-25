@@ -53,4 +53,6 @@ class CastConnectionHandler(
     fun skipToPrevious() {}
     fun navigateToMediaIfInQueue(mediaId: String): Boolean = false
     fun release() {}
+    fun insertItemsAfterCurrent(items: List<androidx.media3.common.MediaItem>) {}
+    fun appendItemsToCastQueue(items: List<androidx.media3.common.MediaItem>) {}
 }
