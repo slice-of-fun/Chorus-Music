@@ -1834,12 +1834,19 @@ fun BottomSheetPlayer(
                             }
                         },
                         enabled = !isListenTogetherGuest,
-                        colors = PlayerSliderColors.getSliderColors(
-                            activeColor = textButtonColor,
-                            playerBackground = playerBackground,
-                            useDarkTheme = useDarkTheme
-                        ),
-                        modifier = Modifier.padding(horizontal = PlayerHorizontalPadding),
+                        thumb = { Spacer(modifier = Modifier.size(0.dp)) },
+                        track = { sliderState ->
+                            PlayerSliderTrack(
+                                sliderState = sliderState,
+                                trackHeight = 4.dp,
+                                colors = PlayerSliderColors.getSliderColors(
+                                    activeColor = textButtonColor,
+                                    playerBackground = playerBackground,
+                                    useDarkTheme = useDarkTheme
+                                )
+                            )
+                        },
+                        modifier = Modifier.padding(horizontal = PlayerHorizontalPadding).height(48.dp),
                     )
                 }
 

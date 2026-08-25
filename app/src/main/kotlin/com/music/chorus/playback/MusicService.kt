@@ -3038,9 +3038,7 @@ class MusicService :
                     songUrlCache["${mediaId}_${lockedQuality.name}"]?.takeIf { it.second > System.currentTimeMillis() }
                         ?.let {
                             scope.launch(Dispatchers.IO) { recoverSong(mediaId, isOfflinePlayback = true) }
-                            val headers = mutableMapOf("User-Agent" to it.third)
-                            YouTube.cookie?.let { c -> headers["Cookie"] = c }
-                            return@Factory dataSpec.buildUpon().setUri(it.first.toUri()).setHttpRequestHeaders(headers).build()
+                            return@Factory dataSpec.withUri(it.first.toUri())
                         }
                     // Fall through to fetch real URL since it's only partially downloaded
                 }
@@ -3049,9 +3047,7 @@ class MusicService :
                     songUrlCache["${mediaId}_${lockedQuality.name}"]?.takeIf { it.second > System.currentTimeMillis() }
                         ?.let {
                             scope.launch(Dispatchers.IO) { recoverSong(mediaId, isOfflinePlayback = true) }
-                            val headers = mutableMapOf("User-Agent" to it.third)
-                            YouTube.cookie?.let { c -> headers["Cookie"] = c }
-                            return@Factory dataSpec.buildUpon().setUri(it.first.toUri()).setHttpRequestHeaders(headers).build()
+                            return@Factory dataSpec.withUri(it.first.toUri())
                         }
                     Timber.tag(TAG).w("Ghost cache entry for $mediaId, re-fetching")
                     playerCache.removeResource(mediaId)
