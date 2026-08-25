@@ -106,6 +106,7 @@ object YTPlayerUtils {
         val format: PlayerResponse.StreamingData.Format,
         val streamUrl: String,
         val streamExpiresInSeconds: Int,
+        val userAgent: String,
     )
     
     suspend fun playerResponseForPlayback(
@@ -203,6 +204,7 @@ object YTPlayerUtils {
 
         
         var usedAgeRestrictedClient: YouTubeClient? = null
+        var finalUserAgent = MAIN_CLIENT.userAgent
         val wasOriginallyAgeRestricted: Boolean
 
         
@@ -366,6 +368,7 @@ object YTPlayerUtils {
                 } else {
                     STREAM_FALLBACK_CLIENTS[clientIndex]
                 }
+                finalUserAgent = currentClient.userAgent
 
                 
                 val isPrivatelyOwnedTrack = streamPlayerResponse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
@@ -500,6 +503,7 @@ object YTPlayerUtils {
             format,
             streamUrl,
             streamExpiresInSeconds,
+            finalUserAgent
         )
     }.onFailure { e ->
         Timber.tag(logTag).e(e, "Playback resolution failed")

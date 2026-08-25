@@ -471,7 +471,7 @@ class MusicService :
     private var silenceSkipJob: Job? = null
 
 
-    private val songUrlCache = HashMap<String, Pair<String, Long>>()
+    private val songUrlCache = java.util.concurrent.ConcurrentHashMap<String, Triple<String, Long, String>>()
 
 
     private val bypassCacheForQualityChange = mutableSetOf<String>()
@@ -3038,7 +3038,9 @@ class MusicService :
                     songUrlCache["${mediaId}_${lockedQuality.name}"]?.takeIf { it.second > System.currentTimeMillis() }
                         ?.let {
                             scope.launch(Dispatchers.IO) { recoverSong(mediaId, isOfflinePlayback = true) }
-                            return@Factory dataSpec.withUri(it.first.toUri())
+                            val headers = mutableMapOf("User-Agent" to it.third)
+                            YouTube.cookie?.let { c -> headers["Cookie"] = c }
+                            return@Factory dataSpec.buildUpon().setUri(it.first.toUri()).setHttpRequestHeaders(headers).build()
                         }
                     // Fall through to fetch real URL since it's only partially downloaded
                 }
@@ -3047,7 +3049,9 @@ class MusicService :
                     songUrlCache["${mediaId}_${lockedQuality.name}"]?.takeIf { it.second > System.currentTimeMillis() }
                         ?.let {
                             scope.launch(Dispatchers.IO) { recoverSong(mediaId, isOfflinePlayback = true) }
-                            return@Factory dataSpec.withUri(it.first.toUri())
+                            val headers = mutableMapOf("User-Agent" to it.third)
+                            YouTube.cookie?.let { c -> headers["Cookie"] = c }
+                            return@Factory dataSpec.buildUpon().setUri(it.first.toUri()).setHttpRequestHeaders(headers).build()
                         }
                     Timber.tag(TAG).w("Ghost cache entry for $mediaId, re-fetching")
                     playerCache.removeResource(mediaId)
@@ -3056,7 +3060,9 @@ class MusicService :
                 songUrlCache["${mediaId}_${lockedQuality.name}"]?.takeIf { it.second > System.currentTimeMillis() }
                     ?.let {
                         scope.launch(Dispatchers.IO) { recoverSong(mediaId, isOfflinePlayback = true) }
-                        return@Factory dataSpec.withUri(it.first.toUri())
+                        val headers = mutableMapOf("User-Agent" to it.third)
+                        YouTube.cookie?.let { c -> headers["Cookie"] = c }
+                        return@Factory dataSpec.buildUpon().setUri(it.first.toUri()).setHttpRequestHeaders(headers).build()
                     }
             } else {
                 Timber.tag("MusicService").i("BYPASSING CACHE for $mediaId due to quality change")
@@ -3157,9 +3163,12 @@ class MusicService :
                 val streamUrl = nonNullPlayback.streamUrl
 
                 songUrlCache["${mediaId}_${lockedQuality.name}"] =
-                    streamUrl to System.currentTimeMillis() + (nonNullPlayback.streamExpiresInSeconds * 1000L)
+                    Triple(streamUrl, System.currentTimeMillis() + (nonNullPlayback.streamExpiresInSeconds * 1000L), nonNullPlayback.userAgent)
 
-                return@Factory dataSpec.buildUpon().setKey(targetCacheKey).setUri(streamUrl.toUri()).build()
+                val headers = mutableMapOf("User-Agent" to nonNullPlayback.userAgent)
+                YouTube.cookie?.let { cookie -> headers["Cookie"] = cookie }
+
+                return@Factory dataSpec.buildUpon().setKey(targetCacheKey).setUri(streamUrl.toUri()).setHttpRequestHeaders(headers).build()
             }
         }
     }
@@ -4282,9 +4291,9 @@ class MusicService :
                             knownDurationMs = dbSong?.song?.duration?.let { if (it > 0) it * 1000L else null }
                         )
 
-                        playbackData.getOrNull()?.streamUrl?.let { streamUrl ->
+                        playbackData.getOrNull()?.let { pd ->
                             songUrlCache["${mediaId}_${audioQuality.name}"] =
-                                Pair(streamUrl, System.currentTimeMillis() + 1000 * 60 * 60)
+                                Triple(pd.streamUrl, System.currentTimeMillis() + 1000 * 60 * 60, pd.userAgent)
                             Timber.tag(TAG).d("Preloaded stream for $mediaId")
                         }
                     }
