@@ -119,7 +119,7 @@ class AudioExportService : Service() {
 
         httpClient.newCall(request).execute().use { response ->
             if (!response.isSuccessful) error("Stream request failed with ${response.code}")
-            val body = response.body
+            val body = response.body ?: error("No response body")
             totalBytes = body.contentLength()
             val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
             body.byteStream().use { input ->
@@ -143,7 +143,7 @@ class AudioExportService : Service() {
         return runCatching {
             httpClient.newCall(Request.Builder().url(artworkUrl).build()).execute().use { response ->
                 if (!response.isSuccessful) return@use
-                response.body.byteStream().use { input ->
+                response.body?.byteStream()?.use { input ->
                     destFile.outputStream().use { output ->
                         input.copyTo(output)
                         output.flush()

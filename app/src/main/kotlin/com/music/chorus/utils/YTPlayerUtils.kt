@@ -1,3 +1,5 @@
+
+
 package pushkar.chorus.music.utils
 
 import android.net.ConnectivityManager
@@ -30,7 +32,6 @@ import pushkar.chorus.music.utils.potoken.PoTokenResult
 import pushkar.chorus.music.utils.sabr.EjsNTransformSolver
 import pushkar.chorus.music.utils.PlaybackLogLevel
 import pushkar.chorus.music.utils.PlaybackLogManager
-import kotlinx.coroutines.launch
 import com.music.innertube.models.IpVersion
 import okhttp3.Dns
 import okhttp3.OkHttpClient
@@ -44,8 +45,6 @@ import java.net.SocketAddress
 import java.net.URI
 import java.io.IOException
 import kotlinx.coroutines.flow.first
-
-import kotlin.coroutines.resume
 
 object YTPlayerUtils {
     private const val logTag = "YTPlayerUtils"
@@ -81,16 +80,16 @@ object YTPlayerUtils {
 
     private val poTokenGenerator = PoTokenGenerator()
 
+    
+    private val MAIN_CLIENT: YouTubeClient = ANDROID_VR_1_43_32
 
-    private val MAIN_CLIENT: YouTubeClient = WEB_REMIX
-
+    
     private val METADATA_CLIENT: YouTubeClient = WEB_REMIX
 
     private val STREAM_FALLBACK_CLIENTS: Array<YouTubeClient> = arrayOf(
-        IOS,
-        ANDROID_VR_1_43_32,
+        ANDROID_VR_1_61_48,
         WEB_REMIX,
-        TVHTML5_SIMPLY_EMBEDDED_PLAYER,
+        TVHTML5_SIMPLY_EMBEDDED_PLAYER,  
         TVHTML5,
         ANDROID_CREATOR,
         IPADOS,
@@ -100,22 +99,6 @@ object YTPlayerUtils {
         WEB,
         WEB_CREATOR
     )
-
-    private const val CLIENT_COOLDOWN_MS = 10 * 60 * 1000L
-
-    private val clientCooldowns = java.util.concurrent.ConcurrentHashMap<String, Long>()
-
-    fun reportClientPlaybackFailure(userAgent: String?) {
-        if (userAgent.isNullOrBlank()) return
-        clientCooldowns[userAgent] = System.currentTimeMillis()
-        Timber.tag(logTag).w("Client marked unhealthy for cooldown period: $userAgent")
-    }
-
-    private fun isClientCoolingDown(client: YouTubeClient): Boolean {
-        val failedAt = clientCooldowns[client.userAgent] ?: return false
-        return System.currentTimeMillis() - failedAt < CLIENT_COOLDOWN_MS
-    }
-
     data class PlaybackData(
         val audioConfig: PlayerResponse.PlayerConfig.AudioConfig?,
         val videoDetails: PlayerResponse.VideoDetails?,
@@ -123,9 +106,8 @@ object YTPlayerUtils {
         val format: PlayerResponse.StreamingData.Format,
         val streamUrl: String,
         val streamExpiresInSeconds: Int,
-        val userAgent: String,
     )
-
+    
     suspend fun playerResponseForPlayback(
         videoId: String,
         playlistId: String? = null,
@@ -137,136 +119,18 @@ object YTPlayerUtils {
         knownDurationMs: Long? = null,
         isDownload: Boolean = false
     ): Result<PlaybackData> {
-        val showFallbackToast = false
-
-        var hasShownLosslessToast = false
-        var hasShownOpusToast = false
-
-        suspend fun tryOpus(): Result<PlaybackData> {
-            val firstAttempt = resolvePlaybackData(
-                videoId,
-                playlistId,
-                audioQuality,
-                connectivityManager,
-                context,
-                knownArtist,
-                knownTitle
-            )
-            if (firstAttempt.isFailure && YouTube.cookie == null) {
-                Timber.tag(TAG).w("Playback failed for guest. Rotating session and retrying...")
-                PlaybackLogManager.log(
-                    PlaybackLogLevel.BOT,
-                    "Playback failed for guest",
-                    "Triggering bot detection mitigation (rotating guest session)"
-                )
-                BotDetectionMitigator.rotateGuestSession()
-                val retryResult = resolvePlaybackData(
-                    videoId,
-                    playlistId,
-                    audioQuality,
-                    connectivityManager,
-                    context,
-                    knownArtist,
-                    knownTitle
-                )
-                retryResult.onSuccess { BotDetectionMitigator.notifyPlaybackSuccess() }
-                return retryResult
-            }
-            firstAttempt.onSuccess { BotDetectionMitigator.notifyPlaybackSuccess() }
-            return firstAttempt
+        val firstAttempt = resolvePlaybackData(videoId, playlistId, audioQuality, connectivityManager, context, knownArtist, knownTitle)
+        if (firstAttempt.isFailure && YouTube.cookie == null) {
+            Timber.tag(TAG).w("Playback failed for guest. Rotating session and retrying...")
+            PlaybackLogManager.log(PlaybackLogLevel.BOT, "Playback failed for guest", "Triggering bot detection mitigation (rotating guest session)")
+            BotDetectionMitigator.rotateGuestSession()
+            val retryResult = resolvePlaybackData(videoId, playlistId, audioQuality, connectivityManager, context, knownArtist, knownTitle)
+            retryResult.onSuccess { BotDetectionMitigator.notifyPlaybackSuccess() }
+            return retryResult
         }
-
-        suspend fun tryLossless(): Result<PlaybackData> {
-            var attemptResult: Result<PlaybackData>? = null
-            var lastException: Exception? = null
-            try {
-                attemptResult = kotlinx.coroutines.withTimeoutOrNull(3000L) {
-                    val metadata =
-                        if (knownTitle == null || knownArtist == null) playerResponseForMetadata(videoId).getOrNull() else null
-                    val title = knownTitle ?: metadata?.videoDetails?.title
-                    val author = knownArtist ?: metadata?.videoDetails?.author?.replace(" - Topic", "")
-                    if (title != null && author != null) {
-                        val track = pushkar.chorus.music.utils.LosslessAPI.search(title, author)
-                        if (track != null) {
-                            val format = com.music.innertube.models.response.PlayerResponse.StreamingData.Format(
-                                itag = 0,
-                                mimeType = "audio/flac; codecs=\"flac\"",
-                                bitrate = 1411000,
-                                audioSampleRate = 44100,
-                                contentLength = 0L,
-                                url = track.url,
-                                cipher = null,
-                                signatureCipher = null,
-                                audioQuality = "LOSSLESS",
-                                fps = null,
-                                width = null,
-                                height = null,
-                                quality = "lossless",
-                                qualityLabel = null,
-                                averageBitrate = null,
-                                approxDurationMs = null,
-                                audioChannels = null,
-                                loudnessDb = null,
-                                lastModified = null,
-                                audioTrack = null
-                            )
-                            val resolvedPlaybackData = PlaybackData(
-                                audioConfig = null,
-                                videoDetails = metadata?.videoDetails,
-                                playbackTracking = null,
-                                format = format,
-                                streamUrl = track.url,
-                                streamExpiresInSeconds = 3600,
-                                userAgent = com.music.innertube.models.YouTubeClient.WEB_CREATOR.userAgent
-                            )
-                            return@withTimeoutOrNull Result.success(resolvedPlaybackData)
-                        } else {
-                            throw Exception("No streamable match resolved on Lossless index")
-                        }
-                    } else {
-                        throw Exception("Missing title or artist for lookup")
-                    }
-                }
-                if (attemptResult == null) {
-                    lastException = Exception("Timeout fetching Lossless stream")
-                }
-            } catch (e: Exception) {
-                lastException = e
-            }
-
-            return attemptResult ?: Result.failure(lastException ?: Exception("Lossless resolution failed"))
-        }
-
-        fun showToastMsg(msg: String) {
-            context?.let {
-                if (showFallbackToast) {
-                    android.os.Handler(android.os.Looper.getMainLooper()).post {
-                        android.widget.Toast.makeText(it, msg, android.widget.Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        }
-
-        return when (audioQuality) {
-            AudioQuality.LOSSLESS -> {
-                val losslessRes = tryLossless()
-                if (losslessRes.isSuccess) return losslessRes
-
-                Timber.tag(TAG).e("Qobuz resolution failed, falling back to YouTube Opus")
-                if (!hasShownLosslessToast) {
-                    hasShownLosslessToast = true
-                    showToastMsg(if (isDownload) "Lossless download unavailable, falling back to Opus" else "Lossless stream unavailable, falling back to Opus")
-                }
-
-                tryOpus()
-            }
-
-            else -> {
-                tryOpus()
-            }
-        }
+        firstAttempt.onSuccess { BotDetectionMitigator.notifyPlaybackSuccess() }
+        return firstAttempt
     }
-
 
     private suspend fun resolvePlaybackData(
         videoId: String,
@@ -279,22 +143,18 @@ object YTPlayerUtils {
     ): Result<PlaybackData> = runCatching {
         Timber.tag(logTag).d("Fetching player response for videoId: $videoId, playlistId: $playlistId")
         PlaybackLogManager.log(PlaybackLogLevel.INFO, "Resolving playback data", "Video: $videoId")
-
-        val playbackCpn = (1..16).map {
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"[kotlin.random.Random.nextInt(64)]
-        }.joinToString("")
-
-
+        
+        
         val isUploadedTrack = playlistId == "MLPT" || playlistId?.contains("MLPT") == true
 
         val isLoggedIn = YouTube.cookie != null
         Timber.tag(logTag).d("Session authentication status: ${if (isLoggedIn) "Logged in" else "Not logged in"}")
 
-
+        
         val signatureTimestamp = getSignatureTimestampOrNull(videoId)
         Timber.tag(logTag).d("Signature timestamp: ${signatureTimestamp.timestamp}")
 
-
+        
         var poToken: PoTokenResult? = null
         val sessionId = if (isLoggedIn) YouTube.dataSyncId else YouTube.visitorData
         if (MAIN_CLIENT.useWebPoTokens && sessionId != null) {
@@ -309,28 +169,19 @@ object YTPlayerUtils {
             }
         }
 
-        // The web main client is only trustworthy when its PoToken actually generated;
-        // guests without one get bot-checked ("Sign in to confirm you're not a bot").
-        val potBackedPrimary = !MAIN_CLIENT.useWebPoTokens || poToken != null
-
-
+        
         Timber.tag(logTag).d("Attempting to get player response using MAIN_CLIENT: ${MAIN_CLIENT.clientName}")
         PlaybackLogManager.log(PlaybackLogLevel.DEBUG, "Trying ${MAIN_CLIENT.clientName} (Main)")
-        var mainPlayerResponse = YouTube.player(
-            videoId,
-            playlistId,
-            MAIN_CLIENT,
-            signatureTimestamp.timestamp,
-            poToken?.playerRequestPoToken,
-            playbackCpn
-        ).getOrThrow()
+        var mainPlayerResponse = YouTube.player(videoId, playlistId, MAIN_CLIENT, signatureTimestamp.timestamp, poToken?.playerRequestPoToken).getOrThrow()
 
-
+        
+        
+        
         var metadataResponse: PlayerResponse? = null
         if (isLoggedIn) {
             Timber.tag(logTag).d("Fetching metadata from METADATA_CLIENT (WEB_REMIX) for authenticated tracking")
             try {
-
+                
                 var metaPoToken: PoTokenResult? = null
                 val metaSessionId = YouTube.dataSyncId
                 if (METADATA_CLIENT.useWebPoTokens && metaSessionId != null) {
@@ -350,24 +201,25 @@ object YTPlayerUtils {
             }
         }
 
-
+        
         var usedAgeRestrictedClient: YouTubeClient? = null
         val wasOriginallyAgeRestricted: Boolean
 
-
+        
+        
+        
+        
+        
         val mainStatus = mainPlayerResponse.playabilityStatus.status
         val isAgeRestrictedFromResponse = mainStatus in listOf(
             "AGE_CHECK_REQUIRED",
             "AGE_VERIFICATION_REQUIRED",
             "CONTENT_CHECK_REQUIRED"
-        ) || (mainStatus == "LOGIN_REQUIRED" && mainPlayerResponse.playabilityStatus.reason?.contains(
-            "age",
-            ignoreCase = true
-        ) == true)
+        ) || (mainStatus == "LOGIN_REQUIRED" && mainPlayerResponse.playabilityStatus.reason?.contains("age", ignoreCase = true) == true)
         wasOriginallyAgeRestricted = isAgeRestrictedFromResponse
 
         if (isAgeRestrictedFromResponse && isLoggedIn) {
-
+            
             Timber.tag(logTag).d("Age-restricted detected, using WEB_CREATOR")
             Log.i(TAG, "Age-restricted: using WEB_CREATOR for videoId=$videoId")
             val creatorResponse = YouTube.player(videoId, playlistId, WEB_CREATOR, null, null)
@@ -383,7 +235,13 @@ object YTPlayerUtils {
             }
         }
 
+        
+        if (mainPlayerResponse == null) {
+            throw Exception("Failed to get player response")
+        }
 
+        
+        
         val audioConfig = metadataResponse?.playerConfig?.audioConfig ?: mainPlayerResponse.playerConfig?.audioConfig
         val videoDetails = metadataResponse?.videoDetails ?: mainPlayerResponse.videoDetails
         val playbackTracking = metadataResponse?.playbackTracking ?: mainPlayerResponse.playbackTracking
@@ -393,7 +251,7 @@ object YTPlayerUtils {
         var streamPlayerResponse: PlayerResponse? = null
         var retryMainPlayerResponse: PlayerResponse? = if (usedAgeRestrictedClient != null) mainPlayerResponse else null
 
-
+        
         val currentStatus = mainPlayerResponse.playabilityStatus.status
         var isAgeRestricted = currentStatus in listOf(
             "AGE_CHECK_REQUIRED",
@@ -407,173 +265,253 @@ object YTPlayerUtils {
             Timber.tag(logTag).d("Content needs fallback (status: $currentStatus)")
             android.util.Log.i("YTPlayerUtils", "Unplayable content detected: videoId=$videoId, status=$currentStatus")
         }
-
+        
         val isPrivateTrack = mainPlayerResponse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
 
-        val clientsToTry = buildList {
-            if (!isPrivateTrack || isLoggedIn) {
-                add(
-                    when {
-                        usedAgeRestrictedClient != null -> usedAgeRestrictedClient
-                        // Guests without a PoToken: lead with the best PoToken-free client.
-                        !potBackedPrimary && !isLoggedIn ->
-                            STREAM_FALLBACK_CLIENTS.first { !it.useWebPoTokens }
-
-                        else -> MAIN_CLIENT
-                    }
-                )
-            }
-            val fallbackStart = if (isPrivateTrack) 1 else 0
-            addAll(STREAM_FALLBACK_CLIENTS.toList().drop(fallbackStart))
+        
+        
+        
+        val startIndex = when {
+            isPrivateTrack -> 1  
+            isAgeRestricted -> 0
+            else -> -1
         }
-            .distinct()
-            .filter { !it.loginRequired || (isLoggedIn && YouTube.cookie != null) }
-            .sortedBy { isClientCoolingDown(it) }
 
-        suspend fun tryResolveForClient(client: YouTubeClient): PlaybackData? {
-            return kotlinx.coroutines.withTimeout(12_000L) {
-                var streamUrl: String? = null
-                var format: PlayerResponse.StreamingData.Format? = null
+        for (clientIndex in (startIndex until STREAM_FALLBACK_CLIENTS.size)) {
+            
+            format = null
+            streamUrl = null
+            streamExpiresInSeconds = null
 
-                val clientPoToken = if (client.useWebPoTokens) {
-                    if (poToken == null && sessionId != null) {
-                        try {
-                            poTokenGenerator.getWebClientPoToken(videoId, sessionId)
-                        } catch (e: Exception) {
-                            null
-                        }
-                    } else poToken
-                } else null
+            
+            val client: YouTubeClient
+            if (clientIndex == -1) {
+                
+                client = MAIN_CLIENT
+                streamPlayerResponse = retryMainPlayerResponse ?: mainPlayerResponse
+                Timber.tag(logTag).d("Trying stream from MAIN_CLIENT: ${client.clientName}")
+            } else {
+                
+                client = STREAM_FALLBACK_CLIENTS[clientIndex]
+                Timber.tag(logTag).d("Trying fallback client ${clientIndex + 1}/${STREAM_FALLBACK_CLIENTS.size}: ${client.clientName}")
+                PlaybackLogManager.log(PlaybackLogLevel.DEBUG, "Trying fallback [${clientIndex + 1}/${STREAM_FALLBACK_CLIENTS.size}]", client.clientName)
 
-                val clientSigTimestamp =
-                    if (wasOriginallyAgeRestricted) null else signatureTimestamp.timestamp
-
-                val streamPlayerResponse = when {
-                    retryMainPlayerResponse != null && client == usedAgeRestrictedClient ->
-                        retryMainPlayerResponse
-
-                    client == MAIN_CLIENT && mainPlayerResponse.playabilityStatus.status == "OK" ->
-                        mainPlayerResponse
-
-                    else -> YouTube.player(
-                        videoId,
-                        playlistId,
-                        client,
-                        clientSigTimestamp,
-                        clientPoToken?.playerRequestPoToken,
-                        playbackCpn
-                    ).getOrNull()
+                if (client.loginRequired && !isLoggedIn && YouTube.cookie == null) {
+                    
+                    Timber.tag(logTag).d("Skipping client ${client.clientName} - requires login but user is not logged in")
+                    continue
                 }
 
-                val responseToUse = streamPlayerResponse?.takeIf {
-                    it.playabilityStatus.status == "OK"
-                } ?: return@withTimeout null
-
-                format = findFormat(responseToUse, audioQuality, connectivityManager)
-                if (format != null) {
-                    streamUrl = findUrlOrNull(
-                        format,
-                        videoId,
-                        responseToUse,
-                        skipNewPipe = wasOriginallyAgeRestricted
-                    )
-                }
-
-                if (streamUrl == null || format == null) return@withTimeout null
-
-                if (client.useWebPoTokens) {
+                
+                if (client.useWebPoTokens && poToken == null && sessionId != null) {
+                    Timber.tag(logTag).d("Lazily generating PoToken for fallback web client: ${client.clientName}")
                     try {
-                        val transformed = EjsNTransformSolver.transformNParamInUrl(streamUrl)
-                        if (transformed != streamUrl) streamUrl = transformed
+                        poToken = poTokenGenerator.getWebClientPoToken(videoId, sessionId)
                     } catch (e: Exception) {
-                    }
-                    if (clientPoToken?.streamingDataPoToken != null) {
-                        val separator = if ("?" in streamUrl) "&" else "?"
-                        streamUrl =
-                            "${streamUrl}${separator}pot=${clientPoToken.streamingDataPoToken}"
+                        Timber.tag(logTag).e(e, "Lazy PoToken generation failed")
                     }
                 }
 
-                val resolvedExpiry =
-                    responseToUse.streamingData?.expiresInSeconds ?: 21600
+                Timber.tag(logTag).d("Fetching player response for fallback client: ${client.clientName}")
+                
+                val clientPoToken = if (client.useWebPoTokens) poToken?.playerRequestPoToken else null
+                
+                val clientSigTimestamp = if (wasOriginallyAgeRestricted) null else signatureTimestamp.timestamp
+                streamPlayerResponse =
+                    YouTube.player(videoId, playlistId, client, clientSigTimestamp, clientPoToken)
+                        .onFailure {
+                            Timber.tag(logTag).e(it, "player() request FAILED for %s", client.clientName)
+                        }.getOrNull()
+            }
 
-                val separator = if ("?" in streamUrl) "&" else "?"
-                if (!streamUrl.contains("cpn=")) {
-                    streamUrl = "${streamUrl}${separator}cpn=$playbackCpn"
+            
+            if (streamPlayerResponse?.playabilityStatus?.status == "OK") {
+                Timber.tag(logTag).d("Player response status OK for client: ${if (clientIndex == -1) MAIN_CLIENT.clientName else STREAM_FALLBACK_CLIENTS[clientIndex].clientName}")
+                PlaybackLogManager.log(PlaybackLogLevel.INFO, "Player response OK", if (clientIndex == -1) MAIN_CLIENT.clientName else STREAM_FALLBACK_CLIENTS[clientIndex].clientName)
+
+                
+                val hasDirectUrls = streamPlayerResponse.streamingData?.adaptiveFormats
+                    ?.any { !it.url.isNullOrEmpty() } == true
+                val hasSignatureCipher = streamPlayerResponse.streamingData?.adaptiveFormats
+                    ?.any { !it.signatureCipher.isNullOrEmpty() || !it.cipher.isNullOrEmpty() } == true
+
+                Timber.tag(logTag).d("URL check: hasDirectUrls=$hasDirectUrls, hasSignatureCipher=$hasSignatureCipher")
+
+                
+                val responseToUse = streamPlayerResponse
+
+                format =
+                    findFormat(
+                        responseToUse,
+                        audioQuality,
+                        connectivityManager,
+                    )
+
+                if (format == null) {
+                    Timber.tag(logTag).d("No suitable format found for client: ${if (clientIndex == -1) MAIN_CLIENT.clientName else STREAM_FALLBACK_CLIENTS[clientIndex].clientName}")
+                    continue
                 }
 
-                val isPrivatelyOwned =
-                    responseToUse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
+                Timber.tag(logTag).d("Format found: ${format.mimeType}, bitrate: ${format.bitrate}")
 
-                var isValid = true
+                streamUrl = findUrlOrNull(format, videoId, responseToUse, skipNewPipe = wasOriginallyAgeRestricted)
+                if (streamUrl == null) {
+                    Timber.tag(logTag).d("Stream URL not found for format")
+                    continue
+                }
 
-                if (!isValid) return@withTimeout null
+                
+                val currentClient = if (clientIndex == -1) {
+                    usedAgeRestrictedClient ?: MAIN_CLIENT
+                } else {
+                    STREAM_FALLBACK_CLIENTS[clientIndex]
+                }
 
-                PlaybackData(
-                    audioConfig = audioConfig
-                        ?: responseToUse.playerConfig?.audioConfig,
-                    videoDetails = videoDetails ?: responseToUse.videoDetails,
-                    playbackTracking = playbackTracking
-                        ?: responseToUse.playbackTracking,
-                    format = format,
-                    streamUrl = streamUrl,
-                    streamExpiresInSeconds = resolvedExpiry,
-                    userAgent = client.userAgent
-                )
-            }
-        }
+                
+                val isPrivatelyOwnedTrack = streamPlayerResponse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
 
-        var finalPlaybackData: PlaybackData? = null
-
-        if (clientsToTry.isNotEmpty()) {
-            finalPlaybackData = try {
-                tryResolveForClient(clientsToTry.first())
-            } catch (e: Exception) {
-                if (e is kotlinx.coroutines.CancellationException) throw e
-                Timber.tag(logTag).e(e, "Primary client (${clientsToTry.first().clientName}) resolution failed")
-                null
-            }
-        }
-
-        if (finalPlaybackData == null && clientsToTry.size > 1) {
-            for (client in clientsToTry.drop(1)) {
-                try {
-                    val result = tryResolveForClient(client)
-                    if (result != null) {
-                        finalPlaybackData = result
-                        break
+                
+                if (currentClient.useWebPoTokens) {
+                    try {
+                        Timber.tag(logTag).d("Applying n-transform to stream URL for ${currentClient.clientName}")
+                        val transformed = EjsNTransformSolver.transformNParamInUrl(streamUrl!!)
+                        if (transformed != streamUrl) {
+                            streamUrl = transformed
+                            Timber.tag(logTag).d("N-transform applied successfully")
+                        }
+                    } catch (e: Exception) {
+                        Timber.tag(logTag).e(e, "N-transform failed: ${e.message}")
                     }
-                } catch (e: Exception) {
-                    if (e is kotlinx.coroutines.CancellationException) throw e
-                    Timber.tag(logTag).e(e, "Fetch failed for fallback client: ${client.clientName}")
                 }
+
+                
+                
+                if (currentClient.useWebPoTokens && poToken?.streamingDataPoToken != null) {
+                    Timber.tag(logTag).d("Appending pot= parameter to stream URL")
+                    val separator = if ("?" in streamUrl!!) "&" else "?"
+                    streamUrl = "${streamUrl}${separator}pot=${poToken.streamingDataPoToken}"
+                }
+
+                streamExpiresInSeconds = streamPlayerResponse.streamingData?.expiresInSeconds
+                if (streamExpiresInSeconds == null) {
+                    Timber.tag(logTag).d("Stream expiration time not found")
+                    continue
+                }
+
+                Timber.tag(logTag).d("Stream expires in: $streamExpiresInSeconds seconds")
+
+                
+                val urlHost = try { java.net.URL(streamUrl).host } catch (e: Exception) { "unknown" }
+                Timber.tag(logTag).d("Stream URL host: $urlHost, pot length: ${poToken?.streamingDataPoToken?.length ?: 0}")
+
+                
+                val isPrivatelyOwned = streamPlayerResponse.videoDetails?.musicVideoType == "MUSIC_VIDEO_TYPE_PRIVATELY_OWNED_TRACK"
+
+                if (clientIndex == STREAM_FALLBACK_CLIENTS.size - 1 || isPrivatelyOwned) {
+                    
+                    if (isPrivatelyOwned) {
+                        Timber.tag(logTag).d("Skipping validation for privately owned track: ${currentClient.clientName}")
+                    } else {
+                        Timber.tag(logTag).d("Using last fallback client without validation: ${STREAM_FALLBACK_CLIENTS[clientIndex].clientName}")
+                    }
+                    Log.i(TAG, "Playback: client=${currentClient.clientName}, videoId=$videoId, private=$isPrivatelyOwned")
+                    break
+                }
+
+                if (validateStatus(streamUrl!!)) {
+                    
+                    Timber.tag(logTag).d("Stream validated successfully with client: ${currentClient.clientName}")
+                    PlaybackLogManager.log(PlaybackLogLevel.INFO, "Stream validated", currentClient.clientName)
+                    
+                    Log.i(TAG, "Playback: client=${currentClient.clientName}, videoId=$videoId")
+                    break
+                } else {
+                    Timber.tag(logTag).d("Stream validation failed for client: ${currentClient.clientName}")
+
+                    
+                    if (currentClient.useWebPoTokens) {
+                        var nTransformWorked = false
+
+                        
+                        try {
+                            val nTransformed = CipherDeobfuscator.transformNParamInUrl(streamUrl!!)
+                            if (nTransformed != streamUrl) {
+                                Timber.tag(logTag).d("CipherDeobfuscator n-transform applied, re-validating...")
+                                if (validateStatus(nTransformed)) {
+                                    Timber.tag(logTag).d("N-transformed URL VALIDATED OK!")
+                                    streamUrl = nTransformed
+                                    nTransformWorked = true
+                                    Log.i(TAG, "Playback: client=${currentClient.clientName}, videoId=$videoId (cipher n-transform)")
+                                }
+                            }
+                        } catch (e: Exception) {
+                            Timber.tag(logTag).e(e, "CipherDeobfuscator n-transform error")
+                        }
+
+                        if (nTransformWorked) break
+                    }
+                }
+            } else {
+                val status = streamPlayerResponse?.playabilityStatus?.status ?: "Unknown"
+                val reason = streamPlayerResponse?.playabilityStatus?.reason ?: "No reason"
+                Timber.tag(logTag).d("Player response status not OK: $status, reason: $reason")
+                PlaybackLogManager.log(PlaybackLogLevel.WARNING, "Client failed: ${client.clientName}", "$status: $reason")
+                
+                
+                Timber.tag(logTag).d("Player response status not OK: ${streamPlayerResponse?.playabilityStatus?.status}, reason: ${streamPlayerResponse?.playabilityStatus?.reason}")
             }
         }
 
-        if (finalPlaybackData == null) {
+        if (streamPlayerResponse == null) {
             Timber.tag(logTag).e("Bad stream player response - all clients failed")
+            throw Exception("Bad stream player response")
+        }
+
+        if (streamPlayerResponse.playabilityStatus.status != "OK") {
+            val errorReason = streamPlayerResponse.playabilityStatus.reason
+            Timber.tag(logTag).e("Playability status not OK: $errorReason")
             throw PlaybackException(
-                "All fallback clients failed to resolve stream",
+                errorReason,
                 null,
                 PlaybackException.ERROR_CODE_REMOTE_ERROR
             )
         }
 
-        Timber.tag(logTag).d("Successfully obtained playback data from concurrent fetch")
-        finalPlaybackData
+        if (streamExpiresInSeconds == null) {
+            Timber.tag(logTag).e("Missing stream expire time")
+            throw Exception("Missing stream expire time")
+        }
+
+        if (format == null) {
+            Timber.tag(logTag).e("Could not find format")
+            throw Exception("Could not find format")
+        }
+
+        if (streamUrl == null) {
+            Timber.tag(logTag).e("Could not find stream url")
+            throw Exception("Could not find stream url")
+        }
+
+        Timber.tag(logTag).d("Successfully obtained playback data with format: ${format.mimeType}, bitrate: ${format.bitrate}")
+        PlaybackData(
+            audioConfig,
+            videoDetails,
+            playbackTracking,
+            format,
+            streamUrl,
+            streamExpiresInSeconds,
+        )
     }.onFailure { e ->
-        if (e is kotlinx.coroutines.CancellationException) throw e
         Timber.tag(logTag).e(e, "Playback resolution failed")
         PlaybackLogManager.log(PlaybackLogLevel.ERROR, "Playback failed", "${e::class.simpleName}: ${e.message}")
     }
-
+    
     suspend fun playerResponseForMetadata(
         videoId: String,
         playlistId: String? = null,
     ): Result<PlayerResponse> {
-        Timber.tag(logTag)
-            .d("Fetching metadata-only player response for videoId: $videoId using MAIN_CLIENT: ${MAIN_CLIENT.clientName}")
-        return YouTube.player(videoId, playlistId, client = WEB_REMIX)
+        Timber.tag(logTag).d("Fetching metadata-only player response for videoId: $videoId using MAIN_CLIENT: ${MAIN_CLIENT.clientName}")
+        return YouTube.player(videoId, playlistId, client = WEB_REMIX) 
             .onSuccess { Timber.tag(logTag).d("Successfully fetched metadata") }
             .onFailure { Timber.tag(logTag).e(it, "Failed to fetch metadata") }
     }
@@ -583,15 +521,14 @@ object YTPlayerUtils {
         audioQuality: AudioQuality,
         connectivityManager: ConnectivityManager,
     ): PlayerResponse.StreamingData.Format? {
-        Timber.tag(logTag)
-            .d("Finding format with audioQuality: $audioQuality, network metered: ${connectivityManager.isActiveNetworkMetered}")
+        Timber.tag(logTag).d("Finding format with audioQuality: $audioQuality, network metered: ${connectivityManager.isActiveNetworkMetered}")
 
         val format = playerResponse.streamingData?.adaptiveFormats
             ?.filter { it.isAudio && it.isOriginal }
             ?.maxByOrNull {
                 it.bitrate * when (audioQuality) {
-                    AudioQuality.OPUS, AudioQuality.LOSSLESS -> 1
-                } + (if (it.mimeType.startsWith("audio/webm")) 10240 else 0)
+                    AudioQuality.OPUS -> 1
+                } + (if (it.mimeType.startsWith("audio/webm")) 10240 else 0) 
             }
 
         if (format != null) {
@@ -602,45 +539,30 @@ object YTPlayerUtils {
 
         return format
     }
-
-    private suspend fun validateStatus(url: String, client: YouTubeClient): Boolean {
+    
+    private fun validateStatus(url: String): Boolean {
         Timber.tag(logTag).d("Validating stream URL status")
-        return kotlinx.coroutines.suspendCancellableCoroutine { cont ->
+        try {
             val requestBuilder = okhttp3.Request.Builder()
-                .get()
+                .head()
                 .url(url)
-                .header("User-Agent", client.userAgent)
-                .header("Range", "bytes=0-1")
+                .header("User-Agent", YouTubeClient.USER_AGENT_WEB)
 
+            
             YouTube.cookie?.let { cookie ->
                 requestBuilder.addHeader("Cookie", cookie)
             }
 
-            val call = httpClient.newCall(requestBuilder.build())
-            cont.invokeOnCancellation { call.cancel() }
-
-            call.enqueue(object : okhttp3.Callback {
-                override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                    response.use {
-                        val isSuccessful = it.isSuccessful
-                        Timber.tag(logTag)
-                            .d("Stream URL validation result: ${if (isSuccessful) "Success" else "Failed"} (${it.code})")
-                        if (cont.isActive) {
-                            cont.resume(isSuccessful)
-                        }
-                    }
-                }
-
-                override fun onFailure(call: okhttp3.Call, e: java.io.IOException) {
-                    Timber.tag(logTag).e(e, "Stream URL validation failed with exception")
-                    if (cont.isActive) {
-                        cont.resume(false)
-                    }
-                }
-            })
+            val response = httpClient.newCall(requestBuilder.build()).execute()
+            val isSuccessful = response.isSuccessful
+            Timber.tag(logTag).d("Stream URL validation result: ${if (isSuccessful) "Success" else "Failed"} (${response.code})")
+            return isSuccessful
+        } catch (e: Exception) {
+            Timber.tag(logTag).e(e, "Stream URL validation failed with exception")
+            reportException(e)
         }
+        return false
     }
-
     data class SignatureTimestampResult(
         val timestamp: Int?,
         val isAgeRestricted: Boolean
@@ -656,7 +578,7 @@ object YTPlayerUtils {
             },
             onFailure = { error ->
                 val isAgeRestricted = error.message?.contains("age-restricted", ignoreCase = true) == true ||
-                        error.cause?.message?.contains("age-restricted", ignoreCase = true) == true
+                    error.cause?.message?.contains("age-restricted", ignoreCase = true) == true
                 if (isAgeRestricted) {
                     Timber.tag(logTag).d("Age-restricted content detected from NewPipe")
                     Log.i(TAG, "Age-restricted detected early via NewPipe: videoId=$videoId")
@@ -675,16 +597,15 @@ object YTPlayerUtils {
         playerResponse: PlayerResponse,
         skipNewPipe: Boolean = false
     ): String? {
-        Timber.tag(logTag)
-            .d("Finding stream URL for format: ${format.mimeType}, videoId: $videoId, skipNewPipe: $skipNewPipe")
+        Timber.tag(logTag).d("Finding stream URL for format: ${format.mimeType}, videoId: $videoId, skipNewPipe: $skipNewPipe")
 
-
+        
         if (!format.url.isNullOrEmpty()) {
             Timber.tag(logTag).d("Using URL from format directly")
             return format.url
         }
 
-
+        
         val signatureCipher = format.signatureCipher ?: format.cipher
         if (!signatureCipher.isNullOrEmpty()) {
             Timber.tag(logTag).d("Format has signatureCipher, using custom deobfuscation")
@@ -696,20 +617,20 @@ object YTPlayerUtils {
             Timber.tag(logTag).d("Custom cipher deobfuscation failed")
         }
 
-
+        
         if (skipNewPipe) {
             Timber.tag(logTag).d("Skipping NewPipe methods for age-restricted content")
             return null
         }
 
-
+        
         val deobfuscatedUrl = NewPipeExtractor.getStreamUrl(format, videoId)
         if (deobfuscatedUrl != null) {
             Timber.tag(logTag).d("Stream URL obtained via NewPipe deobfuscation")
             return deobfuscatedUrl
         }
 
-
+        
         Timber.tag(logTag).d("Trying StreamInfo fallback for URL")
         val streamUrls = YouTube.getNewPipeStreamUrls(videoId)
         if (streamUrls.isNotEmpty()) {
@@ -719,7 +640,7 @@ object YTPlayerUtils {
                 return streamUrl
             }
 
-
+            
             val audioStream = streamUrls.find { urlPair ->
                 playerResponse.streamingData?.adaptiveFormats?.any {
                     it.itag == urlPair.first && it.isAudio

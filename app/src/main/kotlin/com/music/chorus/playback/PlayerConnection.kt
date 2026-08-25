@@ -159,6 +159,10 @@ class PlayerConnection(
     val isAutomixing: kotlinx.coroutines.flow.StateFlow<Boolean> = service.isAutomixing
     val automixDebugInfo: kotlinx.coroutines.flow.StateFlow<MusicService.AutomixDebugInfo?> = service.automixDebugInfo
 
+    
+    var shouldBlockPlaybackChanges: (() -> Boolean)? = null
+    
+    
     @Volatile
     var allowInternalSync: Boolean = false
 
@@ -229,6 +233,11 @@ class PlayerConnection(
     }
 
     fun startRadioSeamlessly() {
+        
+        if (shouldBlockPlaybackChanges?.invoke() == true) {
+            Timber.tag("PlayerConnection").d("startRadioSeamlessly blocked - Listen Together guest")
+            return
+        }
         if (!playerReadinessFlow.value) {
             Timber.tag(TAG).w("startRadioSeamlessly called before player ready; delegating to service")
         }
@@ -243,6 +252,11 @@ class PlayerConnection(
     fun playNext(item: MediaItem) = playNext(listOf(item))
 
     fun playNext(items: List<MediaItem>) {
+        
+        if (!allowInternalSync && shouldBlockPlaybackChanges?.invoke() == true) {
+            Timber.tag("PlayerConnection").d("playNext blocked - Listen Together guest")
+            return
+        }
         try {
             service.playNext(items)
         } catch (e: Exception) {
@@ -254,6 +268,11 @@ class PlayerConnection(
     fun addToQueue(item: MediaItem) = addToQueue(listOf(item))
 
     fun addToQueue(items: List<MediaItem>) {
+        
+        if (!allowInternalSync && shouldBlockPlaybackChanges?.invoke() == true) {
+            Timber.tag("PlayerConnection").d("addToQueue blocked - Listen Together guest")
+            return
+        }
         try {
             service.addToQueue(items)
         } catch (e: Exception) {
