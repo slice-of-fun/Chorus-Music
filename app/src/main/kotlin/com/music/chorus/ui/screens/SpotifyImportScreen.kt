@@ -401,8 +401,12 @@ private fun SpotifyLoginSheet(
                     .weight(1f)
                     .clip(MaterialTheme.shapes.large),
                 factory = { context ->
-                    WebView(context).apply {
-                        val cookieManager = CookieManager.getInstance()
+                    android.webkit.WebView(context).apply {
+                        layoutParams = android.view.ViewGroup.LayoutParams(
+                            android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                            android.view.ViewGroup.LayoutParams.MATCH_PARENT
+                        )
+                        val cookieManager = android.webkit.CookieManager.getInstance()
                         cookieManager.setAcceptCookie(true)
                         cookieManager.setAcceptThirdPartyCookies(this, true)
                         settings.javaScriptEnabled = true
