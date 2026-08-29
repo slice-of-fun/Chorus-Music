@@ -118,12 +118,12 @@ object YouTube {
         set(value) {
             innerTube.useLoginForBrowse = value
         }
-
     var ipVersion: com.music.innertube.models.IpVersion
         get() = innerTube.ipVersion
         set(value) {
             innerTube.ipVersion = value
         }
+
 
     suspend fun refreshVisitorData(): Result<String> = visitorData().onSuccess {
         visitorData = it
@@ -265,7 +265,7 @@ object YouTube {
             }
             // Check all tabs in singleColumnBrowseResultsRenderer
             response.contents?.singleColumnBrowseResultsRenderer?.tabs?.forEach { tab ->
-                tab.tabRenderer.content?.sectionListRenderer?.contents?.forEach { content ->
+                tab.tabRenderer?.content?.sectionListRenderer?.contents?.forEach { content ->
                     content.musicDescriptionShelfRenderer?.description?.runs?.let { yield(it) }
                 }
             }
@@ -282,7 +282,7 @@ object YouTube {
                 }
             }
             response.contents?.singleColumnBrowseResultsRenderer?.tabs?.forEach { tab ->
-                tab.tabRenderer.content?.sectionListRenderer?.contents?.forEach { content ->
+                tab.tabRenderer?.content?.sectionListRenderer?.contents?.forEach { content ->
                     content.musicResponsiveHeaderRenderer?.description?.runs?.let { yield(it) }
                 }
             }
@@ -680,12 +680,12 @@ object YouTube {
             ?.tabRenderer?.content?.sectionListRenderer?.continuations?.getContinuation()
         val sectionListRender = response.contents?.singleColumnBrowseResultsRenderer?.tabs?.firstOrNull()
             ?.tabRenderer?.content?.sectionListRenderer
-        val sections = sectionListRender?.contents!!
+        val sections = sectionListRender?.contents.orEmpty()
             .mapNotNull { it.musicCarouselShelfRenderer }
             .mapNotNull {
                 HomePage.Section.fromMusicCarouselShelfRenderer(it)
             }.toMutableList()
-        val chips = sectionListRender.header?.chipCloudRenderer?.chips?.mapNotNull { HomePage.Chip.fromChipCloudChipRenderer(it) }
+        val chips = sectionListRender?.header?.chipCloudRenderer?.chips?.mapNotNull { HomePage.Chip.fromChipCloudChipRenderer(it) }
         HomePage(chips, sections, continuation)
     }
 
@@ -1195,8 +1195,8 @@ object YouTube {
         innerTube.deletePlaylist(WEB_REMIX, playlistId)
     }
 
-    suspend fun player(videoId: String, playlistId: String? = null, client: YouTubeClient, signatureTimestamp: Int? = null, poToken: String? = null, cpn: String? = null): Result<PlayerResponse> = runCatching {
-        innerTube.player(client, videoId, playlistId, signatureTimestamp, poToken, cpn).body<PlayerResponse>()
+    suspend fun player(videoId: String, playlistId: String? = null, client: YouTubeClient, signatureTimestamp: Int? = null, poToken: String? = null): Result<PlayerResponse> = runCatching {
+        innerTube.player(client, videoId, playlistId, signatureTimestamp, poToken).body<PlayerResponse>()
     }
 
     suspend fun registerPlayback(playlistId: String? = null, playbackTracking: String) = runCatching {
@@ -1572,20 +1572,20 @@ object YouTube {
                     comment = CommentThreadRenderer.Comment(
                         commentRenderer = com.music.innertube.models.comment.CommentRenderer(
                             authorText = com.music.innertube.models.Runs(
-                                listOf(com.music.innertube.models.Run(text = payload.author?.displayName ?: "Unknown", navigationEndpoint = null))
+                                runs = listOf(com.music.innertube.models.Run(text = payload.author?.displayName ?: "Unknown", navigationEndpoint = null))
                             ),
                             authorThumbnail = com.music.innertube.models.Thumbnails(
                                 thumbnails = listOf(com.music.innertube.models.Thumbnail(url = payload.author?.avatarThumbnailUrl ?: "", width = 0, height = 0))
                             ),
                             contentText = com.music.innertube.models.Runs(
-                                listOf(com.music.innertube.models.Run(text = payload.properties?.content?.content ?: "", navigationEndpoint = null))
+                                runs = listOf(com.music.innertube.models.Run(text = payload.properties?.content?.content ?: "", navigationEndpoint = null))
                             ),
                             publishedTimeText = com.music.innertube.models.Runs(
-                                listOf(com.music.innertube.models.Run(text = payload.properties?.publishedTime ?: "", navigationEndpoint = null))
+                                runs = listOf(com.music.innertube.models.Run(text = payload.properties?.publishedTime ?: "", navigationEndpoint = null))
                             ),
                             commentId = commentId,
                             voteCount = com.music.innertube.models.Runs(
-                                listOf(com.music.innertube.models.Run(text = likeCount, navigationEndpoint = null))
+                                runs = listOf(com.music.innertube.models.Run(text = likeCount, navigationEndpoint = null))
                             ),
                             voteStatus = when (toolbarState?.likeState) {
                                 "TOOLBAR_LIKE_STATE_LIKE" -> "UPVOTE"
@@ -1663,20 +1663,20 @@ object YouTube {
 
                 com.music.innertube.models.comment.CommentRenderer(
                     authorText = com.music.innertube.models.Runs(
-                        listOf(com.music.innertube.models.Run(text = payload.author?.displayName ?: "Unknown", navigationEndpoint = null))
+                        runs = listOf(com.music.innertube.models.Run(text = payload.author?.displayName ?: "Unknown", navigationEndpoint = null))
                     ),
                     authorThumbnail = com.music.innertube.models.Thumbnails(
                         thumbnails = listOf(com.music.innertube.models.Thumbnail(url = payload.author?.avatarThumbnailUrl ?: "", width = 0, height = 0))
                     ),
                     contentText = com.music.innertube.models.Runs(
-                        listOf(com.music.innertube.models.Run(text = payload.properties?.content?.content ?: "", navigationEndpoint = null))
+                        runs = listOf(com.music.innertube.models.Run(text = payload.properties?.content?.content ?: "", navigationEndpoint = null))
                     ),
                     publishedTimeText = com.music.innertube.models.Runs(
-                        listOf(com.music.innertube.models.Run(text = payload.properties?.publishedTime ?: "", navigationEndpoint = null))
+                        runs = listOf(com.music.innertube.models.Run(text = payload.properties?.publishedTime ?: "", navigationEndpoint = null))
                     ),
                     commentId = payload.properties?.commentId ?: "reply-${mutation.hashCode()}",
                     voteCount = com.music.innertube.models.Runs(
-                        listOf(com.music.innertube.models.Run(text = likeCount, navigationEndpoint = null))
+                        runs = listOf(com.music.innertube.models.Run(text = likeCount, navigationEndpoint = null))
                     ),
                     voteStatus = when (toolbarState?.likeState) {
                         "TOOLBAR_LIKE_STATE_LIKE" -> "UPVOTE"

@@ -1,22 +1,16 @@
 package com.music.innertube.models
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Runs(
-    @SerialName("runs")
-    private val _runs: List<Run>? = null,
-    val simpleText: String? = null,
-) {
-    val runs: List<Run>?
-        get() = _runs ?: simpleText?.let { listOf(Run(text = it, navigationEndpoint = null)) }
-}
+    val runs: List<Run>?,
+)
 
 @Serializable
 data class Run(
     val text: String,
-    val navigationEndpoint: NavigationEndpoint? = null,
+    val navigationEndpoint: NavigationEndpoint?,
 )
 
 private const val compactCountSuffixPattern =
@@ -48,23 +42,9 @@ fun List<Run>.splitBySeparator(): List<List<Run>> {
     val res = mutableListOf<List<Run>>()
     var tmp = mutableListOf<Run>()
     forEach { run ->
-        val text = run.text
-        val isExactSeparator = text == " • " || text.trim() == "•"
-        
-        if (isExactSeparator) {
+        if (run.text == " • ") {
             res.add(tmp)
             tmp = mutableListOf()
-        } else if (text.contains(" • ") || text.contains("•")) {
-            val parts = text.split(" • ", "•")
-            parts.forEachIndexed { i, part ->
-                if (part.isNotEmpty()) {
-                    tmp.add(Run(text = part, navigationEndpoint = run.navigationEndpoint))
-                }
-                if (i < parts.size - 1) {
-                    res.add(tmp)
-                    tmp = mutableListOf()
-                }
-            }
         } else {
             tmp.add(run)
         }

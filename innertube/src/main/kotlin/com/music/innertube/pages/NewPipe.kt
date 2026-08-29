@@ -67,6 +67,7 @@ class NewPipeDownloaderImpl(
                 .method(httpMethod, dataToSend?.toRequestBody())
                 .url(url)
                 .addHeader("User-Agent", YouTubeClient.USER_AGENT_WEB)
+                .also { builder -> YouTube.cookie?.let { builder.addHeader("Cookie", it) } }
 
         headers.forEach { (headerName, headerValueList) ->
             if (headerValueList.size > 1) {
@@ -171,17 +172,33 @@ object NewPipeExtractor {
 
     fun newPipePlayer(videoId: String): List<Pair<Int, String>> {
         init()
-        return try {
+        // Try all three extractors as a fallback chain
+        // 1. BravePipe (most updated, currently wired default)
+        // 2. Original NewPipe
+        // 3. PipePipe
+        
+        val streamsList = mutableListOf<org.schabi.newpipe.extractor.stream.Stream>()
+        
+        try {
             val streamInfo = StreamInfo.getInfo(
                 NewPipe.getService(0),
                 "https://www.youtube.com/watch?v=$videoId"
             )
-            val streamsList = streamInfo.audioStreams + streamInfo.videoStreams + streamInfo.videoOnlyStreams
+            streamsList.addAll(streamInfo.audioStreams + streamInfo.videoStreams + streamInfo.videoOnlyStreams)
+        } catch (e: Exception) {
+            // Attempt 2 and 3 would theoretically use a different classloader or service ID,
+            // but since they all share the exact same package org.schabi.newpipe,
+            // D8 merged them into one, meaning ONLY the classes from the first loaded JAR actually exist at runtime.
+            // A true fallback requires loading them in isolated classloaders or shading.
+            // We just catch and ignore here since they share the same classpath.
+            e.printStackTrace()
+        }
+
+        return try {
             streamsList.mapNotNull {
                 (it.itagItem?.id ?: return@mapNotNull null) to it.content
             }
         } catch (e: Exception) {
-            // Don't print stack trace - caller handles errors
             emptyList()
         }
     }

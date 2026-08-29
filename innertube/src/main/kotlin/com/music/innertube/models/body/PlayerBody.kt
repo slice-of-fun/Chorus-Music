@@ -8,7 +8,6 @@ data class PlayerBody(
     val context: Context,
     val videoId: String,
     val playlistId: String?,
-    val cpn: String? = null,
     val playbackContext: PlaybackContext? = null,
     val serviceIntegrityDimensions: ServiceIntegrityDimensions? = null,
     val contentCheckOk: Boolean = true,

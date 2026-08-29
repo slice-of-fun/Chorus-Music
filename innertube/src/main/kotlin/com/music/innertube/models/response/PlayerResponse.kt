@@ -67,7 +67,7 @@ data class PlayerResponse(
             val isAudio: Boolean
                 get() = width == null
             val isOriginal: Boolean
-                get() = audioTrack?.isAutoDubbed != true
+                get() = audioTrack?.isAutoDubbed == null
 
             @Serializable
             data class AudioTrack(
