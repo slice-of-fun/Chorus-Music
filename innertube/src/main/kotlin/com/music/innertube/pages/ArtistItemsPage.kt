@@ -19,7 +19,7 @@ data class ArtistItemsPage(
 ) {
     companion object {
         fun fromMusicResponsiveListItemRenderer(renderer: MusicResponsiveListItemRenderer): SongItem? {
-            // Split the secondary line by bullet separator to separate artists from other metadata (like views)
+            
             val secondaryLineRuns = renderer.flexColumns
                 .getOrNull(1)
                 ?.musicResponsiveListItemFlexColumnRenderer
@@ -27,7 +27,7 @@ data class ArtistItemsPage(
                 ?.runs
                 ?.splitBySeparator()
 
-            // Extract artists from the first segment after splitting
+            
             val artists = secondaryLineRuns?.firstOrNull()?.oddElements()?.map {
                 Artist(
                     name = it.text,
@@ -35,7 +35,7 @@ data class ArtistItemsPage(
                 )
             }
 
-            // Extract album from last flexColumn (like SimpMusic does)
+            
             val album = renderer.flexColumns.lastOrNull()
                 ?.musicResponsiveListItemFlexColumnRenderer?.text?.runs
                 ?.firstOrNull()?.let {
@@ -47,7 +47,7 @@ data class ArtistItemsPage(
                     } else null
                 }
 
-            // Extract library tokens using the new method that properly handles multiple toggle items
+            
             val libraryTokens = PageHelper.extractLibraryTokensFromMenuItems(renderer.menu?.menuRenderer?.items)
 
             return SongItem(
@@ -95,7 +95,7 @@ data class ArtistItemsPage(
                         it.musicInlineBadgeRenderer?.icon?.iconType == "MUSIC_EXPLICIT_BADGE"
                     } != null
                 )
-                // Video
+                
                 renderer.isSong -> SongItem(
                     id = renderer.navigationEndpoint.watchEndpoint?.videoId ?: return null,
                     title = renderer.title.runs?.firstOrNull()?.text ?: return null,

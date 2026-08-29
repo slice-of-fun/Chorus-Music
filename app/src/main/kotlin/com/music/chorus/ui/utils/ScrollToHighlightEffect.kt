@@ -25,12 +25,12 @@ fun Modifier.scrollToOnHighlight(
         LocalConfiguration.current.screenHeightDp.dp.toPx()
     }
     
-    // We want the item to be positioned roughly in the center of the screen
+    
     val targetScreenY = screenHeightPx / 2f
 
     LaunchedEffect(isHighlighted, targetScroll.value) {
         if (isHighlighted && targetScroll.value != null) {
-            delay(delayMs) // Wait for layout/animations
+            delay(delayMs) 
             scrollState.animateScrollTo(targetScroll.value!!)
         }
     }
@@ -38,13 +38,13 @@ fun Modifier.scrollToOnHighlight(
     return if (isHighlighted) {
         this.onGloballyPositioned { coordinates ->
             if (targetScroll.value == null) {
-                // The current absolute screen position of the item
+                
                 val currentScreenY = coordinates.positionInWindow().y
                 
-                // How much we need to shift the scroll to make currentScreenY == targetScreenY
+                
                 val scrollDelta = currentScreenY - targetScreenY
                 
-                // Target scroll value is current scroll + delta
+                
                 var newScroll = scrollState.value + scrollDelta.toInt()
                 if (newScroll < 0) newScroll = 0
                 

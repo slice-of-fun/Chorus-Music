@@ -113,7 +113,7 @@ highlightKey: String? = null) {
                                         }
                                     }
                                 } catch (e: Exception) {
-                                    // continue to next url
+                                    
                                 }
                                 if (success) break
                             }
@@ -128,7 +128,7 @@ highlightKey: String? = null) {
                     )
                 }
             }
-            delay(60_000L) // 1 minute
+            delay(60_000L) 
         }
     }
 

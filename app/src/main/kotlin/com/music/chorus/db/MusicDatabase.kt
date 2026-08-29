@@ -729,12 +729,12 @@ val MIGRATION_29_30 = object : Migration(29, 30) {
 
     override fun migrate(db: SupportSQLiteDatabase) {
 
-        // Drop views before modifying the schema
+        
         db.execSQL("DROP VIEW IF EXISTS sorted_song_artist_map")
         db.execSQL("DROP VIEW IF EXISTS sorted_song_album_map")
         db.execSQL("DROP VIEW IF EXISTS playlist_song_map_preview")
 
-        // Add the isVideo column only if it does not already exist
+        
         if (!hasColumn(db, "song", "isVideo")) {
             try {
                 db.execSQL(
@@ -745,9 +745,9 @@ val MIGRATION_29_30 = object : Migration(29, 30) {
             }
         }
 
-        // Add the provider column only if it does not already exist.
-        // This prevents crashes for databases that already contain the
-        // provider column due to previous migration inconsistencies.
+        
+        
+        
         if (!hasColumn(db, "lyrics", "provider")) {
             try {
                 db.execSQL(
@@ -758,7 +758,7 @@ val MIGRATION_29_30 = object : Migration(29, 30) {
             }
         }
 
-        // Recreate the dropped views
+        
         db.execSQL(
             "CREATE VIEW `sorted_song_artist_map` AS SELECT * FROM song_artist_map ORDER BY position"
         )
@@ -794,7 +794,7 @@ private fun hasColumn(
 val MIGRATION_27_28 =
     object : Migration(27, 28) {
         override fun migrate(db: SupportSQLiteDatabase) {
-            // Fix missing columns for users that updated to broken version 27
+            
             try {
                 db.execSQL("ALTER TABLE song ADD COLUMN lyricsOffset INTEGER NOT NULL DEFAULT 0")
             } catch (e: Exception) {
@@ -867,7 +867,7 @@ val MIGRATION_28_29 = object : Migration(28, 29) {
 val MIGRATION_36_37 =
     object : Migration(36, 37) {
         override fun migrate(db: SupportSQLiteDatabase) {
-            // Empty migration to prevent crash on downgrade from version 37
+            
         }
     }
 
@@ -880,7 +880,7 @@ val MIGRATION_37_38 =
             db.execSQL("CREATE TABLE IF NOT EXISTS `play_event` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trackId` TEXT NOT NULL, `startTime` INTEGER NOT NULL, `durationMs` INTEGER NOT NULL, `skipped` INTEGER NOT NULL, `engaged` INTEGER NOT NULL)")
             db.execSQL("CREATE TABLE IF NOT EXISTS `taste_profile` (`id` INTEGER NOT NULL, `genres` TEXT NOT NULL, `confidence` REAL NOT NULL, `patternsFound` INTEGER NOT NULL, `modelVersion` TEXT NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`id`))")
 
-            // Fix missing format.perceptualLoudnessDb column if needed
+            
             var columnExists = false
             db.query("PRAGMA table_info(format)").use { cursor ->
                 val nameIndex = cursor.getColumnIndex("name")
@@ -900,7 +900,7 @@ val MIGRATION_37_38 =
 val MIGRATION_38_39 =
     object : Migration(38, 39) {
         override fun migrate(db: SupportSQLiteDatabase) {
-            // Fix missing format.perceptualLoudnessDb column if needed
+            
             var columnExists = false
             db.query("PRAGMA table_info(format)").use { cursor ->
                 val nameIndex = cursor.getColumnIndex("name")
@@ -953,7 +953,7 @@ class Migration41To42 : AutoMigrationSpec
 
 val MIGRATION_41_42 = object : Migration(41, 42) {
     override fun migrate(db: SupportSQLiteDatabase) {
-        // Handled by AutoMigration
+        
     }
 }
 

@@ -84,7 +84,7 @@ fun ChorusExtractorSettings(
         }
     }
 
-    // Rate-limiting update timestamps (Limits to 3 clicks per 24 hours / 1 day)
+    
     val (updateTime1, onUpdateTime1Change) = rememberPreference(
         CipherManualUpdate1Key,
         defaultValue = 0L
@@ -98,7 +98,7 @@ fun ChorusExtractorSettings(
         defaultValue = 0L
     )
 
-    // Keep track of remaining time in milliseconds for the countdown
+    
     var timeRemaining by remember { mutableStateOf(0L) }
     var currentTimeMillis by remember { mutableStateOf(System.currentTimeMillis()) }
 
@@ -117,9 +117,9 @@ fun ChorusExtractorSettings(
         }
     }
 
-    val limitWindow = 24 * 60 * 60 * 1000L // 24 hours (1 day)
+    val limitWindow = 24 * 60 * 60 * 1000L 
 
-    // Check if all 3 recent updates occurred within the last 24 hours
+    
     val isRateLimited = updateTime1 > 0L && updateTime2 > 0L && updateTime3 > 0L &&
         (currentTimeMillis - updateTime1 < limitWindow) &&
         (currentTimeMillis - updateTime2 < limitWindow) &&
@@ -160,7 +160,7 @@ fun ChorusExtractorSettings(
     ) {
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Options settings group
+        
         Material3SettingsGroup(
             scrollState = null,
             title = null,
@@ -237,7 +237,7 @@ fun ChorusExtractorSettings(
                                         lastUpdated = newTime
                                     }
                                     if (success) {
-                                        // Slide manual update timestamps to record the success
+                                        
                                         onUpdateTime1Change(updateTime2)
                                         onUpdateTime2Change(updateTime3)
                                         onUpdateTime3Change(System.currentTimeMillis())

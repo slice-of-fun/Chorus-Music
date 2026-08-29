@@ -1,7 +1,4 @@
-/**
- * Chorus Music Project (C) 2026
- * Licensed under GPL-3.0 | See git history for contributors
- */
+
 
 package pushkar.chorus.music.ui.screens
 
@@ -69,7 +66,7 @@ fun ActivityHistoryBottomSheet(
                 .animateContentSize(animationSpec = spring(stiffness = Spring.StiffnessMediumLow)),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Header Row (Standard settings top app bar aesthetic)
+            
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -104,7 +101,7 @@ fun ActivityHistoryBottomSheet(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Total Listening Time Hero Card (Pixel Settings banner style)
+            
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(24.dp),
@@ -163,14 +160,14 @@ fun ActivityHistoryBottomSheet(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Segmented Pomodoro Timer Settings style row for Unique Counts
+            
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
                 val segmentBgColor = MaterialTheme.colorScheme.surfaceContainerHigh
 
-                // Songs Segment (Rounded Start)
+                
                 Box(
                     modifier = Modifier
                         .weight(1f)
@@ -228,7 +225,7 @@ fun ActivityHistoryBottomSheet(
 
                 Spacer(modifier = Modifier.width(3.dp))
 
-                // Artists Segment (Middle)
+                
                 Box(
                     modifier = Modifier
                         .weight(1f)
@@ -281,7 +278,7 @@ fun ActivityHistoryBottomSheet(
 
                 Spacer(modifier = Modifier.width(3.dp))
 
-                // Albums Segment (Rounded End)
+                
                 Box(
                     modifier = Modifier
                         .weight(1f)
@@ -340,7 +337,7 @@ fun ActivityHistoryBottomSheet(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // All-Time Total Play Time Card (Clean Wide rounded settings-style row)
+            
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(24.dp),
@@ -412,7 +409,7 @@ fun ActivityHistoryBottomSheet(
     }
 }
 
-/** Converts milliseconds to a human-readable "Xh Ym" string */
+
 private fun formatDuration(ms: Long): String {
     if (ms <= 0L) return "0m"
     val totalMinutes = ms / 60_000

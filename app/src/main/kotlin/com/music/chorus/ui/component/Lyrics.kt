@@ -2278,7 +2278,7 @@ fun Lyrics(
                         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
                         modifier = Modifier
                             .fillMaxWidth()
-                            // Ensure the card is constrained so the inner column can scroll
+                            
                             .heightIn(max = 650.dp)
                     ) {
                         Column(
@@ -2524,7 +2524,7 @@ fun Lyrics(
                         }
                     }
                 }
-            } // closes Dialog
+            } 
         }
     }
 }

@@ -11,17 +11,7 @@ import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-/**
- * Low-shelf ducking processor used only during AutoMix DJ-blend crossfades, so two full
- * basslines don't sum into mud during the overlap. Not the user's parametric EQ chain.
- *
- * The shelf filter's coefficients are fixed once at configure time and never change again —
- * changing an IIR filter's coefficients on the fly while its delay-line memory carries state
- * from the old coefficients produces audible clicks ("zipper noise"). Instead, the filter runs
- * continuously (its own signal stays perfectly smooth) and the duck amount is a linear blend
- * between the dry and fully-filtered signal, ramped smoothly per-sample toward whatever mix the
- * crossfade loop last requested.
- */
+
 @UnstableApi
 class AutomixDuckAudioProcessor(
     private val shelfFrequencyHz: Double = 150.0,
@@ -37,11 +27,11 @@ class AutomixDuckAudioProcessor(
     private var outputBuffer: ByteBuffer = EMPTY_BUFFER
     private var inputEnded = false
 
-    /** Target blend, 0=dry (no duck) .. 1=fully filtered (maxDuckDb). Set from the fade loop. */
+    
     @Volatile
     private var targetMix: Float = 0f
 
-    /** Currently applied blend; eases toward targetMix a little every sample, never jumps. */
+    
     private var currentMix: Float = 0f
 
     private var b0 = 1.0
@@ -61,11 +51,11 @@ class AutomixDuckAudioProcessor(
 
     companion object {
         private val EMPTY_BUFFER: ByteBuffer = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder())
-        // Time constant for the per-sample mix ease, independent of sample rate.
+        
         private const val MIX_EASE_MS = 15.0
     }
 
-    /** Duck toward [dbFraction] of maxDuckDb, where 0=no duck and 1=full duck. */
+    
     fun setMix(fraction: Float) {
         targetMix = fraction.coerceIn(0f, 1f)
     }
@@ -79,7 +69,7 @@ class AutomixDuckAudioProcessor(
         val omega = 2.0 * PI * shelfFrequencyHz / sampleRate
         val sinOmega = sin(omega)
         val cosOmega = cos(omega)
-        val alpha = sinOmega / 2.0 * sqrt(2.0) // S=1 shelf slope
+        val alpha = sinOmega / 2.0 * sqrt(2.0) 
         val sqrtA = sqrt(A)
         val aPlusOne = A + 1.0
         val aMinusOne = A - 1.0
@@ -122,8 +112,8 @@ class AutomixDuckAudioProcessor(
             outputBuffer.clear()
         }
 
-        // Per-sample ease toward targetMix: at 44.1-48kHz this settles in a few ms, fast
-        // enough to track the fade loop's ~100ms updates while never stepping abruptly.
+        
+        
         val easePerSample = (1000.0 / (MIX_EASE_MS * sampleRate)).toFloat().coerceIn(0f, 1f)
 
         val sampleCount = inputSize / 2

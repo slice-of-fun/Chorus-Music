@@ -110,9 +110,7 @@ constructor(
                 YTPlayerUtils.playerResponseForPlayback(
                     mediaId,
                     audioQuality = AudioQuality.OPUS,
-                    connectivityManager = connectivityManager,
-                    context = context,
-                    isDownload = true
+                    connectivityManager = connectivityManager
                 )
             }.getOrThrow()
             val format = playbackData.format

@@ -38,13 +38,13 @@ object AiRecommendationHelper {
         val database = InternalDatabase.newInstance(context)
 
         onLog?.invoke("Analyzing your listening history...")
-        // 1. Gather User Taste
+        
         val topSongs: List<Song> = database.topSongs(20).firstOrNull() ?: emptyList()
         val likedSongs: List<Song> = database.likedSongsByPlayTimeAsc().firstOrNull()?.take(20) ?: emptyList()
 
         if (topSongs.isEmpty() && likedSongs.isEmpty()) {
             onLog?.invoke("Not enough listening history found.")
-            return@withContext // Not enough data
+            return@withContext 
         }
 
         val tasteList = (topSongs + likedSongs).distinctBy { it.song.id }.take(30).map { songObj ->
@@ -67,11 +67,11 @@ object AiRecommendationHelper {
             ]
         """.trimIndent()
 
-        // 2. Query AI Provider
+        
         onLog?.invoke("Connecting to AI Provider...")
         val aiProvider = context.dataStore.get(AiProviderKey, "OpenRouter")
         val jsonOutput = if (aiProvider == "Puter") {
-            // Future Puter Implementation
+            
             "[]"
         } else {
             val apiKey = context.dataStore.get(OpenRouterApiKey, "")
@@ -157,7 +157,7 @@ object AiRecommendationHelper {
             )
             database.insert(playlist)
         } else {
-            // Clear existing songs in playlist
+            
             database.clearPlaylist(playlist.id)
         }
 

@@ -353,7 +353,7 @@ fun getAllSearchableSettings(): List<Triple<String, String, String>> {
             Triple(stringResource(R.string.wavy), "Appearance", "settings/appearance"),
             Triple(stringResource(R.string.yt_sync), "Account", "settings/account"),
 
-            // Hardcoded Settings Missed by Generator
+            
             Triple("Import from Spotify", "Backup & Restore", "settings/spotify_import"),
             Triple("Import from local file", "Backup & Restore", "settings/backup_restore"),
             Triple("Import 'm3u' Playlist", "Backup & Restore", "settings/backup_restore"),

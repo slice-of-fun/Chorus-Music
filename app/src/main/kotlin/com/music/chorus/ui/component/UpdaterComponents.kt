@@ -200,17 +200,17 @@ fun String.parseMarkdown(): androidx.compose.ui.text.AnnotatedString {
         }
         
         when {
-            match.groups[1] != null -> { // **bold**
+            match.groups[1] != null -> { 
                 builder.withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
                     append(match.groups[2]!!.value)
                 }
             }
-            match.groups[3] != null -> { // *italic*
+            match.groups[3] != null -> { 
                 builder.withStyle(SpanStyle(fontStyle = FontStyle.Italic)) {
                     append(match.groups[4]!!.value)
                 }
             }
-            match.groups[5] != null -> { // `code`
+            match.groups[5] != null -> { 
                 builder.withStyle(SpanStyle(
                     background = codeBgColor,
                     fontFamily = FontFamily.Monospace
@@ -218,7 +218,7 @@ fun String.parseMarkdown(): androidx.compose.ui.text.AnnotatedString {
                     append(match.groups[6]!!.value)
                 }
             }
-            match.groups[7] != null -> { // [link](url)
+            match.groups[7] != null -> { 
                 val text = match.groups[8]!!.value
                 val url = match.groups[9]!!.value
                 val startIndex = builder.length
@@ -230,7 +230,7 @@ fun String.parseMarkdown(): androidx.compose.ui.text.AnnotatedString {
                 }
                 builder.addStringAnnotation("URL", url, startIndex, builder.length)
             }
-            match.groups[10] != null -> { // bare url
+            match.groups[10] != null -> { 
                 val url = match.groups[10]!!.value
                 val startIndex = builder.length
                 val fullUrl = if (url.startsWith("http")) url else "https://$url"

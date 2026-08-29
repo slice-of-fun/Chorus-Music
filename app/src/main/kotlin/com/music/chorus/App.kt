@@ -74,7 +74,7 @@ class App : Application(), SingletonImageLoader.Factory {
     override fun onCreate() {
         super.onCreate()
 
-        // Removed destructive database deletion to preserve user data
+        
 
         
         CrashHandler.install(this)
@@ -93,7 +93,7 @@ class App : Application(), SingletonImageLoader.Factory {
         applicationScope.launch {
             initializeSettings()
             
-            // Warm the cipher WebView off the first-play critical path
+            
             launch(Dispatchers.IO) {
                 delay(1500)
                 CipherDeobfuscator.prewarm()

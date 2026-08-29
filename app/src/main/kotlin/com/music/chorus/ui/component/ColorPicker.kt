@@ -1,7 +1,4 @@
-/**
- * vivimusic Project (C) 2026
- * Licensed under GPL-3.0 | See git history for contributors
- */
+
 
 package pushkar.chorus.music.ui.component
 
@@ -48,13 +45,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import pushkar.chorus.music.R
 
-/**
- * Pure HSV/hex color conversions used by [ColorPickerDialog].
- * Kept free of android.* dependencies so they are unit-testable on the JVM.
- */
+
 object ColorPickerConversions {
 
-    /** Converts HSV components (hue 0..360, saturation/value 0..1) to an opaque [Color]. */
+    
     fun hsvToColor(hue: Float, saturation: Float, value: Float): Color {
         val h = ((hue % 360f) + 360f) % 360f
         val s = saturation.coerceIn(0f, 1f)
@@ -75,7 +69,7 @@ object ColorPickerConversions {
         return Color(r + m, g + m, b + m)
     }
 
-    /** Extracts HSV components (hue 0..360, saturation/value 0..1) from [color]. */
+    
     fun colorToHsv(color: Color): Triple<Float, Float, Float> {
         val r = color.red
         val g = color.green
@@ -94,16 +88,13 @@ object ColorPickerConversions {
         return Triple(hue, saturation, max)
     }
 
-    /** Formats [color] as an uppercase RRGGBB hex string without the leading '#'. */
+    
     fun colorToHex(color: Color): String {
         val argb = color.toArgb()
         return "%06X".format(argb and 0xFFFFFF)
     }
 
-    /**
-     * Parses a RRGGBB hex string (optionally prefixed with '#') to an opaque [Color],
-     * or null if the input is not a valid 6-digit hex color.
-     */
+    
     fun parseHexColor(hex: String): Color? {
         val cleaned = hex.trim().removePrefix("#")
         if (cleaned.length != 6) return null
@@ -127,14 +118,7 @@ private val presetColors = listOf(
     Color(0xFFF06292),
 )
 
-/**
- * A full HSV color picker dialog with a saturation/value area, hue slider, hex input
- * and preset swatches. Calls [onConfirm] with the chosen color.
- *
- * The reset button selects [defaultColor] in the picker; when [onReset] is provided
- * it is invoked instead (for defaults that aren't a fixed color, e.g. theme-adaptive)
- * and the dialog is expected to be dismissed by the callback.
- */
+
 @Composable
 fun ColorPickerDialog(
     initialColor: Color,

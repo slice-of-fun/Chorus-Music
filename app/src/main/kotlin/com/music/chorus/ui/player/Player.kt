@@ -2003,8 +2003,8 @@ fun BottomSheetPlayer(
 
                     val isBuffering = playbackState == androidx.media3.common.Player.STATE_BUFFERING
 
-                    // Beat-synced automix countdown: beats left until the planned mix point,
-                    // ticking with playback position and pulsing at the track's tempo.
+                    
+                    
                     val mixBeatMs = automixDebug?.outBpm?.takeIf { it > 0f }?.let { 60_000f / it } ?: 500f
                     val mixBeatsLeft = automixDebug?.triggerTimeMs?.let {
                         kotlin.math.ceil((it - (sliderPosition ?: effectivePosition)) / mixBeatMs).toInt()

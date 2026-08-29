@@ -18,7 +18,7 @@ class TidalCanvasProviderTest {
 
     @Test
     fun testCacheBehavior() = runBlocking {
-        // This test would require mocking the HttpClient which is set by lazy
-        // In a real project, we'd use a test HttpClient engine
+        
+        
     }
 }

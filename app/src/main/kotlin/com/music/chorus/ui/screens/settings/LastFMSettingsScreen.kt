@@ -1,7 +1,4 @@
-/**
- * Metrolist Project (C) 2026
- * Licensed under GPL-3.0 | See git history for contributors
- */
+
 
 package com.music.chorus.ui.screens.settings
 
@@ -165,7 +162,7 @@ fun LastFMSettingsScreen(
                         enabled = !isLoggingIn,
                     )
 
-                    // Show error message if login failed
+                    
                     loginError?.let { error ->
                         Text(
                             text = error,
@@ -175,7 +172,7 @@ fun LastFMSettingsScreen(
                         )
                     }
 
-                    // Show loading indicator
+                    
                     if (isLoggingIn) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -213,7 +210,7 @@ fun LastFMSettingsScreen(
                                         lastfmSession = auth.session.key
                                         LastFM.sessionKey = auth.session.key
 
-                                        // Switch back to main thread to update UI
+                                        
                                         coroutineScope.launch(Dispatchers.Main) {
                                             isLoggingIn = false
                                             showLoginDialog = false
@@ -289,7 +286,7 @@ fun LastFMSettingsScreen(
             )
         )
 
-        // Options section (card-based)
+        
         Material3SettingsGroup(
             title = stringResource(R.string.account),
             items = listOf(

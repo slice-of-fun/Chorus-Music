@@ -1,7 +1,4 @@
-/**
- * vivimusic Project (C) 2026
- * Licensed under GPL-3.0 | See git history for contributors
- */
+
 
 package pushkar.chorus.music.ui.player
 
@@ -61,15 +58,7 @@ import kotlin.math.exp
 import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
 
-/**
- * Compact now playing controls docked inside the floating tab bar, mirroring the
- * iOS 26 Apple Music accessory: a wide pill above the tabs when the bar is
- * expanded, and a slim strip between the tab pill and the search tab when inline.
- *
- * Swiping the artwork/title area horizontally changes the song, honoring the same
- * swipe preferences and thresholds as [MiniPlayer]. Tapping the row invokes
- * [onClick] (which opens the full player).
- */
+
 @Composable
 fun FloatingMiniPlayer(
     isInline: Boolean,
@@ -103,7 +92,7 @@ fun FloatingMiniPlayer(
     val artCornerRadius = if (isInline) 8.dp else 10.dp
     val controlSize = if (isInline) 32.dp else 40.dp
 
-    // iOS 26 style press response: the whole glass pill grows slightly while touched.
+    
     val pressInteractionSource = remember { MutableInteractionSource() }
     val isPressed by pressInteractionSource.collectIsPressedAsState()
     val pressScale by animateFloatAsState(
@@ -112,9 +101,9 @@ fun FloatingMiniPlayer(
         label = "accessoryPressScale",
     )
 
-    // Same structure as MiniPlayer: the drag detector sits on the outermost
-    // container so the whole accessory is swipeable, and the entire content row
-    // slides with the drag.
+    
+    
+    
     Box(
         contentAlignment = Alignment.CenterStart,
         modifier = Modifier

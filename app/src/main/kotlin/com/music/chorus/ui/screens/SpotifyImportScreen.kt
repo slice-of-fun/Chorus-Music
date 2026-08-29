@@ -390,8 +390,8 @@ private fun SpotifyLoginSheet(
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
-            // Loading indicator visible during page transitions, OTP screens,
-            // and the post-email security-verification flow.
+            
+            
             if (isPageLoading) {
                 LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
@@ -410,8 +410,8 @@ private fun SpotifyLoginSheet(
                         settings.setSupportZoom(true)
                         settings.builtInZoomControls = true
                         settings.displayZoomControls = false
-                        // Override the UA to remove WebView fingerprints so Spotify allows OTP
-                        // and Google allows email OAuth login.
+                        
+                        
                         settings.userAgentString = settings.userAgentString
                             .replace("; wv", "")
                             .replace("Version/4.0 ", "")
@@ -443,9 +443,9 @@ private fun SpotifyLoginSheet(
 
                             override fun onPageFinished(view: WebView, url: String?) {
                                 isPageLoading = false
-                                // Try capturing on every page-finish, including the
-                                // security-verification confirmation and the final
-                                // open.spotify.com landing after email auth.
+                                
+                                
+                                
                                 captureCookies(url)
                             }
                         }
@@ -470,9 +470,9 @@ private fun readSpotifyCookies(
     val urls = linkedSetOf(
         "https://open.spotify.com",
         "https://accounts.spotify.com",
-        // Captures cookies on the security-verification page that Spotify shows
-        // when it detects an unusual login (e.g. email auth). Without this the
-        // captureCookies call after completing verification would find nothing.
+        
+        
+        
         "https://challenge.spotify.com",
         "https://spotify.com",
     )

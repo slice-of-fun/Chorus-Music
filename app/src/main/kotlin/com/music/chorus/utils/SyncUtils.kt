@@ -429,7 +429,7 @@ class SyncUtils @Inject constructor(
                         try {
                             val likedDate = song.song.likedDate
                             if (likedDate == null || likedDate.toEpochSecond(ZoneOffset.UTC) > lastSync) {
-                                // Schedule a migration/backfill job for songs with null likedDate
+                                
                                 withRetry {
                                     YouTube.likeVideo(song.id, true)
                                 }.onFailure { e ->

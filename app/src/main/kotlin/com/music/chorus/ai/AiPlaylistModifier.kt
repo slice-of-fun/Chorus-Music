@@ -171,7 +171,7 @@ object AiPlaylistModifier {
             if (resolvedSongs.isNotEmpty()) {
                 onLog("Adding ${resolvedSongs.size} songs to playlist...")
                 
-                // Get the current max position to append new songs
+                
                 val maxPosition = currentSongs.maxOfOrNull { it.map.position } ?: -1
 
                 resolvedSongs.forEachIndexed { index, songItem ->

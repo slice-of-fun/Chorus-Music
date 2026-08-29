@@ -29,10 +29,7 @@ import java.util.*
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
-/**
- * Provide access to InnerTube endpoints.
- * For making HTTP requests, not parsing response.
- */
+
 @OptIn(ExperimentalEncodingApi::class)
 class InnerTube {
     private var httpClient = createClient()
@@ -79,43 +76,43 @@ class InnerTube {
             deflate(0.8F)
         }
 
-        // Enhanced network configuration for better performance
+        
         engine {
             config {
-                // Connection pool settings for better connection reuse
+                
                 connectionPool(
                     okhttp3.ConnectionPool(
-                        10, // maxIdleConnections
-                        5, // keepAliveDuration
+                        10, 
+                        5, 
                         java.util.concurrent.TimeUnit.MINUTES
                     )
                 )
                 
-                // Timeout configurations
+                
                 connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
                 readTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
                 writeTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
                 
-                // Enable HTTP/2 for better performance
+                
                 protocols(listOf(okhttp3.Protocol.HTTP_2, okhttp3.Protocol.HTTP_1_1))
                 
-                // Retry on connection failure
+                
                 retryOnConnectionFailure(true)
                 
-                // Cache configuration for better performance
+                
                 cache(
                     okhttp3.Cache(
                         directory = java.io.File(System.getProperty("java.io.tmpdir"), "http_cache"),
-                        maxSize = 50L * 1024L * 1024L // 50 MB
+                        maxSize = 50L * 1024L * 1024L 
                     )
                 )
                 
-                // Apply proxy configuration
+                
                 this@InnerTube.proxy?.let { proxyConfig ->
                     proxy(proxyConfig)
                 }
                 
-                // Apply proxy authentication
+                
                 this@InnerTube.proxyAuth?.let { auth ->
                     proxyAuthenticator { _, response ->
                         response.request.newBuilder()
@@ -126,7 +123,7 @@ class InnerTube {
             }
         }
 
-        // Request timeout configuration
+        
         install(HttpTimeout) {
             requestTimeoutMillis = 60000
             connectTimeoutMillis = 30000
@@ -136,8 +133,8 @@ class InnerTube {
         defaultRequest {
             url(YouTubeClient.API_URL_YOUTUBE_MUSIC)
             header("Accept", "application/json")
-            // Use the user's locale instead of hardcoding en-US so region-specific
-            // catalogs and language-matched recommendations are returned.
+            
+            
             header("Accept-Language", "${locale.hl},${locale.gl};q=0.9,en;q=0.8")
             header("Cache-Control", "no-cache")
         }
@@ -147,17 +144,17 @@ class InnerTube {
         contentType(ContentType.Application.Json)
         headers {
             append("X-Goog-Api-Format-Version", "1")
-            append("X-YouTube-Client-Name", client.clientId /* Not a typo. The Client-Name header does contain the client id. */)
+            append("X-YouTube-Client-Name", client.clientId )
             append("X-YouTube-Client-Version", client.clientVersion)
             append("X-Origin", YouTubeClient.ORIGIN_YOUTUBE_MUSIC)
             append("Referer", YouTubeClient.REFERER_YOUTUBE_MUSIC)
-            // Sent to EVERY client, including `loginSupported = false` ones. Withholding it from
-            // those (on the theory that an account-bound visitor id without credentials looks like
-            // a hijacked session) was tried and measured to be backwards: VISIONOS and
-            // ANDROID_VR 1.65.10 — the only clients that currently mint a fully readable stream
-            // URL — *require* it. Without one they answer UNPLAYABLE / LOGIN_REQUIRED with zero
-            // formats. `dataSyncId` is the genuinely account-scoped identifier and stays gated on
-            // `loginSupported` in YouTubeClient.toContext (`onBehalfOfUser`).
+            
+            
+            
+            
+            
+            
+            
             visitorData?.let { append("X-Goog-Visitor-Id", it) }
             if (setLogin && client.loginSupported) {
                 cookie?.let { cookie ->
@@ -173,11 +170,7 @@ class InnerTube {
         parameter("prettyPrint", false)
     }
 
-    /**
-     * Simple retry wrapper for transient IO errors (socket aborts, timeouts).
-     * Retries the given block up to [maxAttempts] times with exponential backoff.
-     * Cancellation is respected since [delay] will throw if the coroutine is cancelled.
-     */
+    
     private suspend fun <T> withRetry(
         maxAttempts: Int = 3,
         initialDelay: Long = 500L,
@@ -205,10 +198,10 @@ class InnerTube {
         continuation: String? = null,
         setLogin: Boolean? = null,
     ) = withRetry {
-        // When [setLogin] is null, fall back to the global browse-login preference.
-        // Callers can pass `false` to force an anonymous search (no auth header,
-        // no dataSyncId) so the query is NOT recorded in the user's YouTube search
-        // history — used for background Spotify→YouTube matching.
+        
+        
+        
+        
         val effectiveLogin = (setLogin ?: useLoginForBrowse) && !cookie.isNullOrEmpty()
         httpClient.post("search") {
             ytClient(client, setLogin = effectiveLogin)
@@ -239,7 +232,7 @@ class InnerTube {
             ytClient(client, setLogin = true)
             setBody(
                 PlayerBody(
-                    // Must stay consistent with the X-Goog-Visitor-Id header set in ytClient.
+                    
                     context = client.toContext(locale, visitorData, dataSyncId).let {
                         if (client.isEmbedded) {
                             it.copy(
@@ -718,10 +711,7 @@ class InnerTube {
     }
 
 
-    /**
-     * Initialize a song upload to YouTube Music.
-     * Returns the upload URL in the X-Goog-Upload-URL header.
-     */
+    
     suspend fun initSongUpload(
         filename: String,
         contentLength: Long
@@ -747,9 +737,7 @@ class InnerTube {
         }
     }
 
-    /**
-     * Upload song data to the provided upload URL.
-     */
+    
     suspend fun uploadSongData(
         uploadUrl: String,
         data: ByteArray,
@@ -779,9 +767,7 @@ class InnerTube {
         }
     }
 
-    /**
-     * Delete a privately owned (uploaded) song from YouTube Music.
-     */
+    
     suspend fun deletePrivatelyOwnedEntity(entityId: String) = withRetry {
         val context = YouTubeClient.WEB_REMIX.toContext(locale, visitorData, null)
         val requestBody = """{"context":${Json.encodeToString(context)},"entityId":"$entityId"}"""

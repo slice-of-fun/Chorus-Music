@@ -29,7 +29,7 @@ object SearchPage {
                 ?: return null.also { println("[UPLOAD_DEBUG] SearchPage.toYTItem FAILED: secondaryLine is null for renderer: $renderer") }
         return when {
             renderer.isSong -> {
-                // Extract library tokens using the new method that properly handles multiple toggle items
+                
                 val libraryTokens = PageHelper.extractLibraryTokensFromMenuItems(renderer.menu?.menuRenderer?.items)
 
                 SongItem(

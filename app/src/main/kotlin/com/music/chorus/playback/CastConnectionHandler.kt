@@ -5,10 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-/**
- * Stub CastConnectionHandler for F-Droid builds.
- * Cast functionality is not available without Google Play Services.
- */
+
 class CastConnectionHandler(
     context: Context,
     scope: CoroutineScope,

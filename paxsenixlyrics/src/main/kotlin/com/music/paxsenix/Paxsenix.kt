@@ -157,8 +157,8 @@ object Paxsenix {
             throw IllegalStateException("No tracks found on Paxsenix")
         }
 
-        // Fetch top candidates in parallel; return the first word-timed result,
-        // or the best plain/line-synced result if none have word timings.
+        
+        
         val candidates = allResults.take(5)
         val scope = CoroutineScope(Dispatchers.IO)
         val jobs = candidates.map { (result, score) ->
@@ -359,7 +359,7 @@ object Paxsenix {
             }
         }
 
-        // Fetch top 3 candidates in parallel; deliver word-timed result first.
+        
         val candidates = scoredResults.take(3)
         val scope = CoroutineScope(Dispatchers.IO)
         val jobs = candidates.map { (result, _) ->

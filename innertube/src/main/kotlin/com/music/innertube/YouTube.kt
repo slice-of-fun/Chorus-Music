@@ -75,10 +75,7 @@ import kotlinx.serialization.json.jsonPrimitive
 import java.net.Proxy
 import kotlin.random.Random
 
-/**
- * Parse useful data with [InnerTube] sending requests.
- * Modified from [ViMusic](https://github.com/vfsfitvnm/ViMusic)
- */
+
 object YouTube {
     private val innerTube = InnerTube()
 
@@ -257,25 +254,25 @@ object YouTube {
         }
 
         val descriptionRuns = sequence {
-            // Check all tabs in twoColumnBrowseResultsRenderer
+            
             response.contents?.twoColumnBrowseResultsRenderer?.tabs?.forEach { tab ->
                 tab?.tabRenderer?.content?.sectionListRenderer?.contents?.forEach { content ->
                     content.musicDescriptionShelfRenderer?.description?.runs?.let { yield(it) }
                 }
             }
-            // Check all tabs in singleColumnBrowseResultsRenderer
+            
             response.contents?.singleColumnBrowseResultsRenderer?.tabs?.forEach { tab ->
                 tab.tabRenderer?.content?.sectionListRenderer?.contents?.forEach { content ->
                     content.musicDescriptionShelfRenderer?.description?.runs?.let { yield(it) }
                 }
             }
-            // Check headers
+            
             response.header?.musicDetailHeaderRenderer?.description?.runs?.let { yield(it) }
             response.header?.musicImmersiveHeaderRenderer?.description?.runs?.let { yield(it) }
             response.header?.musicEditablePlaylistDetailHeaderRenderer?.header?.musicDetailHeaderRenderer?.description?.runs?.let { yield(it) }
             response.header?.musicEditablePlaylistDetailHeaderRenderer?.header?.musicResponsiveHeaderRenderer?.description?.runs?.let { yield(it) }
             
-            // Check musicResponsiveHeaderRenderer in contents
+            
             response.contents?.twoColumnBrowseResultsRenderer?.tabs?.forEach { tab ->
                 tab?.tabRenderer?.content?.sectionListRenderer?.contents?.forEach { content ->
                     content.musicResponsiveHeaderRenderer?.description?.runs?.let { yield(it) }
@@ -305,7 +302,7 @@ object YouTube {
                 },
                 year = response.header.musicDetailHeaderRenderer.subtitle.runs?.lastOrNull()?.text?.toIntOrNull(),
                 thumbnail = response.header.musicDetailHeaderRenderer.thumbnail.croppedSquareThumbnailRenderer?.thumbnail?.thumbnails?.lastOrNull()!!.url,
-                explicit = false, // TODO: Extract explicit badge for albums from YouTube response
+                explicit = false, 
                 description = description
             )
             return@runCatching AlbumPage(
@@ -333,7 +330,7 @@ object YouTube {
                     }!!,
                 year = response.contents.twoColumnBrowseResultsRenderer.tabs.firstOrNull()?.tabRenderer?.content?.sectionListRenderer?.contents?.firstOrNull()?.musicResponsiveHeaderRenderer?.subtitle?.runs?.lastOrNull()?.text?.toIntOrNull(),
                 thumbnail = response.contents.twoColumnBrowseResultsRenderer.tabs.firstOrNull()?.tabRenderer?.content?.sectionListRenderer?.contents?.firstOrNull()?.musicResponsiveHeaderRenderer?.thumbnail?.musicThumbnailRenderer?.thumbnail?.thumbnails?.lastOrNull()?.url!!,
-                explicit = false, // TODO: Extract explicit badge for albums from YouTube response
+                explicit = false, 
                 description = description
             )
             return@runCatching AlbumPage(
@@ -373,10 +370,10 @@ object YouTube {
             .contents.firstOrNull()?.musicPlaylistShelfRenderer?.contents?.getContinuation()
         val seenContinuations = mutableSetOf<String>()
         var requestCount = 0
-        val maxRequests = 50 // Prevent excessive API calls
+        val maxRequests = 50 
         
         while (continuation != null && requestCount < maxRequests) {
-            // Prevent infinite loops by tracking seen continuations
+            
             if (continuation in seenContinuations) {
                 break
             }
@@ -777,7 +774,7 @@ object YouTube {
             val tabs = response.contents?.singleColumnBrowseResultsRenderer?.tabs
             println("[UPLOAD_DEBUG] tabs count: ${tabs?.size ?: 0}")
 
-            // Debug: log the structure for uploaded songs browseId
+            
             if (browseId == "FEmusic_library_privately_owned_tracks") {
                 println("[UPLOAD_DEBUG] Raw response.contents: ${response.contents}")
                 tabs?.forEachIndexed { idx, tab ->
@@ -816,7 +813,7 @@ object YouTube {
                     )
                 }
 
-                else -> { // contents?.musicShelfRenderer != null
+                else -> { 
                     val shelfContents = contents?.musicShelfRenderer?.contents
                     println("[UPLOAD_DEBUG] musicShelfRenderer contents count: ${shelfContents?.size ?: 0}")
                     if (shelfContents == null) {
@@ -878,7 +875,7 @@ object YouTube {
                 )
             }
 
-            else -> { // contents?.musicShelfContinuation != null
+            else -> { 
                 LibraryContinuationPage(
                     items = contents?.musicShelfContinuation?.contents!!
                         .mapNotNull (MusicShelfRenderer.Content::musicResponsiveListItemRenderer)
@@ -914,14 +911,7 @@ object YouTube {
             }
         }.toMutableList()
 
-        /*
-         * We need to fetch the artist page when accessing the library because it allows to have
-         * a proper playEndpoint, which is needed to correctly report the playing indicator in
-         * the home page.
-         *
-         * Despite this, we need to use the old thumbnail because it's the proper format for a
-         * square picture, which is what we need.
-         */
+        
         items.forEachIndexed { index, item ->
             if (item is ArtistItem) {
                 artist(item.id).getOrNull()?.artist?.let { fetchedArtist ->
@@ -1243,7 +1233,7 @@ object YouTube {
         val songs = items.map { it.first }
         val currentIndex = items.indexOfFirst { it.second }.takeIf { it != -1 }
 
-        // load automix items
+        
         playlistPanelRenderer.contents.lastOrNull()?.automixPreviewVideoRenderer?.content?.automixPlaylistVideoRenderer?.navigationEndpoint?.watchPlaylistEndpoint?.let { watchPlaylistEndpoint ->
             return@runCatching next(watchPlaylistEndpoint).getOrThrow().let { result ->
                 result.copy(
@@ -1301,7 +1291,7 @@ object YouTube {
         }
 
         response.contents?.sectionListRenderer?.contents?.forEach { sectionContent ->
-            // Music Carousel
+            
             sectionContent.musicCarouselShelfRenderer?.contents?.forEach { content ->
                 val item = content.musicResponsiveListItemRenderer?.let(RelatedPage.Companion::fromMusicResponsiveListItemRenderer)
                     ?: content.musicTwoRowItemRenderer?.let(RelatedPage.Companion::fromMusicTwoRowItemRenderer)
@@ -1310,7 +1300,7 @@ object YouTube {
                 }
             }
 
-            // Music Shelf
+            
             sectionContent.musicShelfRenderer?.contents?.forEach { content ->
                 val item = content.musicResponsiveListItemRenderer?.let(RelatedPage.Companion::fromMusicResponsiveListItemRenderer)
                 if (item != null) {
@@ -1318,7 +1308,7 @@ object YouTube {
                 }
             }
 
-            // Item Section
+            
             sectionContent.itemSectionRenderer?.contents?.forEach { content ->
                 val item = content.musicResponsiveListItemRenderer?.let(RelatedPage.Companion::fromMusicResponsiveListItemRenderer)
                 if (item != null) {
@@ -1331,7 +1321,7 @@ object YouTube {
 
     suspend fun queue(videoIds: List<String>? = null, playlistId: String? = null): Result<List<SongItem>> = runCatching {
         if (videoIds != null) {
-            assert(videoIds.size <= MAX_GET_QUEUE_SIZE) // Max video limit
+            assert(videoIds.size <= MAX_GET_QUEUE_SIZE) 
         }
         innerTube.getQueue(WEB_REMIX, videoIds, playlistId).body<GetQueueResponse>().queueDatas
             .mapNotNull {
@@ -1375,12 +1365,9 @@ object YouTube {
         innerTube.feedback(WEB_REMIX, tokens).body<FeedbackResponse>().feedbackResponses.all { it.isProcessed }
     }
 
-    /**
-     * Add a song to library by fetching fresh feedback tokens from the next endpoint
-     * This is more reliable than using cached tokens which might be stale
-     */
+    
     suspend fun addSongToLibrary(videoId: String): Result<Boolean> = runCatching {
-        // Get fresh song data with menu tokens using next endpoint
+        
         val nextResult = next(WatchEndpoint(videoId = videoId)).getOrThrow()
         val song = nextResult.items.find { it.id == videoId }
             ?: throw Exception("Song not found in next response")
@@ -1391,11 +1378,9 @@ object YouTube {
         feedback(listOf(addToken)).getOrThrow()
     }
 
-    /**
-     * Remove a song from library by fetching fresh feedback tokens from the next endpoint
-     */
+    
     suspend fun removeSongFromLibrary(videoId: String): Result<Boolean> = runCatching {
-        // Get fresh song data with menu tokens using next endpoint
+        
         val nextResult = next(WatchEndpoint(videoId = videoId)).getOrThrow()
         val song = nextResult.items.find { it.id == videoId }
             ?: throw Exception("Song not found in next response")
@@ -1406,10 +1391,7 @@ object YouTube {
         feedback(listOf(removeToken)).getOrThrow()
     }
 
-    /**
-     * Toggle song library status - adds if not in library, removes if in library
-     * Uses fresh tokens fetched from the API for reliability
-     */
+    
     suspend fun toggleSongLibrary(videoId: String, addToLibrary: Boolean): Result<Boolean> = runCatching {
         if (addToLibrary) {
             addSongToLibrary(videoId).getOrThrow()
@@ -1494,7 +1476,7 @@ object YouTube {
     suspend fun comments(videoId: String): Result<Pair<List<CommentThreadRenderer>, String?>> = runCatching {
         val response = innerTube.next(YouTubeClient.WEB, videoId, null, null, null, null, null).body<NextResponse>()
         
-        // Find comment continuation token from engagementPanels (Primary location for YouTube Music/some WEB videos)
+        
         val commentsPanel = response.engagementPanels?.firstOrNull { 
             it.engagementPanelSectionListRenderer?.panelIdentifier == "engagement-panel-comments-section"
         }
@@ -1507,20 +1489,20 @@ object YouTube {
 
         val contentList = response.contents.twoColumnWatchNextResults?.results?.results?.content
 
-        // We MUST prioritize the standard WEB comment section tokenizer to unlock nested replies!
-        // Engagement panels are tailored for YouTube Music which natively disables nested replies.
+        
+        
         val token =
-            // Path 1: direct continuationItemRenderer in the content list
+            
             contentList?.mapNotNull { it?.continuationItemRenderer }
                 ?.firstOrNull()
                 ?.continuationEndpoint?.continuationCommand?.token
-            // Path 2: fallback — inside an itemSectionRenderer's contents
+            
                 ?: contentList?.mapNotNull { it?.itemSectionRenderer }
                     ?.flatMap { it.contents.orEmpty() }
                     ?.mapNotNull { it?.continuationItemRenderer }
                     ?.firstOrNull()
                     ?.continuationEndpoint?.continuationCommand?.token
-            // Path 3: Fallback strictly to engagement panels only if WEB fails
+            
                 ?: tokenFromEngagementPanels
                 ?: throw Exception("No comment continuation token found for videoId=$videoId")
 
@@ -1536,18 +1518,18 @@ object YouTube {
             endpoint.appendContinuationItemsAction?.continuationItems.orEmpty()
         }
 
-        // 1. Extract Legacy comments
+        
         val legacyComments = continuationItems.mapNotNull { it.commentThreadRenderer }
             .filter { it.comment?.commentRenderer != null || it.commentViewModel?.commentViewModel != null }
 
-        // Use a safe key extraction that prioritizes the renderer's ID, then the viewport ID, then fallback to index
+        
         val legacyCommentsMap = legacyComments.associateBy { thread ->
             thread.comment?.commentRenderer?.commentId 
                 ?: thread.commentViewModel?.commentViewModel?.commentId
                 ?: "legacy-${thread.hashCode()}"
         }
 
-        // 2. Extract Framework-based comments
+        
         val mutations = response.frameworkUpdates?.entityBatchUpdate?.mutations.orEmpty()
         val toolbarMap = mutations.mapNotNull { it.payload?.engagementToolbarStateEntityPayload }.associateBy { it.key }
         val surfaceMap = mutations.mapNotNull { it.payload?.engagementToolbarSurfaceEntityPayload }.associateBy { it.key }
@@ -1600,7 +1582,7 @@ object YouTube {
             }
         }
 
-        // 3. Extract Next Token (Exhaustive Search)
+        
         val nextToken = continuationItems.mapNotNull { item ->
             item.continuationItemRenderer?.let { renderer ->
                 renderer.continuationEndpoint?.continuationCommand?.token
@@ -1612,7 +1594,7 @@ object YouTube {
                 endpoint.appendContinuationItemsAction?.continuationItems?.mapNotNull { it.continuationItemRenderer?.continuationEndpoint?.continuationCommand?.token }
             }.flatten().firstOrNull()
         
-        // Merge Legacy and Framework comments
+        
         val frameworkCommentsMap = commentsFromFramework.associateBy { it.comment?.commentRenderer?.commentId }
         val allIds = (legacyCommentsMap.keys + frameworkCommentsMap.keys).filterNotNull().distinct()
 
@@ -1620,8 +1602,8 @@ object YouTube {
             val legacy = legacyCommentsMap[id]
             val modern = frameworkCommentsMap[id]
 
-            // Always prioritize the modern framework model because YouTube migrated text content exclusively to it.
-            // We've already injected `legacy.replies` into `modern` above.
+            
+            
             if (modern != null) {
                 modern
             } else {
@@ -1642,10 +1624,10 @@ object YouTube {
             endpoint.appendContinuationItemsAction?.continuationItems.orEmpty()
         }
 
-        // 1. Extract Legacy replies
+        
         val legacyReplies = continuationItems.mapNotNull { it.commentRenderer ?: it.commentThreadRenderer?.comment?.commentRenderer }
 
-        // 2. Extract Framework-based replies
+        
         val mutations = response.frameworkUpdates?.entityBatchUpdate?.mutations.orEmpty()
         
         val toolbarMap = mutations.mapNotNull { it.payload?.engagementToolbarStateEntityPayload }.associateBy { it.key }
@@ -1706,7 +1688,7 @@ object YouTube {
             }
         }.distinctBy { it.commentId ?: it.hashCode() }
         
-        // 3. Extract Next Token (Exhaustive Search for Replies)
+        
         val nextToken = continuationItems.mapNotNull { item ->
             item.continuationItemRenderer?.let { renderer ->
                 renderer.continuationEndpoint?.continuationCommand?.token

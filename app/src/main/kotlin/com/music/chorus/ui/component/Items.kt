@@ -1835,7 +1835,7 @@ fun rememberLosslessMatch(
             value = true
             return@produceState
         }
-        kotlinx.coroutines.delay(300) // Debounce fast scrolling
+        kotlinx.coroutines.delay(300) 
         val track = pushkar.chorus.music.utils.LosslessAPI.search(title, artist)
         value = track != null
     }

@@ -221,6 +221,6 @@ object RingtoneHelper {
     }
 
     fun requestSettingsPermission(context: Context) {
-        // Do nothing, permission is no longer requested
+        
     }
 }

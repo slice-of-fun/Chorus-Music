@@ -57,7 +57,7 @@ object AiPlaylistGenerator {
         """.trimIndent()
 
         val jsonOutput = if (aiProvider == "Puter") {
-            // Puter logic placeholder
+            
             onLog("Puter is not implemented yet. Using dummy data.")
             "{}"
         } else {

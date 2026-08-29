@@ -1,12 +1,4 @@
-/*
- * Vendored from Kyant0/backdrop v2.0.0 (io.github.kyant0:backdrop)
- * https://github.com/Kyant0/backdrop — Copyright 2025 Kyant0, Apache License 2.0
- *
- * Vendored so the library ships as source with this app (binary AARs compiled
- * against older Compose broke at runtime) and to add a backdrop resolution
- * scale for cheaper effect rendering. KMP expect/actual declarations were
- * merged into this single Android source set. Package renamed accordingly.
- */
+
 package pushkar.chorus.music.ui.component.backdrop
 
 import androidx.compose.ui.geometry.Size
@@ -44,9 +36,9 @@ internal abstract class BackdropEffectScopeImpl : BackdropEffectScope, RuntimeSh
         return runtimeShaderCache.obtainRuntimeShader(key, string)
     }
 
-    // Vendored change: [contentScale] reports the size the effects actually operate
-    // on when the backdrop layer is recorded at a reduced resolution, so shader
-    // geometry (e.g. the lens size uniform) matches the layer's pixel grid.
+    
+    
+    
     fun update(scope: DrawScope, contentScale: Float = 1f): Boolean {
         val newDensity = scope.density
         val newFontScale = scope.fontScale

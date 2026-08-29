@@ -3,9 +3,7 @@ package pushkar.chorus.music.utils.cipher
 import org.json.JSONException
 import org.json.JSONObject
 
-/**
- * Parses and validates the player-config JSON (bundled asset and remote copies).
- */
+
 object PlayerConfigParser {
     const val SUPPORTED_SCHEMA_VERSION = 1
 

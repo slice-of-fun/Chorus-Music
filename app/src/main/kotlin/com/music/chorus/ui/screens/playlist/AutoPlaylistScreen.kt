@@ -510,7 +510,7 @@ fun AutoPlaylistScreen(
                         )
                     }
                     else -> {
-                        // Title is removed from the top bar
+                        
                     }
                 }
             },

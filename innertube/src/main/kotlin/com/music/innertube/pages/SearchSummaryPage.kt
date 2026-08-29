@@ -227,7 +227,7 @@ data class SearchSummaryPage(
             val listRun = (secondaryLine + thirdLine).clean()
             return when {
                 renderer.isSong -> {
-                    // Extract library tokens using the new method that properly handles multiple toggle items
+                    
                     val libraryTokens = PageHelper.extractLibraryTokensFromMenuItems(renderer.menu?.menuRenderer?.items)
 
                     SongItem(

@@ -58,10 +58,10 @@ object SimpMusicLyrics {
                 if (apiResponse.success) {
                     apiResponse.data
                 } else {
-                    emptyList() // Successfully responded, but no lyrics
+                    emptyList() 
                 }
             } else {
-                null // Return null to trigger fallback (e.g. 502, 403, etc.)
+                null 
             }
         }.getOrNull()
 
@@ -69,7 +69,7 @@ object SimpMusicLyrics {
             return primaryAttempt
         }
 
-        // Fallback attempt
+        
         return runCatching {
             val response = client.get(FALLBACK_URL + videoId)
             
@@ -96,7 +96,7 @@ object SimpMusicLyrics {
             throw IllegalStateException("Lyrics unavailable")
         }
 
-        // Filter tracks that match duration within tolerance (10 seconds)
+        
         val validTracks = if (duration > 0) {
             tracks.filter { track ->
                 abs((track.duration ?: 0) - duration) <= 10
@@ -117,7 +117,7 @@ object SimpMusicLyrics {
             validTracks.firstOrNull()
         }
 
-        // Prioritize richSyncLyrics for word-by-word sync, then syncedLyrics, then plainLyrics
+        
         val lyrics = bestMatch?.richSyncLyrics?.takeIf { it.isNotBlank() }
             ?: bestMatch?.syncedLyrics?.takeIf { it.isNotBlank() }
             ?: bestMatch?.plainLyrics?.takeIf { it.isNotBlank() }
@@ -143,10 +143,10 @@ object SimpMusicLyrics {
 
         sortedTracks.forEach { track ->
             if (count <= 4) {
-                // Check duration match - relaxed to 10 seconds or skip if duration is 0
+                
                 val durationMatch = duration <= 0 || abs((track.duration ?: 0) - duration) <= 10
 
-                // Prioritize richSyncLyrics for word-by-word sync
+                
                 if (track.richSyncLyrics != null && track.richSyncLyrics.isNotBlank() && durationMatch) {
                     count++
                     callback(track.richSyncLyrics)

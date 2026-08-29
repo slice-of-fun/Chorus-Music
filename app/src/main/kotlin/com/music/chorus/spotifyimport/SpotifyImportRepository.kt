@@ -1,9 +1,4 @@
-/*
- * ChorusMusic (2026)
- * © Chartreux Westia — github.com/koiverse
- * GPL-3.0 License | Contributors: see git history
- * Do not remove or alter this notice. - Per GPL-3.0 Section 4 & Section 5
- */
+
 
 package pushkar.chorus.music.spotifyimport
 
@@ -575,13 +570,13 @@ class SpotifyImportRepository @Inject constructor(
                 update(entity)
             }
 
-            // Insert / update song metadata BEFORE deleting old mappings so that
-            // an interrupted transaction never leaves the playlist completely empty.
+            
+            
             tracks.forEach { metadata ->
                 insert(metadata)
             }
 
-            // Now it is safe to clear the old mapping rows and re-insert in order.
+            
             clearPlaylist(source.localPlaylistId)
             tracks.forEachIndexed { index, metadata ->
                 insert(

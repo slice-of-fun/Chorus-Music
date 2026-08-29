@@ -1,9 +1,4 @@
-/*
- * ChorusMusic (2026)
- * © Chartreux Westia — github.com/koiverse
- * GPL-3.0 License | Contributors: see git history
- * Do not remove or alter this notice. - Per GPL-3.0 Section 4 & Section 5
- */
+
 
 package pushkar.chorus.music.spotify.models
 
@@ -43,9 +38,7 @@ data class SpotifySimpleAlbum(
     val uri: String? = null,
 )
 
-/**
- * Wrapper for the /me/tracks endpoint which returns SavedTrack objects
- */
+
 @Serializable
 data class SpotifySavedTrack(
     @SerialName("added_at") val addedAt: String? = null,

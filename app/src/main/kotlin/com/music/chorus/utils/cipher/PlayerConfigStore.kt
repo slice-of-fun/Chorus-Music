@@ -16,12 +16,7 @@ import timber.log.Timber
 import java.io.File
 import java.nio.charset.StandardCharsets
 
-/**
- * Owns the player-config table at runtime: bundled asset as the offline default, overlaid
- * by the same JSON fetched from the remote source so rotated players are fixed without
- * an APK update. Parsing/validation is delegated to [PlayerConfigParser]; only validated
- * payloads ever replace the in-memory map or touch the disk cache.
- */
+
 object PlayerConfigStore {
     private const val TAG = "chorusmusic_CipherConfig"
     private const val ASSET_NAME = "player_configs.json"

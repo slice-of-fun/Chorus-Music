@@ -1,17 +1,8 @@
-/*
- * ChorusMusic (2026)
- * © Chartreux Westia — github.com/koiverse
- * GPL-3.0 License | Contributors: see git history
- * Do not remove or alter this notice. - Per GPL-3.0 Section 4 & Section 5
- */
+
 
 package pushkar.chorus.music.spotify.models
 
-/**
- * Personalized Spotify home feed returned by the `home` GQL operation.
- * Mirrors what open.spotify.com shows on its landing page: Daily Mix,
- * Discover Weekly, Release Radar, Jump back in, recently played, etc.
- */
+
 data class SpotifyHomeFeed(
     val greeting: String?,
     val sections: List<SpotifyHomeFeedSection>,

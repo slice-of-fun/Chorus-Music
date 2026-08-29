@@ -84,7 +84,7 @@ fun SettingDialoge(
                     .padding(vertical = 16.dp, horizontal = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                // Header
+                
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -115,7 +115,7 @@ fun SettingDialoge(
                     }
                 }
 
-                // Account Group
+                
                 Material3SettingsGroup(
                     title = "Account",
                     compact = true,
@@ -243,7 +243,7 @@ fun SettingDialoge(
                     )
                 )
 
-                // Footer Links
+                
                 Row(
                     modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
                     verticalAlignment = Alignment.CenterVertically,

@@ -1847,7 +1847,7 @@ fun HomeScreen(
                         ShimmerHost(
                             modifier = Modifier.animateItem()
                         ) {
-                            // 1. Quick Picks Skeleton
+                            
                             Row(
                                 modifier = Modifier
                                     .horizontalScroll(rememberScrollState())
@@ -1865,7 +1865,7 @@ fun HomeScreen(
                                 }
                             }
 
-                            // 2. Speed Dial Skeleton
+                            
                             TextPlaceholder(
                                 height = 36.dp,
                                 modifier = Modifier
@@ -1889,7 +1889,7 @@ fun HomeScreen(
                                 }
                             }
 
-                            // 3. Generic Row Skeleton
+                            
                             TextPlaceholder(
                                 height = 36.dp,
                                 modifier = Modifier

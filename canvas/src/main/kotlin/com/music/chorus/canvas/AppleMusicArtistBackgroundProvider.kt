@@ -23,17 +23,10 @@ import kotlinx.serialization.json.jsonPrimitive
 import java.util.Locale
 import java.util.concurrent.ConcurrentHashMap
 
-/**
- * Fetches Apple Music artist motion artwork (HLS canvas) for the artist screen.
- *
- * 1. Searches for the artist by name.
- * 2. Fetches the artist profile with `extend=editorialVideo,editorialArtwork`.
- *
- * Results are cached for 24 hours.
- */
+
 object AppleMusicArtistBackgroundProvider {
 
-    // Public read-only JWT used by the Apple Music web player for unauthenticated catalog reads.
+    
 
 
     private const val AMP_BASE_URL = "https://amp-api.music.apple.com"
@@ -70,7 +63,7 @@ object AppleMusicArtistBackgroundProvider {
     )
 
     private val cache = ConcurrentHashMap<String, CacheEntry>()
-    private const val CACHE_TTL_MS = 1000L * 60 * 60 * 24 // 24 hours
+    private const val CACHE_TTL_MS = 1000L * 60 * 60 * 24 
 
     suspend fun getByArtistName(
         artistName: String,
@@ -154,7 +147,7 @@ object AppleMusicArtistBackgroundProvider {
             val artistObj = data.firstOrNull()?.jsonObject ?: return@runCatching null
             val attributes = artistObj["attributes"]?.jsonObject
             
-            // Look for editorialVideo first
+            
             val ev = attributes?.get("editorialVideo")?.jsonObject
             if (ev != null) {
                 val videoUrl = extractEditorialVideoUrl(ev)
@@ -163,7 +156,7 @@ object AppleMusicArtistBackgroundProvider {
                 }
             }
 
-            // Fallback to editorialArtwork
+            
             val ea = attributes?.get("editorialArtwork")?.jsonObject
             if (ea != null) {
                 val videoUrl = extractEditorialVideoUrl(ea)

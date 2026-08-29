@@ -73,7 +73,7 @@ fun DiscordTokenWebView(
             }
         },
         update = { webView ->
-            // Update block if needed
+            
         }
     )
 }

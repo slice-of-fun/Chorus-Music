@@ -65,17 +65,7 @@ data class YouTubeClient(
             useWebPoTokens = true,
         )
 
-        /**
-         * The only client that answers `OK` for age-restricted / explicit tracks, because it is the
-         * only authenticated one left in the stream chain. Everything else is refused with
-         * "sign in to confirm your age".
-         *
-         * `useWebPoTokens` is load-bearing and was missing: yt-dlp lists `web_creator` as requiring
-         * a GVS PO token, and the flag is what makes `YTPlayerUtils` append `pot=` to the
-         * deciphered URL at all. Without it we produced a URL with a correct signature and a
-         * transformed `n` that googlevideo still rejected with 403 on the very first byte
-         * (`hasPot=false` in the fix403 trace). Upstream sets the same flag.
-         */
+        
         val WEB_CREATOR = YouTubeClient(
             clientName = "WEB_CREATOR",
             clientVersion = "1.20260213.00.00",
@@ -98,10 +88,7 @@ data class YouTubeClient(
             useWebPoTokens = true,
         )
 
-        /**
-         * Embedded player that can bypass age-restriction.
-         * Does not require login for age-restricted content.
-         */
+        
         val TVHTML5_SIMPLY_EMBEDDED_PLAYER = YouTubeClient(
             clientName = "TVHTML5_SIMPLY_EMBEDDED_PLAYER",
             clientVersion = "2.0",
@@ -130,11 +117,7 @@ data class YouTubeClient(
             useSignatureTimestamp = true
         )
 
-        /**
-         * Video not playable: Paid / Movie / Private / Age-restricted.
-         * Note: The 'Authorization' key must be excluded from the header.
-         * For some reason, PoToken is not required.
-         */
+        
         val ANDROID_NO_SDK = YouTubeClient(
             clientName = "ANDROID",
             clientVersion = "21.03.38",
@@ -154,10 +137,7 @@ data class YouTubeClient(
             useSignatureTimestamp = false
         )
 
-        /**
-         * Video not playable: Kids / Paid / Movie / Private / Age-restricted.
-         * This client can only be used when logged out.
-         */
+        
         val ANDROID_VR_1_61_48 = YouTubeClient(
             clientName = "ANDROID_VR",
             clientVersion = "1.61.48",
@@ -176,25 +156,7 @@ data class YouTubeClient(
             useSignatureTimestamp = false
         )
 
-        /**
-         * Current ANDROID_VR pin, matching yt-dlp master and YouTube.js.
-         *
-         * [ANDROID_VR_1_43_32] and [ANDROID_VR_1_61_48] are bot-gated **by client version**:
-         * measured on three videoIds, both return `LOGIN_REQUIRED / "Sign in to confirm you're not
-         * a bot"` with zero formats, anonymously *and* signed in, with or without visitorData, and
-         * with the device fields stripped. Only the version differs here, and 1.65.10 returns
-         * `OK` with 100% direct-url formats — so this is a server-side version gate, not a
-         * malformed request.
-         *
-         * Note the deliberate omissions versus the older two: no `buildId`, no `cronetVersion`,
-         * no `packageName`, `osVersion` is `"12L"` (not `"12"`), and the user agent is the
-         * `... gzip` form rather than the Cronet form. Those are the values yt-dlp and YouTube.js
-         * both pin, byte-for-byte. A Cronet-style variant was probed and behaves identically, so
-         * the UA is not the discriminator — but there is no reason to diverge from upstream.
-         *
-         * Requires a visitorData: without one it returns LOGIN_REQUIRED like its older siblings.
-         * See the X-Goog-Visitor-Id note in `InnerTube.ytClient`.
-         */
+        
         val ANDROID_VR_1_65_10 = YouTubeClient(
             clientName = "ANDROID_VR",
             clientVersion = "1.65.10",
@@ -210,10 +172,7 @@ data class YouTubeClient(
             useSignatureTimestamp = false
         )
 
-        /**
-         * Uses non adaptive bitrate, which fixes audio stuttering with YT Music.
-         * Does not use AV1.
-         */
+        
         val ANDROID_VR_1_43_32 = YouTubeClient(
             clientName = "ANDROID_VR",
             clientVersion = "1.43.32",
@@ -232,9 +191,7 @@ data class YouTubeClient(
             useSignatureTimestamp = false
         )
 
-        /**
-         * Cannot play livestreams and lacks HDR, but can play videos with music and labeled "for children".
-         */
+        
         val ANDROID_CREATOR = YouTubeClient(
             clientName = "ANDROID_CREATOR",
             clientVersion = "25.03.101",
@@ -253,9 +210,7 @@ data class YouTubeClient(
             useSignatureTimestamp = true
         )
 
-        /**
-         * Internal YT client for an unreleased YT client. May stop working at any time.
-         */
+        
         val VISIONOS = YouTubeClient(
             clientName = "VISIONOS",
             clientVersion = "0.1",
@@ -270,10 +225,7 @@ data class YouTubeClient(
             useSignatureTimestamp = false
         )
 
-        /**
-         * The device machine id for the iPad 6th Gen (iPad7,6).
-         * AV1 hardware decoding is not supported.
-         */
+        
         val IPADOS = YouTubeClient(
             clientName = "IOS",
             clientVersion = "21.03.3",

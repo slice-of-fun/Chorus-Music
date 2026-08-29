@@ -212,7 +212,7 @@ private fun AboutAppCard() {
                         contentDescription = null,
                         modifier = Modifier
                             .fillMaxSize()
-                            .graphicsLayer { rotationY = 180f }, // Un-flip the backside image
+                            .graphicsLayer { rotationY = 180f }, 
                         contentScale = androidx.compose.ui.layout.ContentScale.Crop
                     )
                 }

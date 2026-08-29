@@ -225,7 +225,7 @@ fun AmbientGlowBackground(
                     }
             )
         } else {
-            // Fallback backgound
+            
             Box(modifier = Modifier.fillMaxSize())
         }
     }

@@ -78,7 +78,7 @@ data class LibraryPage(
         }
 
         fun fromMusicResponsiveListItemRenderer(renderer: MusicResponsiveListItemRenderer): YTItem? {
-            // Extract library tokens using the new method that properly handles multiple toggle items
+            
             val libraryTokens = PageHelper.extractLibraryTokensFromMenuItems(renderer.menu?.menuRenderer?.items)
 
             return when {
@@ -107,12 +107,12 @@ data class LibraryPage(
                     val artistRuns = renderer.flexColumns.getOrNull(1)?.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.oddElements()
                     println("[UPLOAD_DEBUG] LibraryPage.parse: videoId=$videoId, title=$title, artistRuns=${artistRuns?.map { "${it.text}(browseId=${it.navigationEndpoint?.browseEndpoint?.browseId})" }}")
 
-                    // For uploaded songs, artists may not have browseEndpoint - make it optional
+                    
                     val artists = artistRuns?.mapNotNull {
                         val browseId = it.navigationEndpoint?.browseEndpoint?.browseId
                         if (browseId == null) {
                             println("[UPLOAD_DEBUG] LibraryPage.parse: Artist '${it.text}' has no browseId, using empty string")
-                            // For uploaded songs, use empty string for artist ID if not available
+                            
                             Artist(name = it.text, id = "")
                         } else {
                             Artist(name = it.text, id = browseId)
@@ -122,7 +122,7 @@ data class LibraryPage(
                     val albumRun = renderer.flexColumns.getOrNull(2)?.musicResponsiveListItemFlexColumnRenderer?.text?.runs?.firstOrNull()
                     println("[UPLOAD_DEBUG] LibraryPage.parse: albumRun=${albumRun?.text}, albumBrowseId=${albumRun?.navigationEndpoint?.browseEndpoint?.browseId}")
 
-                    // For uploaded songs, album may not have browseEndpoint - make it optional
+                    
                     val album = albumRun?.let {
                         val albumBrowseId = it.navigationEndpoint?.browseEndpoint?.browseId
                         if (albumBrowseId == null) {

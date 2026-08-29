@@ -118,7 +118,7 @@ class SuggestionsViewModel @Inject constructor() : ViewModel() {
     private fun artistMatches(ytArtistName: String, appleMusicArtist: String): Boolean {
         val ytNorm = ytArtistName.trim().lowercase()
         val apNorm = appleMusicArtist.trim().lowercase()
-        // Check both directions — no stripping, no word removal
+        
         return apNorm.contains(ytNorm) || ytNorm.contains(apNorm)
     }
 

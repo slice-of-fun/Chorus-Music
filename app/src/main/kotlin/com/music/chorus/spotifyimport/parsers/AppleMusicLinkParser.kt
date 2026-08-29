@@ -26,7 +26,7 @@ class AppleMusicLinkParser : UniversalLinkParser {
 
         val tracks = mutableListOf<UniversalParsedTrack>()
         
-        // Try to parse JSON-LD
+        
         val jsonLdElements = doc.select("script[type=application/ld+json]")
         for (elem in jsonLdElements) {
             try {

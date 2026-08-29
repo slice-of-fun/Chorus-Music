@@ -135,7 +135,7 @@ class NewPipeUtils(
                 url,
             )
         } catch (e: Exception) {
-            // Don't print stack trace - caller handles errors
+            
             null
         }
 }
@@ -172,10 +172,10 @@ object NewPipeExtractor {
 
     fun newPipePlayer(videoId: String): List<Pair<Int, String>> {
         init()
-        // Try all three extractors as a fallback chain
-        // 1. BravePipe (most updated, currently wired default)
-        // 2. Original NewPipe
-        // 3. PipePipe
+        
+        
+        
+        
         
         val streamsList = mutableListOf<org.schabi.newpipe.extractor.stream.Stream>()
         
@@ -186,11 +186,11 @@ object NewPipeExtractor {
             )
             streamsList.addAll(streamInfo.audioStreams + streamInfo.videoStreams + streamInfo.videoOnlyStreams)
         } catch (e: Exception) {
-            // Attempt 2 and 3 would theoretically use a different classloader or service ID,
-            // but since they all share the exact same package org.schabi.newpipe,
-            // D8 merged them into one, meaning ONLY the classes from the first loaded JAR actually exist at runtime.
-            // A true fallback requires loading them in isolated classloaders or shading.
-            // We just catch and ignore here since they share the same classpath.
+            
+            
+            
+            
+            
             e.printStackTrace()
         }
 

@@ -111,7 +111,7 @@ fun LocalPlaylistMenu(
                     description = { Text(stringResource(R.string.modify_with_ai_desc)) },
                     icon = {
                         Icon(
-                            painter = painterResource(R.drawable.edit), // Or another icon
+                            painter = painterResource(R.drawable.edit), 
                             contentDescription = null
                         )
                     },

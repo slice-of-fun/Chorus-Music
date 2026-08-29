@@ -5,9 +5,7 @@ import com.music.innertube.models.Thumbnails
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-/**
- * PlayerResponse with [com.music.innertube.models.YouTubeClient.WEB_REMIX] client
- */
+
 @Serializable
 data class PlayerResponse(
     val responseContext: ResponseContext,

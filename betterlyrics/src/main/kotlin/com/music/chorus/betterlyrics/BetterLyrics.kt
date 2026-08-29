@@ -68,8 +68,8 @@ object BetterLyrics {
         duration: Int,
         album: String? = null,
     ) = runCatching {
-        // Use exact title and artist - no normalization to ensure correct sync
-        // Normalizing can return wrong lyrics (e.g., radio edit vs original)
+        
+        
         val ttml = fetchTTML(artist, title, duration, album)
             ?: throw IllegalStateException("Lyrics unavailable")
         

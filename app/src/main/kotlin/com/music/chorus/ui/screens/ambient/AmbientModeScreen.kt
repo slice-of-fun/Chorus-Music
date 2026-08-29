@@ -84,7 +84,7 @@ fun AmbientModeScreen(navController: NavController) {
             .pointerInput(Unit) {
                 detectDragGestures(
                     onDragEnd = {
-                        // Horizontal swipe logic (Skip Next/Prev)
+                        
                         if (abs(swipeThresholdX) > 150f && abs(swipeThresholdX) > abs(swipeThresholdY)) {
                             if (swipeThresholdX > 0) {
                                 playerConnection.player.seekToPreviousMediaItem()
@@ -100,7 +100,7 @@ fun AmbientModeScreen(navController: NavController) {
                         swipeThresholdX += dragAmount.x
                         swipeThresholdY += dragAmount.y
 
-                        // Vertical swipe logic (Volume Control)
+                        
                         if (abs(dragAmount.y) > 10f && abs(dragAmount.y) > abs(dragAmount.x)) {
                             val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
                             val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
@@ -109,7 +109,7 @@ fun AmbientModeScreen(navController: NavController) {
                             } else if (dragAmount.y > 0 && currentVolume > 0) {
                                 audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI)
                             }
-                            swipeThresholdY = 0f // Reset to require another swipe chunk to keep raising
+                            swipeThresholdY = 0f 
                         }
                     }
                 )
@@ -125,7 +125,7 @@ fun AmbientModeScreen(navController: NavController) {
                 .safeDrawingPadding(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Left Side: Album Art
+            
             Box(
                 modifier = Modifier
                     .weight(1f)
@@ -151,7 +151,7 @@ fun AmbientModeScreen(navController: NavController) {
                 )
             }
 
-            // Right Side: Lyrics
+            
             Box(
                 modifier = Modifier
                     .weight(1f)

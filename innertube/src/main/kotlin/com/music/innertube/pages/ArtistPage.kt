@@ -66,7 +66,7 @@ data class ArtistPage(
         }
 
         private fun fromMusicResponsiveListItemRenderer(renderer: MusicResponsiveListItemRenderer): SongItem? {
-            // Split the secondary line by bullet separator to separate artists from other metadata (like views)
+            
             val secondaryLineRuns = renderer.flexColumns
                 .getOrNull(1)
                 ?.musicResponsiveListItemFlexColumnRenderer
@@ -74,7 +74,7 @@ data class ArtistPage(
                 ?.runs
                 ?.splitBySeparator()
 
-            // Extract artists from the first segment after splitting
+            
             val artists = secondaryLineRuns?.firstOrNull()?.oddElements()?.map {
                 Artist(
                     name = it.text,
@@ -82,7 +82,7 @@ data class ArtistPage(
                 )
             }
 
-            // Extract album from last flexColumn (like SimpMusic)
+            
             val album = renderer.flexColumns.lastOrNull()
                 ?.musicResponsiveListItemFlexColumnRenderer?.text?.runs
                 ?.firstOrNull()?.let {
@@ -94,7 +94,7 @@ data class ArtistPage(
                     } else null
                 }
 
-            // Extract library tokens using the new method that properly handles multiple toggle items
+            
             val libraryTokens = PageHelper.extractLibraryTokensFromMenuItems(renderer.menu?.menuRenderer?.items)
 
             return SongItem(
@@ -172,7 +172,7 @@ data class ArtistPage(
                 }
 
                 renderer.isPlaylist -> {
-                    // Playlist from YouTube Music
+                    
                     PlaylistItem(
                         id = renderer.navigationEndpoint.browseEndpoint?.browseId?.removePrefix("VL") ?: return null,
                         title = renderer.title.runs?.firstOrNull()?.text ?: return null,

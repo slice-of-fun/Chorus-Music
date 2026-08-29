@@ -694,7 +694,7 @@ fun DiscordSettings(
                             discordToken = token
                             authorizationMessage = context.getString(R.string.discord_authorization_success)
                             authorizationUiModeName = DiscordAuthorizationUiMode.Success.name
-                            // Account details are fetched in LaunchedEffect(discordToken) automatically
+                            
                         }
                     )
                 }

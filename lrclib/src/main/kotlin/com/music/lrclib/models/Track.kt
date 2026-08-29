@@ -24,7 +24,7 @@ internal fun List<Track>.bestMatchingFor(duration: Int): Track? {
         ?.takeIf { abs(it.duration.toInt() - duration) <= 2 }
 }
 
-// Relaxed matching with ±5 seconds tolerance
+
 internal fun List<Track>.bestMatchingForRelaxed(duration: Int): Track? {
     if (isEmpty()) return null
 
@@ -32,14 +32,14 @@ internal fun List<Track>.bestMatchingForRelaxed(duration: Int): Track? {
         return firstOrNull { it.syncedLyrics != null } ?: firstOrNull()
     }
 
-    // First try to find synced lyrics within tolerance
+    
     val syncedMatch = filter { it.syncedLyrics != null }
         .minByOrNull { abs(it.duration.toInt() - duration) }
         ?.takeIf { abs(it.duration.toInt() - duration) <= 5 }
     
     if (syncedMatch != null) return syncedMatch
     
-    // Fall back to any lyrics within tolerance
+    
     return minByOrNull { abs(it.duration.toInt() - duration) }
         ?.takeIf { abs(it.duration.toInt() - duration) <= 5 }
 }
@@ -58,7 +58,7 @@ internal fun List<Track>.bestMatchingFor(
         return firstOrNull { it.syncedLyrics != null } ?: firstOrNull()
     }
 
-    // Use relaxed matching for duration-based search
+    
     return bestMatchingForRelaxed(duration)
 }
 
@@ -126,9 +126,9 @@ private fun levenshteinDistance(str1: String, str2: String): Int {
         for (j in 1..len2) {
             val cost = if (str1[i - 1] == str2[j - 1]) 0 else 1
             matrix[i][j] = minOf(
-                matrix[i - 1][j] + 1,      // deletion
-                matrix[i][j - 1] + 1,      // insertion
-                matrix[i - 1][j - 1] + cost // substitution
+                matrix[i - 1][j] + 1,      
+                matrix[i][j - 1] + 1,      
+                matrix[i - 1][j - 1] + cost 
             )
         }
     }

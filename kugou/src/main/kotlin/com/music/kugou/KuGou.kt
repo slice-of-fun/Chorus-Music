@@ -44,10 +44,7 @@ private val client = HttpClient {
 private const val PAGE_SIZE = 8
 private const val HEAD_CUT_LIMIT = 30
 
-/**
- * KuGou Lyrics Library
- * Modified from [ViMusic](https://github.com/vfsfitvnm/ViMusic)
- */
+
 object KuGou {
     var useTraditionalChinese: Boolean = false
 
@@ -82,7 +79,7 @@ object KuGou {
         keyword: Keyword, duration: Int
     ): SearchLyricsResponse.Candidate? {
         searchSongs(keyword).data.info.forEach { song ->
-            if (duration == -1 || abs(song.duration - duration) <= DURATION_TOLERANCE) { // if duration == -1, we don't care duration
+            if (duration == -1 || abs(song.duration - duration) <= DURATION_TOLERANCE) { 
                 val candidate = searchLyricsByHash(song.hash).candidates.firstOrNull()
                 if (candidate != null) return candidate
             }
@@ -118,7 +115,7 @@ object KuGou {
             parameter("client", "pc")
             parameter(
                 "duration", duration.takeIf { it != -1 }?.times(1000)
-            ) // if duration == -1, we don't care duration
+            ) 
             val searchQuery = buildString {
                 append(keyword.title)
                 append(" - ")
@@ -168,7 +165,7 @@ object KuGou {
     private fun String.normalize(): String =
         lines().filter { line -> line.matches(ACCEPTED_REGEX) }
             .let { lines ->
-                // Remove useless information such as singer, writer, composer, guitar, etc.
+                
                 var headCutLine = 0
                 for (i in min(HEAD_CUT_LIMIT, lines.lastIndex) downTo 0) {
                     if (lines[i].matches(BANNED_REGEX)) {

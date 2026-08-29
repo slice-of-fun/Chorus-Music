@@ -155,7 +155,7 @@ class OnlinePlaylistViewModel @Inject constructor(
         if (!hideVideoSongs) return uniqueSongs
 
         val filtered = uniqueSongs.filterVideoSongs(true)
-        // If filtering hides everything, keep original list to avoid false "empty playlist" UX.
+        
         return if (filtered.isEmpty() && uniqueSongs.isNotEmpty()) uniqueSongs else filtered
     }
 
