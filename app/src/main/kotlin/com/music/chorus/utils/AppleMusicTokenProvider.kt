@@ -31,7 +31,7 @@ object AppleMusicTokenProvider {
                 val indexJsUri = match.groupValues[1]
 
                 // 3. Fetch index.js
-                val indexJsResponse = httpClient.get("https:
+                val indexJsResponse = httpClient.get("https://beta.music.apple.com$indexJsUri")
                 val indexJsBody = indexJsResponse.bodyAsText()
 
                 
