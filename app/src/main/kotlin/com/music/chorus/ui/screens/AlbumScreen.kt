@@ -3,6 +3,7 @@
 package pushkar.chorus.music.ui.screens
 
 import androidx.activity.compose.BackHandler
+import pushkar.chorus.music.ui.utils.resize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
