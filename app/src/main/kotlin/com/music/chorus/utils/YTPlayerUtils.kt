@@ -686,7 +686,7 @@ object YTPlayerUtils {
         val format = playerResponse.streamingData?.adaptiveFormats
             ?.filter { it.isAudio && it.isOriginal }
             ?.maxByOrNull {
-                it.bitrate * 1 + (if (it.mimeType.startsWith("audio/webm")) 10240 else 0)
+                it.bitrate * 1 + (if (it.mimeType.startsWith("audio/mp4")) 1000000 else 0)
             }
 
         if (format != null) {

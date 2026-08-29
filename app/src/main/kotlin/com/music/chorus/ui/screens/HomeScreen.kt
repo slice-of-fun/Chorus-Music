@@ -645,6 +645,7 @@ fun HomeScreen(
     }
 
     LaunchedEffect(Unit) {
+        viewModel.refresh()
         snapshotFlow { lazylistState.layoutInfo.visibleItemsInfo.lastOrNull()?.index }
             .collect { lastVisibleIndex ->
                 val len = lazylistState.layoutInfo.totalItemsCount

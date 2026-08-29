@@ -1803,7 +1803,8 @@ fun BottomSheetPlayer(
                     androidx.compose.material3.LinearProgressIndicator(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(4.dp),
+                            .height(10.dp)
+                            .clip(RoundedCornerShape(5.dp)),
                         color = textButtonColor,
                         trackColor = textButtonColor.copy(alpha = 0.2f)
                     )
@@ -1834,11 +1835,15 @@ fun BottomSheetPlayer(
                             }
                         },
                         enabled = !isListenTogetherGuest,
-                        thumb = { Spacer(modifier = Modifier.size(0.dp)) },
+                        colors = SliderDefaults.colors(
+                            thumbColor = textButtonColor,
+                            activeTrackColor = textButtonColor,
+                            inactiveTrackColor = textButtonColor.copy(alpha = 0.2f)
+                        ),
                         track = { sliderState ->
                             PlayerSliderTrack(
                                 sliderState = sliderState,
-                                trackHeight = 4.dp,
+                                trackHeight = 10.dp,
                                 colors = PlayerSliderColors.getSliderColors(
                                     activeColor = textButtonColor,
                                     playerBackground = playerBackground,
@@ -1947,7 +1952,11 @@ fun BottomSheetPlayer(
                         },
                         enabled = !isListenTogetherGuest,
                         interactionSource = trackInteractionSource,
-                        thumb = { Spacer(modifier = Modifier.size(0.dp)) },
+                        colors = SliderDefaults.colors(
+                            thumbColor = textButtonColor,
+                            activeTrackColor = textButtonColor,
+                            inactiveTrackColor = textButtonColor.copy(alpha = 0.2f)
+                        ),
                         track = { sliderState ->
                             PlayerSliderTrack(
                                 sliderState = sliderState,
@@ -2399,6 +2408,22 @@ fun BottomSheetPlayer(
                                 )
                             }
                         }
+                        
+                        mediaMetadata?.let { meta ->
+                            Box(
+                                modifier = Modifier
+                                    .align(Alignment.TopEnd)
+                                    .padding(top = 16.dp, end = 16.dp)
+                            ) {
+                                PlayerMoreMenuButton(
+                                    mediaMetadata = meta,
+                                    navController = navController,
+                                    state = state,
+                                    textButtonColor = textButtonColor,
+                                    iconButtonColor = iconButtonColor
+                                )
+                            }
+                        }
                     }
 
                     Column(
@@ -2457,6 +2482,22 @@ fun BottomSheetPlayer(
                                     modifier = Modifier.nestedScroll(state.preUpPostDownNestedScrollConnection),
                                     isPlayerExpanded = isExpandedProvider,
                                     isListenTogetherGuest = isListenTogetherGuest
+                                )
+                            }
+                        }
+                        
+                        mediaMetadata?.let { meta ->
+                            Box(
+                                modifier = Modifier
+                                    .align(Alignment.TopEnd)
+                                    .padding(top = 16.dp, end = 16.dp)
+                            ) {
+                                PlayerMoreMenuButton(
+                                    mediaMetadata = meta,
+                                    navController = navController,
+                                    state = state,
+                                    textButtonColor = textButtonColor,
+                                    iconButtonColor = iconButtonColor
                                 )
                             }
                         }

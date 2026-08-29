@@ -333,7 +333,8 @@ fun ArtistScreen(
                                             model = thumbnail.resize(1200, 1200),
                                             contentDescription = null,
                                             modifier = Modifier.fillMaxSize(),
-                                            contentScale = androidx.compose.ui.layout.ContentScale.Crop
+                                            contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                                            alignment = androidx.compose.ui.Alignment.Center
                                         )
                                     }
                                     if (backgroundVideoUrl != null && showArtistBackgroundVideo) {
