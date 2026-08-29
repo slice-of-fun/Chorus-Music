@@ -273,10 +273,11 @@ fun AlbumScreen(
                             modifier = Modifier.fillMaxSize()
                         ) {
                             AsyncImage(
-                                model = albumWithSongs.album.thumbnailUrl,
+                                model = albumWithSongs.album.thumbnailUrl?.resize(1200, 1200),
                                 contentDescription = null,
                                 modifier = Modifier.fillMaxSize(),
-                                contentScale = ContentScale.Crop
+                                contentScale = ContentScale.Crop,
+                                alignment = Alignment.Center
                             )
 
                             if (albumCanvasEnabled && canvasArtwork != null) {

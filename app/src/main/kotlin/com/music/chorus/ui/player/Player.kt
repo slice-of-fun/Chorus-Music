@@ -1786,9 +1786,16 @@ fun BottomSheetPlayer(
                                 }
                             }
                         }
-                    }
 
-            }
+                        PlayerMoreMenuButton(
+                            mediaMetadata = mediaMetadata,
+                            navController = navController,
+                            state = state,
+                            textButtonColor = textButtonColor,
+                            iconButtonColor = iconButtonColor
+                        )
+                    }
+                }
 
             Spacer(Modifier.height(24.dp))
 
@@ -2408,22 +2415,6 @@ fun BottomSheetPlayer(
                                 )
                             }
                         }
-                        
-                        mediaMetadata?.let { meta ->
-                            Box(
-                                modifier = Modifier
-                                    .align(Alignment.TopEnd)
-                                    .padding(top = 16.dp, end = 16.dp)
-                            ) {
-                                PlayerMoreMenuButton(
-                                    mediaMetadata = meta,
-                                    navController = navController,
-                                    state = state,
-                                    textButtonColor = textButtonColor,
-                                    iconButtonColor = iconButtonColor
-                                )
-                            }
-                        }
                     }
 
                     Column(
@@ -2482,22 +2473,6 @@ fun BottomSheetPlayer(
                                     modifier = Modifier.nestedScroll(state.preUpPostDownNestedScrollConnection),
                                     isPlayerExpanded = isExpandedProvider,
                                     isListenTogetherGuest = isListenTogetherGuest
-                                )
-                            }
-                        }
-                        
-                        mediaMetadata?.let { meta ->
-                            Box(
-                                modifier = Modifier
-                                    .align(Alignment.TopEnd)
-                                    .padding(top = 16.dp, end = 16.dp)
-                            ) {
-                                PlayerMoreMenuButton(
-                                    mediaMetadata = meta,
-                                    navController = navController,
-                                    state = state,
-                                    textButtonColor = textButtonColor,
-                                    iconButtonColor = iconButtonColor
                                 )
                             }
                         }

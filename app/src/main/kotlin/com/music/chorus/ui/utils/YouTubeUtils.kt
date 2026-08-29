@@ -20,24 +20,30 @@ fun String.resize(
         )
     }
 
-    
     if (this.contains("googleusercontent.com") && this.contains("=w")) {
         val baseUrl = this.split("=w")[0]
         val size = if ((width ?: 0) >= 1000 || (height ?: 0) >= 1000) 1200 else 500
-        return "$baseUrl=w$size-h$size"
+        val afterW = this.substringAfter("=w")
+        val suffix = if (afterW.contains("-")) "-" + afterW.substringAfter("-") else ""
+        return "$baseUrl=w$size-h$size$suffix"
     }
 
     
     if (this.contains("yt3.ggpht.com")) {
-        
-        val baseUrl = this.split("=")[0].split("-s")[0]
-        return "$baseUrl=s${width ?: height}"
+        val baseUrl = this.split("=")[0]
+        val afterEq = if (this.contains("=")) this.substringAfter("=") else ""
+        val suffix = if (afterEq.contains("-")) "-" + afterEq.substringAfter("-") else ""
+        val size = width ?: height ?: 1200
+        return "$baseUrl=s$size$suffix"
     }
 
     
     "https://lh\\d\\.googleusercontent\\.com/.*".toRegex().matchEntire(this)?.let {
         val size = if ((width ?: 0) >= 1000 || (height ?: 0) >= 1000) 1200 else 500
-        return "${this.split("=")[0]}=w$size-h$size"
+        val baseUrl = this.split("=")[0]
+        val afterEq = if (this.contains("=")) this.substringAfter("=") else ""
+        val suffix = if (afterEq.contains("-")) "-" + afterEq.substringAfter("-") else ""
+        return "$baseUrl=w$size-h$size$suffix"
     }
 
     return this
