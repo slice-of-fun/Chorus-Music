@@ -25,12 +25,12 @@ internal object AppleMusicTokenProvider {
                 val match = indexJsRegex.find(htmlBody) ?: throw Exception("Could not find index.js")
                 val indexJsUri = match.groupValues[1]
 
-                val indexJsResponse = httpClient.get("https:
+                val indexJsResponse = httpClient.get("https://beta.music.apple.com$indexJsUri")
                 val indexJsBody = indexJsResponse.bodyAsText()
 
                 val tokenRegex = Regex("""eyJ[A-Za-z0-9\-_=]+\.[A-Za-z0-9\-_=]+\.[A-Za-z0-9\-_=]+""")
                 val tokenMatch = tokenRegex.find(indexJsBody) ?: throw Exception("Could not find token")
-                
+
                 val token = tokenMatch.value
                 cachedToken = token
                 token
