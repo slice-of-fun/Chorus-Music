@@ -71,7 +71,11 @@ import pushkar.chorus.music.utils.rememberEnumPreference
 import pushkar.chorus.music.utils.rememberPreference
 import pushkar.chorus.music.viewmodels.LibraryArtistsViewModel
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(
+    ExperimentalFoundationApi::class,
+    ExperimentalMaterial3Api::class,
+    androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class
+)
 @Composable
 fun FollowedArtistsScreen(
     navController: NavController,
@@ -87,15 +91,12 @@ fun FollowedArtistsScreen(
     )
     val (sortDescending, onSortDescendingChange) = rememberPreference(ArtistSortDescendingKey, true)
     val gridItemSize by rememberEnumPreference(GridItemsSizeKey, GridItemSize.BIG)
-
     var searchQuery by remember { mutableStateOf("") }
     val allArtists by viewModel.allArtists.collectAsState()
-
-    // Filter by followed (bookmarkedAt != null) AND search query
     val followedArtists = remember(allArtists, searchQuery) {
         allArtists
-            .filter { it.bookmarkedAt != null }
-            .filter { it.name.contains(searchQuery, ignoreCase = true) }
+            .filter { it.artist.bookmarkedAt != null }
+            .filter { it.artist.name.contains(searchQuery, ignoreCase = true) }
     }
 
     val lazyListState = rememberLazyListState()
