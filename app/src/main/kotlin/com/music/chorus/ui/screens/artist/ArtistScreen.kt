@@ -303,76 +303,51 @@ fun ArtistScreen(
                         }
                     }
 
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.TopCenter
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        
-                        val configuration = LocalConfiguration.current
-                        val isTablet = configuration.screenWidthDp > 600
-                        val artHeightDp = if (isTablet) 400.dp else configuration.screenWidthDp.dp
-                        val artHeightPx = with(density) { artHeightDp.toPx() }
-
                         if (thumbnail != null || backgroundVideoUrl != null) {
                             Box(
                                 modifier = Modifier
-                                    .matchParentSize()
+                                    .size(220.dp)
                                     .offset {
                                         IntOffset(x = 0, y = headerOffset)
                                     }
                             ) {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .fadingEdge(
-                                            bottom = 200.dp,
-                                        )
-                                ) {
-                                    if (thumbnail != null) {
-                                        AsyncImage(
-                                            model = thumbnail.resize(1200, 1200),
-                                            contentDescription = null,
-                                            modifier = Modifier.fillMaxSize(),
-                                            contentScale = androidx.compose.ui.layout.ContentScale.Crop
-                                        )
-                                    }
-                                    if (backgroundVideoUrl != null && showArtistBackgroundVideo) {
-                                        ArtistVideo(
-                                            videoUrl = backgroundVideoUrl!!,
-                                            modifier = Modifier.fillMaxSize(),
-                                            onClick = { }
-                                        )
-                                    }
+                                if (thumbnail != null) {
+                                    AsyncImage(
+                                        model = thumbnail.resize(1200, 1200),
+                                        contentDescription = null,
+                                        modifier = Modifier.fillMaxSize().clip(androidx.compose.foundation.shape.CircleShape),
+                                        contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                                        alignment = Alignment.Center
+                                    )
+                                }
+                                if (backgroundVideoUrl != null && showArtistBackgroundVideo) {
+                                    ArtistVideo(
+                                        videoUrl = backgroundVideoUrl!!,
+                                        modifier = Modifier.fillMaxSize().clip(androidx.compose.foundation.shape.CircleShape),
+                                        onClick = { }
+                                    )
                                 }
                             }
+                            Spacer(modifier = Modifier.height(24.dp))
                         }
-
-                        
 
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(
-                                    top = if (thumbnail != null) {
-                                        
-                                        
-                                        with(density) {
-                                            ((artHeightPx / 1.2f) - 144).toDp()
-                                        }
-                                    } else {
-                                        16.dp
-                                    }
-                                )
+                                .padding(horizontal = 16.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 16.dp)
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center,
+                                modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth()
                             ) {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier.padding(bottom = 16.dp)
-                                ) {
                                     if (showArtistVideo && !(showArtistBackgroundVideo && backgroundVideoUrl != null)) {
                                         artistVideoUrl?.let { videoUrl ->
                                             artistPage?.artist?.radioEndpoint?.let { radioEndpoint ->
@@ -408,7 +383,7 @@ fun ArtistScreen(
 
                                 @OptIn(ExperimentalLayoutApi::class)
                                 FlowRow(
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    horizontalArrangement = Arrangement.Center,
                                     verticalArrangement = Arrangement.spacedBy(8.dp),
                                     modifier = Modifier
                                         .fillMaxWidth()
@@ -441,6 +416,8 @@ fun ArtistScreen(
                                             }
                                         }
                                     }
+                                    
+                                    Spacer(modifier = Modifier.width(8.dp))
 
                                     artistPage?.monthlyListenerCount?.takeIf { it.isNotBlank() }?.let { monthlyListeners ->
                                         Row(
@@ -470,7 +447,7 @@ fun ArtistScreen(
                                 }
 
                                 Row(
-                                    horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.Start),
+                                    horizontalArrangement = Arrangement.Center,
                                     verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier
                                         .fillMaxWidth()
@@ -480,7 +457,7 @@ fun ArtistScreen(
                                         artistPage?.artist?.radioEndpoint?.let { radioEndpoint ->
                                             OutlinedButton(
                                                 onClick = { playerConnection.playQueue(YouTubeQueue(radioEndpoint)) },
-                                                modifier = Modifier.size(56.dp),
+                                                modifier = Modifier.size(48.dp),
                                                 shape = androidx.compose.foundation.shape.CircleShape,
                                                 contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
                                             ) {
@@ -513,7 +490,9 @@ fun ArtistScreen(
                                                     }
                                                 }
                                             },
-                                            modifier = Modifier.size(72.dp),
+                                            modifier = Modifier
+                                                .padding(horizontal = 16.dp)
+                                                .size(56.dp),
                                             shape = androidx.compose.foundation.shape.CircleShape,
                                             colors = ButtonDefaults.buttonColors(
                                                 containerColor = MaterialTheme.colorScheme.primary,
@@ -588,7 +567,6 @@ fun ArtistScreen(
                             Spacer(modifier = Modifier.height(16.dp))
                         }
                     }
-                }
 
 
                 if (showLocal) {

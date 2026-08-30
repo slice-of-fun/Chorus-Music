@@ -62,6 +62,12 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.graphics.graphicsLayer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
+import java.net.URLEncoder
 import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
@@ -118,6 +124,42 @@ import pushkar.chorus.music.ui.menu.YouTubeAlbumMenu
 import pushkar.chorus.music.constants.GridThumbnailHeight
 import pushkar.chorus.music.constants.GridItemsSizeKey
 import pushkar.chorus.music.constants.GridItemSize
+
+suspend fun fetchMoodThumbnail(mood: String): String? {
+    return withContext(Dispatchers.IO) {
+        try {
+            val encoded = URLEncoder.encode(mood, "UTF-8")
+            val url = URL("https://itunes.apple.com/search?term=$encoded&entity=album&limit=1")
+            val connection = url.openConnection() as HttpURLConnection
+            connection.requestMethod = "GET"
+            connection.connectTimeout = 3000
+            connection.readTimeout = 3000
+            val response = connection.inputStream.bufferedReader().use { it.readText() }
+            val json = JSONObject(response)
+            val results = json.getJSONArray("results")
+            if (results.length() > 0) {
+                val artwork = results.getJSONObject(0).getString("artworkUrl100")
+                artwork.replace("100x100bb.jpg", "400x400bb.jpg")
+            } else null
+        } catch (e: Exception) {
+            null
+        }
+    }
+}
+
+@Composable
+fun MoodThumbnail(title: String, modifier: Modifier = Modifier) {
+    var url by remember(title) { mutableStateOf<String?>(null) }
+    LaunchedEffect(title) {
+        url = fetchMoodThumbnail(title)
+    }
+    AsyncImage(
+        model = url ?: "https://picsum.photos/seed/$title/400",
+        contentDescription = null,
+        contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+        modifier = modifier
+    )
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -554,10 +596,8 @@ fun ExploreTabContent(
                                     .padding(16.dp)
                                     .align(Alignment.TopStart)
                             )
-                            AsyncImage(
-                                model = "https://picsum.photos/seed/${item.title}/400",
-                                contentDescription = null,
-                                contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                            MoodThumbnail(
+                                title = item.title,
                                 modifier = Modifier
                                     .align(Alignment.BottomEnd)
                                     .offset(x = 16.dp, y = 16.dp)

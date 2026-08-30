@@ -1,5 +1,3 @@
-
-
 package pushkar.chorus.music.ui.component
 
 import android.widget.Toast
@@ -353,6 +351,7 @@ fun GridItem(
     thumbnailContent: @Composable BoxWithConstraintsScope.() -> Unit,
     thumbnailRatio: Float = 1f,
     fillMaxWidth: Boolean = false,
+    textAlign: TextAlign = TextAlign.Start,
 ) = GridItem(
     modifier = modifier,
     title = {
@@ -362,18 +361,22 @@ fun GridItem(
             fontWeight = FontWeight.Bold,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Start,
+            textAlign = textAlign,
             modifier = Modifier.fillMaxWidth()
         )
     },
     subtitle = {
-        Text(
-            text = subtitle,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.secondary,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
+        if (subtitle != null) {
+            Text(
+                text = subtitle,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.secondary,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = textAlign,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     },
     thumbnailContent = thumbnailContent,
     thumbnailRatio = thumbnailRatio,
@@ -602,7 +605,12 @@ fun ArtistGridItem(
     fillMaxWidth: Boolean = false,
 ) = GridItem(
     title = artist.artist.name,
-    subtitle = pluralStringResource(R.plurals.n_song, artist.songCount, artist.songCount),
+    subtitle = if (artist.songCount > 0) pluralStringResource(
+        R.plurals.n_song,
+        artist.songCount,
+        artist.songCount
+    ) else null,
+    textAlign = TextAlign.Center,
     badges = badges,
     thumbnailContent = {
         AsyncImage(
@@ -649,7 +657,13 @@ fun AlbumListItem(
                 } else {
                     when {
                         songs.all { allDownloads[it.id]?.state == STATE_COMPLETED } -> STATE_COMPLETED
-                        songs.any { allDownloads[it.id]?.state in listOf(STATE_QUEUED, STATE_DOWNLOADING) } -> STATE_DOWNLOADING
+                        songs.any {
+                            allDownloads[it.id]?.state in listOf(
+                                STATE_QUEUED,
+                                STATE_DOWNLOADING
+                            )
+                        } -> STATE_DOWNLOADING
+
                         else -> Download.STATE_STOPPED
                     }
                 }
@@ -715,7 +729,13 @@ fun AlbumGridItem(
                 } else {
                     when {
                         songs.all { allDownloads[it.id]?.state == STATE_COMPLETED } -> STATE_COMPLETED
-                        songs.any { allDownloads[it.id]?.state in listOf(STATE_QUEUED, STATE_DOWNLOADING) } -> STATE_DOWNLOADING
+                        songs.any {
+                            allDownloads[it.id]?.state in listOf(
+                                STATE_QUEUED,
+                                STATE_DOWNLOADING
+                            )
+                        } -> STATE_DOWNLOADING
+
                         else -> Download.STATE_STOPPED
                     }
                 }
@@ -809,7 +829,13 @@ fun PlaylistListItem(
                 } else {
                     when {
                         songs.all { allDownloads[it.id]?.state == STATE_COMPLETED } -> STATE_COMPLETED
-                        songs.any { allDownloads[it.id]?.state in listOf(STATE_QUEUED, STATE_DOWNLOADING) } -> STATE_DOWNLOADING
+                        songs.any {
+                            allDownloads[it.id]?.state in listOf(
+                                STATE_QUEUED,
+                                STATE_DOWNLOADING
+                            )
+                        } -> STATE_DOWNLOADING
+
                         else -> Download.STATE_STOPPED
                     }
                 }
@@ -857,7 +883,7 @@ fun PlaylistListItem(
                     stringResource(R.string.liked) -> R.drawable.favorite_border
                     stringResource(R.string.offline) -> R.drawable.offline
                     stringResource(R.string.cached_playlist) -> R.drawable.offline
-                    
+
                     stringResource(R.string.uploaded_playlist) -> R.drawable.backup
                     else -> if (autoPlaylist) R.drawable.trending_up else R.drawable.ic_launcher_nobg
                 }
@@ -901,7 +927,13 @@ fun PlaylistGridItem(
                 } else {
                     when {
                         songs.all { allDownloads[it.id]?.state == STATE_COMPLETED } -> STATE_COMPLETED
-                        songs.any { allDownloads[it.id]?.state in listOf(STATE_QUEUED, STATE_DOWNLOADING) } -> STATE_DOWNLOADING
+                        songs.any {
+                            allDownloads[it.id]?.state in listOf(
+                                STATE_QUEUED,
+                                STATE_DOWNLOADING
+                            )
+                        } -> STATE_DOWNLOADING
+
                         else -> Download.STATE_STOPPED
                     }
                 }
@@ -967,7 +999,7 @@ fun PlaylistGridItem(
                     stringResource(R.string.liked) -> R.drawable.favorite_border
                     stringResource(R.string.offline) -> R.drawable.offline
                     stringResource(R.string.cached_playlist) -> R.drawable.offline
-                    
+
                     stringResource(R.string.uploaded_playlist) -> R.drawable.backup
                     else -> if (autoPlaylist) R.drawable.trending_up else R.drawable.ic_launcher_nobg
                 }
@@ -1072,7 +1104,7 @@ fun YouTubeListItem(
             Icon.Favorite()
         }
         if (item.explicit) Icon.Explicit()
-        
+
         if (item is SongItem) {
             val download by LocalDownloadUtil.current.getDownload(item.id).collectAsState(null)
             Icon.Download(download?.state)
@@ -1087,7 +1119,11 @@ fun YouTubeListItem(
         ListItem(
             title = item.title,
             subtitle = when (item) {
-                is SongItem -> joinByBullet(item.artists.joinToString { it.name }, makeTimeString(item.duration?.times(1000L)))
+                is SongItem -> joinByBullet(
+                    item.artists.joinToString { it.name },
+                    makeTimeString(item.duration?.times(1000L))
+                )
+
                 is AlbumItem -> joinByBullet(item.artists?.joinToString { it.name }, item.year?.toString())
                 is ArtistItem -> null
                 is PlaylistItem -> joinByBullet(item.author?.name, item.songCountText)
@@ -1116,7 +1152,7 @@ fun YouTubeListItem(
 
     if (item is SongItem && isSwipeable && swipeEnabled) {
         SwipeToSongBox(
-            mediaItem = item.copy(thumbnail = item.thumbnail.resize(544,544)).toMediaItem(),
+            mediaItem = item.copy(thumbnail = item.thumbnail.resize(544, 544)).toMediaItem(),
             modifier = Modifier.fillMaxWidth()
         ) {
             content()
@@ -1146,7 +1182,7 @@ fun YouTubeGridItem(
             Icon.Favorite()
         }
         if (item.explicit) Icon.Explicit()
-        
+
         if (item is SongItem) {
             val download by LocalDownloadUtil.current.getDownload(item.id).collectAsState(null)
             Icon.Download(download?.state)
@@ -1170,7 +1206,11 @@ fun YouTubeGridItem(
     },
     subtitle = {
         val subtitle = when (item) {
-            is SongItem -> joinByBullet(item.artists.joinToString { it.name }, makeTimeString(item.duration?.times(1000L)))
+            is SongItem -> joinByBullet(
+                item.artists.joinToString { it.name },
+                makeTimeString(item.duration?.times(1000L))
+            )
+
             is AlbumItem -> joinByBullet(item.artists?.joinToString { it.name }, item.year?.toString())
             is ArtistItem -> null
             is PlaylistItem -> joinByBullet(item.author?.name, item.songCountText)
@@ -1328,7 +1368,7 @@ fun ItemThumbnail(
     thumbnailRatio: Float = 1f
 ) {
     val cropAlbumArt by rememberPreference(CropAlbumArtKey, true)
-    
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
@@ -1410,7 +1450,7 @@ fun LocalThumbnail(
     thumbnailRatio: Float = 1f
 ) {
     val cropAlbumArt by rememberPreference(CropAlbumArtKey, true)
-    
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
@@ -1516,7 +1556,7 @@ fun PlaylistThumbnail(
     cacheKey: String? = null
 ) {
     val cropAlbumArt by rememberPreference(CropAlbumArtKey, true)
-    
+
     when (thumbnails.size) {
         0 -> Box(
             contentAlignment = Alignment.Center,
@@ -1527,10 +1567,11 @@ fun PlaylistThumbnail(
         ) {
             placeHolder()
         }
+
         1 -> AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(thumbnails[0].resize(544, 544))
-                .apply {  }
+                .apply { }
                 .memoryCachePolicy(coil3.request.CachePolicy.ENABLED)
                 .diskCachePolicy(coil3.request.CachePolicy.ENABLED)
                 .networkCachePolicy(coil3.request.CachePolicy.ENABLED)
@@ -1543,6 +1584,7 @@ fun PlaylistThumbnail(
                 .size(size)
                 .clip(shape)
         )
+
         else -> Box(
             modifier = Modifier
                 .size(size)
@@ -1557,7 +1599,7 @@ fun PlaylistThumbnail(
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(thumbnails.getOrNull(index)?.resize(544, 544))
-                        .apply {  }
+                        .apply { }
                         .memoryCachePolicy(coil3.request.CachePolicy.ENABLED)
                         .diskCachePolicy(coil3.request.CachePolicy.ENABLED)
                         .networkCachePolicy(coil3.request.CachePolicy.ENABLED)
@@ -1805,13 +1847,15 @@ object Icon {
                     .size(18.dp)
                     .padding(end = 2.dp)
             )
+
             STATE_QUEUED, STATE_DOWNLOADING -> CircularProgressIndicator(
                 strokeWidth = 2.dp,
                 modifier = Modifier
                     .size(16.dp)
                     .padding(end = 2.dp)
             )
-            else -> {  }
+
+            else -> {}
         }
     }
 
@@ -1840,7 +1884,7 @@ fun rememberLosslessMatch(
             value = true
             return@produceState
         }
-        kotlinx.coroutines.delay(300) 
+        kotlinx.coroutines.delay(300)
         val track = pushkar.chorus.music.utils.LosslessAPI.search(title, artist)
         value = track != null
     }
