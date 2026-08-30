@@ -265,8 +265,7 @@ fun AlbumScreen(
                     
                     Box(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .aspectRatio(1f)
+                            .matchParentSize()
                             .offset {
                                 IntOffset(x = 0, y = headerOffset)
                             }

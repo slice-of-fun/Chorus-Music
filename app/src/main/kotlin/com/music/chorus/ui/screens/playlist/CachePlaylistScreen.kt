@@ -490,7 +490,7 @@ private fun CachePlaylistHeader(
                     .clip(RoundedCornerShape(8.dp))
             ) {
                 AsyncImage(
-                    model = songs.firstOrNull()?.thumbnailUrl,
+                    model = songs.firstOrNull()?.thumbnailUrl?.resize(1200, 1200),
                     contentDescription = null,
                     contentScale = androidx.compose.ui.layout.ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()

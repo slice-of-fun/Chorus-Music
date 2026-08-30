@@ -640,7 +640,7 @@ private fun AutoPlaylistHeader(
             contentAlignment = Alignment.Center
         ) {
             AsyncImage(
-                model = songs[0].thumbnailUrl,
+                model = songs[0].thumbnailUrl?.resize(1200, 1200),
                 contentDescription = null,
                 modifier = Modifier
                     .then(

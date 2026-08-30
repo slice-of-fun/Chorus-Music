@@ -33,8 +33,8 @@ fun AutoPlaylistButton(
         Color(0xFF009688), Color(0xFF4CAF50), Color(0xFFFF9800),
         Color(0xFFFF5722), Color(0xFF795548), Color(0xFF607D8B)
     )
-    val backgroundColor = androidx.compose.runtime.remember(title) { 
-        colors[kotlin.math.abs(title.hashCode()) % colors.size] 
+    val backgroundColor = androidx.compose.runtime.remember(icon) { 
+        colors[kotlin.math.abs(icon * 31) % colors.size] 
     }
 
     Surface(

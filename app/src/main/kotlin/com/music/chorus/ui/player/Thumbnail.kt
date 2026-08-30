@@ -895,8 +895,8 @@ private fun ThumbnailImage(
 ) {
     Box(
         modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.surfaceVariant)
     ) {
         var currentUrl by remember(artworkUri) {
             mutableStateOf(artworkUri)
@@ -918,9 +918,7 @@ private fun ThumbnailImage(
                     currentUrl = url.replace("maxresdefault.jpg", "hqdefault.jpg")
                 }
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
+            modifier = Modifier.fillMaxSize()
         )
     }
 }

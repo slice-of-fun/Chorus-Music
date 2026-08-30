@@ -1125,7 +1125,7 @@ fun LocalPlaylistHeader(
                 }
                 1 -> {
                     AsyncImage(
-                        model = overrideThumbnail.value ?: playlist.thumbnails[0],
+                        model = (overrideThumbnail.value ?: playlist.thumbnails[0])?.resize(1200, 1200),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()
@@ -1190,7 +1190,7 @@ fun LocalPlaylistHeader(
                             Alignment.BottomEnd,
                         ).fastForEachIndexed { index, alignment ->
                             AsyncImage(
-                                model = playlist.thumbnails.getOrNull(index),
+                                model = playlist.thumbnails.getOrNull(index)?.resize(1200, 1200),
                                 contentDescription = null,
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier

@@ -1834,6 +1834,13 @@ fun BottomSheetPlayer(
                             }
                         },
                         enabled = !isListenTogetherGuest,
+                        thumb = {
+                            Box(
+                                modifier = Modifier
+                                    .size(16.dp)
+                                    .background(textButtonColor, CircleShape)
+                            )
+                        },
                         colors = SliderDefaults.colors(
                             thumbColor = textButtonColor,
                             activeTrackColor = textButtonColor,
@@ -1951,6 +1958,13 @@ fun BottomSheetPlayer(
                         },
                         enabled = !isListenTogetherGuest,
                         interactionSource = trackInteractionSource,
+                        thumb = {
+                            Box(
+                                modifier = Modifier
+                                    .size(16.dp)
+                                    .background(textButtonColor, CircleShape)
+                            )
+                        },
                         colors = SliderDefaults.colors(
                             thumbColor = textButtonColor,
                             activeTrackColor = textButtonColor,

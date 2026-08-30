@@ -316,8 +316,7 @@ fun ArtistScreen(
                         if (thumbnail != null || backgroundVideoUrl != null) {
                             Box(
                                 modifier = Modifier
-                                    .fillMaxWidth()
-                                    .aspectRatio(16f / 9f)
+                                    .matchParentSize()
                                     .offset {
                                         IntOffset(x = 0, y = headerOffset)
                                     }
@@ -334,8 +333,7 @@ fun ArtistScreen(
                                             model = thumbnail.resize(1200, 1200),
                                             contentDescription = null,
                                             modifier = Modifier.fillMaxSize(),
-                                            contentScale = androidx.compose.ui.layout.ContentScale.Crop,
-                                            alignment = androidx.compose.ui.Alignment.Center
+                                            contentScale = androidx.compose.ui.layout.ContentScale.Crop
                                         )
                                     }
                                     if (backgroundVideoUrl != null && showArtistBackgroundVideo) {
@@ -369,60 +367,110 @@ fun ArtistScreen(
                             Column(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(horizontal = 16.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally
+                                    .padding(horizontal = 16.dp)
                             ) {
-                                if (showArtistVideo && !(showArtistBackgroundVideo && backgroundVideoUrl != null)) {
-                                    artistVideoUrl?.let { videoUrl ->
-                                        artistPage?.artist?.radioEndpoint?.let { radioEndpoint ->
-                                            ArtistVideo(
-                                                videoUrl = videoUrl,
-                                                modifier = Modifier
-                                                    .size(64.dp)
-                                                    .padding(bottom = 8.dp),
-                                                onClick = {
-                                                    val watchEndpoint = artistVideoSong?.endpoint
-                                                        ?: artistPage.artist.radioEndpoint
-                                                    watchEndpoint?.let {
-                                                        playerConnection.playQueue(YouTubeQueue(it))
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(bottom = 16.dp)
+                                ) {
+                                    if (showArtistVideo && !(showArtistBackgroundVideo && backgroundVideoUrl != null)) {
+                                        artistVideoUrl?.let { videoUrl ->
+                                            artistPage?.artist?.radioEndpoint?.let { radioEndpoint ->
+                                                Spacer(modifier = Modifier.width(5.dp))
+                                                ArtistVideo(
+                                                    videoUrl = videoUrl,
+                                                    modifier = Modifier
+                                                        .size(45.dp),
+                                                    onClick = {
+                                                        val watchEndpoint = artistVideoSong?.endpoint
+                                                            ?: artistPage.artist.radioEndpoint
+                                                        watchEndpoint?.let {
+                                                            playerConnection.playQueue(YouTubeQueue(it))
+                                                        }
                                                     }
-                                                }
+                                                )
+                                            }
+                                        }
+                                    }
+
+                                    Spacer(modifier = Modifier.width(5.dp))
+
+                                    Text(
+                                        text = artistName ?: "Unknown",
+                                        style = MaterialTheme.typography.headlineLarge,
+                                        fontWeight = FontWeight.Bold,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
+                                        fontSize = 32.sp,
+                                        modifier = Modifier.weight(1f, fill = false)
+                                    )
+                                }
+
+                                @OptIn(ExperimentalLayoutApi::class)
+                                FlowRow(
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(bottom = 16.dp)
+                                ) {
+                                    if (showArtistSubscriberCount) {
+                                        artistPage?.subscriberCountText?.takeIf { it.isNotBlank() }?.let { subscribers ->
+                                            Row(
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                modifier = Modifier
+                                                    .clip(RoundedCornerShape(12.dp))
+                                                    .background(MaterialTheme.colorScheme.secondaryContainer)
+                                                    .padding(horizontal = 12.dp, vertical = 6.dp)
+                                            ) {
+                                                Icon(
+                                                    painter = painterResource(R.drawable.artist_screen),
+                                                    contentDescription = null,
+                                                    modifier = Modifier.size(16.dp),
+                                                    tint = MaterialTheme.colorScheme.onSecondaryContainer
+                                                )
+                                                Spacer(modifier = Modifier.width(6.dp))
+                                                Text(
+                                                    text = "$subscribers ${stringResource(R.string.subscribers)}",
+                                                    style = MaterialTheme.typography.labelLarge,
+                                                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                                                    fontWeight = FontWeight.Medium,
+                                                    maxLines = 1,
+                                                    overflow = TextOverflow.Ellipsis
+                                                )
+                                            }
+                                        }
+                                    }
+
+                                    artistPage?.monthlyListenerCount?.takeIf { it.isNotBlank() }?.let { monthlyListeners ->
+                                        Row(
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            modifier = Modifier
+                                                .clip(RoundedCornerShape(12.dp))
+                                                .background(MaterialTheme.colorScheme.tertiaryContainer)
+                                                .padding(horizontal = 12.dp, vertical = 6.dp)
+                                        ) {
+                                            Icon(
+                                                painter = painterResource(R.drawable.graphic_eq),
+                                                contentDescription = null,
+                                                modifier = Modifier.size(16.dp),
+                                                tint = MaterialTheme.colorScheme.onTertiaryContainer
+                                            )
+                                            Spacer(modifier = Modifier.width(6.dp))
+                                            Text(
+                                                text = "$monthlyListeners ${stringResource(R.string.monthly_listeners)}",
+                                                style = MaterialTheme.typography.labelLarge,
+                                                color = MaterialTheme.colorScheme.onTertiaryContainer,
+                                                fontWeight = FontWeight.Medium,
+                                                maxLines = 1,
+                                                overflow = TextOverflow.Ellipsis
                                             )
                                         }
                                     }
                                 }
 
-                                Text(
-                                    text = artistName ?: "Unknown",
-                                    style = MaterialTheme.typography.headlineLarge,
-                                    fontWeight = FontWeight.Bold,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                    fontSize = 32.sp,
-                                    modifier = Modifier.padding(bottom = 8.dp)
-                                )
-
-                                val statsText = buildString {
-                                    artistPage?.subscriberCountText?.takeIf { it.isNotBlank() }?.let {
-                                        append("$it ${stringResource(R.string.subscribers)}")
-                                    }
-                                    artistPage?.monthlyListenerCount?.takeIf { it.isNotBlank() }?.let {
-                                        if (isNotEmpty()) append(" • ")
-                                        append("$it ${stringResource(R.string.monthly_listeners)}")
-                                    }
-                                }
-                                
-                                if (statsText.isNotBlank()) {
-                                    Text(
-                                        text = statsText,
-                                        style = MaterialTheme.typography.bodyLarge,
-                                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
-                                        modifier = Modifier.padding(bottom = 24.dp)
-                                    )
-                                }
-
                                 Row(
-                                    horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterHorizontally),
+                                    horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.Start),
                                     verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier
                                         .fillMaxWidth()

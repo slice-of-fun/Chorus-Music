@@ -1,5 +1,3 @@
-
-
 package pushkar.chorus.music.ui.screens.search
 
 import androidx.compose.foundation.background
@@ -58,6 +56,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import coil3.compose.AsyncImage
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
@@ -135,15 +134,15 @@ fun SearchScreen(
     }
     val pauseSearchHistory by rememberPreference(PauseSearchHistoryKey, defaultValue = false)
     var isFirstLaunch by rememberSaveable { mutableStateOf(true) }
-    
+
     var selectedTabIndex by rememberSaveable { mutableStateOf(0) }
     var searchActive by rememberSaveable { mutableStateOf(false) }
     var showSearchContent by remember { mutableStateOf(false) }
 
     LaunchedEffect(searchActive) {
         if (searchActive) {
-            
-            
+
+
             kotlinx.coroutines.delay(100)
             showSearchContent = true
         } else {
@@ -245,7 +244,7 @@ fun SearchScreen(
                                 .focusRequester(focusRequester),
                             singleLine = true,
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                            keyboardActions = KeyboardActions(onSearch = { 
+                            keyboardActions = KeyboardActions(onSearch = {
                                 onSearch(query.text)
                                 searchActive = false
                             }),
@@ -263,9 +262,9 @@ fun SearchScreen(
                                         onClick = {
                                             if (searchActive) {
                                                 searchActive = false
-                                                query = TextFieldValue("") 
+                                                query = TextFieldValue("")
                                             } else {
-                                                searchActive = true 
+                                                searchActive = true
                                             }
                                         }
                                     ) {
@@ -308,7 +307,7 @@ fun SearchScreen(
                                         }
                                         IconButton(
                                             onClick = {
-                                                searchSource = if (searchSource == SearchSource.ONLINE) 
+                                                searchSource = if (searchSource == SearchSource.ONLINE)
                                                     SearchSource.LOCAL else SearchSource.ONLINE
                                             }
                                         ) {
@@ -346,6 +345,7 @@ fun SearchScreen(
                                 onDismiss = { searchActive = false },
                                 pureBlack = pureBlack
                             )
+
                             SearchSource.ONLINE -> OnlineSearchScreen(
                                 query = query.text,
                                 onQueryChange = { query = it },
@@ -363,8 +363,18 @@ fun SearchScreen(
 
                 AnimatedVisibility(
                     visible = !searchActive,
-                    enter = expandVertically(animationSpec = tween(durationMillis = 245, easing = FastOutSlowInEasing)) + fadeIn(),
-                    exit = shrinkVertically(animationSpec = tween(durationMillis = 245, easing = FastOutSlowInEasing)) + fadeOut()
+                    enter = expandVertically(
+                        animationSpec = tween(
+                            durationMillis = 245,
+                            easing = FastOutSlowInEasing
+                        )
+                    ) + fadeIn(),
+                    exit = shrinkVertically(
+                        animationSpec = tween(
+                            durationMillis = 245,
+                            easing = FastOutSlowInEasing
+                        )
+                    ) + fadeOut()
                 ) {
                     Column {
                         Spacer(modifier = Modifier.height(8.dp))
@@ -418,7 +428,7 @@ fun SearchScreen(
         containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.background
     ) { paddingValues ->
         val bottomPadding = LocalPlayerAwareWindowInsets.current.asPaddingValues().calculateBottomPadding()
-        
+
         Box(
             modifier = Modifier
                 .padding(top = paddingValues.calculateTopPadding())
@@ -435,41 +445,43 @@ fun SearchScreen(
         }
     }
 
-    
+
     DisposableEffect(lifecycleOwner, isPlayerExpanded) {
         val observer = LifecycleEventObserver { _, event ->
             when (event) {
                 Lifecycle.Event.ON_RESUME -> {
-                    
+
                     if (isPlayerExpanded) {
                         keyboardController?.hide()
                         focusManager.clearFocus()
                     } else if (isFirstLaunch) {
-                        
+
                         try {
                             focusRequester.requestFocus()
                         } catch (e: Exception) {
-                            
+
                         }
                         isFirstLaunch = false
                     }
                 }
+
                 Lifecycle.Event.ON_PAUSE -> {
-                    
+
                     focusManager.clearFocus()
                     keyboardController?.hide()
                 }
+
                 else -> {}
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
-        
-        
+
+
         if (isPlayerExpanded) {
             keyboardController?.hide()
             focusManager.clearFocus()
         }
-        
+
         onDispose {
             lifecycleOwner.lifecycle.removeObserver(observer)
         }
@@ -492,39 +504,65 @@ fun ExploreTabContent(
             item {
                 NavigationTitle(title = section.title)
             }
-            
+
             val rows = section.items.chunked(2)
             items(rows) { row ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 6.dp)
+                        .padding(horizontal = 12.dp, vertical = 6.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     row.forEach { item ->
+                        val baseColor = androidx.compose.ui.graphics.Color(item.stripeColor).takeOrElse {
+                            MaterialTheme.colorScheme.surfaceContainer
+                        }
+
                         Box(
-                            contentAlignment = Alignment.CenterStart,
                             modifier = Modifier
                                 .weight(1f)
-                                .padding(6.dp)
-                                .height(64.dp)
-                                .clip(RoundedCornerShape(10.dp))
-                                .background(MaterialTheme.colorScheme.surfaceContainer)
+                                .aspectRatio(1.5f)
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(
+                                    brush = androidx.compose.ui.graphics.Brush.linearGradient(
+                                        colors = listOf(
+                                            baseColor,
+                                            baseColor.copy(alpha = 0.5f)
+                                        )
+                                    )
+                                )
                                 .clickable {
                                     navController.navigate(
                                         "youtube_browse/${item.endpoint.browseId}?params=${item.endpoint.params}"
                                     )
                                 }
-                                .padding(horizontal = 14.dp)
                         ) {
                             Text(
                                 text = item.title,
-                                style = MaterialTheme.typography.labelLarge,
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                                color = androidx.compose.ui.graphics.Color.White,
                                 maxLines = 2,
-                                overflow = TextOverflow.Ellipsis
+                                overflow = TextOverflow.Ellipsis,
+                                modifier = Modifier
+                                    .padding(16.dp)
+                                    .align(Alignment.TopStart)
+                            )
+                            AsyncImage(
+                                model = "https://picsum.photos/seed/${item.title}/400",
+                                contentDescription = null,
+                                contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                                modifier = Modifier
+                                    .align(Alignment.BottomEnd)
+                                    .offset(x = 16.dp, y = 16.dp)
+                                    .size(64.dp)
+                                    .graphicsLayer { rotationZ = 25f }
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(androidx.compose.ui.graphics.Color.Black.copy(alpha = 0.3f))
                             )
                         }
                     }
-                    
+
                     repeat(2 - row.size) {
                         Spacer(modifier = Modifier.weight(1f))
                     }
@@ -561,7 +599,7 @@ fun AlbumsTabContent(
     val mediaMetadata by (playerConnection?.mediaMetadata?.collectAsState() ?: remember { mutableStateOf(null) })
     val isPlaying by (playerConnection?.isEffectivelyPlaying?.collectAsState() ?: remember { mutableStateOf(false) })
     val coroutineScope = rememberCoroutineScope()
-    
+
     val explorePage by viewModel.explorePage.collectAsState()
     val newReleaseAlbums = explorePage?.newReleaseAlbums
 

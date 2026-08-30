@@ -541,7 +541,7 @@ private fun TopPlaylistHeader(
             contentAlignment = Alignment.Center
         ) {
             AsyncImage(
-                model = songs[0].thumbnailUrl,
+                model = songs[0].thumbnailUrl?.resize(1200, 1200),
                 contentDescription = null,
                 modifier = Modifier
                     .then(
@@ -549,7 +549,7 @@ private fun TopPlaylistHeader(
                         else Modifier.fillMaxWidth().aspectRatio(1f)
                     )
                     .clip(RoundedCornerShape(8.dp)),
-                contentScale = ContentScale.Crop
+                contentScale = androidx.compose.ui.layout.ContentScale.Crop
             )
         }
 

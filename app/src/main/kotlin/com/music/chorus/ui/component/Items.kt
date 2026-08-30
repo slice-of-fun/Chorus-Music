@@ -325,9 +325,9 @@ fun GridItem(
             modifier = if (fillMaxWidth) {
                 Modifier.fillMaxWidth()
             } else {
-                Modifier.width(gridHeight)
+                Modifier.height(gridHeight)
             }
-                .wrapContentHeight()
+                .aspectRatio(thumbnailRatio)
         ) {
             thumbnailContent()
         }
@@ -456,8 +456,7 @@ fun SongListItem(
                     isPlaying = isPlaying,
                     shape = RoundedCornerShape(ThumbnailCornerRadius),
                     modifier = Modifier
-                        .width(ListThumbnailSize)
-                        .wrapContentHeight()
+                        .size(ListThumbnailSize)
                 )
             },
             trailingContent = trailingContent,
@@ -581,9 +580,8 @@ fun ArtistListItem(
                 .build(),
             contentDescription = null,
             modifier = Modifier
-                .width(ListThumbnailSize)
-                .wrapContentHeight()
-                .clip(RoundedCornerShape(ThumbnailCornerRadius)),
+                .size(ListThumbnailSize)
+                .clip(CircleShape),
         )
     },
     trailingContent = trailingContent,
@@ -618,7 +616,7 @@ fun ArtistGridItem(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxSize()
-                .clip(RoundedCornerShape(ThumbnailCornerRadius))
+                .clip(CircleShape)
         )
     },
     fillMaxWidth = fillMaxWidth,
@@ -684,8 +682,7 @@ fun AlbumListItem(
             isPlaying = isPlaying,
             shape = RoundedCornerShape(ThumbnailCornerRadius),
             modifier = Modifier
-                .width(ListThumbnailSize)
-                .wrapContentHeight()
+                .size(ListThumbnailSize)
         )
     },
     trailingContent = trailingContent,
@@ -1036,8 +1033,7 @@ fun MediaMetadataListItem(
                 isPlaying = isPlaying,
                 shape = RoundedCornerShape(ThumbnailCornerRadius),
                 modifier = Modifier
-                    .width(ListThumbnailSize)
-                    .wrapContentHeight()
+                    .size(ListThumbnailSize)
             )
         },
         trailingContent = trailingContent,
@@ -1106,8 +1102,7 @@ fun YouTubeListItem(
                     isPlaying = isPlaying,
                     shape = RoundedCornerShape(ThumbnailCornerRadius),
                     modifier = Modifier
-                        .width(ListThumbnailSize)
-                        .wrapContentHeight()
+                        .size(ListThumbnailSize)
                 )
             },
             trailingContent = trailingContent,
@@ -1337,8 +1332,8 @@ fun ItemThumbnail(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
+            .fillMaxSize()
+            .aspectRatio(thumbnailRatio)
             .clip(shape)
     ) {
         if (albumIndex == null) {
@@ -1350,10 +1345,9 @@ fun ItemThumbnail(
                     .networkCachePolicy(coil3.request.CachePolicy.ENABLED)
                     .build(),
                 contentDescription = null,
-                contentScale = androidx.compose.ui.layout.ContentScale.FillWidth,
+                contentScale = if (cropAlbumArt) androidx.compose.ui.layout.ContentScale.Crop else androidx.compose.ui.layout.ContentScale.Fit,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight()
                     .clip(shape)
             )
         }

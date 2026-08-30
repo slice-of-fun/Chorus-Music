@@ -383,9 +383,7 @@ fun LibraryMixScreen(
                                 icon = R.drawable.snippet_folder,
                                 iconTint = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
                                 onClick = { navController.navigate("local_songs") },
-                                modifier = Modifier
-                                    .fillMaxWidth(0.5f)
-                                    .padding(end = 4.dp)
+                                modifier = itemModifier
                             )
                             AutoPlaylistButton(
                                 title = "Followed Artists",
@@ -648,9 +646,14 @@ fun LibraryMixScreen(
                                 icon = R.drawable.snippet_folder,
                                 iconTint = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
                                 onClick = { navController.navigate("local_songs") },
-                                modifier = Modifier
-                                    .fillMaxWidth(0.5f)
-                                    .padding(end = 4.dp)
+                                modifier = itemModifier
+                            )
+                            AutoPlaylistButton(
+                                title = "Followed Artists",
+                                icon = R.drawable.subscribed,
+                                iconTint = androidx.compose.material3.MaterialTheme.colorScheme.onSurface,
+                                onClick = { navController.navigate("followed_artists") },
+                                modifier = itemModifier
                             )
                         }
                     }
