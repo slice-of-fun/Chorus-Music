@@ -72,6 +72,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -266,9 +267,6 @@ fun AlbumScreen(
                     Box(
                         modifier = Modifier
                             .matchParentSize()
-                            .offset {
-                                IntOffset(x = 0, y = headerOffset)
-                            }
                     ) {
                         Box(
                             modifier = Modifier.fillMaxSize()
@@ -276,8 +274,16 @@ fun AlbumScreen(
                             AsyncImage(
                                 model = albumWithSongs.album.thumbnailUrl?.resize(1200, 1200),
                                 contentDescription = null,
-                                modifier = Modifier.fillMaxSize(),
+                                modifier = Modifier.fillMaxSize().blur(50.dp),
                                 contentScale = ContentScale.Crop,
+                                alignment = Alignment.Center
+                            )
+                            
+                            AsyncImage(
+                                model = albumWithSongs.album.thumbnailUrl?.resize(1200, 1200),
+                                contentDescription = null,
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = ContentScale.Fit,
                                 alignment = Alignment.Center
                             )
 

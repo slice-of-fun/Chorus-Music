@@ -64,6 +64,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
@@ -313,6 +314,13 @@ fun ArtistScreen(
                                     .aspectRatio(1f)
                             ) {
                                 if (thumbnail != null) {
+                                    AsyncImage(
+                                        model = thumbnail.resize(1200, 1200),
+                                        contentDescription = null,
+                                        modifier = Modifier.fillMaxSize().blur(50.dp),
+                                        contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                                        alignment = Alignment.Center
+                                    )
                                     AsyncImage(
                                         model = thumbnail.resize(1200, 1200),
                                         contentDescription = null,
