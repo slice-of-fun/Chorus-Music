@@ -2,6 +2,7 @@
 
 package pushkar.chorus.music.ui.screens.playlist
 
+import pushkar.chorus.music.ui.utils.resize
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background

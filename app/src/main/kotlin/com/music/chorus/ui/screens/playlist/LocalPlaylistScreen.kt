@@ -2,6 +2,7 @@
 
 package pushkar.chorus.music.ui.screens.playlist
 
+import pushkar.chorus.music.ui.utils.resize
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
