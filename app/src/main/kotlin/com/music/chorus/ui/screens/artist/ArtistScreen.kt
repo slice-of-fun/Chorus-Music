@@ -292,15 +292,8 @@ fun ArtistScreen(
                 }
             } else {
                 item(key = "header") {
-                    val fallbackThumbnail = remember(artistPage) {
-                        artistPage?.sections
-                            ?.flatMap { it.items }
-                            ?.firstOrNull { !it.thumbnail.isNullOrBlank() }
-                            ?.thumbnail
-                    }
                     val thumbnail = artistPage?.artist?.thumbnail?.takeIf { it.isNotBlank() } 
-                        ?: libraryArtist?.artist?.thumbnailUrl?.takeIf { it.isNotBlank() } 
-                        ?: fallbackThumbnail
+                        ?: libraryArtist?.artist?.thumbnailUrl?.takeIf { it.isNotBlank() }
                     val artistName = artistPage?.artist?.title ?: libraryArtist?.artist?.name
 
                     var backgroundVideoUrl by remember { mutableStateOf<String?>(null) }
