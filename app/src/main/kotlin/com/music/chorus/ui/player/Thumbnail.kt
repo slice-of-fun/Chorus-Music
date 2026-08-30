@@ -1,5 +1,3 @@
-
-
 package pushkar.chorus.music.ui.player
 
 import androidx.compose.animation.AnimatedVisibility
@@ -131,7 +129,7 @@ private fun calculateThumbnailDimensions(
     cornerRadius: Dp = ThumbnailCornerRadius,
     isLandscape: Boolean = false
 ): ThumbnailDimensions {
-    
+
     val effectiveSize = if (isLandscape) {
         minOf(containerWidth, containerHeight) - (horizontalPadding * 2)
     } else {
@@ -154,11 +152,13 @@ private fun getMediaItems(
     val timeline = player.currentTimeline
     val currentIndex = player.currentMediaItemIndex
     val shuffleModeEnabled = player.shuffleModeEnabled
-    
+
     val currentMediaItem = try {
         player.currentMediaItem
-    } catch (e: Exception) { null }
-    
+    } catch (e: Exception) {
+        null
+    }
+
     val previousMediaItem = if (swipeThumbnail && !timeline.isEmpty) {
         val previousIndex = timeline.getPreviousWindowIndex(
             currentIndex,
@@ -166,7 +166,11 @@ private fun getMediaItems(
             shuffleModeEnabled
         )
         if (previousIndex != C.INDEX_UNSET) {
-            try { player.getMediaItemAt(previousIndex) } catch (e: Exception) { null }
+            try {
+                player.getMediaItemAt(previousIndex)
+            } catch (e: Exception) {
+                null
+            }
         } else null
     } else null
 
@@ -177,13 +181,17 @@ private fun getMediaItems(
             shuffleModeEnabled
         )
         if (nextIndex != C.INDEX_UNSET) {
-            try { player.getMediaItemAt(nextIndex) } catch (e: Exception) { null }
+            try {
+                player.getMediaItemAt(nextIndex)
+            } catch (e: Exception) {
+                null
+            }
         } else null
     } else null
 
     val items = listOfNotNull(previousMediaItem, currentMediaItem, nextMediaItem)
     val currentMediaIndex = items.indexOf(currentMediaItem)
-    
+
     return MediaItemsData(items, currentMediaIndex)
 }
 
@@ -201,7 +209,8 @@ private fun getTextColor(playerBackground: PlayerBackgroundStyle): Color {
 object CanvasArtworkPlaybackCache {
     private const val defaultMaxSize = 256
     private val map = LinkedHashMap<String, CanvasArtwork>(defaultMaxSize, 0.75f, true)
-    @Volatile private var maxSize = defaultMaxSize
+    @Volatile
+    private var maxSize = defaultMaxSize
 
     @Synchronized
     fun get(mediaId: String): CanvasArtwork? {
@@ -256,37 +265,37 @@ fun Thumbnail(
     isPlayerExpanded: () -> Boolean = { true },
     isLandscape: Boolean = false,
     isListenTogetherGuest: Boolean = false,
+    trailingHeaderContent: (@Composable () -> Unit)? = null
 ) {
     val playerConnection = LocalPlayerConnection.current ?: return
     val context = LocalContext.current
     val layoutDirection = LocalLayoutDirection.current
 
-    
+
     val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
     val error by playerConnection.error.collectAsState()
     val queueTitle by playerConnection.queueTitle.collectAsState()
     val canSkipPrevious by playerConnection.canSkipPrevious.collectAsState()
     val canSkipNext by playerConnection.canSkipNext.collectAsState()
 
-    
-    
+
     val swipeThumbnailPref by rememberPreference(SwipeThumbnailKey, true)
     val swipeThumbnail = swipeThumbnailPref && !isListenTogetherGuest
     val hidePlayerThumbnail by rememberPreference(HidePlayerThumbnailKey, false)
-    val cropAlbumArt by rememberPreference(CropAlbumArtKey, false)
+    val cropAlbumArt by rememberPreference(CropAlbumArtKey, true)
     val playerBackground by rememberEnumPreference(
         key = PlayerBackgroundStyleKey,
         defaultValue = PlayerBackgroundStyle.GRADIENT
     )
     val thumbnailCornerRadius by rememberPreference(ThumbnailCornerRadiusKey, defaultValue = 3f)
-    
-    
+
+
     val textBackgroundColor = getTextColor(playerBackground)
-    
-    
+
+
     val thumbnailLazyGridState = rememberLazyGridState()
-    
-    
+
+
     val mediaItemsData by remember(
         playerConnection.player.currentMediaItemIndex,
         playerConnection.player.shuffleModeEnabled,
@@ -297,11 +306,11 @@ fun Thumbnail(
             getMediaItems(playerConnection.player, swipeThumbnail)
         }
     }
-    
+
     val mediaItems = mediaItemsData.items
     val currentMediaIndex = mediaItemsData.currentIndex
 
-    
+
     val thumbnailSnapLayoutInfoProvider = remember(thumbnailLazyGridState) {
         ThumbnailSnapLayoutInfoProvider(
             lazyGridState = thumbnailLazyGridState,
@@ -312,11 +321,11 @@ fun Thumbnail(
         )
     }
 
-    
+
     val currentItem by remember { derivedStateOf { thumbnailLazyGridState.firstVisibleItemIndex } }
     val itemScrollOffset by remember { derivedStateOf { thumbnailLazyGridState.firstVisibleItemScrollOffset } }
 
-    
+
     LaunchedEffect(itemScrollOffset) {
         if (!thumbnailLazyGridState.isScrollInProgress || !swipeThumbnail || itemScrollOffset != 0 || currentMediaIndex < 0) return@LaunchedEffect
 
@@ -327,7 +336,7 @@ fun Thumbnail(
         }
     }
 
-    
+
     LaunchedEffect(mediaMetadata, canSkipPrevious, canSkipNext) {
         val index = maxOf(0, currentMediaIndex)
         if (index >= 0 && index < mediaItems.size) {
@@ -346,7 +355,7 @@ fun Thumbnail(
         }
     }
 
-    
+
     LaunchedEffect(mediaItems) {
         mediaItems.forEach { item ->
             val artworkUri = item.mediaMetadata.artworkUri?.toString()?.resize(1200, 1200) ?: return@forEach
@@ -359,18 +368,18 @@ fun Thumbnail(
         }
     }
 
-    
+
     var showSeekEffect by remember { mutableStateOf(false) }
     var seekDirection by remember { mutableStateOf("") }
 
     Box(
         modifier = modifier
             .graphicsLayer {
-                
+
                 compositingStrategy = CompositingStrategy.Offscreen
             }
     ) {
-        
+
         AnimatedVisibility(
             visible = error != null,
             enter = fadeIn(),
@@ -387,7 +396,7 @@ fun Thumbnail(
             }
         }
 
-        
+
         AnimatedVisibility(
             visible = error == null && !(playerBackground == PlayerBackgroundStyle.APPLE_MUSIC && !isLandscape),
             enter = fadeIn(),
@@ -401,16 +410,18 @@ fun Thumbnail(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = if (isLandscape) Arrangement.Center else Arrangement.Top
             ) {
-                
+
                 if (!isLandscape) {
                     ThumbnailHeader(
                         queueTitle = queueTitle,
                         albumTitle = mediaMetadata?.album?.title,
-                        textColor = textBackgroundColor
+                        textColor = textBackgroundColor,
+                        modifier = Modifier,
+                        trailingHeaderContent = trailingHeaderContent
                     )
                 }
-                
-                
+
+
                 BoxWithConstraints(
                     contentAlignment = Alignment.Center,
                     modifier = if (isLandscape) {
@@ -419,7 +430,7 @@ fun Thumbnail(
                         Modifier.fillMaxSize()
                     }
                 ) {
-                    
+
                     val dimensions = remember(maxWidth, maxHeight, isLandscape, thumbnailCornerRadius) {
                         calculateThumbnailDimensions(
                             containerWidth = maxWidth,
@@ -429,19 +440,19 @@ fun Thumbnail(
                         )
                     }
 
-                    
+
                     val onSeekCallback = remember {
                         { direction: String, showEffect: Boolean ->
                             seekDirection = direction
                             showSeekEffect = showEffect
                         }
                     }
-                    
-                    
+
+
                     val isScrollEnabled by remember(swipeThumbnail) {
                         derivedStateOf { swipeThumbnail && isPlayerExpanded() }
                     }
-                    
+
                     LazyHorizontalGrid(
                         state = thumbnailLazyGridState,
                         rows = GridCells.Fixed(1),
@@ -455,7 +466,7 @@ fun Thumbnail(
                     ) {
                         items(
                             items = mediaItems,
-                            key = { item -> 
+                            key = { item ->
                                 item.mediaId.ifEmpty { "unknown_${item.hashCode()}" }
                             }
                         ) { item ->
@@ -482,7 +493,7 @@ fun Thumbnail(
             }
         }
 
-        
+
         LaunchedEffect(showSeekEffect) {
             if (showSeekEffect) {
                 delay(1000)
@@ -507,7 +518,8 @@ private fun ThumbnailHeader(
     queueTitle: String?,
     albumTitle: String?,
     textColor: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    trailingHeaderContent: (@Composable () -> Unit)? = null
 ) {
     Box(
         modifier = modifier
@@ -525,7 +537,7 @@ private fun ThumbnailHeader(
                 style = MaterialTheme.typography.titleMedium,
                 color = textColor
             )
-            val playingFrom = albumTitle ?: queueTitle 
+            val playingFrom = albumTitle ?: queueTitle
             androidx.compose.animation.AnimatedContent(
                 targetState = playingFrom,
                 transitionSpec = { androidx.compose.animation.fadeIn() togetherWith androidx.compose.animation.fadeOut() },
@@ -544,7 +556,11 @@ private fun ThumbnailHeader(
             }
         }
 
-
+        if (trailingHeaderContent != null) {
+            Box(modifier = Modifier.align(Alignment.CenterEnd)) {
+                trailingHeaderContent()
+            }
+        }
     }
 }
 
@@ -572,7 +588,7 @@ private fun ThumbnailItem(
     val rotatingThumbnail by rememberPreference(RotatingThumbnailKey, defaultValue = false)
     val isPlaying by playerConnection.isPlaying.collectAsState()
     val isCurrentItem = item.mediaId == currentMediaId
-    
+
     val infiniteTransition = rememberInfiniteTransition(label = "ThumbnailRotation")
     val rotation by infiniteTransition.animateFloat(
         initialValue = 0f,
@@ -611,7 +627,7 @@ private fun ThumbnailItem(
                     val itemCenter = visibleItem.offset.x + (visibleItem.size.width / 2f)
                     val distance = kotlin.math.abs(itemCenter - center)
                     val fraction = (distance / visibleItem.size.width.toFloat()).coerceIn(0f, 1f)
-                    
+
                     val targetScale = androidx.compose.ui.util.lerp(1f, 0.85f, fraction)
                     scaleX = targetScale
                     scaleY = targetScale
@@ -693,7 +709,7 @@ private fun ThumbnailItem(
                     cropArtwork = cropAlbumArt
                 )
             }
-            
+
             if (canvasThumbnailAnimation && item.mediaId == currentMediaId && !rotatingThumbnail && playerBackground != PlayerBackgroundStyle.APPLE_MUSIC) {
                 var canvasArtwork by remember(item.mediaId) { mutableStateOf<CanvasArtwork?>(null) }
                 var canvasFetchInFlight by remember(item.mediaId) { mutableStateOf(false) }
@@ -715,13 +731,13 @@ private fun ThumbnailItem(
                         val metadata = item.metadata
                         val albumName = (metadata?.album?.title ?: item.mediaMetadata.albumTitle)?.toString()
                         val duration = metadata?.duration
-                        
+
                         val songTitleRaw = item.mediaMetadata.title?.toString() ?: ""
                         val artistNameRaw = item.mediaMetadata.artist?.toString() ?: ""
-                        
+
                         val songTitle = normalizeCanvasSongTitle(songTitleRaw)
                         val artistName = normalizeCanvasArtistName(artistNameRaw)
-                        
+
                         linkedSetOf(
                             songTitle to artistName,
                             songTitleRaw to artistName,
@@ -729,14 +745,15 @@ private fun ThumbnailItem(
                             songTitleRaw to artistNameRaw,
                         ).filter { (s, a) -> s.isNotBlank() && a.isNotBlank() }
                             .firstNotNullOfOrNull { (s, a) ->
-                                
-                                
+
+
                                 if (!albumName.isNullOrBlank()) {
                                     AppleMusicCanvasProvider.getByAlbumArtist(
                                         album = albumName,
                                         artist = a,
                                         storefront = storefront
-                                    )?.takeIf { !it.preferredAnimationUrl.isNullOrBlank() }?.let { return@firstNotNullOfOrNull it }
+                                    )?.takeIf { !it.preferredAnimationUrl.isNullOrBlank() }
+                                        ?.let { return@firstNotNullOfOrNull it }
                                 }
 
                                 chorusmusicCanvasProvider.getBySongArtist(
@@ -756,61 +773,64 @@ private fun ThumbnailItem(
                                     )?.takeIf { !it.preferredAnimationUrl.isNullOrBlank() }
                             }
                     }
-                    
-                    
-                    
+
+
                     val requestedArtist = item.mediaMetadata.artist?.toString() ?: ""
                     val requestedTitle = item.mediaMetadata.title?.toString() ?: ""
-                    
+
                     val validated = fetched?.let { artwork ->
                         val resultArtist = artwork.artist
                         val resultName = artwork.name
-                        
-                        
+
+
                         val artistMatches = if (resultArtist != null && requestedArtist.isNotBlank()) {
                             val normalizedResult = normalizeCanvasArtistName(resultArtist)
                             val normalizedRequested = normalizeCanvasArtistName(requestedArtist)
-                            resultArtist.contains(requestedArtist, ignoreCase = true) || 
-                            requestedArtist.contains(resultArtist, ignoreCase = true) ||
-                            normalizedResult.contains(normalizedRequested, ignoreCase = true) ||
-                            normalizedRequested.contains(normalizedResult, ignoreCase = true)
+                            resultArtist.contains(requestedArtist, ignoreCase = true) ||
+                                    requestedArtist.contains(resultArtist, ignoreCase = true) ||
+                                    normalizedResult.contains(normalizedRequested, ignoreCase = true) ||
+                                    normalizedRequested.contains(normalizedResult, ignoreCase = true)
                         } else true
 
-                        
-                        
-                        
-                        
+
                         val requestedAlbum = item.mediaMetadata.albumTitle?.toString() ?: ""
                         val canvasAlbumName = artwork.albumName
                         val canvasSongName = artwork.name
 
                         val titleMatches = when {
-                            
+
                             canvasAlbumName != null && requestedAlbum.isNotBlank() -> {
                                 val normalizedCanvasAlbum = normalizeCanvasSongTitle(canvasAlbumName)
                                 val normalizedRequestedAlbum = normalizeCanvasSongTitle(requestedAlbum)
                                 canvasAlbumName.contains(requestedAlbum, ignoreCase = true) ||
-                                requestedAlbum.contains(canvasAlbumName, ignoreCase = true) ||
-                                normalizedCanvasAlbum.contains(normalizedRequestedAlbum, ignoreCase = true) ||
-                                normalizedRequestedAlbum.contains(normalizedCanvasAlbum, ignoreCase = true)
+                                        requestedAlbum.contains(canvasAlbumName, ignoreCase = true) ||
+                                        normalizedCanvasAlbum.contains(normalizedRequestedAlbum, ignoreCase = true) ||
+                                        normalizedRequestedAlbum.contains(normalizedCanvasAlbum, ignoreCase = true)
                             }
-                            
+
                             canvasSongName != null && requestedTitle.isNotBlank() -> {
                                 val normalizedCanvasSong = normalizeCanvasSongTitle(canvasSongName)
                                 val normalizedRequestedTitle = normalizeCanvasSongTitle(requestedTitle)
-                                val normalizedRequestedAlbum = if (requestedAlbum.isNotBlank()) normalizeCanvasSongTitle(requestedAlbum) else ""
+                                val normalizedRequestedAlbum =
+                                    if (requestedAlbum.isNotBlank()) normalizeCanvasSongTitle(requestedAlbum) else ""
                                 canvasSongName.contains(requestedTitle, ignoreCase = true) ||
-                                requestedTitle.contains(canvasSongName, ignoreCase = true) ||
-                                normalizedCanvasSong.contains(normalizedRequestedTitle, ignoreCase = true) ||
-                                normalizedRequestedTitle.contains(normalizedCanvasSong, ignoreCase = true) ||
-                                (requestedAlbum.isNotBlank() && (
-                                    canvasSongName.contains(requestedAlbum, ignoreCase = true) ||
-                                    requestedAlbum.contains(canvasSongName, ignoreCase = true) ||
-                                    normalizedCanvasSong.contains(normalizedRequestedAlbum, ignoreCase = true) ||
-                                    normalizedRequestedAlbum.contains(normalizedCanvasSong, ignoreCase = true)
-                                ))
+                                        requestedTitle.contains(canvasSongName, ignoreCase = true) ||
+                                        normalizedCanvasSong.contains(normalizedRequestedTitle, ignoreCase = true) ||
+                                        normalizedRequestedTitle.contains(normalizedCanvasSong, ignoreCase = true) ||
+                                        (requestedAlbum.isNotBlank() && (
+                                                canvasSongName.contains(requestedAlbum, ignoreCase = true) ||
+                                                        requestedAlbum.contains(canvasSongName, ignoreCase = true) ||
+                                                        normalizedCanvasSong.contains(
+                                                            normalizedRequestedAlbum,
+                                                            ignoreCase = true
+                                                        ) ||
+                                                        normalizedRequestedAlbum.contains(
+                                                            normalizedCanvasSong,
+                                                            ignoreCase = true
+                                                        )
+                                                ))
                             }
-                            
+
                             else -> true
                         }
 
@@ -820,7 +840,7 @@ private fun ThumbnailItem(
                             null
                         }
                     }
-                    
+
                     canvasArtwork = validated
                     if (validated != null) {
                         CanvasArtworkPlaybackCache.put(item.mediaId, validated)
@@ -974,5 +994,5 @@ internal fun splitAndNormalizeArtists(raw: String): List<String> {
             RegexOption.IGNORE_CASE,
         )
     ).map { it.replace(Regex("\\s+"), " ").trim() }
-     .filter { it.isNotEmpty() }
+        .filter { it.isNotEmpty() }
 }

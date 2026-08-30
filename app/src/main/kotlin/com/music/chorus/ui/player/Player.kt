@@ -303,7 +303,7 @@ fun BottomSheetPlayer(
     val showCodecOnPlayer by rememberPreference(pushkar.chorus.music.constants.ShowCodecOnPlayerKey, false)
     val hidePlayerSlider by rememberPreference(pushkar.chorus.music.constants.HidePlayerSliderKey, false)
     val (hidePlayerThumbnail, onHidePlayerThumbnailChange) = rememberPreference(HidePlayerThumbnailKey, false)
-    val cropAlbumArt by rememberPreference(CropAlbumArtKey, false)
+    val cropAlbumArt by rememberPreference(CropAlbumArtKey, true)
     val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
     val isLocalMedia = mediaMetadata?.id?.isLocalMediaId() == true
 
@@ -1786,14 +1786,6 @@ fun BottomSheetPlayer(
                                 }
                             }
                         }
-
-                        PlayerMoreMenuButton(
-                            mediaMetadata = mediaMetadata,
-                            navController = navController,
-                            state = state,
-                            textButtonColor = textButtonColor,
-                            iconButtonColor = iconButtonColor
-                        )
                     }
                 }
 
@@ -2411,7 +2403,18 @@ fun BottomSheetPlayer(
                                     modifier = Modifier.animateContentSize(),
                                     isPlayerExpanded = isExpandedProvider,
                                     isLandscape = true,
-                                    isListenTogetherGuest = isListenTogetherGuest
+                                    isListenTogetherGuest = isListenTogetherGuest,
+                                    trailingHeaderContent = {
+                                        mediaMetadata?.let {
+                                            PlayerMoreMenuButton(
+                                                mediaMetadata = it,
+                                                navController = navController,
+                                                state = state,
+                                                textButtonColor = textButtonColor,
+                                                iconButtonColor = iconButtonColor
+                                            )
+                                        }
+                                    }
                                 )
                             }
                         }
@@ -2472,7 +2475,18 @@ fun BottomSheetPlayer(
                                     sliderPositionProvider = sliderPositionProvider,
                                     modifier = Modifier.nestedScroll(state.preUpPostDownNestedScrollConnection),
                                     isPlayerExpanded = isExpandedProvider,
-                                    isListenTogetherGuest = isListenTogetherGuest
+                                    isListenTogetherGuest = isListenTogetherGuest,
+                                    trailingHeaderContent = {
+                                        mediaMetadata?.let {
+                                            PlayerMoreMenuButton(
+                                                mediaMetadata = it,
+                                                navController = navController,
+                                                state = state,
+                                                textButtonColor = textButtonColor,
+                                                iconButtonColor = iconButtonColor
+                                            )
+                                        }
+                                    }
                                 )
                             }
                         }
