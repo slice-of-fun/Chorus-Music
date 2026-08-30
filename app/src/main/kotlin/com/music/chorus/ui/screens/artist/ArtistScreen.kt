@@ -210,6 +210,9 @@ fun ArtistScreen(
                 item(key = "shimmer") {
                     ShimmerHost (
                         modifier = Modifier
+                            .offset {
+                                IntOffset(x = 0, y = headerOffset)
+                            }
                     ) {
                         
                         Box(
@@ -312,6 +315,9 @@ fun ArtistScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(300.dp)
+                                    .offset {
+                                        IntOffset(x = 0, y = headerOffset)
+                                    }
                             ) {
                                 if (thumbnail != null) {
                                     AsyncImage(
