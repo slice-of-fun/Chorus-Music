@@ -215,7 +215,7 @@ fun ArtistScreen(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .aspectRatio(1f),
+                                .height(300.dp),
                         ) {
                             Spacer(
                                 modifier = Modifier
@@ -311,7 +311,7 @@ fun ArtistScreen(
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .aspectRatio(1f)
+                                    .height(300.dp)
                             ) {
                                 if (thumbnail != null) {
                                     AsyncImage(
@@ -327,6 +327,20 @@ fun ArtistScreen(
                                         modifier = Modifier.fillMaxSize(),
                                         contentScale = androidx.compose.ui.layout.ContentScale.Fit,
                                         alignment = Alignment.Center
+                                    )
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(150.dp)
+                                            .align(Alignment.BottomCenter)
+                                            .background(
+                                                brush = androidx.compose.ui.graphics.Brush.verticalGradient(
+                                                    colors = listOf(
+                                                        Color.Transparent,
+                                                        MaterialTheme.colorScheme.background
+                                                    )
+                                                )
+                                            )
                                     )
                                 }
                                 if (backgroundVideoUrl != null && showArtistBackgroundVideo) {
