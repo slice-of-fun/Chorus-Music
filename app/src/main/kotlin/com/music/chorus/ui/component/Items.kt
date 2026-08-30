@@ -346,7 +346,7 @@ fun GridItem(
 fun GridItem(
     modifier: Modifier = Modifier,
     title: String,
-    subtitle: String,
+    subtitle: String?,
     badges: @Composable RowScope.() -> Unit = {},
     thumbnailContent: @Composable BoxWithConstraintsScope.() -> Unit,
     thumbnailRatio: Float = 1f,

@@ -121,10 +121,10 @@ data class RelatedPage(
                                 ?.firstOrNull()
                                 ?.text ?: return null,
                         author = Artist(
-                            name = renderer.subtitle?.runs?.lastOrNull()?.text ?: return null,
+                            name = renderer.subtitle.runs?.lastOrNull()?.text ?: return null,
                             id = null
                         ),
-                        songCountText = renderer.subtitle?.runs?.let { runs ->
+                        songCountText = renderer.subtitle.runs?.let { runs ->
                             runs.findLast {
                                 it.text.any { c -> c.isDigit() } && !it.text.contains("view", ignoreCase = true)
                             }

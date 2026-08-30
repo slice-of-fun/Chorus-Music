@@ -101,9 +101,7 @@ import pushkar.chorus.music.utils.rememberPreference
 import pushkar.chorus.music.viewmodels.MoodAndGenresViewModel
 import pushkar.chorus.music.viewmodels.ExploreViewModel
 import pushkar.chorus.music.ui.screens.search.suggestions.SuggestionsTabContent
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.net.URLEncoder
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.compose.ui.text.style.TextOverflow
