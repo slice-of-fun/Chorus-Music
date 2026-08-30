@@ -614,7 +614,7 @@ private fun ThumbnailItem(
                 } else {
                     Modifier
                         .width(dimensions.itemWidth)
-                        .fillMaxSize()
+                        .wrapContentHeight()
                 }
             )
             .padding(horizontal = PlayerHorizontalPadding)
@@ -680,7 +680,8 @@ private fun ThumbnailItem(
     ) {
         Box(
             modifier = Modifier
-                .size(dimensions.thumbnailSize)
+                .width(dimensions.thumbnailSize)
+                .wrapContentHeight()
                 .graphicsLayer {
                     rotationZ = rotation
                 }
@@ -893,8 +894,8 @@ private fun ThumbnailImage(
 ) {
     Box(
         modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surfaceVariant)
+            .fillMaxWidth()
+            .wrapContentHeight()
     ) {
         var currentUrl by remember(artworkUri) {
             mutableStateOf(artworkUri)
@@ -916,7 +917,9 @@ private fun ThumbnailImage(
                     currentUrl = url.replace("maxresdefault.jpg", "hqdefault.jpg")
                 }
             },
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
         )
     }
 }

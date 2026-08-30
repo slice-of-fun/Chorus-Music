@@ -25,7 +25,7 @@ fun String.resize(
         val size = if ((width ?: 0) >= 1000 || (height ?: 0) >= 1000) 1200 else 500
         val afterW = this.substringAfter("=w")
         val suffix = if (afterW.contains("-")) "-" + afterW.substringAfter("-") else ""
-        return "$baseUrl=w$size-h$size$suffix"
+        return "$baseUrl=w$size$suffix"
     }
 
     
@@ -43,7 +43,7 @@ fun String.resize(
         val baseUrl = this.split("=")[0]
         val afterEq = if (this.contains("=")) this.substringAfter("=") else ""
         val suffix = if (afterEq.contains("-")) "-" + afterEq.substringAfter("-") else ""
-        return "$baseUrl=w$size-h$size$suffix"
+        return "$baseUrl=w$size$suffix"
     }
 
     return this

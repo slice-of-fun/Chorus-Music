@@ -930,7 +930,6 @@ object YouTube {
         val response = innerTube.browse(
             client = WEB_REMIX,
             browseId = "FEmusic_charts",
-            params = "ggMGCgQIgAQ%3D",
             continuation = continuation
         ).body<BrowseResponse>()
 

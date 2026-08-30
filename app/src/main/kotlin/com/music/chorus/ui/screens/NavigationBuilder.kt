@@ -116,6 +116,10 @@ fun NavGraphBuilder.navigationBuilder(
         LocalSongScreen(navController)
     }
 
+    composable("followed_artists") {
+        pushkar.chorus.music.ui.screens.library.FollowedArtistsScreen(navController)
+    }
+
     composable("stats") {
         StatsScreen(navController)
     }

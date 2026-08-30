@@ -324,9 +324,9 @@ fun GridItem(
             modifier = if (fillMaxWidth) {
                 Modifier.fillMaxWidth()
             } else {
-                Modifier.height(gridHeight)
+                Modifier.width(gridHeight)
             }
-                .aspectRatio(thumbnailRatio)
+                .wrapContentHeight()
         ) {
             thumbnailContent()
         }
@@ -454,7 +454,9 @@ fun SongListItem(
                     isActive = isActive,
                     isPlaying = isPlaying,
                     shape = RoundedCornerShape(ThumbnailCornerRadius),
-                    modifier = Modifier.size(ListThumbnailSize)
+                    modifier = Modifier
+                        .width(ListThumbnailSize)
+                        .wrapContentHeight()
                 )
             },
             trailingContent = trailingContent,
@@ -578,7 +580,8 @@ fun ArtistListItem(
                 .build(),
             contentDescription = null,
             modifier = Modifier
-                .size(ListThumbnailSize)
+                .width(ListThumbnailSize)
+                .wrapContentHeight()
                 .clip(RoundedCornerShape(ThumbnailCornerRadius)),
         )
     },
@@ -679,7 +682,9 @@ fun AlbumListItem(
             isActive = isActive,
             isPlaying = isPlaying,
             shape = RoundedCornerShape(ThumbnailCornerRadius),
-            modifier = Modifier.size(ListThumbnailSize)
+            modifier = Modifier
+                .width(ListThumbnailSize)
+                .wrapContentHeight()
         )
     },
     trailingContent = trailingContent,
@@ -1029,7 +1034,9 @@ fun MediaMetadataListItem(
                 isActive = isActive,
                 isPlaying = isPlaying,
                 shape = RoundedCornerShape(ThumbnailCornerRadius),
-                modifier = Modifier.size(ListThumbnailSize)
+                modifier = Modifier
+                    .width(ListThumbnailSize)
+                    .wrapContentHeight()
             )
         },
         trailingContent = trailingContent,
@@ -1097,7 +1104,9 @@ fun YouTubeListItem(
                     isActive = isActive,
                     isPlaying = isPlaying,
                     shape = RoundedCornerShape(ThumbnailCornerRadius),
-                    modifier = Modifier.size(ListThumbnailSize)
+                    modifier = Modifier
+                        .width(ListThumbnailSize)
+                        .wrapContentHeight()
                 )
             },
             trailingContent = trailingContent,
@@ -1327,8 +1336,8 @@ fun ItemThumbnail(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .fillMaxSize()
-            .aspectRatio(thumbnailRatio)
+            .fillMaxWidth()
+            .wrapContentHeight()
             .clip(shape)
     ) {
         if (albumIndex == null) {
@@ -1340,9 +1349,10 @@ fun ItemThumbnail(
                     .networkCachePolicy(coil3.request.CachePolicy.ENABLED)
                     .build(),
                 contentDescription = null,
-                contentScale = if (shape == CircleShape || cropAlbumArt) ContentScale.Crop else ContentScale.Fit,
+                contentScale = androidx.compose.ui.layout.ContentScale.FillWidth,
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
+                    .wrapContentHeight()
                     .clip(shape)
             )
         }

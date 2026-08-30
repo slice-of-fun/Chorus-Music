@@ -323,9 +323,10 @@ fun CommunityPlaylistCard(
                             model = song.thumbnail.resize(544, 544),
                             contentDescription = null,
                             modifier = Modifier
-                                .size(56.dp)
+                                .width(56.dp)
+                                .wrapContentHeight()
                                 .clip(RoundedCornerShape(12.dp)),
-                            contentScale = ContentScale.Crop
+                            contentScale = ContentScale.FillWidth
                         )
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
@@ -1481,9 +1482,10 @@ fun HomeScreen(
                                                     placeholder = painterResource(id = R.drawable.person),
                                                     error = painterResource(id = R.drawable.person),
                                                     contentDescription = null,
-                                                    contentScale = ContentScale.Crop,
+                                                    contentScale = ContentScale.FillWidth,
                                                     modifier = Modifier
-                                                        .size(ListThumbnailSize)
+                                                        .width(ListThumbnailSize)
+                                                        .wrapContentHeight()
                                                         .clip(CircleShape)
                                                 )
                                             } else {

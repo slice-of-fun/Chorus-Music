@@ -23,13 +23,23 @@ import androidx.compose.ui.unit.dp
 fun AutoPlaylistButton(
     title: String,
     icon: Int,
-    iconTint: Color,
+    iconTint: Color = Color.White,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val colors = listOf(
+        Color(0xFFE91E63), Color(0xFF9C27B0), Color(0xFF673AB7),
+        Color(0xFF3F51B5), Color(0xFF2196F3), Color(0xFF00BCD4),
+        Color(0xFF009688), Color(0xFF4CAF50), Color(0xFFFF9800),
+        Color(0xFFFF5722), Color(0xFF795548), Color(0xFF607D8B)
+    )
+    val backgroundColor = androidx.compose.runtime.remember(title) { 
+        colors[kotlin.math.abs(title.hashCode()) % colors.size] 
+    }
+
     Surface(
         shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+        color = backgroundColor,
         modifier = modifier.clickable(onClick = onClick)
     ) {
         Row(
@@ -47,7 +57,7 @@ fun AutoPlaylistButton(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface
+                color = Color.White
             )
         }
     }

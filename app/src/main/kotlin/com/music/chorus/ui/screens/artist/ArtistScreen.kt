@@ -317,7 +317,7 @@ fun ArtistScreen(
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .aspectRatio(1f)
+                                    .aspectRatio(16f / 9f)
                                     .offset {
                                         IntOffset(x = 0, y = headerOffset)
                                     }
@@ -481,48 +481,59 @@ fun ArtistScreen(
                                         }
                                     }
 
-                                    OutlinedButton(
-                                        onClick = {
-                                            database.transaction {
-                                                val artist = libraryArtist?.artist
-                                                if (artist != null) {
-                                                    update(artist.toggleLike())
-                                                } else {
-                                                    artistPage?.artist?.let {
-                                                        insert(
-                                                            ArtistEntity(
-                                                                id = it.id,
-                                                                name = it.title,
-                                                                channelId = it.channelId,
-                                                                thumbnailUrl = it.thumbnail,
-                                                            ).toggleLike()
-                                                        )
+                                    val isFollowed = libraryArtist?.artist?.bookmarkedAt != null
+
+                                    if (isFollowed) {
+                                        androidx.compose.material3.Button(
+                                            onClick = {
+                                                database.query {
+                                                    val artist = libraryArtist?.artist
+                                                    if (artist != null) {
+                                                        update(artist.toggleLike())
                                                     }
                                                 }
-                                            }
-                                        },
-                                        modifier = Modifier.size(56.dp),
-                                        shape = androidx.compose.foundation.shape.CircleShape,
-                                        contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
-                                    ) {
-                                        Icon(
-                                            painter = painterResource(
-                                                if (libraryArtist?.artist?.bookmarkedAt != null) {
-                                                    R.drawable.subscribed
-                                                } else {
-                                                    R.drawable.subscribe
+                                            },
+                                            modifier = Modifier.size(56.dp),
+                                            shape = androidx.compose.foundation.shape.CircleShape,
+                                            contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                                        ) {
+                                            Icon(
+                                                painter = painterResource(R.drawable.subscribed),
+                                                contentDescription = stringResource(R.string.subscribed),
+                                                modifier = Modifier.size(24.dp)
+                                            )
+                                        }
+                                    } else {
+                                        OutlinedButton(
+                                            onClick = {
+                                                database.query {
+                                                    val artist = libraryArtist?.artist
+                                                    if (artist != null) {
+                                                        update(artist.toggleLike())
+                                                    } else {
+                                                        artistPage?.artist?.let {
+                                                            insert(
+                                                                pushkar.chorus.music.db.entities.ArtistEntity(
+                                                                    id = it.id,
+                                                                    name = it.title,
+                                                                    channelId = it.channelId,
+                                                                    thumbnailUrl = it.thumbnail,
+                                                                ).toggleLike()
+                                                            )
+                                                        }
+                                                    }
                                                 }
-                                            ),
-                                            contentDescription = stringResource(
-                                                if (libraryArtist?.artist?.bookmarkedAt != null) R.string.subscribed else R.string.subscribe
-                                            ),
-                                            modifier = Modifier.size(24.dp),
-                                            tint = if (libraryArtist?.artist?.bookmarkedAt != null) {
-                                                MaterialTheme.colorScheme.primary
-                                            } else {
-                                                LocalContentColor.current
-                                            }
-                                        )
+                                            },
+                                            modifier = Modifier.size(56.dp),
+                                            shape = androidx.compose.foundation.shape.CircleShape,
+                                            contentPadding = androidx.compose.foundation.layout.PaddingValues(0.dp)
+                                        ) {
+                                            Icon(
+                                                painter = painterResource(R.drawable.subscribe),
+                                                contentDescription = stringResource(R.string.subscribe),
+                                                modifier = Modifier.size(24.dp)
+                                            )
+                                        }
                                     }
                                 }
                             }

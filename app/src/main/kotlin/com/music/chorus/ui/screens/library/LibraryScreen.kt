@@ -150,8 +150,8 @@ fun LibraryScreen(navController: NavController) {
                     icon = { Icon(painter = painterResource(R.drawable.add), contentDescription = "Create playlist") },
                     onClick = { showCreatePlaylistOptionsDialog = true },
                     shape = androidx.compose.foundation.shape.CircleShape,
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    contentColor = MaterialTheme.colorScheme.onSurface
+                    containerColor = androidx.compose.ui.graphics.Color(0xFFE91E63), // Vibrant Pink
+                    contentColor = androidx.compose.ui.graphics.Color.White
                 )
                 
                 Box {
@@ -160,8 +160,8 @@ fun LibraryScreen(navController: NavController) {
                         icon = { Icon(painter = painterResource(R.drawable.download), contentDescription = "Import playlist") },
                         onClick = { showImportMenu = true },
                         shape = androidx.compose.foundation.shape.CircleShape,
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                        contentColor = MaterialTheme.colorScheme.onSurface
+                        containerColor = androidx.compose.ui.graphics.Color(0xFF2196F3), // Vibrant Blue
+                        contentColor = androidx.compose.ui.graphics.Color.White
                     )
                     
                     DropdownMenu(

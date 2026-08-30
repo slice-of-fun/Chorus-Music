@@ -126,19 +126,30 @@ fun MoodAndGenresButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val colors = listOf(
+        androidx.compose.ui.graphics.Color(0xFFE91E63), androidx.compose.ui.graphics.Color(0xFF9C27B0), androidx.compose.ui.graphics.Color(0xFF673AB7),
+        androidx.compose.ui.graphics.Color(0xFF3F51B5), androidx.compose.ui.graphics.Color(0xFF2196F3), androidx.compose.ui.graphics.Color(0xFF00BCD4),
+        androidx.compose.ui.graphics.Color(0xFF009688), androidx.compose.ui.graphics.Color(0xFF4CAF50), androidx.compose.ui.graphics.Color(0xFFFF9800),
+        androidx.compose.ui.graphics.Color(0xFFFF5722), androidx.compose.ui.graphics.Color(0xFF795548), androidx.compose.ui.graphics.Color(0xFF607D8B)
+    )
+    val backgroundColor = androidx.compose.runtime.remember(title) { 
+        colors[kotlin.math.abs(title.hashCode()) % colors.size] 
+    }
+
     Box(
         contentAlignment = Alignment.CenterStart,
         modifier =
         modifier
             .height(MoodAndGenresButtonHeight)
             .clip(RoundedCornerShape(6.dp))
-            .background(MaterialTheme.colorScheme.surfaceContainer)
+            .background(backgroundColor)
             .clickable(onClick = onClick)
             .padding(horizontal = 12.dp),
     ) {
         Text(
             text = title,
             style = MaterialTheme.typography.labelLarge,
+            color = androidx.compose.ui.graphics.Color.White,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
