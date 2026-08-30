@@ -615,7 +615,7 @@ private fun ThumbnailItem(
                 } else {
                     Modifier
                         .width(dimensions.itemWidth)
-                        .wrapContentHeight()
+                        .aspectRatio(1f)
                 }
             )
             .padding(horizontal = PlayerHorizontalPadding)
@@ -682,7 +682,7 @@ private fun ThumbnailItem(
         Box(
             modifier = Modifier
                 .width(dimensions.thumbnailSize)
-                .wrapContentHeight()
+                .aspectRatio(1f)
                 .graphicsLayer {
                     rotationZ = rotation
                 }

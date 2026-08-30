@@ -209,15 +209,12 @@ fun ArtistScreen(
                 item(key = "shimmer") {
                     ShimmerHost (
                         modifier = Modifier
-                            .offset {
-                                IntOffset(x = 0, y = headerOffset)
-                            }
                     ) {
                         
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .aspectRatio(1.1f),
+                                .aspectRatio(1f),
                         ) {
                             Spacer(
                                 modifier = Modifier
@@ -312,24 +309,22 @@ fun ArtistScreen(
                         if (thumbnail != null || backgroundVideoUrl != null) {
                             Box(
                                 modifier = Modifier
-                                    .size(220.dp)
-                                    .offset {
-                                        IntOffset(x = 0, y = headerOffset)
-                                    }
+                                    .fillMaxWidth()
+                                    .aspectRatio(1f)
                             ) {
                                 if (thumbnail != null) {
                                     AsyncImage(
                                         model = thumbnail.resize(1200, 1200),
                                         contentDescription = null,
-                                        modifier = Modifier.fillMaxSize().clip(androidx.compose.foundation.shape.CircleShape),
-                                        contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentScale = androidx.compose.ui.layout.ContentScale.Fit,
                                         alignment = Alignment.Center
                                     )
                                 }
                                 if (backgroundVideoUrl != null && showArtistBackgroundVideo) {
                                     ArtistVideo(
                                         videoUrl = backgroundVideoUrl!!,
-                                        modifier = Modifier.fillMaxSize().clip(androidx.compose.foundation.shape.CircleShape),
+                                        modifier = Modifier.fillMaxSize(),
                                         onClick = { }
                                     )
                                 }
