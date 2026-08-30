@@ -259,14 +259,15 @@ fun AlbumScreen(
                 val artSizeDp = if (isTablet) 300.dp else configuration.screenWidthDp.dp
                 val artSizePx = with(density) { artSizeDp.toPx() }
 
-                Box(
+                Column(
                     modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.TopCenter
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     
                     Box(
                         modifier = Modifier
-                            .matchParentSize()
+                            .fillMaxWidth()
+                            .height(artSizeDp)
                             .offset {
                                 IntOffset(x = 0, y = headerOffset)
                             }
@@ -320,11 +321,6 @@ fun AlbumScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(
-                                top = with(density) {
-                                    ((artSizePx / 1.2f) - 144).toDp()
-                                }
-                            )
                             .padding(bottom = 24.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
