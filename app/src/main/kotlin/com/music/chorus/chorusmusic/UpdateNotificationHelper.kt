@@ -31,12 +31,9 @@ object UpdateNotificationHelper {
         }
 
         
-        val apkUrl = if (versionName.contains("nightly", ignoreCase = true)) {
-            "https://nightly.link/slice-of-fun/Chorus-Music/workflows/nightly.yml/main/chorusmusic-gms-nightly.zip"
-        } else {
-            "https://github.com/slice-of-fun/Chorus-Music/releases/download/$versionName/chorusmusic.apk"
+        val intent = Intent(context, Class.forName("pushkar.chorus.music.MainActivity")).apply {
+            action = "pushkar.chorus.music.action.OPEN_UPDATE"
         }
-        val intent = Intent(Intent.ACTION_VIEW, apkUrl.toUri())
 
         val flags = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         val pending = PendingIntent.getActivity(context, NOTIFICATION_ID, intent, flags)

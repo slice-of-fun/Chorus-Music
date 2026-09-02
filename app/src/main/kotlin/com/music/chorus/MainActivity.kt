@@ -323,6 +323,7 @@ class MainActivity : ComponentActivity() {
             handleDeepLinkIntent(intent, navController)
             handleAssistantSearchIntent(intent, navController)
             handleWidgetIntent(intent, navController)
+            handleUpdateIntent(intent, navController)
         } else {
             pendingIntent = intent
         }
@@ -828,6 +829,8 @@ class MainActivity : ComponentActivity() {
                         
                     } else if (intent != null && intent.action == "pushkar.chorus.music.action.OPEN_WIDGET_TARGET") {
                         handleWidgetIntent(intent, navController)
+                    } else if (intent != null && intent.action == "pushkar.chorus.music.action.OPEN_UPDATE") {
+                        handleUpdateIntent(intent, navController)
                     }
                 }
 
@@ -841,6 +844,8 @@ class MainActivity : ComponentActivity() {
                             
                         } else if (intent.action == "pushkar.chorus.music.action.OPEN_WIDGET_TARGET") {
                             handleWidgetIntent(intent, navController)
+                        } else if (intent.action == "pushkar.chorus.music.action.OPEN_UPDATE") {
+                            handleUpdateIntent(intent, navController)
                         }
                     }
 
@@ -1446,6 +1451,17 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 }
+            }
+        }
+    }
+
+    private fun handleUpdateIntent(
+        intent: Intent,
+        navController: NavHostController,
+    ) {
+        if (intent.action == "pushkar.chorus.music.action.OPEN_UPDATE") {
+            navController.navigate("update") {
+                launchSingleTop = true
             }
         }
     }

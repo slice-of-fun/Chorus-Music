@@ -691,7 +691,13 @@ suspend fun checkForUpdate(
                         val itemsArray = sectionObj.getJSONArray("items")
                         val itemsList = mutableListOf<String>()
                         for (k in 0 until itemsArray.length()) {
-                            itemsList.add(itemsArray.getString(k))
+                            val rawItem = itemsArray.getString(k).trim()
+                            val cleanItem = if (rawItem.startsWith("* ") || rawItem.startsWith("- ")) {
+                                rawItem.substring(2).trim()
+                            } else {
+                                rawItem
+                            }
+                            itemsList.add(cleanItem)
                         }
                         changelogList.add(ChangelogSection(title, itemsList))
                     }
@@ -704,7 +710,28 @@ suspend fun checkForUpdate(
                         imageUrl = match.groupValues[2]
                         body = body.replace(match.value, "").trim()
                     }
-                    description = body
+                    
+                    val items = mutableListOf<String>()
+                    val remainingDescriptionLines = mutableListOf<String>()
+                    
+                    body.lines().forEach { line ->
+                        val trimmed = line.trim()
+                        if (trimmed.startsWith("* ") || trimmed.startsWith("- ")) {
+                            val cleanItem = trimmed.substring(2).trim()
+                            if (cleanItem.isNotEmpty()) {
+                                items.add(cleanItem)
+                            }
+                        } else if (trimmed.isNotEmpty()) {
+                            remainingDescriptionLines.add(line)
+                        }
+                    }
+                    
+                    if (items.isNotEmpty()) {
+                        changelogList.add(ChangelogSection("What's New", items))
+                    }
+                    
+                    val parsedDescription = remainingDescriptionLines.joinToString("\n").trim()
+                    description = parsedDescription.takeIf { it.isNotEmpty() }
                 }
 
                 val publishedAt = targetRelease.getString("published_at")

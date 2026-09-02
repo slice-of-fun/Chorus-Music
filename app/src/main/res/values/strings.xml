@@ -424,7 +424,7 @@
     <string name="spotify_select_sources">Select playlists</string>
     <string name="spotify_import_by_link">Import playlist by link</string>
     <string name="spotify_import_by_link_desc">Paste a playlist link (Spotify, YouTube, Apple Music, SoundCloud, JioSaavn) to import it</string>
-    <string name="spotify_import_by_link_hint">https://open.spotify.com/playlist/... or https://youtube.com/playlist?list=...</string>
+    <string name="spotify_import_by_link_hint">Spotify, YouTube, etc. playlist link</string>
     <string name="spotify_add">Add</string>
     <string name="spotify_invalid_playlist_link">That doesn\'t look like a supported playlist link. Make sure it\'s a valid URL for Spotify, YouTube, Apple Music, SoundCloud, or JioSaavn.</string>
     <string name="spotify_import_selected">Import selected</string>

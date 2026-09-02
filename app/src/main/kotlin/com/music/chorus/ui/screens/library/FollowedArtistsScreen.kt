@@ -21,6 +21,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,6 +30,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.ToggleButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -47,6 +50,14 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -91,7 +102,10 @@ fun FollowedArtistsScreen(
     )
     val (sortDescending, onSortDescendingChange) = rememberPreference(ArtistSortDescendingKey, true)
     val gridItemSize by rememberEnumPreference(GridItemsSizeKey, GridItemSize.BIG)
+    var isSearching by remember { mutableStateOf(false) }
     var searchQuery by remember { mutableStateOf("") }
+    val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
     val allArtists by viewModel.allArtists.collectAsState()
     val followedArtists = remember(allArtists, searchQuery) {
         allArtists
@@ -117,27 +131,73 @@ fun FollowedArtistsScreen(
 
     Column(modifier = Modifier.fillMaxSize()) {
         TopAppBar(
-            title = { Text("Followed Artists") },
+            title = {
+                if (isSearching) {
+                    TextField(
+                        value = searchQuery,
+                        onValueChange = { searchQuery = it },
+                        placeholder = {
+                            Text(
+                                text = "Search followed artists...",
+                                style = MaterialTheme.typography.titleLarge
+                            )
+                        },
+                        singleLine = true,
+                        textStyle = MaterialTheme.typography.titleLarge,
+                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            disabledIndicatorColor = Color.Transparent,
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .focusRequester(focusRequester)
+                    )
+                    LaunchedEffect(Unit) {
+                        focusRequester.requestFocus()
+                    }
+                } else {
+                    Text("Followed Artists")
+                }
+            },
             navigationIcon = {
-                IconButton(onClick = { navController.navigateUp() }) {
+                IconButton(onClick = {
+                    if (isSearching) {
+                        isSearching = false
+                        searchQuery = ""
+                        focusManager.clearFocus()
+                    } else {
+                        navController.navigateUp()
+                    }
+                }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
                         contentDescription = "Back"
                     )
                 }
+            },
+            actions = {
+                if (isSearching) {
+                    if (searchQuery.isNotEmpty()) {
+                        IconButton(onClick = { searchQuery = "" }) {
+                            Icon(
+                                imageVector = Icons.Rounded.Close,
+                                contentDescription = "Clear"
+                            )
+                        }
+                    }
+                } else {
+                    IconButton(onClick = { isSearching = true }) {
+                        Icon(
+                            imageVector = Icons.Rounded.Search,
+                            contentDescription = "Search"
+                        )
+                    }
+                }
             }
-        )
-
-        OutlinedTextField(
-            value = searchQuery,
-            onValueChange = { searchQuery = it },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            placeholder = { Text("Search followed artists...") },
-            leadingIcon = { Icon(Icons.Rounded.Search, contentDescription = "Search") },
-            singleLine = true,
-            shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp)
         )
 
         val headerContent = @Composable {
@@ -210,7 +270,7 @@ fun FollowedArtistsScreen(
                 LibraryViewType.LIST ->
                     LazyColumn(
                         state = lazyListState,
-                        contentPadding = LocalPlayerAwareWindowInsets.current.asPaddingValues(),
+                        contentPadding = LocalPlayerAwareWindowInsets.current.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom).asPaddingValues(),
                     ) {
                         item(
                             key = "header",
@@ -250,7 +310,7 @@ fun FollowedArtistsScreen(
                         columns = GridCells.Adaptive(
                             minSize = GridThumbnailHeight + if (gridItemSize == GridItemSize.BIG) 24.dp else (-24).dp,
                         ),
-                        contentPadding = LocalPlayerAwareWindowInsets.current.asPaddingValues(),
+                        contentPadding = LocalPlayerAwareWindowInsets.current.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom).asPaddingValues(),
                     ) {
                         item(
                             key = "header",

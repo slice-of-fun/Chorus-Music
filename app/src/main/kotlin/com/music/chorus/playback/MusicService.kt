@@ -2966,6 +2966,11 @@ class MusicService :
                 .takeIf { it != androidx.media3.common.C.LENGTH_UNSET.toLong() } ?: dbFormat?.contentLength ?: -1L
             val isFullyDownloaded = cachedLength > 0 && downloadCache.isCached(mediaId, 0, cachedLength)
 
+            val playerCachedLength = androidx.media3.datasource.cache.ContentMetadata.getContentLength(
+                playerCache.getContentMetadata(mediaId)
+            ).takeIf { it != androidx.media3.common.C.LENGTH_UNSET.toLong() } ?: dbFormat?.contentLength ?: -1L
+            val isFullyPlayerCached = playerCachedLength > 0 && playerCache.isCached(mediaId, 0, playerCachedLength)
+
             val activeQualityInCache =
                 songUrlCache.keys.find { it.startsWith("${mediaId}_") }?.substringAfter("_")?.let {
                     runCatching { pushkar.chorus.music.constants.AudioQuality.valueOf(it) }.getOrNull()
@@ -2974,7 +2979,7 @@ class MusicService :
 
 
             if (!shouldBypassCache) {
-                if (isFullyDownloaded) {
+                if (isFullyDownloaded || isFullyPlayerCached) {
                     scope.launch(Dispatchers.IO) { recoverSong(mediaId, isOfflinePlayback = true) }
                     return@Factory dataSpec
                 }
