@@ -111,13 +111,7 @@ fun UpdateSettings(
                         }
                     },
                     onClick = {
-                        val isFoss = !BuildConfig.CAST_AVAILABLE
-                        if (isFoss) {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/slice-of-fun/Chorus-Music"))
-                            context.startActivity(intent)
-                        } else {
-                            navController.navigate("update")
-                        }
+                        navController.navigate("update")
                     }
                 ),
                 Material3SettingsItem(
