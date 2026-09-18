@@ -46,7 +46,7 @@ fun OfflineModeCard(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.cloud_off),
+                    painter = painterResource(id = R.drawable.offline),
                     contentDescription = "Offline Mode",
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(28.dp)
