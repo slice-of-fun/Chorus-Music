@@ -582,6 +582,9 @@ fun HomeScreen(
     val mediaMetadata by playerConnection.mediaMetadata.collectAsState()
 
     val quickPicks by viewModel.quickPicks.collectAsState()
+    val downloadedSongs by viewModel.downloadedSongs.collectAsState()
+    val cachedSongs by viewModel.cachedSongs.collectAsState()
+    val localSongs by viewModel.localSongs.collectAsState()
     val aiRecommendedPlaylist by viewModel.aiRecommendedPlaylist.collectAsState()
     val forgottenFavorites by viewModel.forgottenFavorites.collectAsState()
     val keepListening by viewModel.keepListening.collectAsState()
@@ -965,7 +968,83 @@ fun HomeScreen(
                     item(key = "offline_mode_card") {
                         OfflineModeCard(navController = navController)
                     }
-                }
+                    
+                    if (downloadedSongs.isNotEmpty()) {
+                        item(key = "offline_downloads_title") {
+                            NavigationTitle(title = "Downloads")
+                        }
+                        item(key = "offline_downloads_list") {
+                            androidx.compose.foundation.lazy.LazyRow(
+                                contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp),
+                                horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp),
+                                modifier = Modifier.animateItem()
+                            ) {
+                                items(downloadedSongs, key = { it.id }) { song ->
+                                    ytGridItem(
+                                        com.music.innertube.models.SongItem(
+                                            id = song.id,
+                                            title = song.title,
+                                            artists = song.artists.map { com.music.innertube.models.Artist(name = it.name, id = it.id) },
+                                            thumbnail = song.thumbnailUrl ?: "",
+                                            explicit = false
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    if (cachedSongs.isNotEmpty()) {
+                        item(key = "offline_cached_title") {
+                            NavigationTitle(title = "Offline")
+                        }
+                        item(key = "offline_cached_list") {
+                            androidx.compose.foundation.lazy.LazyRow(
+                                contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp),
+                                horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp),
+                                modifier = Modifier.animateItem()
+                            ) {
+                                items(cachedSongs, key = { it.id }) { song ->
+                                    ytGridItem(
+                                        com.music.innertube.models.SongItem(
+                                            id = song.id,
+                                            title = song.title,
+                                            artists = song.artists.map { com.music.innertube.models.Artist(name = it.name, id = it.id) },
+                                            thumbnail = song.thumbnailUrl ?: "",
+                                            explicit = false
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    if (localSongs.isNotEmpty()) {
+                        item(key = "offline_local_title") {
+                            NavigationTitle(title = "Local Files")
+                        }
+                        item(key = "offline_local_list") {
+                            androidx.compose.foundation.lazy.LazyRow(
+                                contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp),
+                                horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp),
+                                modifier = Modifier.animateItem()
+                            ) {
+                                items(localSongs, key = { it.id }) { item ->
+                                    val song = item as pushkar.chorus.music.db.entities.Song
+                                    ytGridItem(
+                                        com.music.innertube.models.SongItem(
+                                            id = song.id,
+                                            title = song.title,
+                                            artists = song.artists.map { com.music.innertube.models.Artist(name = it.name, id = it.id) },
+                                            thumbnail = song.thumbnailUrl ?: "",
+                                            explicit = false
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    }
+                } else {
                 item {
                     ChipsRow(
                         chips = homePage?.chips?.filter { 
@@ -1913,6 +1992,7 @@ fun HomeScreen(
                             }
                         }
                     }
+                }
                 }
 
                 item(key = "bottom_spacer") {

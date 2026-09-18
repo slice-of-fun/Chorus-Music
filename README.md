@@ -29,7 +29,7 @@
 ### 🎧 Superior Streaming & Playback
 *   **Ad-Free by Default:** Dive into uninterrupted sessions of your favorite albums.
 *   **High-Fidelity Audio:** Integrated support for high-quality audio streams.
-*   **Seamless Offline Mode:** Download tracks, entire albums, or playlists for offline listening.
+*   **Seamless Offline Mode:** Enjoy an exclusive "Chorus Bar" Offline Home Screen that automatically adapts to show only your downloaded, cached, and local tracks when you lose connection.
 *   **Crossfade & Smooth Transitions:** No abrupt cuts between songs.
 *   **Listen Together:** Sync and enjoy music in real time with your friends.
 

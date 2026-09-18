@@ -1,7 +1,4 @@
-
-
 package pushkar.chorus.music.db
-
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -171,6 +168,56 @@ interface DatabaseDao {
     @Transaction
     @Query("SELECT COUNT(1) FROM song WHERE liked")
     fun likedSongsCount(): Flow<Int>
+
+    @Transaction
+    @Query("SELECT * FROM song WHERE isDownloaded ORDER BY rowId")
+    fun downloadedSongsByRowIdAsc(): Flow<List<Song>>
+
+    @Transaction
+    @Query("SELECT * FROM song WHERE isDownloaded ORDER BY dateDownload")
+    fun downloadedSongsByCreateDateAsc(): Flow<List<Song>>
+
+    @Transaction
+    @Query("SELECT * FROM song WHERE isDownloaded ORDER BY title")
+    fun downloadedSongsByNameAsc(): Flow<List<Song>>
+
+    @Transaction
+    @Query("SELECT * FROM song WHERE isDownloaded ORDER BY totalPlayTime")
+    fun downloadedSongsByPlayTimeAsc(): Flow<List<Song>>
+
+    fun downloadedSongs(
+        sortType: SongSortType,
+        descending: Boolean,
+    ) = when (sortType) {
+        SongSortType.CREATE_DATE -> downloadedSongsByCreateDateAsc()
+        SongSortType.NAME ->
+            downloadedSongsByNameAsc().map { songs ->
+                val collator = Collator.getInstance(Locale.getDefault())
+                collator.strength = Collator.PRIMARY
+                songs.sortedWith(compareBy(collator) { it.song.title })
+            }
+
+        SongSortType.ARTIST ->
+            downloadedSongsByRowIdAsc().map { songs ->
+                val collator = Collator.getInstance(Locale.getDefault())
+                collator.strength = Collator.PRIMARY
+                songs
+                    .sortedWith(
+                        compareBy(collator) { song ->
+                            song.artists.joinToString("") { it.name }
+                        },
+                    ).groupBy { it.album?.title }
+                    .flatMap { (_, songsByAlbum) ->
+                        songsByAlbum.sortedBy { album ->
+                            album.artists.joinToString(
+                                "",
+                            ) { it.name }
+                        }
+                    }
+            }
+
+        SongSortType.PLAY_TIME -> downloadedSongsByPlayTimeAsc()
+    }.map { it.reversed(descending) }
 
     @Transaction
     @Query("SELECT song.* FROM song JOIN song_album_map ON song.id = song_album_map.songId WHERE song_album_map.albumId = :albumId")

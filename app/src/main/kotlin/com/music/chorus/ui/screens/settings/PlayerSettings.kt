@@ -256,7 +256,6 @@ highlightKey: String? = null) {
             valueText = {
                 when (it) {
                     AudioQuality.OPUS -> "Opus"
-                    else -> "Opus"
                 }
             },
             valueDescription = {
@@ -278,7 +277,6 @@ highlightKey: String? = null) {
             valueText = {
                 when (it) {
                     pushkar.chorus.music.constants.DownloadQuality.YOUTUBE -> "YouTube Music (AAC/Default)"
-                    else -> "Unknown"
                 }
             }
         )
@@ -372,7 +370,6 @@ highlightKey: String? = null) {
                         Text(
                             when (audioQuality) {
                                 AudioQuality.OPUS -> "Opus"
-                                else -> "Opus"
                             }
                         )
                     },
@@ -387,7 +384,6 @@ highlightKey: String? = null) {
                         Text(
                             when (downloadQuality) {
                                 pushkar.chorus.music.constants.DownloadQuality.YOUTUBE -> "YouTube Music (AAC/Default)"
-                                else -> "YouTube Music (AAC/Default)"
                             }
                         )
                     },

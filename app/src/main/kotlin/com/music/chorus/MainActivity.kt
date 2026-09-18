@@ -1,5 +1,3 @@
-
-
 package pushkar.chorus.music
 import pushkar.chorus.music.R
 import pushkar.chorus.music.BuildConfig
@@ -426,6 +424,10 @@ class MainActivity : ComponentActivity() {
         var latestUpdateVersion by remember { mutableStateOf("") }
         var latestUpdateDescription by remember { mutableStateOf<String?>(null) }
 
+        val networkObserver = remember(context) { pushkar.chorus.music.utils.NetworkConnectivityObserver(context) }
+        val isOnline by networkObserver.networkStatus.collectAsState(initial = networkObserver.isCurrentlyConnected())
+        val isOffline = !isOnline
+
         LaunchedEffect(Unit) {
             val prefs = context.dataStore.data.first()
 
@@ -651,16 +653,16 @@ class MainActivity : ComponentActivity() {
 
                 val isLandscape = configuration.containerDpSize.width > configuration.containerDpSize.height
 
-                val showRail = isLandscape && !inSearchScreen && currentRoute != "ambient_mode"
+                val showRail = isLandscape && !inSearchScreen && currentRoute != "ambient_mode" && !isOffline
 
-                val navPadding = if (shouldShowNavigationBar && !showRail) {
+                val navPadding = if (shouldShowNavigationBar && !showRail && !isOffline) {
                     NavigationBarHeight + FloatingToolbarBottomPadding
                 } else {
                     0.dp
                 }
 
                 val navigationBarHeight by animateDpAsState(
-                    targetValue = if (shouldShowNavigationBar && !showRail) NavigationBarHeight else 0.dp,
+                    targetValue = if (shouldShowNavigationBar && !showRail && !isOffline) NavigationBarHeight else 0.dp,
                     animationSpec = NavigationBarAnimationSpec,
                     label = "navBarHeight",
                 )
@@ -861,7 +863,7 @@ class MainActivity : ComponentActivity() {
                     onDispose { removeOnNewIntentListener(listener) }
                 }
 
-                val currentTitle = when (navBackStackEntry?.destination?.route) {
+                val currentTitle = if (isOffline) "Chorus Bar" else when (navBackStackEntry?.destination?.route) {
                     Screens.Home.route -> "Chorus Music"
                     Screens.Search.route -> stringResource(R.string.search)
                     Screens.Library.route -> stringResource(R.string.filter_library)
@@ -911,37 +913,46 @@ class MainActivity : ComponentActivity() {
                                             )
                                         },
                                         actions = {
-                                            if (showHistoryButton) {
-                                                IconButton(onClick = { navController.navigate("history") }) {
+                                            if (isOffline) {
+                                                IconButton(onClick = { navController.navigate("settings") }) {
                                                     Icon(
-                                                        painter = painterResource(R.drawable.music_history),
-                                                        contentDescription = stringResource(R.string.history)
+                                                        painter = painterResource(R.drawable.settings),
+                                                        contentDescription = stringResource(R.string.settings)
                                                     )
                                                 }
-                                            }
-                                            IconButton(onClick = { navController.navigate("stats") }) {
-                                                Icon(
-                                                    painter = painterResource(R.drawable.stats),
-                                                    contentDescription = stringResource(R.string.stats)
-                                                )
-                                            }
-                                             IconButton(onClick = { showSettingDialoge = true }) {
-                                                BadgedBox(badge = {}) {
-                                                    if (accountImageUrl != null) {
-                                                        AsyncImage(
-                                                            model = accountImageUrl,
-                                                            contentDescription = stringResource(R.string.account),
-                                                            modifier = Modifier
-                                                                .size(24.dp)
-                                                                .clip(CircleShape)
+                                            } else {
+                                                if (showHistoryButton) {
+                                                    IconButton(onClick = { navController.navigate("history") }) {
+                                                        Icon(
+                                                            painter = painterResource(R.drawable.music_history),
+                                                            contentDescription = stringResource(R.string.history)
                                                         )
-                                                     } else {
-                                                         Icon(
-                                                             painter = painterResource(R.drawable.settings),
-                                                             contentDescription = stringResource(R.string.account),
-                                                             modifier = Modifier.size(24.dp)
-                                                         )
-                                                     }
+                                                    }
+                                                }
+                                                IconButton(onClick = { navController.navigate("stats") }) {
+                                                    Icon(
+                                                        painter = painterResource(R.drawable.stats),
+                                                        contentDescription = stringResource(R.string.stats)
+                                                    )
+                                                }
+                                                 IconButton(onClick = { showSettingDialoge = true }) {
+                                                    BadgedBox(badge = {}) {
+                                                        if (accountImageUrl != null) {
+                                                            AsyncImage(
+                                                                model = accountImageUrl,
+                                                                contentDescription = stringResource(R.string.account),
+                                                                modifier = Modifier
+                                                                    .size(24.dp)
+                                                                    .clip(CircleShape)
+                                                            )
+                                                         } else {
+                                                             Icon(
+                                                                 painter = painterResource(R.drawable.settings),
+                                                                 contentDescription = stringResource(R.string.account),
+                                                                 modifier = Modifier.size(24.dp)
+                                                             )
+                                                         }
+                                                    }
                                                 }
                                             }
                                         },
@@ -1011,39 +1022,41 @@ class MainActivity : ComponentActivity() {
                                         slideOffset + hideOffset
                                     }
 
-                                        Box(
-                                            modifier = Modifier
-                                                .align(Alignment.BottomCenter)
-                                                .height(navSlideDistance)
-                                                .offset(y = navOffsetY),
-                                        ) {
-                                            FloatingNavigationToolbar(
-                                                items = navigationItems,
-                                                pureBlack = pureBlack,
-                                                onShuffleClick = onShuffleClick,
-                                                shuffleIconRes = R.drawable.shuffle,
-                                                shuffleContentDescription = stringResource(R.string.shuffle),
-
-                                                onSettingsClick = { 
-                                                    navController.navigate("settings") {
-                                                        launchSingleTop = true
-                                                    }
-                                                },
-                                                settingsIconRes = R.drawable.settings,
-                                                settingsContentDescription = stringResource(R.string.settings),
-                                                isSelected = { screen ->
-                                                    currentRoute == screen.route || currentRoute?.startsWith("${screen.route}/") == true
-                                                },
-                                                onItemClick = onNavItemClick,
+                                        if (!isOffline) {
+                                            Box(
                                                 modifier = Modifier
                                                     .align(Alignment.BottomCenter)
-                                                    .padding(
-                                                        start = FloatingToolbarHorizontalPadding,
-                                                        end = FloatingToolbarHorizontalPadding,
-                                                        bottom = bottomInset + FloatingToolbarBottomPadding,
-                                                    )
-                                                    .height(NavigationBarHeight)
-                                            )
+                                                    .height(navSlideDistance)
+                                                    .offset(y = navOffsetY),
+                                            ) {
+                                                FloatingNavigationToolbar(
+                                                    items = navigationItems,
+                                                    pureBlack = pureBlack,
+                                                    onShuffleClick = onShuffleClick,
+                                                    shuffleIconRes = R.drawable.shuffle,
+                                                    shuffleContentDescription = stringResource(R.string.shuffle),
+
+                                                    onSettingsClick = { 
+                                                        navController.navigate("settings") {
+                                                            launchSingleTop = true
+                                                        }
+                                                    },
+                                                    settingsIconRes = R.drawable.settings,
+                                                    settingsContentDescription = stringResource(R.string.settings),
+                                                    isSelected = { screen ->
+                                                        currentRoute == screen.route || currentRoute?.startsWith("${screen.route}/") == true
+                                                    },
+                                                    onItemClick = onNavItemClick,
+                                                    modifier = Modifier
+                                                        .align(Alignment.BottomCenter)
+                                                        .padding(
+                                                            start = FloatingToolbarHorizontalPadding,
+                                                            end = FloatingToolbarHorizontalPadding,
+                                                            bottom = bottomInset + FloatingToolbarBottomPadding,
+                                                        )
+                                                        .height(NavigationBarHeight)
+                                                )
+                                            }
                                         }
 
                                         Box(
