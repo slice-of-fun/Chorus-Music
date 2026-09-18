@@ -1076,40 +1076,6 @@ interface DatabaseDao {
         }
     }
 
-    fun downloadedSongs(
-        sortType: SongSortType,
-        descending: Boolean
-    ): Flow<List<Song>> = when (sortType) {
-        SongSortType.CREATE_DATE -> downloadedSongsByCreateDateAsc()
-        SongSortType.NAME -> downloadedSongsByNameAsc().map { songs ->
-            val collator = Collator.getInstance(Locale.getDefault())
-            collator.strength = Collator.PRIMARY
-            songs.sortedWith(compareBy(collator) { it.song.title })
-        }
-
-        SongSortType.ARTIST -> downloadedSongsByNameAsc().map { songs ->
-            val collator = Collator.getInstance(Locale.getDefault())
-            collator.strength = Collator.PRIMARY
-            songs.sortedWith(compareBy(collator) { song ->
-                song.artists.joinToString("") { it.name }
-            })
-        }
-
-        SongSortType.PLAY_TIME -> downloadedSongsByPlayTimeAsc()
-    }.map { it.reversed(descending) }
-
-    @Transaction
-    @Query("SELECT * FROM song WHERE isDownloaded = 1 ORDER BY dateDownload")
-    fun downloadedSongsByCreateDateAsc(): Flow<List<Song>>
-
-    @Transaction
-    @Query("SELECT * FROM song WHERE isDownloaded = 1 ORDER BY title")
-    fun downloadedSongsByNameAsc(): Flow<List<Song>>
-
-    @Transaction
-    @Query("SELECT * FROM song WHERE isDownloaded = 1 ORDER BY totalPlayTime")
-    fun downloadedSongsByPlayTimeAsc(): Flow<List<Song>>
-
     @Query("UPDATE song SET isDownloaded = :downloaded, dateDownload = :date WHERE id = :songId")
     fun updateDownloadedInfo(songId: String, downloaded: Boolean, date: LocalDateTime?)
 
