@@ -147,6 +147,7 @@ import coil3.request.allowHardware
 import coil3.request.crossfade
 import coil3.toBitmap
 import com.music.innertube.YouTube
+import pushkar.chorus.music.utils.isLocalMediaId
 import com.music.innertube.models.SongItem
 import com.music.innertube.models.WatchEndpoint
 import pushkar.chorus.music.constants.AppBarHeight
@@ -440,7 +441,7 @@ class MainActivity : ComponentActivity() {
                             playerCache.isCached(metadata.id, 0, 1) || downloadCache.isCached(metadata.id, 0, 1)
                         } catch (e: Exception) { false }
                         
-                        if (!isCached && !metadata.id.pushkar.chorus.music.utils.isLocalMediaId()) {
+                        if (!isCached && !metadata.id.isLocalMediaId()) {
                             connection.player.pause()
                             connection.player.clearMediaItems()
                         }
