@@ -15,13 +15,13 @@ def create_composite():
     canvas = Image.new("RGBA", (canvas_w, canvas_h), (0,0,0,0))
     
     # Paste horizontal first (background)
-    # vertically center horizontal image relative to the canvas
-    h_y = (canvas_h - hh) // 2
+    # Align horizontal image to the bottom
+    h_y = canvas_h - hh
     canvas.paste(horizontal, (0, h_y), horizontal)
     
     # Paste vertical (foreground)
-    # vertically center vertical image
-    v_y = (canvas_h - vh) // 2
+    # Align vertical image to the bottom
+    v_y = canvas_h - vh
     v_x = hw - overlap
     
     # Add some drop shadow to vertical image
