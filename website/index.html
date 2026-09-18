@@ -8,18 +8,23 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Google Material Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet" />
 </head>
 <body>
-    
+    <div class="ambient-background">
+        <div class="ambient-blob color-1"></div>
+        <div class="ambient-blob color-2"></div>
+        <div class="ambient-blob color-3"></div>
+    </div>
+
     <!-- Top App Bar -->
-    <header class="top-app-bar">
+    <header class="top-app-bar glass-panel">
         <div class="top-app-bar-content">
             <div class="logo">
                 <span class="material-symbols-rounded">music_note</span>
-                <span class="title">Chorus Music</span>
+                <span class="title">Chorus</span>
             </div>
             <nav class="desktop-nav">
                 <a href="#features" class="nav-link">Features</a>
@@ -32,22 +37,153 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-text">
-                <h1 class="headline">Hear the Unheard</h1>
+                <h1 class="headline">Hear the Unheard.</h1>
                 <p class="body-text">The ultimate, ad-free Android music experience powered by high-fidelity audio, smart synchronization, and multiple lyric backends.</p>
                 <div class="hero-actions">
-                    <a href="https://github.com/slice-of-fun/Chorus-Music/releases" target="_blank" class="button filled-button">
+                    <a href="https://github.com/slice-of-fun/Chorus-Music/releases" target="_blank" class="button primary-button glass-button">
                         <span class="material-symbols-rounded">download</span>
                         Download APK
                     </a>
-                    <a href="https://github.com/slice-of-fun/Chorus-Music" target="_blank" class="button text-button">
+                    <a href="https://github.com/slice-of-fun/Chorus-Music" target="_blank" class="button secondary-button glass-button">
                         <span class="material-symbols-rounded">code</span>
                         View Source
                     </a>
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="hero-image-container">
+                <div class="hero-image-container glass-panel">
                     <img src="Chorus-new.png" alt="Chorus Music Icon" class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots Marquee Section -->
+        <section class="screenshots-section">
+            <h2 class="section-title">See It in Action</h2>
+            <div class="marquee-container">
+                <div class="marquee-track">
+                    <!-- First set of mockups -->
+                    <div class="phone-mockup">
+                        <div class="camera-hole"></div>
+                        <div class="status-bar">
+                            <span class="time">9:41</span>
+                            <div class="status-icons">
+                                <span class="material-symbols-rounded icon-small">signal_cellular_4_bar</span>
+                                <span class="material-symbols-rounded icon-small">wifi</span>
+                                <span class="material-symbols-rounded icon-small">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="phone-screen"><img src="ss/1.png" alt="Screenshot 1" class="screen-static"></div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="camera-hole"></div>
+                        <div class="status-bar">
+                            <span class="time">9:41</span>
+                            <div class="status-icons">
+                                <span class="material-symbols-rounded icon-small">signal_cellular_4_bar</span>
+                                <span class="material-symbols-rounded icon-small">wifi</span>
+                                <span class="material-symbols-rounded icon-small">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="phone-screen"><img src="ss/2.png" alt="Screenshot 2" class="screen-static"></div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="camera-hole"></div>
+                        <div class="status-bar">
+                            <span class="time">9:41</span>
+                            <div class="status-icons">
+                                <span class="material-symbols-rounded icon-small">signal_cellular_4_bar</span>
+                                <span class="material-symbols-rounded icon-small">wifi</span>
+                                <span class="material-symbols-rounded icon-small">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="phone-screen"><img src="ss/3.png" alt="Screenshot 3" class="screen-static"></div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="camera-hole"></div>
+                        <div class="status-bar">
+                            <span class="time">9:41</span>
+                            <div class="status-icons">
+                                <span class="material-symbols-rounded icon-small">signal_cellular_4_bar</span>
+                                <span class="material-symbols-rounded icon-small">wifi</span>
+                                <span class="material-symbols-rounded icon-small">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="phone-screen"><img src="ss/4.jpg" alt="Screenshot 4" class="screen-static"></div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="camera-hole"></div>
+                        <div class="status-bar">
+                            <span class="time">9:41</span>
+                            <div class="status-icons">
+                                <span class="material-symbols-rounded icon-small">signal_cellular_4_bar</span>
+                                <span class="material-symbols-rounded icon-small">wifi</span>
+                                <span class="material-symbols-rounded icon-small">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="phone-screen"><img src="ss/5.png" alt="Screenshot 5" class="screen-static"></div>
+                    </div>
+                    <!-- Duplicate set for infinite scrolling -->
+                    <div class="phone-mockup">
+                        <div class="camera-hole"></div>
+                        <div class="status-bar">
+                            <span class="time">9:41</span>
+                            <div class="status-icons">
+                                <span class="material-symbols-rounded icon-small">signal_cellular_4_bar</span>
+                                <span class="material-symbols-rounded icon-small">wifi</span>
+                                <span class="material-symbols-rounded icon-small">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="phone-screen"><img src="ss/1.png" alt="Screenshot 1" class="screen-static"></div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="camera-hole"></div>
+                        <div class="status-bar">
+                            <span class="time">9:41</span>
+                            <div class="status-icons">
+                                <span class="material-symbols-rounded icon-small">signal_cellular_4_bar</span>
+                                <span class="material-symbols-rounded icon-small">wifi</span>
+                                <span class="material-symbols-rounded icon-small">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="phone-screen"><img src="ss/2.png" alt="Screenshot 2" class="screen-static"></div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="camera-hole"></div>
+                        <div class="status-bar">
+                            <span class="time">9:41</span>
+                            <div class="status-icons">
+                                <span class="material-symbols-rounded icon-small">signal_cellular_4_bar</span>
+                                <span class="material-symbols-rounded icon-small">wifi</span>
+                                <span class="material-symbols-rounded icon-small">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="phone-screen"><img src="ss/3.png" alt="Screenshot 3" class="screen-static"></div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="camera-hole"></div>
+                        <div class="status-bar">
+                            <span class="time">9:41</span>
+                            <div class="status-icons">
+                                <span class="material-symbols-rounded icon-small">signal_cellular_4_bar</span>
+                                <span class="material-symbols-rounded icon-small">wifi</span>
+                                <span class="material-symbols-rounded icon-small">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="phone-screen"><img src="ss/4.jpg" alt="Screenshot 4" class="screen-static"></div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="camera-hole"></div>
+                        <div class="status-bar">
+                            <span class="time">9:41</span>
+                            <div class="status-icons">
+                                <span class="material-symbols-rounded icon-small">signal_cellular_4_bar</span>
+                                <span class="material-symbols-rounded icon-small">wifi</span>
+                                <span class="material-symbols-rounded icon-small">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="phone-screen"><img src="ss/5.png" alt="Screenshot 5" class="screen-static"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -57,15 +193,15 @@
             <h2 class="section-title">Why Chorus Music?</h2>
             
             <div class="features-grid">
-                <div class="card elevated-card">
+                <div class="glass-card">
                     <div class="card-icon-container">
                         <span class="material-symbols-rounded card-icon">high_quality</span>
                     </div>
-                    <h3>Ad-Free &amp; High-Fidelity</h3>
+                    <h3>High-Fidelity</h3>
                     <p>Dive into uninterrupted sessions with integrated support for high-fidelity audio streams.</p>
                 </div>
 
-                <div class="card elevated-card">
+                <div class="glass-card">
                     <div class="card-icon-container">
                         <span class="material-symbols-rounded card-icon">lyrics</span>
                     </div>
@@ -73,7 +209,7 @@
                     <p>Karaoke-style word-by-word syncing powered by multiple robust engines and real-time AI translations.</p>
                 </div>
 
-                <div class="card elevated-card">
+                <div class="glass-card">
                     <div class="card-icon-container">
                         <span class="material-symbols-rounded card-icon">sports_esports</span>
                     </div>
@@ -81,7 +217,7 @@
                     <p>Show off what you're listening to directly on your Discord profile with rich presence integration.</p>
                 </div>
 
-                <div class="card elevated-card">
+                <div class="glass-card">
                     <div class="card-icon-container">
                         <span class="material-symbols-rounded card-icon">smart_toy</span>
                     </div>
@@ -93,7 +229,7 @@
         
         <!-- Open Source Section -->
         <section class="open-source-section">
-            <div class="card surface-container-high center-text">
+            <div class="glass-panel center-text hero-card">
                 <span class="material-symbols-rounded giant-icon">code_blocks</span>
                 <h2>Fully Open Source</h2>
                 <p>Built with modularity and clean architecture using Kotlin and Jetpack Compose. No trackers, no bloat.</p>
@@ -109,6 +245,5 @@
     <footer>
         <p>&copy; 2026 Chorus Music Contributors. Released under the GPL-3.0 License.</p>
     </footer>
-
 </body>
 </html>
