@@ -21,8 +21,8 @@
 **Chorus Music** is a meticulously designed music streaming client built for both casual listeners and audiophiles. It combines multiple online music sources into a unified, high-performance playback engine. Enjoy gapless transitions, smart synchronization, and real-time karaoke-style lyrics without any advertisements or user tracking.
 
 <p align="center">
-  <img src="website/ss/2.png" alt="Chorus Music Screenshot 2" width="30%" style="vertical-align: bottom; margin-right: 2%;"/>
-  <img src="website/ss/3.png" alt="Chorus Music Screenshot 3" width="65%" style="vertical-align: bottom;"/>
+  <img src="website/ss/2_mockup.png" alt="Chorus Music Screenshot 2" width="30%" style="vertical-align: bottom; margin-right: 2%;"/>
+  <img src="website/ss/3_mockup.png" alt="Chorus Music Screenshot 3" width="65%" style="vertical-align: bottom;"/>
 </p>
 
 ---
