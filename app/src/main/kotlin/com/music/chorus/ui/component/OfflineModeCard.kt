@@ -1,7 +1,9 @@
 package pushkar.chorus.music.ui.component
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,18 +12,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,105 +42,118 @@ fun OfflineModeCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-        shape = RoundedCornerShape(16.dp),
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
+            containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
         ),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.1f))
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 14.dp)
+                .padding(20.dp)
         ) {
-            // Header row: icon + "OFFLINE" badge
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Icon(
-                    painter = painterResource(R.drawable.offline),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(20.dp)
-                )
-                Spacer(Modifier.width(8.dp))
-                Text(
-                    text = "You're offline",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Spacer(Modifier.weight(1f))
-                Surface(
-                    shape = RoundedCornerShape(50),
-                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
+                // Circular icon background
+                Box(
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clip(CircleShape)
+                        .background(
+                            Brush.linearGradient(
+                                colors = listOf(
+                                    MaterialTheme.colorScheme.primary,
+                                    MaterialTheme.colorScheme.tertiary
+                                )
+                            )
+                        ),
+                    contentAlignment = Alignment.Center
                 ) {
+                    Icon(
+                        painter = painterResource(R.drawable.offline),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+                
+                Spacer(modifier = Modifier.width(16.dp))
+                
+                Column {
                     Text(
-                        text = "OFFLINE",
-                        style = MaterialTheme.typography.labelSmall,
+                        text = "Welcome to Chorus!",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = "You're currently offline",
+                        style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                        fontWeight = FontWeight.Medium
                     )
                 }
             }
 
-            Spacer(Modifier.height(6.dp))
+            Spacer(Modifier.height(16.dp))
 
             Text(
-                text = "Enjoy your downloaded and local music.",
+                text = "Enjoy your downloaded and local music without any interruptions.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(20.dp))
 
-            // Action buttons
             Row(
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                OutlinedButton(
+                Button(
                     onClick = { navController.navigate("local_songs") },
-                    shape = RoundedCornerShape(12.dp),
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = MaterialTheme.colorScheme.primary
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
                     ),
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f).height(48.dp)
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.music_note),
                         contentDescription = null,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(18.dp)
                     )
-                    Spacer(Modifier.width(6.dp))
+                    Spacer(Modifier.width(8.dp))
                     Text(
                         text = "Local Files",
-                        style = MaterialTheme.typography.labelMedium
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
-                OutlinedButton(
+                FilledTonalButton(
                     onClick = { navController.navigate(pushkar.chorus.music.ui.screens.Screens.Library.route) },
-                    shape = RoundedCornerShape(12.dp),
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = MaterialTheme.colorScheme.primary
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.filledTonalButtonColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                     ),
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f).height(48.dp)
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.library_music),
                         contentDescription = null,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(18.dp)
                     )
-                    Spacer(Modifier.width(6.dp))
+                    Spacer(Modifier.width(8.dp))
                     Text(
                         text = "Library",
-                        style = MaterialTheme.typography.labelMedium
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Bold
                     )
                 }
             }

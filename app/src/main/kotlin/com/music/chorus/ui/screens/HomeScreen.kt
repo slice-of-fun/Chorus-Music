@@ -41,6 +41,7 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -1007,15 +1008,45 @@ fun HomeScreen(
                                 horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp),
                                 modifier = Modifier.animateItem()
                             ) {
-                                items(cachedSongs, key = { it.id }) { song ->
-                                    ytGridItem(
-                                        com.music.innertube.models.SongItem(
-                                            id = song.id,
-                                            title = song.title,
-                                            artists = song.artists.map { com.music.innertube.models.Artist(name = it.name, id = it.id) },
-                                            thumbnail = song.thumbnailUrl ?: "",
-                                            explicit = false
-                                        )
+                                itemsIndexed(cachedSongs, key = { _, it -> it.id }) { index, song ->
+                                    val songItem = com.music.innertube.models.SongItem(
+                                        id = song.id,
+                                        title = song.title,
+                                        artists = song.artists.map { com.music.innertube.models.Artist(name = it.name, id = it.id) },
+                                        thumbnail = song.thumbnailUrl ?: "",
+                                        explicit = false
+                                    )
+                                    pushkar.chorus.music.ui.component.YouTubeGridItem(
+                                        item = songItem,
+                                        isActive = song.id in listOf(mediaMetadata?.album?.id, mediaMetadata?.id),
+                                        isPlaying = isPlaying,
+                                        coroutineScope = scope,
+                                        thumbnailRatio = 1f,
+                                        modifier = Modifier
+                                            .combinedClickable(
+                                                onClick = {
+                                                    if (song.id == mediaMetadata?.id) {
+                                                        playerConnection?.togglePlayPause()
+                                                    } else {
+                                                        playerConnection?.playQueue(
+                                                            pushkar.chorus.music.playback.queues.ListQueue(
+                                                                title = "Cached Songs",
+                                                                items = cachedSongs.map { it.toMediaItem() },
+                                                                startIndex = index
+                                                            )
+                                                        )
+                                                    }
+                                                },
+                                                onLongClick = {
+                                                    haptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress)
+                                                    menuState.show {
+                                                        pushkar.chorus.music.ui.component.YouTubeSongMenu(
+                                                            song = songItem,
+                                                            onDismiss = menuState::dismiss
+                                                        )
+                                                    }
+                                                }
+                                            )
                                     )
                                 }
                             }

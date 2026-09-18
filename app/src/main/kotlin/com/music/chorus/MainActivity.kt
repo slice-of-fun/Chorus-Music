@@ -428,6 +428,27 @@ class MainActivity : ComponentActivity() {
         val isOnline by networkObserver.networkStatus.collectAsState(initial = networkObserver.isCurrentlyConnected())
         val isOffline = !isOnline
 
+        LaunchedEffect(isOffline) {
+            if (isOffline) {
+                playerConnection?.let { connection ->
+                    val metadata = connection.mediaMetadata.value
+                    if (metadata != null) {
+                        val playerCache = connection.service.playerCache
+                        val downloadCache = connection.service.downloadCache
+                        // Need to check if it's cached or downloaded
+                        val isCached = try {
+                            playerCache.isCached(metadata.id, 0, 1) || downloadCache.isCached(metadata.id, 0, 1)
+                        } catch (e: Exception) { false }
+                        
+                        if (!isCached && !metadata.isLocal) {
+                            connection.player.pause()
+                            connection.player.clearMediaItems()
+                        }
+                    }
+                }
+            }
+        }
+
         LaunchedEffect(Unit) {
             val prefs = context.dataStore.data.first()
 
