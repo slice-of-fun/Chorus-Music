@@ -22,7 +22,7 @@
     <string name="your_app_getting_better">Your App is getting even better…</string>
     <string name="update_includes_features">This update includes new features and the latest from Chorus Music %1$s, making your app even more helpful. Learn more at %2$s.</string>
     <string name="whats_new">What\'s new?</string>
-    <string name="update_available">Update</string>
+    <string name="update_action_button">Update</string>
     <string name="checking_for_updates">Checking for updates…</string>
     <string name="cant_check_updates">Can\'t check for\nupdates</string>
     <string name="app_up_to_date">App is up to date</string>

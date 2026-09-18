@@ -306,7 +306,7 @@ fun UpdateScreen(navController: NavHostController) {
                                     enabled = !isDownloading
                                 )
                                 AnimatedActionButton(
-                                    text = if (isDownloading) "${(downloadProgress * 100).toInt()}%" else if (isDownloadComplete) stringResource(R.string.install) else stringResource(R.string.update_available),
+                                    text = if (isDownloading) "${(downloadProgress * 100).toInt()}%" else if (isDownloadComplete) stringResource(R.string.install) else stringResource(R.string.update_action_button),
                                     onClick = {
                                         if (isDownloadComplete) {
                                             val file = downloadedFile
