@@ -996,7 +996,7 @@ fun HomeScreen(
 
                     if (cachedSongs.isNotEmpty()) {
                         item(key = "offline_cached_title") {
-                            NavigationTitle(title = "Offline")
+                            NavigationTitle(title = "Cached Songs")
                         }
                         item(key = "offline_cached_list") {
                             androidx.compose.foundation.lazy.LazyRow(

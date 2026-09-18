@@ -178,6 +178,10 @@ interface DatabaseDao {
     fun downloadedSongsByCreateDateAsc(): Flow<List<Song>>
 
     @Transaction
+    @Query("SELECT * FROM song WHERE dateDownload IS NOT NULL AND isDownloaded = 0 ORDER BY dateDownload DESC")
+    fun cachedSongs(): Flow<List<Song>>
+
+    @Transaction
     @Query("SELECT * FROM song WHERE isDownloaded ORDER BY title")
     fun downloadedSongsByNameAsc(): Flow<List<Song>>
 

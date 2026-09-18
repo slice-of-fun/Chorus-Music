@@ -114,7 +114,7 @@ class HomeViewModel @Inject constructor(
     val allYtItems = MutableStateFlow<List<YTItem>>(emptyList())
     
     val downloadedSongs = database.downloadedSongs(pushkar.chorus.music.constants.SongSortType.CREATE_DATE, true).stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
-    val cachedSongs = database.downloadedSongsByCreateDateAsc().map { songs -> songs.filter { it.song.dateDownload != null && !it.song.isDownloaded } }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+    val cachedSongs = database.cachedSongs().stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
     val localSongs = database.localSongs().stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     val speedDialItems: StateFlow<List<YTItem>> =
