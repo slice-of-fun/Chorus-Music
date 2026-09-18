@@ -303,7 +303,6 @@
     <string name="audio_quality_auto">Samodejno</string>
     <string name="audio_quality_high">Visoka</string>
     <string name="audio_quality_low">Nizka</string>
-    <string name="audio_quality_lossless">Brez izgub</string>
     <string name="queue">ÄŒakalna vrsta</string>
     <string name="persistent_queue">Trajna Äakalna vrsta</string>
     <string name="persistent_queue_desc">Ob zagonu aplikacije obnovi zadnjo Äakalno vrsto</string>

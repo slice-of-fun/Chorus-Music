@@ -365,7 +365,6 @@
     <!-- Settings -->
     <string name="show_audio_quality_badge">Afficher lâ€™indicateur de qualitÃ© audio</string>
     <string name="apple_music">Apple Music</string>
-    <string name="audio_quality_lossless">Audio sans perte</string>
     <string name="spotify_import_title">Importer depuis Spotify</string>
     <string name="spotify_import_desc">Connectez Spotify, choisissez des playlists et reflÃ©tez-les dans des playlists Chorus Music locales.</string>
     <string name="spotify_connect">Connecter Spotify</string>

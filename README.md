@@ -3,7 +3,7 @@
 
   # 🎵 Chorus Music
 
-  ### *The ultimate, ad-free Android music experience powered by lossless audio, smart synchronization, and multiple lyric backends.*
+  ### *The ultimate, ad-free Android music experience powered by high-fidelity audio, smart synchronization, and multiple lyric backends.*
 
   <p align="center">
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-GPL--3.0-32CD32?style=for-the-badge" alt="GPL-3.0 License"/></a>
@@ -18,7 +18,7 @@
 
 ## 🌟 Overview
 
-**Chorus Music** is a high-fidelity, open-source Android music streaming client designed for audiophiles and casual listeners alike. By tapping into online music streams and combining it with multi-source synchronized lyrics, lossless playback, and high-performance audio engine support, Chorus Music delivers a premium listening experience—without advertisements or tracking.
+**Chorus Music** is a high-fidelity, open-source Android music streaming client designed for audiophiles and casual listeners alike. By tapping into online music streams and combining it with multi-source synchronized lyrics, high-fidelity playback, and high-performance audio engine support, Chorus Music delivers a premium listening experience—without advertisements or tracking.
 
 ---
 
@@ -28,7 +28,7 @@
 
 ### 🎧 Superior Streaming & Playback
 *   **Ad-Free by Default:** Dive into uninterrupted sessions of your favorite albums.
-*   **Lossless FLAC Audio:** Integrated support for high-fidelity 16-bit and 24-bit streams.
+*   **High-Fidelity Audio:** Integrated support for high-quality audio streams.
 *   **Seamless Offline Mode:** Download tracks, entire albums, or playlists for offline listening.
 *   **Crossfade & Smooth Transitions:** No abrupt cuts between songs.
 *   **Listen Together:** Sync and enjoy music in real time with your friends.

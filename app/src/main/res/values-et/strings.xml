@@ -323,7 +323,6 @@
     <string name="ip_version_auto">Automaatne</string>
     <string name="ip_version_ipv4">Sunni IPv4</string>
     <string name="ip_version_ipv6">Sunni IPv6</string>
-    <string name="audio_quality_lossless">Kadudeta muusika</string>
     <string name="clear_downloaded_updates">Kustuta allalaaditud uuendused</string>
     <string name="clear_downloaded_updates_desc">Allalaaditud APK-failide eemaldamine ruumi vabastamiseks</string>
     <string name="bluetooth_permission_required">Heliseadmete leidmiseks on vajalik Bluetoothi luba.</string>

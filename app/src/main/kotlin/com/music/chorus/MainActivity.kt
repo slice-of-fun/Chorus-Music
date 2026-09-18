@@ -420,6 +420,10 @@ class MainActivity : ComponentActivity() {
         val enableHighRefreshRate by rememberPreference(EnableHighRefreshRateKey, defaultValue = true)
         val context = LocalContext.current
 
+        var showUpdateDialog by remember { mutableStateOf(false) }
+        var latestUpdateVersion by remember { mutableStateOf("") }
+        var latestUpdateDescription by remember { mutableStateOf<String?>(null) }
+
         LaunchedEffect(Unit) {
             val prefs = context.dataStore.data.first()
 
@@ -428,14 +432,16 @@ class MainActivity : ComponentActivity() {
                 delay(2000L)
                 checkForUpdate(
                     context = context,
-                    onSuccess = { latestVersion, isAvailable, _, _, _, _, _, _ ->
+                    onSuccess = { latestVersion, isAvailable, _, _, _, description, _, _ ->
                         val currentVersion = BuildConfig.VERSION_NAME
                         Log.d("UpdateCheck", "Startup check success. Latest: $latestVersion, Current: $currentVersion, isAvailable: $isAvailable")
                         saveUpdateAvailableState(context, isAvailable)
                         
-                        if (isAvailable && getUpdateNotificationsSetting(context)) {
-                            Log.d("UpdateCheck", "Posting update notification for $latestVersion")
-                            UpdateNotificationHelper.showUpdateNotification(context, latestVersion)
+                        if (isAvailable && getAutoUpdateCheckSetting(context)) {
+                            Log.d("UpdateCheck", "Showing update dialog for $latestVersion")
+                            latestUpdateVersion = latestVersion
+                            latestUpdateDescription = description
+                            showUpdateDialog = true
                         }
                     },
                     onError = {
@@ -1268,6 +1274,45 @@ class MainActivity : ComponentActivity() {
                             onDismissRequest = {
                                 showWelcomeDialog = false
                                 setLastOpenedVersionCode(BuildConfig.VERSION_CODE)
+                            }
+                        )
+                    }
+
+                    if (showUpdateDialog) {
+                        androidx.compose.material3.AlertDialog(
+                            onDismissRequest = { showUpdateDialog = false },
+                            title = { Text(stringResource(R.string.update_available)) },
+                            text = {
+                                androidx.compose.foundation.layout.Column(
+                                    modifier = androidx.compose.ui.Modifier.verticalScroll(androidx.compose.foundation.rememberScrollState())
+                                ) {
+                                    Text(stringResource(R.string.update_available_msg, latestUpdateVersion))
+                                    if (!latestUpdateDescription.isNullOrBlank()) {
+                                        androidx.compose.foundation.layout.Spacer(modifier = androidx.compose.ui.Modifier.height(16.dp))
+                                        Text(
+                                            text = "Release Notes:\n$latestUpdateDescription",
+                                            style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
+                                            color = androidx.compose.material3.MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                }
+                            },
+                            confirmButton = {
+                                androidx.compose.material3.TextButton(
+                                    onClick = {
+                                        showUpdateDialog = false
+                                        navController.navigate("update")
+                                    }
+                                ) {
+                                    Text("Update")
+                                }
+                            },
+                            dismissButton = {
+                                androidx.compose.material3.TextButton(
+                                    onClick = { showUpdateDialog = false }
+                                ) {
+                                    Text(stringResource(android.R.string.cancel))
+                                }
                             }
                         )
                     }

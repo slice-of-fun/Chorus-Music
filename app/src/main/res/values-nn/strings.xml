@@ -273,7 +273,6 @@
     <string name="audio_quality_auto">Automatisk</string>
     <string name="audio_quality_high">HÃ¸g</string>
     <string name="audio_quality_low">LÃ¥g</string>
-    <string name="audio_quality_lossless">Tapsfri musikk</string>
     <string name="queue">KÃ¸</string>
     <string name="persistent_queue">Varig kÃ¸</string>
     <string name="persistent_queue_desc">Gjenopprett den siste kÃ¸en nÃ¥r appen startar</string>

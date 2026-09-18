@@ -273,7 +273,6 @@
     <string name="audio_quality_auto">Automatikoa</string>
     <string name="audio_quality_high">Altua</string>
     <string name="audio_quality_low">Baxua</string>
-    <string name="audio_quality_lossless">Galerarik gabeko musika</string>
     <string name="queue">Ilara</string>
     <string name="persistent_queue">Ilara iraunkorra</string>
     <string name="persistent_queue_desc">Berrezarri azken ilara aplikazioa abiaraztean</string>

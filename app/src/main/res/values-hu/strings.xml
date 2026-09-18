@@ -323,7 +323,6 @@
     <string name="ip_version_auto">Automatikus</string>
     <string name="ip_version_ipv4">IPv4 kÃ©nyszerÃ­tÃ©se</string>
     <string name="ip_version_ipv6">IPv6 kÃ©nyszerÃ­tÃ©se</string>
-    <string name="audio_quality_lossless">VesztesÃ©gmentes zene</string>
     <string name="clear_downloaded_updates">LetÃ¶ltÃ¶tt frissÃ­tÃ©sek tÃ¶rlÃ©se</string>
     <string name="clear_downloaded_updates_desc">A letÃ¶ltÃ¶tt APK-fÃ¡jlok eltÃ¡volÃ­tÃ¡sa tÃ¡rhely felszabadÃ­tÃ¡sÃ¡hoz</string>
     <string name="bluetooth_permission_required">A hangeszkÃ¶zÃ¶k felismerÃ©sÃ©hez Bluetooth-engedÃ©ly szÃ¼ksÃ©ges.</string>

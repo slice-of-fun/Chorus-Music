@@ -689,13 +689,6 @@ object YTPlayerUtils {
         if (formats.isEmpty()) return null
 
         val format = when (audioQuality) {
-            AudioQuality.LOSSLESS -> {
-                formats.find {
-                    it.mimeType.contains("audio/flac", ignoreCase = true) ||
-                    it.mimeType.contains("audio/alac", ignoreCase = true) ||
-                    it.audioQuality?.contains("LOSSLESS", ignoreCase = true) == true
-                } ?: formats.maxByOrNull { it.bitrate }
-            }
             AudioQuality.OPUS -> {
                 formats.filter { it.mimeType.startsWith("audio/webm") }
                     .maxByOrNull { it.bitrate }

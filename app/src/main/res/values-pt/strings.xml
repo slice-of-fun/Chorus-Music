@@ -333,7 +333,6 @@
     <string name="ip_version_auto">AutomÃ¡tico</string>
     <string name="ip_version_ipv4">ForÃ§ar IPv4</string>
     <string name="ip_version_ipv6">ForÃ§ar IPv6</string>
-    <string name="audio_quality_lossless">MÃºsica sem perdas</string>
     <string name="clear_downloaded_updates">Limpar atualizaÃ§Ãµes transferidas</string>
     <string name="clear_downloaded_updates_desc">Remover ficheiros APK transferidos para libertar espaÃ§o</string>
     <string name="bluetooth_permission_required">Ã‰ necessÃ¡ria permissÃ£o Bluetooth para detetar dispositivos de Ã¡udio.</string>

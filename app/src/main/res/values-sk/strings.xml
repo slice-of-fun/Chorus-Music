@@ -344,7 +344,6 @@
     <string name="ip_version_auto">AutomatickÃ¡</string>
     <string name="ip_version_ipv4">VynÃºtiÅ¥ IPv4</string>
     <string name="ip_version_ipv6">VynÃºtiÅ¥ IPv6</string>
-    <string name="audio_quality_lossless">Zvuk bez straty kvality</string>
     <string name="clear_downloaded_updates">VymazaÅ¥ stiahnutÃ© aktualizÃ¡cie</string>
     <string name="clear_downloaded_updates_desc">OdstrÃ¡Åˆte stiahnutÃ© sÃºbory APK a uvoÄ¾nite miesto</string>
     <string name="bluetooth_permission_required">Na zistenie zvukovÃ½ch zariadenÃ­ je potrebnÃ© povolenie Bluetooth.</string>

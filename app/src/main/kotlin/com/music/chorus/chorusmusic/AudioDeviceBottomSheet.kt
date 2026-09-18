@@ -787,12 +787,10 @@ fun AudioQualitySelector(context: Context) {
         )
 
         val options = listOf(
-            "Opus",
-            "Lossless"
+            "Opus"
         )
         val selectedIndex = when (audioQuality) {
             AudioQuality.OPUS -> 0
-            AudioQuality.LOSSLESS -> 1
         }
 
         androidx.compose.foundation.layout.FlowRow(
@@ -809,7 +807,6 @@ fun AudioQualitySelector(context: Context) {
                     onCheckedChange = {
                         val newQuality = when (index) {
                             0 -> AudioQuality.OPUS
-                            1 -> AudioQuality.LOSSLESS
                             else -> AudioQuality.OPUS
                         }
                         onAudioQualityChange(newQuality)
@@ -852,12 +849,10 @@ fun DownloadQualitySelector() {
         )
 
         val options = listOf(
-            "Opus",
-            "Lossless"
+            "Opus"
         )
         val selectedIndex = when (downloadQuality) {
             pushkar.chorus.music.constants.DownloadQuality.YOUTUBE -> 0
-            pushkar.chorus.music.constants.DownloadQuality.LOSSLESS -> 1
         }
 
         androidx.compose.foundation.layout.FlowRow(
@@ -874,7 +869,6 @@ fun DownloadQualitySelector() {
                     onCheckedChange = {
                         val newQuality = when (index) {
                             0 -> pushkar.chorus.music.constants.DownloadQuality.YOUTUBE
-                            1 -> pushkar.chorus.music.constants.DownloadQuality.LOSSLESS
                             else -> pushkar.chorus.music.constants.DownloadQuality.YOUTUBE
                         }
                         onDownloadQualityChange(newQuality)

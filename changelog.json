@@ -1,18 +1,21 @@
 {
-  "description": "This release brings true lossless audio playback and downloads, enhanced offline queue support, and important security fixes to the updater.",
+  "description": "Welcome to Chorus Music v1.1.1! This update focuses on delivering a robust offline experience.",
   "image": "",
   "changelog": [
     {
       "title": "Features & Improvements",
       "items": [
-        "Lossless Audio: Playback and downloads now properly respect user audio quality preferences, favoring FLAC/ALAC for Lossless and WebM for Opus"
+        "Offline Mode: A beautiful offline card now appears on the Home screen when disconnected, providing quick access to Local Music, Downloads, and Offline Playlists",
+        "Auto-Updater Prompt: The app now proactively prompts you on startup when a new update is available"
       ]
     },
     {
       "title": "Bug Fixes",
       "items": [
-        "Security: Fixed an implicit PendingIntent vulnerability in the updater by explicitly resolving the installer package",
-        "Offline playback: Fixed an issue where offline songs were not being added to the play queue"
+        "Offline Album Art: Fixed an issue where local album artwork was missing in the mini player and notification while offline",
+        "Updater: Fixed an issue where the update dialog showed 'null' instead of the release notes",
+        "Security: Fixed an implicit PendingIntent vulnerability in the updater",
+        "Offline Playback: Fixed an issue where offline songs were not being added to the play queue correctly"
       ]
     }
   ]

@@ -103,18 +103,14 @@ val ShowAudioFallbackToastKey = booleanPreferencesKey("show_audio_fallback_toast
 val AudioQualityKey = stringPreferencesKey("audioQuality")
 val IpVersionKey = stringPreferencesKey("ipVersion")
 
-const val LOSSLESS_ENABLED = true
-
 enum class AudioQuality {
-    OPUS,
-    LOSSLESS,
+    OPUS
 }
 
 val DownloadQualityKey = stringPreferencesKey("downloadQuality")
 
 enum class DownloadQuality {
-    YOUTUBE,
-    LOSSLESS,
+    YOUTUBE
 }
 
 val AudioOffload = booleanPreferencesKey("enableOffload")
@@ -233,10 +229,6 @@ val LastAlbumSyncKey = longPreferencesKey("last_album_sync")
 val LastArtistSyncKey = longPreferencesKey("last_artist_sync")
 val LastPlaylistSyncKey = longPreferencesKey("last_playlist_sync")
 val LastFullSyncKey = longPreferencesKey("last_full_sync")
-val LastLosslessSyncKey = longPreferencesKey("lastLosslessSync")
-val LosslessGithubTokenKey = stringPreferencesKey("losslessGithubToken")
-val LosslessGithubUsernameKey = stringPreferencesKey("losslessGithubUsername")
-val LosslessGithubAvatarKey = stringPreferencesKey("losslessGithubAvatar")
 
 
 const val SYNC_COOLDOWN = 30 * 60L

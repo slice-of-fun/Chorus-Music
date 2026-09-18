@@ -343,7 +343,6 @@
     <string name="ip_version_auto">Otomatik</string>
     <string name="ip_version_ipv4">IPv4 zorla</string>
     <string name="ip_version_ipv6">IPv6 zorla</string>
-    <string name="audio_quality_lossless">KayÄ±psÄ±z MÃ¼zik</string>
     <string name="clear_downloaded_updates">Ä°ndirilen gÃ¼ncellemeleri temizle</string>
     <string name="clear_downloaded_updates_desc">Alan aÃ§mak iÃ§in indirilen APK dosyalarÄ±nÄ± kaldÄ±r</string>
     <string name="bluetooth_permission_required">Ses cihazlarÄ±nÄ± keÅŸfetmek iÃ§in Bluetooth izni gerekli.</string>

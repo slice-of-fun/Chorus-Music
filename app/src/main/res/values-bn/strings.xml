@@ -323,7 +323,6 @@
     <string name="ip_version_auto">à¦¸à§à¦¬à¦¯à¦¼à¦‚à¦•à§à¦°à¦¿à¦¯à¦¼</string>
     <string name="ip_version_ipv4">à¦¬à¦¾à¦§à§à¦¯à¦¤à¦¾à¦®à§‚à¦²à¦• IPv4</string>
     <string name="ip_version_ipv6">à¦¬à¦¾à¦§à§à¦¯à¦¤à¦¾à¦®à§‚à¦²à¦• IPv6</string>
-    <string name="audio_quality_lossless">à¦²à¦¸à¦²à§‡à¦¸ à¦¸à¦™à§à¦—à§€à¦¤</string>
     <string name="clear_downloaded_updates">à¦¡à¦¾à¦‰à¦¨à¦²à§‹à¦¡ à¦•à¦°à¦¾ à¦†à¦ªà¦¡à§‡à¦Ÿ à¦®à§à¦›à§à¦¨</string>
     <string name="clear_downloaded_updates_desc">à¦œà¦¾à¦¯à¦¼à¦—à¦¾ à¦–à¦¾à¦²à¦¿ à¦•à¦°à¦¤à§‡ à¦¡à¦¾à¦‰à¦¨à¦²à§‹à¦¡ à¦•à¦°à¦¾ APK à¦«à¦¾à¦‡à¦² à¦¸à¦°à¦¾à¦¨</string>
     <string name="bluetooth_permission_required">à¦…à¦¡à¦¿à¦“ à¦¡à¦¿à¦­à¦¾à¦‡à¦¸ à¦¶à¦¨à¦¾à¦•à§à¦¤ à¦•à¦°à¦¤à§‡ Bluetooth à¦…à¦¨à§à¦®à¦¤à¦¿ à¦ªà§à¦°à¦¯à¦¼à§‹à¦œà¦¨à¥¤</string>

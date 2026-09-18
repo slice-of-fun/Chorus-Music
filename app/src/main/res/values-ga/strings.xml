@@ -301,7 +301,6 @@
     <string name="audio_quality_auto">UathoibrÃ­och</string>
     <string name="audio_quality_high">Ard</string>
     <string name="audio_quality_low">Ãseal</string>
-    <string name="audio_quality_lossless">Ceol gan chailliÃºint</string>
     <string name="queue">Scuaine</string>
     <string name="persistent_queue">Scuaine bhuan</string>
     <string name="persistent_queue_desc">AthchÃ³irigh do scuaine dheireanach nuair a thosaÃ­onn an aip</string>

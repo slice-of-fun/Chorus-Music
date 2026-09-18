@@ -323,7 +323,6 @@
     <string name="ip_version_auto">Automatisch</string>
     <string name="ip_version_ipv4">IPv4 erzwingen</string>
     <string name="ip_version_ipv6">IPv6 erzwingen</string>
-    <string name="audio_quality_lossless">Verlustfreie Musik</string>
     <string name="clear_downloaded_updates">Heruntergeladene Updates lÃ¶schen</string>
     <string name="clear_downloaded_updates_desc">Heruntergeladene APK-Dateien entfernen, um Speicherplatz freizugeben</string>
     <string name="bluetooth_permission_required">Zum Erkennen von AudiogerÃ¤ten ist die Bluetooth-Berechtigung erforderlich.</string>

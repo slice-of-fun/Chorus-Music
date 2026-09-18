@@ -705,7 +705,9 @@ suspend fun checkForUpdate(
                     var body = if (targetRelease.isNull("body")) {
                         context.getString(R.string.no_changelog_available)
                     } else {
-                        targetRelease.optString("body", context.getString(R.string.no_changelog_available))
+                        targetRelease.optString("body", context.getString(R.string.no_changelog_available)).let {
+                            if (it == "null" || it.isBlank()) context.getString(R.string.no_changelog_available) else it
+                        }
                     }
                     
                     val imageRegex = Regex("!\\[(.*?)\\]\\((.*?)\\)")

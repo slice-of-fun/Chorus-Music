@@ -145,6 +145,7 @@ import pushkar.chorus.music.ui.component.HideOnScrollFAB
 import pushkar.chorus.music.ui.component.LocalBottomSheetPageState
 import pushkar.chorus.music.ui.component.LocalMenuState
 import pushkar.chorus.music.ui.component.NavigationTitle
+import pushkar.chorus.music.ui.component.OfflineModeCard
 import pushkar.chorus.music.ui.component.RandomizeGridItem
 import pushkar.chorus.music.ui.component.shimmer.GridItemPlaceHolder
 import pushkar.chorus.music.ui.component.shimmer.ShimmerHost
@@ -618,7 +619,10 @@ fun HomeScreen(
     val url = if (isLoggedIn) accountImageUrl else null
 
     val scope = rememberCoroutineScope()
-    
+    val context = LocalContext.current
+    val networkObserver = remember(context) { pushkar.chorus.music.utils.NetworkConnectivityObserver(context) }
+    val isOnline by networkObserver.networkStatus.collectAsState(initial = networkObserver.isCurrentlyConnected())
+    val isOffline = !isOnline
     var randomizeJob by remember { mutableStateOf<kotlinx.coroutines.Job?>(null) }
 
     val lazylistState = rememberLazyListState()
@@ -957,6 +961,11 @@ fun HomeScreen(
                 state = lazylistState,
                 contentPadding = LocalPlayerAwareWindowInsets.current.asPaddingValues()
             ) {
+                if (isOffline) {
+                    item(key = "offline_mode_card") {
+                        OfflineModeCard(navController = navController)
+                    }
+                }
                 item {
                     ChipsRow(
                         chips = homePage?.chips?.filter { 

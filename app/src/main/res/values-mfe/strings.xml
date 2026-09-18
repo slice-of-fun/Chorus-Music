@@ -272,7 +272,6 @@
     <string name="audio_quality_auto">Otomatik</string>
     <string name="audio_quality_high">O</string>
     <string name="audio_quality_low">Ba</string>
-    <string name="audio_quality_lossless">Mizik san pert</string>
     <string name="queue">Fil</string>
     <string name="persistent_queue">Fil persistan</string>
     <string name="persistent_queue_desc">Restor ou dernie fil kan aplikasyon demare</string>

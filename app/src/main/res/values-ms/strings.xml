@@ -263,7 +263,6 @@
     <string name="audio_quality_auto">Auto</string>
     <string name="audio_quality_high">Tinggi</string>
     <string name="audio_quality_low">Rendah</string>
-    <string name="audio_quality_lossless">Muzik Tanpa Hilang</string>
     <string name="queue">Baris gilir</string>
     <string name="persistent_queue">Baris gilir berterusan</string>
     <string name="persistent_queue_desc">Pulihkan baris gilir terakhir anda apabila aplikasi dimulakan</string>

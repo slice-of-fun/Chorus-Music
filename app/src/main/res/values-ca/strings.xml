@@ -332,7 +332,6 @@
     <string name="ip_version_auto">AutomÃ tica</string>
     <string name="ip_version_ipv4">ForÃ§ar IPv4</string>
     <string name="ip_version_ipv6">ForÃ§ar IPv6</string>
-    <string name="audio_quality_lossless">MÃºsica sense pÃ¨rdua</string>
     <string name="clear_downloaded_updates">Neteja les actualitzacions baixades</string>
     <string name="clear_downloaded_updates_desc">Elimina els fitxers APK baixats per alliberar espai</string>
     <string name="bluetooth_permission_required">Es necessita permÃ­s de Bluetooth per descobrir dispositius dâ€™Ã udio.</string>

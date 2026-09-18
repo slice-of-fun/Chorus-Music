@@ -320,7 +320,6 @@
     <string name="ip_version_auto">Automatisk</string>
     <string name="ip_version_ipv4">Tving IPv4</string>
     <string name="ip_version_ipv6">Tving IPv6</string>
-    <string name="audio_quality_lossless">Tapfri musikk</string>
     <string name="clear_downloaded_updates">Fjern nedlastede oppdateringer</string>
     <string name="clear_downloaded_updates_desc">Fjern nedlastede APK-filer for Ã¥ frigjÃ¸re plass</string>
     <string name="bluetooth_permission_required">Bluetooth-tillatelse er nÃ¸dvendig for Ã¥ oppdage lydenheter.</string>

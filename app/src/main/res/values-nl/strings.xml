@@ -323,7 +323,6 @@
     <string name="ip_version_auto">Automatisch</string>
     <string name="ip_version_ipv4">IPv4 forceren</string>
     <string name="ip_version_ipv6">IPv6 forceren</string>
-    <string name="audio_quality_lossless">Verliesvrije muziek</string>
     <string name="clear_downloaded_updates">Gedownloade updates wissen</string>
     <string name="clear_downloaded_updates_desc">Verwijder gedownloade APK-bestanden om ruimte vrij te maken</string>
     <string name="bluetooth_permission_required">Bluetooth-toestemming is vereist om audioapparaten te ontdekken.</string>

@@ -323,7 +323,6 @@
     <string name="ip_version_auto">ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡Ð½Ð¾</string>
     <string name="ip_version_ipv4">ÐŸÑ€Ð¸Ð½ÑƒÐ´Ð¸Ñ‚ÐµÐ»ÐµÐ½ IPv4</string>
     <string name="ip_version_ipv6">ÐŸÑ€Ð¸Ð½ÑƒÐ´Ð¸Ñ‚ÐµÐ»ÐµÐ½ IPv6</string>
-    <string name="audio_quality_lossless">ÐÑƒÐ´Ð¸Ð¾ Ð±ÐµÐ· Ð·Ð°Ð³ÑƒÐ±Ð¸</string>
     <string name="clear_downloaded_updates">Ð˜Ð·Ñ‡Ð¸ÑÑ‚Ð²Ð°Ð½Ðµ Ð½Ð° Ð¸Ð·Ñ‚ÐµÐ³Ð»ÐµÐ½Ð¸Ñ‚Ðµ Ð°ÐºÑ‚ÑƒÐ°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ð¸</string>
     <string name="clear_downloaded_updates_desc">ÐŸÑ€ÐµÐ¼Ð°Ñ…Ð²Ð°Ð½Ðµ Ð½Ð° Ð¸Ð·Ñ‚ÐµÐ³Ð»ÐµÐ½Ð¸Ñ‚Ðµ APK Ñ„Ð°Ð¹Ð»Ð¾Ð²Ðµ Ð·Ð° Ð¾ÑÐ²Ð¾Ð±Ð¾Ð¶Ð´Ð°Ð²Ð°Ð½Ðµ Ð½Ð° Ð¼ÑÑÑ‚Ð¾</string>
     <string name="bluetooth_permission_required">Ð˜Ð·Ð¸ÑÐºÐ²Ð° ÑÐµ Ñ€Ð°Ð·Ñ€ÐµÑˆÐµÐ½Ð¸Ðµ Ð·Ð° Bluetooth Ð·Ð° Ð¾Ñ‚ÐºÑ€Ð¸Ð²Ð°Ð½Ðµ Ð½Ð° Ð°ÑƒÐ´Ð¸Ð¾ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°.</string>

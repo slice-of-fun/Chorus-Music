@@ -310,7 +310,6 @@
     <string name="ip_version_auto">è‡ªå‹•</string>
     <string name="ip_version_ipv4">å¼·åˆ¶ IPv4</string>
     <string name="ip_version_ipv6">å¼·åˆ¶ IPv6</string>
-    <string name="audio_quality_lossless">ç„¡æéŸ³è³ª</string>
     <string name="clear_downloaded_updates">æ¸…é™¤å·²ä¸‹è¼‰çš„æ›´æ–°</string>
     <string name="clear_downloaded_updates_desc">åˆªé™¤å·²ä¸‹è¼‰çš„ APK æª”æ¡ˆä»¥é‡‹æ”¾ç©ºé–“</string>
     <string name="bluetooth_permission_required">éœ€è¦è—ç‰™æ¬Šé™æ‰èƒ½ç™¼ç¾éŸ³è¨Šè£ç½®ã€‚</string>

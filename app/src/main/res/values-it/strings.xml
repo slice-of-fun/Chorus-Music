@@ -332,7 +332,6 @@
     <string name="ip_version_auto">Automatico</string>
     <string name="ip_version_ipv4">Forza IPv4</string>
     <string name="ip_version_ipv6">Forza IPv6</string>
-    <string name="audio_quality_lossless">Audio senza perdita</string>
     <string name="clear_downloaded_updates">Cancella gli aggiornamenti scaricati</string>
     <string name="clear_downloaded_updates_desc">Rimuovi i file APK scaricati per liberare spazio</string>
     <string name="bluetooth_permission_required">Ãˆ necessario il permesso Bluetooth per rilevare i dispositivi audio.</string>

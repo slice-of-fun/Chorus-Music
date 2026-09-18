@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <!-- Upstream InnerTune strings -->
 <!-- Do not add new features here -->
@@ -335,7 +335,6 @@
     <string name="audio_quality_auto">Auto</string>
     <string name="audio_quality_high">High</string>
     <string name="audio_quality_low">Low</string>
-    <string name="audio_quality_lossless">Lossless Music</string>
     <string name="queue">Queue</string>
     <string name="persistent_queue">Persistent queue</string>
     <string name="persistent_queue_desc">Restore your last queue when the app starts</string>
@@ -482,7 +481,7 @@
     <string name="last_updated_never">Never</string>
     <string name="cipher_update_success">Extractor mappings updated! Loaded %d players.</string>
     <string name="cipher_update_failed">Failed to update extractor mappings: %s</string>
-    <string name="cipher_updating">Updating extractor configurations…</string>
+    <string name="cipher_updating">Updating extractor configurationsâ€¦</string>
     <string name="hours_label">Hours</string>
     <string name="minutes_label">Minutes</string>
     <string name="seconds_label">Seconds</string>
@@ -527,4 +526,6 @@
     <string name="ai_recommendations">AI Recommendations</string>
     <string name="ai_recommendations_desc">Daily update of a custom playlist based on your taste</string>
     <string name="ai_recommendations_refresh">Refresh Recommendations</string>
+    <string name="update_available">Update Available</string>
+    <string name="update_available_msg">A new version (%s) of Chorus Music is available. Would you like to update?</string>
 </resources>

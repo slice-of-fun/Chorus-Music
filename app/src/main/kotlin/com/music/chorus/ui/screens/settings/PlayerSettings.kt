@@ -252,11 +252,10 @@ highlightKey: String? = null) {
             },
             title = stringResource(R.string.audio_quality),
             current = audioQuality,
-            values = listOf(AudioQuality.OPUS, AudioQuality.LOSSLESS),
+            values = listOf(AudioQuality.OPUS),
             valueText = {
                 when (it) {
                     AudioQuality.OPUS -> "Opus"
-                    AudioQuality.LOSSLESS -> "Lossless"
                     else -> "Opus"
                 }
             },
@@ -275,11 +274,10 @@ highlightKey: String? = null) {
             },
             title = stringResource(R.string.download_quality_title),
             current = downloadQuality,
-            values = listOf(pushkar.chorus.music.constants.DownloadQuality.YOUTUBE, pushkar.chorus.music.constants.DownloadQuality.LOSSLESS),
+            values = listOf(pushkar.chorus.music.constants.DownloadQuality.YOUTUBE),
             valueText = {
                 when (it) {
                     pushkar.chorus.music.constants.DownloadQuality.YOUTUBE -> "YouTube Music (AAC/Default)"
-                    pushkar.chorus.music.constants.DownloadQuality.LOSSLESS -> "Lossless"
                     else -> "Unknown"
                 }
             }
@@ -334,8 +332,6 @@ highlightKey: String? = null) {
             )
         )
 
-        pushkar.chorus.music.ui.component.FundingProgressCard()
-
         Material3SettingsGroup(
             scrollState = scrollState,
             title = "Data Saver",
@@ -376,7 +372,6 @@ highlightKey: String? = null) {
                         Text(
                             when (audioQuality) {
                                 AudioQuality.OPUS -> "Opus"
-                                AudioQuality.LOSSLESS -> "Lossless"
                                 else -> "Opus"
                             }
                         )
@@ -392,7 +387,6 @@ highlightKey: String? = null) {
                         Text(
                             when (downloadQuality) {
                                 pushkar.chorus.music.constants.DownloadQuality.YOUTUBE -> "YouTube Music (AAC/Default)"
-                                pushkar.chorus.music.constants.DownloadQuality.LOSSLESS -> "Lossless"
                                 else -> "YouTube Music (AAC/Default)"
                             }
                         )

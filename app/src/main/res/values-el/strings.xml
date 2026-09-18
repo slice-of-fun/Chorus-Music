@@ -321,7 +321,6 @@
     <string name="ip_version_auto">Î‘Ï…Ï„ÏŒÎ¼Î±Ï„Î·</string>
     <string name="ip_version_ipv4">Î¥Ï€Î¿Ï‡ÏÎµÏ‰Ï„Î¹ÎºÎ® Ï‡ÏÎ®ÏƒÎ· IPv4</string>
     <string name="ip_version_ipv6">Î¥Ï€Î¿Ï‡ÏÎµÏ‰Ï„Î¹ÎºÎ® Ï‡ÏÎ®ÏƒÎ· IPv6</string>
-    <string name="audio_quality_lossless">ÎœÎ¿Ï…ÏƒÎ¹ÎºÎ® Ï‡Ï‰ÏÎ¯Ï‚ Î±Ï€ÏŽÎ»ÎµÎ¹ÎµÏ‚</string>
     <string name="clear_downloaded_updates">Î•ÎºÎºÎ±Î¸Î¬ÏÎ¹ÏƒÎ· Î»Î·Ï†Î¸ÎµÎ¹ÏƒÏŽÎ½ ÎµÎ½Î·Î¼ÎµÏÏŽÏƒÎµÏ‰Î½</string>
     <string name="clear_downloaded_updates_desc">Î‘Ï†Î±Î¯ÏÎµÏƒÎ· Î»Î·Ï†Î¸Î­Î½Ï„Ï‰Î½ Î±ÏÏ‡ÎµÎ¯Ï‰Î½ APK Î³Î¹Î± Î±Ï€ÎµÎ»ÎµÏ…Î¸Î­ÏÏ‰ÏƒÎ· Ï‡ÏŽÏÎ¿Ï…</string>
     <string name="use_login_for_browse">Î§ÏÎ®ÏƒÎ· ÏƒÏÎ½Î´ÎµÏƒÎ·Ï‚ Î³Î¹Î± Ï„Î·Î½ Ï€ÎµÏÎ¹Î®Î³Î·ÏƒÎ· ÏƒÏ„Î¿ Ï€ÎµÏÎ¹ÎµÏ‡ÏŒÎ¼ÎµÎ½Î¿</string>

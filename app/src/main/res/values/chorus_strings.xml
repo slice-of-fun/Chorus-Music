@@ -13,7 +13,7 @@
     <string name="no_title">No title</string>
     <string name="unknown_artist">Unknown artist</string>
     <string name="unknown_item_type">Unknown item type</string>
-    <string name="loading_charts">Loading charts…</string>
+    <string name="loading_charts">Loading chartsâ€¦</string>
     <string name="retry_button">Retry</string>
     <string name="album_cover_desc">Album cover</string>
     <string name="top_music_videos">Top music videos</string>
@@ -44,7 +44,7 @@
     <string name="sync_completed_success">Successfully synced %1$d songs</string>
     <string name="sync_completed_partial">Synced %1$d out of %2$d songs</string>
     <string name="playlist_uploaded">Playlist uploaded successfully</string>
-    <string name="syncing_progress">Syncing %1$d of %2$d songs…</string>
+    <string name="syncing_progress">Syncing %1$d of %2$d songsâ€¦</string>
     <string name="sync_disabled">Sync disabled</string>
     <string name="elements_selected">%1$d elements selected</string>
     <string name="allows_for_sync_witch_youtube">Note: This allows for syncing with YouTube Music. This is NOT changeable later.</string>
@@ -380,7 +380,7 @@
     <string name="lastfm_now_playing">Send Now Playing</string>
     <string name="last_fm_send_likes">Send Likes/Unlikes</string>
     <string name="last_fm_send_likes_description">Love/Unlove songs in Last.fm when they are Liked/Unliked in chorusmusic</string>
-    <string name="logging_in">Logging in…</string>
+    <string name="logging_in">Logging inâ€¦</string>
 
     <string name="scrobbling_configuration">Scrobbling Configuration</string>
     <string name="scrobble_min_track_duration">Scrobble songs longer than</string>
@@ -403,10 +403,10 @@
     <string name="export_music">Export music</string>
     <string name="exporting">Exporting</string>
     <string name="action_exported">Exported</string>
-    <string name="export_preparing">Preparing export…</string>
-    <string name="export_processing_audio">Downloading audio…</string>
-    <string name="export_processing_tags">Embedding metadata…</string>
-    <string name="export_writing_file">Saving file…</string>
+    <string name="export_preparing">Preparing exportâ€¦</string>
+    <string name="export_processing_audio">Downloading audioâ€¦</string>
+    <string name="export_processing_tags">Embedding metadataâ€¦</string>
+    <string name="export_writing_file">Saving fileâ€¦</string>
     <string name="export_complete">Exported: %1$s</string>
     <string name="export_completed">Export completed</string>
     <string name="export_failed">Export failed: %1$s</string>
@@ -610,9 +610,9 @@
     <string name="listen_together_use_custom_server">Use custom server</string>
     <string name="listen_together_username">Username</string>
     <string name="listen_together_connected">Connected</string>
-    <string name="listen_together_reconnecting">Reconnecting…</string>
+    <string name="listen_together_reconnecting">Reconnectingâ€¦</string>
     <string name="listen_together_disconnected">Disconnected</string>
-    <string name="listen_together_connecting">Connecting…</string>
+    <string name="listen_together_connecting">Connectingâ€¦</string>
     <string name="listen_together_error">Connection error</string>
     <string name="listen_together_create_room">Create room</string>
     <string name="listen_together_create_room_desc">Create a room and share the code with friends</string>
@@ -640,7 +640,7 @@
     <string name="listen_together_in_top_bar_desc">Show Listen Together in top app bar instead of navigation bar</string>
     <string name="listen_together_description">Listen to music with your friends in real-time. Create a room to be the host or join an existing room with a code.</string>
     <string name="listen_together_background_disconnect_note">Note: You may get disconnected if you create a room while no music is playing and then switch to another app.</string>
-    <string name="listen_together_not_configured">Listen Together is not configured. Please set up the server URL in Settings → Integrations → Listen Together.</string>
+    <string name="listen_together_not_configured">Listen Together is not configured. Please set up the server URL in Settings â†’ Integrations â†’ Listen Together.</string>
     <string name="listen_together_suggestion_received">%1$s requested %2$s</string>
     <string name="listen_together_suggestion_sent">Suggestion sent to host!</string>
     <string name="listen_together_join_request_notification">%1$s wants to join the room</string>
@@ -656,8 +656,8 @@
     <string name="leave_room">Leave room</string>
     <string name="join_room">Join</string>
     <string name="create_room">Create</string>
-    <string name="joining_room">Joining room %s…</string>
-    <string name="creating_room">Creating room…</string>
+    <string name="joining_room">Joining room %sâ€¦</string>
+    <string name="creating_room">Creating roomâ€¦</string>
     <string name="connect">Connect</string>
     <string name="disconnect">Disconnect</string>
     <string name="reconnect">Reconnect</string>
@@ -700,20 +700,6 @@
 
     <!-- AI Lyrics Translation -->
     <string name="ai_lyrics_translation">AI Hub</string>
-    <string name="contribute_to_lossless">Contribute to Lossless Music</string>
-    <string name="lossless_music_hub">Lossless Music Hub</string>
-    <string name="lossless_desc">Add high-fidelity lossless .flac audio to the Chorus Music ecosystem. Max file size: 99MB.</string>
-    <string name="login_with_github">Log in with GitHub</string>
-    <string name="lossless_audio_file">Lossless Audio File</string>
-    <string name="choose_file">Choose .flac file (Max 99MB)</string>
-    <string name="song_title_hint">Song title</string>
-    <string name="artist_name_hint">Artist name</string>
-    <string name="submit_to_github">Submit to GitHub</string>
-    <string name="uploading_track">Uploading Track...</string>
-    <string name="upload_success">Submission Sent! We have automatically created a Pull Request.</string>
-    <string name="upload_failed">Submission Failed</string>
-    <string name="file_size_error">File size must be under 99MB.</string>
-    <string name="file_format_error">Only .flac files are accepted.</string>
     <string name="ai_translating_lyrics">Translating lyrics...</string>
     <string name="ai_lyrics_translated">Lyrics translated</string>
     <string name="ai_provider">Provider</string>
@@ -799,8 +785,8 @@
     <string name="recognition">Recognition</string>
     <string name="recognize_music">Recognize Music</string>
     <string name="tap_to_recognize">Tap to recognize</string>
-    <string name="listening">Listening…</string>
-    <string name="processing">Processing…</string>
+    <string name="listening">Listeningâ€¦</string>
+    <string name="processing">Processingâ€¦</string>
     <string name="no_match_found">No match found</string>
     <string name="recognition_error">Recognition error</string>
     <string name="try_again">Try again</string>
@@ -895,7 +881,7 @@
     <string name="no_old_releases_with_changelog">No old releases with changelog found</string>
     <string name="failed_to_fetch_changelog">Failed to fetch changelog</string>
     <string name="changelog_title">Changelog</string>
-    <string name="loading_changelog">Loading changelog…</string>
+    <string name="loading_changelog">Loading changelogâ€¦</string>
     <string name="cached">Offline</string>
     <string name="current">Current</string>
     <string name="old_releases">Old Releases</string>
@@ -944,7 +930,7 @@
     <string name="welcome_update_check">Stay</string>
     <string name="welcome_update_status">Updated</string>
     <string name="welcome_update_intro">Ensuring you have the latest features and security improvements.</string>
-    <string name="welcome_checking_updates">Checking for updates…</string>
+    <string name="welcome_checking_updates">Checking for updatesâ€¦</string>
     <string name="welcome_up_to_date">chorusmusic is up to date!</string>
     <string name="welcome_update_available">New version is available: %s</string>
     <string name="welcome_everything_ready">Everything is now up to date</string>
@@ -955,7 +941,7 @@
     <string name="suggestions">Suggestions</string>
     <string name="comments">Comments</string>
     <string name="no_comments">No comments found</string>
-    <string name="type_message">Type a message…</string>
+    <string name="type_message">Type a messageâ€¦</string>
     <string name="send">Send</string>
     <string name="clear_downloaded_updates_auto_info">Dynamically it will be deleted after one day.</string>
     <string name="update_info_badge">Info &amp; Tips</string>
@@ -973,8 +959,8 @@
     <string name="show_comment_button_description">Show a button to view comments in the player queue</string>
     <string name="build_stable">STABLE</string>
     <string name="build_nightly">NIGHTLY</string>
-    <string name="scanning_device">Scanning device…</string>
-    <string name="local_songs_scan_failed">Couldn’t finish scanning this device.</string>
+    <string name="scanning_device">Scanning deviceâ€¦</string>
+    <string name="local_songs_scan_failed">Couldnâ€™t finish scanning this device.</string>
     <string name="local_songs_permission_body">Allow storage access to scan audio files stored on this device.</string>
     <string name="local_songs_scan_summary">Last scan: %1$d songs found, %2$d removed</string>
     <string name="local_songs_ready_desc">Play local songs on this device.</string>
@@ -1004,8 +990,8 @@
     <string name="widget_recognizer_name">Music Recognizer</string>
     <string name="widget_recognizer_description">Identify songs playing around you directly from your home screen</string>
     <string name="widget_recognizer_tap_to_search">Tap to identify a song</string>
-    <string name="widget_recognizer_listening">Listening…</string>
-    <string name="widget_recognizer_processing">Identifying…</string>
+    <string name="widget_recognizer_listening">Listeningâ€¦</string>
+    <string name="widget_recognizer_processing">Identifyingâ€¦</string>
     <string name="widget_recognizer_no_match">No match found. Try again</string>
     <string name="widget_recognizer_error">Recognition failed</string>
     <string name="widget_recognizer_error_generic">Something went wrong. Please try again</string>
@@ -1014,15 +1000,13 @@
     <string name="widget_recognizer_mic_desc">Identify a song</string>
     <string name="widget_recognizer_channel_name">Music Recognition</string>
     <string name="widget_recognizer_channel_desc">Shows a notification while identifying a song from the widget</string>
-    <string name="widget_recognizer_notification_text">Recording audio to identify the song…</string>
+    <string name="widget_recognizer_notification_text">Recording audio to identify the songâ€¦</string>
     <string name="widget_playlists">Playlists</string>
     <string name="widget_playlists_description">Playlist shortcuts with mini-player controls</string>
 
     <string name="choose_something_below">Choose something below</string>
 
     <string name="download_quality_title">Download Quality</string>
-    <string name="enable_lossless_audio">Enable Lossless Audio</string>
-    <string name="lossless_audio_warning">Lossless audio requires a fast connection. It may consume more data and battery. Continue?</string>
     <string name="legacy_icon">Legacy Icon</string>
     <string name="legacy_icon_desc">Revert the app icon back to the original legacy design</string>
 </resources>
