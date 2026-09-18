@@ -995,6 +995,9 @@ fun HomeScreen(
                     }
 
                     if (cachedSongs.isNotEmpty()) {
+                        item(key = "offline_cached_spacer") {
+                            androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(16.dp))
+                        }
                         item(key = "offline_cached_title") {
                             NavigationTitle(title = "Cached Songs")
                         }
@@ -1005,31 +1008,6 @@ fun HomeScreen(
                                 modifier = Modifier.animateItem()
                             ) {
                                 items(cachedSongs, key = { it.id }) { song ->
-                                    ytGridItem(
-                                        com.music.innertube.models.SongItem(
-                                            id = song.id,
-                                            title = song.title,
-                                            artists = song.artists.map { com.music.innertube.models.Artist(name = it.name, id = it.id) },
-                                            thumbnail = song.thumbnailUrl ?: "",
-                                            explicit = false
-                                        )
-                                    )
-                                }
-                            }
-                        }
-                    }
-
-                    if (localSongs.isNotEmpty()) {
-                        item(key = "offline_local_title") {
-                            NavigationTitle(title = "Local Files")
-                        }
-                        item(key = "offline_local_list") {
-                            androidx.compose.foundation.lazy.LazyRow(
-                                contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp),
-                                horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp),
-                                modifier = Modifier.animateItem()
-                            ) {
-                                items(localSongs, key = { song: pushkar.chorus.music.db.entities.Song -> song.id }) { song ->
                                     ytGridItem(
                                         com.music.innertube.models.SongItem(
                                             id = song.id,

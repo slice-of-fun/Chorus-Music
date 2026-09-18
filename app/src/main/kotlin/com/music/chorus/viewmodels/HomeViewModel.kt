@@ -75,6 +75,8 @@ class HomeViewModel @Inject constructor(
     @ApplicationContext val context: Context,
     val database: MusicDatabase,
     val syncUtils: SyncUtils,
+    @pushkar.chorus.music.di.PlayerCache private val playerCache: androidx.media3.datasource.cache.SimpleCache,
+    @pushkar.chorus.music.di.DownloadCache private val downloadCache: androidx.media3.datasource.cache.SimpleCache
 ) : ViewModel() {
     val isRefreshing = MutableStateFlow(false)
     val isLoading = MutableStateFlow(false)
@@ -114,7 +116,36 @@ class HomeViewModel @Inject constructor(
     val allYtItems = MutableStateFlow<List<YTItem>>(emptyList())
     
     val downloadedSongs = database.downloadedSongs(pushkar.chorus.music.constants.SongSortType.CREATE_DATE, true).stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
-    val cachedSongs = database.cachedSongs().stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+    private val _cachedSongs = MutableStateFlow<List<Song>>(emptyList())
+    val cachedSongs: StateFlow<List<Song>> = _cachedSongs
+    
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            while (true) {
+                val cachedIds = playerCache.keys.toSet()
+                val downloadedIds = downloadCache.keys.toSet()
+                val pureCacheIds = cachedIds.subtract(downloadedIds)
+
+                val songs = if (pureCacheIds.isNotEmpty()) {
+                    database.getSongsByIds(pureCacheIds.toList())
+                } else {
+                    emptyList()
+                }
+
+                val completeSongs = songs.filter {
+                    val contentLength = it.format?.contentLength
+                    contentLength != null && playerCache.isCached(it.song.id, 0, contentLength)
+                }
+                
+                _cachedSongs.value = completeSongs
+                    .filter { it.song.dateDownload != null }
+                    .sortedByDescending { it.song.dateDownload }
+
+                kotlinx.coroutines.delay(1000)
+            }
+        }
+    }
+    
     val localSongs = database.localSongs().stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     val speedDialItems: StateFlow<List<YTItem>> =
