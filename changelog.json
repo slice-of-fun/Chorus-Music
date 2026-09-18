@@ -1,21 +1,18 @@
 {
-  "description": "This release brings major offline playback improvements, a refreshed UI for Followed Artists, and a much smoother in-app update experience.",
+  "description": "This release brings true lossless audio playback and downloads, enhanced offline queue support, and important security fixes to the updater.",
   "image": "",
   "changelog": [
     {
       "title": "Features & Improvements",
       "items": [
-        "Offline playback: Fully cached songs can now be played entirely offline without requiring a network connection",
-        "Followed Artists: Refreshed the search bar to dynamically expand inside the TopAppBar for a cleaner look",
-        "Spotify Import: Simplified placeholder text to improve readability across different languages"
+        "Lossless Audio: Playback and downloads now properly respect user audio quality preferences, favoring FLAC/ALAC for Lossless and WebM for Opus"
       ]
     },
     {
       "title": "Bug Fixes",
       "items": [
-        "Updater: Tapping the 'Update Available' notification now securely opens the in-app update screen instead of throwing a browser 404 error",
-        "Updater: GitHub release notes are now beautifully parsed and stripped of raw markdown bullet points for a cleaner changelog",
-        "UI: Fixed a frustrating double-padding gap issue on the Followed Artists list"
+        "Security: Fixed an implicit PendingIntent vulnerability in the updater by explicitly resolving the installer package",
+        "Offline playback: Fixed an issue where offline songs were not being added to the play queue"
       ]
     }
   ]

@@ -106,10 +106,15 @@ constructor(
                 return@Factory dataSpec.withUri(it.first.toUri())
             }
 
+            val audioQuality = if (downloadQuality == pushkar.chorus.music.constants.DownloadQuality.LOSSLESS) {
+                AudioQuality.LOSSLESS
+            } else {
+                AudioQuality.OPUS
+            }
             val playbackData = runBlocking(Dispatchers.IO) {
                 YTPlayerUtils.playerResponseForPlayback(
                     mediaId,
-                    audioQuality = AudioQuality.OPUS,
+                    audioQuality = audioQuality,
                     connectivityManager = connectivityManager
                 )
             }.getOrThrow()

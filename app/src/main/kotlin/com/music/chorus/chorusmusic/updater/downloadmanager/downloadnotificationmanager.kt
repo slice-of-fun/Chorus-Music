@@ -293,6 +293,12 @@ object DownloadNotificationManager {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
 
+        val resolveInfo = appContext.packageManager.resolveActivity(installIntent, 0)
+        if (resolveInfo == null) {
+            return
+        }
+        installIntent.setPackage(resolveInfo.activityInfo.packageName)
+
         val pendingIntent = PendingIntent.getActivity(
             appContext,
             0,

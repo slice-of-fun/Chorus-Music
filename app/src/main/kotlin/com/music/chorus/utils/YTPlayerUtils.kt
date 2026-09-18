@@ -422,7 +422,7 @@ object YTPlayerUtils {
                         "bitrate" to format.bitrate,
                         "urlSource" to urlSource,
                         "resolved" to (streamUrl != null),
-                    ) + if (streamUrl != null) " " + describeStreamUrl(streamUrl!!) else "",
+                    ) + if (streamUrl != null) " " + describeStreamUrl(streamUrl) else "",
                 )
                 if (streamUrl == null) {
                     Timber.tag(logTag).d("Stream URL not found for format")
@@ -472,8 +472,8 @@ object YTPlayerUtils {
                         Timber.tag(TAG).d("  Original URL length: ${streamUrl.length}")
                         Timber.tag(TAG).d("  Original URL preview: ${streamUrl.take(100)}...")
 
-                        val originalUrl = streamUrl!!
-                        streamUrl = CipherDeobfuscator.transformNParamInUrl(streamUrl!!)
+                        val originalUrl = streamUrl
+                        streamUrl = CipherDeobfuscator.transformNParamInUrl(streamUrl)
 
                         Timber.tag(TAG).d("  Transformed URL length: ${streamUrl.length}")
                         Timber.tag(TAG).d("  URL changed: ${originalUrl != streamUrl}")
@@ -486,8 +486,8 @@ object YTPlayerUtils {
 
                         if (needsPoToken) {
                             Timber.tag(TAG).d("Appending pot= parameter to stream URL")
-                            val separator = if ("?" in streamUrl!!) "&" else "?"
-                            streamUrl = "${streamUrl}${separator}pot=${Uri.encode(poToken!!.streamingDataPoToken)}"
+                            val separator = if ("?" in streamUrl) "&" else "?"
+                            streamUrl = "${streamUrl}${separator}pot=${Uri.encode(poToken.streamingDataPoToken)}"
                             Timber.tag(TAG).d("  Final URL length (with pot): ${streamUrl.length}")
                         }
                     } catch (e: Exception) {
@@ -536,7 +536,7 @@ object YTPlayerUtils {
                             "validated" to false,
                             "why" to if (isPrivatelyOwned) "privatelyOwnedTrack" else "lastFallbackClient",
                             "expiresInSeconds" to streamExpiresInSeconds,
-                        ) + " " + describeStreamUrl(streamUrl!!),
+                        ) + " " + describeStreamUrl(streamUrl),
                     )
                     logCascade("resolved")
                     break
@@ -557,7 +557,7 @@ object YTPlayerUtils {
                             "client" to currentClient.clientName,
                             "validated" to true,
                             "expiresInSeconds" to streamExpiresInSeconds,
-                        ) + " " + describeStreamUrl(streamUrl!!),
+                        ) + " " + describeStreamUrl(streamUrl),
                     )
                     logCascade("resolved")
                     break
@@ -634,7 +634,7 @@ object YTPlayerUtils {
         Fix403.i(
             fx, "resolve.success",
             Fix403.kv("videoId" to videoId, "itag" to format.itag, "expiresInSeconds" to streamExpiresInSeconds) +
-                    " " + describeStreamUrl(streamUrl!!),
+                    " " + describeStreamUrl(streamUrl),
         )
 
         Timber.tag(logTag)
@@ -683,14 +683,28 @@ object YTPlayerUtils {
     ): PlayerResponse.StreamingData.Format? {
         Timber.tag(logTag)
             .d("Finding format with audioQuality: $audioQuality, network metered: ${connectivityManager.isActiveNetworkMetered}")
-        val format = playerResponse.streamingData?.adaptiveFormats
-            ?.filter { it.isAudio && it.isOriginal }
-            ?.maxByOrNull {
-                it.bitrate * 1 + (if (it.mimeType.startsWith("audio/mp4")) 1000000 else 0)
+        val formats = playerResponse.streamingData?.adaptiveFormats
+            ?.filter { it.isAudio && it.isOriginal } ?: emptyList()
+
+        if (formats.isEmpty()) return null
+
+        val format = when (audioQuality) {
+            AudioQuality.LOSSLESS -> {
+                formats.find {
+                    it.mimeType.contains("audio/flac", ignoreCase = true) ||
+                    it.mimeType.contains("audio/alac", ignoreCase = true) ||
+                    it.audioQuality?.contains("LOSSLESS", ignoreCase = true) == true
+                } ?: formats.maxByOrNull { it.bitrate }
             }
+            AudioQuality.OPUS -> {
+                formats.filter { it.mimeType.startsWith("audio/webm") }
+                    .maxByOrNull { it.bitrate }
+                    ?: formats.maxByOrNull { it.bitrate }
+            }
+        }
 
         if (format != null) {
-            Timber.tag(logTag).d("Selected format: ${format.mimeType}, bitrate: ${format.bitrate}")
+            Timber.tag(logTag).d("Selected format: ${format.mimeType}, bitrate: ${format.bitrate}, audioQuality: ${format.audioQuality}")
         } else {
             Timber.tag(logTag).d("No suitable audio format found")
         }

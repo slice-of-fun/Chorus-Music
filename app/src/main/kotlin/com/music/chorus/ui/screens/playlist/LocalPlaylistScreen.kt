@@ -1126,7 +1126,7 @@ fun LocalPlaylistHeader(
                 }
                 1 -> {
                     AsyncImage(
-                        model = (overrideThumbnail.value ?: playlist.thumbnails[0])?.resize(1200, 1200),
+                        model = (overrideThumbnail.value ?: playlist.thumbnails[0]).resize(1200, 1200),
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()
