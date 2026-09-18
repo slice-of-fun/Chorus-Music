@@ -252,10 +252,11 @@ highlightKey: String? = null) {
             },
             title = stringResource(R.string.audio_quality),
             current = audioQuality,
-            values = listOf(AudioQuality.OPUS),
+            values = listOf(AudioQuality.OPUS, AudioQuality.LOSSLESS),
             valueText = {
                 when (it) {
                     AudioQuality.OPUS -> "Opus"
+                    AudioQuality.LOSSLESS -> "Lossless"
                     else -> "Opus"
                 }
             },
@@ -274,10 +275,11 @@ highlightKey: String? = null) {
             },
             title = stringResource(R.string.download_quality_title),
             current = downloadQuality,
-            values = listOf(pushkar.chorus.music.constants.DownloadQuality.YOUTUBE),
+            values = listOf(pushkar.chorus.music.constants.DownloadQuality.YOUTUBE, pushkar.chorus.music.constants.DownloadQuality.LOSSLESS),
             valueText = {
                 when (it) {
                     pushkar.chorus.music.constants.DownloadQuality.YOUTUBE -> "YouTube Music (AAC/Default)"
+                    pushkar.chorus.music.constants.DownloadQuality.LOSSLESS -> "Lossless"
                     else -> "Unknown"
                 }
             }
@@ -374,6 +376,7 @@ highlightKey: String? = null) {
                         Text(
                             when (audioQuality) {
                                 AudioQuality.OPUS -> "Opus"
+                                AudioQuality.LOSSLESS -> "Lossless"
                                 else -> "Opus"
                             }
                         )
@@ -389,6 +392,7 @@ highlightKey: String? = null) {
                         Text(
                             when (downloadQuality) {
                                 pushkar.chorus.music.constants.DownloadQuality.YOUTUBE -> "YouTube Music (AAC/Default)"
+                                pushkar.chorus.music.constants.DownloadQuality.LOSSLESS -> "Lossless"
                                 else -> "YouTube Music (AAC/Default)"
                             }
                         )
