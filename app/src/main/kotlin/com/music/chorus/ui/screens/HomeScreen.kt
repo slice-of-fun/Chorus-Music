@@ -1040,8 +1040,9 @@ fun HomeScreen(
                                                 onLongClick = {
                                                     haptic.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress)
                                                     menuState.show {
-                                                        pushkar.chorus.music.ui.component.YouTubeSongMenu(
+                                                        YouTubeSongMenu(
                                                             song = songItem,
+                                                            navController = navController,
                                                             onDismiss = menuState::dismiss
                                                         )
                                                     }

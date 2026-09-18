@@ -440,7 +440,7 @@ class MainActivity : ComponentActivity() {
                             playerCache.isCached(metadata.id, 0, 1) || downloadCache.isCached(metadata.id, 0, 1)
                         } catch (e: Exception) { false }
                         
-                        if (!isCached && !metadata.isLocal) {
+                        if (!isCached && !metadata.id.pushkar.chorus.music.utils.isLocalMediaId()) {
                             connection.player.pause()
                             connection.player.clearMediaItems()
                         }
