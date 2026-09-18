@@ -1237,6 +1237,9 @@ class MusicService :
         if (retryCount >= MAX_RETRY_COUNT) {
             Timber.tag(TAG).w("Max retry count ($MAX_RETRY_COUNT) reached, stopping playback")
             stopOnError()
+            android.os.Handler(android.os.Looper.getMainLooper()).post {
+                android.widget.Toast.makeText(this@MusicService, pushkar.chorus.music.R.string.error_no_internet, android.widget.Toast.LENGTH_LONG).show()
+            }
             retryCount = 0
             return
         }

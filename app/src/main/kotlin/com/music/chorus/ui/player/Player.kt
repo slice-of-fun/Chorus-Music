@@ -1791,7 +1791,7 @@ fun BottomSheetPlayer(
 
             Spacer(Modifier.height(24.dp))
 
-            if (playbackState == Player.STATE_BUFFERING && (sliderPosition ?: effectivePosition) <= 0L) {
+            if (playbackState == Player.STATE_BUFFERING && effectiveIsPlaying && (sliderPosition ?: effectivePosition) <= 0L) {
                 androidx.compose.foundation.layout.Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -2021,7 +2021,7 @@ fun BottomSheetPlayer(
                         listOf(codecStr, bitrateStr).filter { it.isNotEmpty() }.joinToString(" \u2022 ")
                     }
 
-                    val isBuffering = playbackState == androidx.media3.common.Player.STATE_BUFFERING
+                    val isBuffering = playbackState == androidx.media3.common.Player.STATE_BUFFERING && effectiveIsPlaying
 
                     
                     
@@ -2318,7 +2318,7 @@ fun BottomSheetPlayer(
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.Center
                                 ) {
-                                    if (playbackState == Player.STATE_BUFFERING) {
+                                    if (playbackState == Player.STATE_BUFFERING && effectiveIsPlaying) {
                                         androidx.compose.material3.CircularProgressIndicator(
                                             color = iconButtonColor,
                                             modifier = Modifier.size(36.dp),

@@ -1053,6 +1053,43 @@ fun HomeScreen(
                             }
                         }
                     }
+
+                    if (downloadedSongs.isEmpty() && cachedSongs.isEmpty()) {
+                        item(key = "offline_empty_state") {
+                            androidx.compose.material3.Surface(
+                                shape = androidx.compose.foundation.shape.RoundedCornerShape(28.dp),
+                                color = androidx.compose.material3.MaterialTheme.colorScheme.surfaceContainerLow,
+                                modifier = androidx.compose.ui.Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp, vertical = 24.dp),
+                            ) {
+                                androidx.compose.foundation.layout.Column(
+                                    horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+                                    verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(12.dp),
+                                    modifier = androidx.compose.ui.Modifier.padding(horizontal = 20.dp, vertical = 32.dp),
+                                ) {
+                                    androidx.compose.material3.Icon(
+                                        painter = androidx.compose.ui.res.painterResource(pushkar.chorus.music.R.drawable.offline),
+                                        contentDescription = null,
+                                        tint = androidx.compose.material3.MaterialTheme.colorScheme.primary,
+                                        modifier = androidx.compose.ui.Modifier.size(48.dp),
+                                    )
+                                    androidx.compose.material3.Text(
+                                        text = "Nothing Saved",
+                                        style = androidx.compose.material3.MaterialTheme.typography.titleLarge,
+                                        fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                                    )
+                                    androidx.compose.material3.Text(
+                                        text = "You don't have any downloaded or cached songs to play offline.",
+                                        style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
+                                        color = androidx.compose.material3.MaterialTheme.colorScheme.onSurfaceVariant,
+                                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                                    )
+                                }
+                            }
+                        }
+                    }
                 } else {
                 item {
                     ChipsRow(

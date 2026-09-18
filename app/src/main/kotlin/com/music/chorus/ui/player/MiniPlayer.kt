@@ -794,7 +794,7 @@ private fun LegacyPlayPauseButton(
             }
         },
     ) {
-        if (playbackState == Player.STATE_BUFFERING) {
+        if (playbackState == Player.STATE_BUFFERING && effectiveIsPlaying) {
             androidx.compose.material3.CircularProgressIndicator(
                 color = tint,
                 modifier = Modifier.size(24.dp),
@@ -1219,7 +1219,7 @@ private fun MiniPlayerControls(
                     .background(primaryColor)
             )
 
-            if (playbackState == Player.STATE_BUFFERING) {
+            if (playbackState == Player.STATE_BUFFERING && effectiveIsPlaying) {
                 androidx.compose.material3.CircularProgressIndicator(
                     color = onPrimaryColor,
                     modifier = Modifier.size(24.dp),
