@@ -702,7 +702,11 @@ suspend fun checkForUpdate(
                         changelogList.add(ChangelogSection(title, itemsList))
                     }
                 } catch (e: Exception) {
-                    var body = targetRelease.optString("body", context.getString(R.string.no_changelog_available))
+                    var body = if (targetRelease.isNull("body")) {
+                        context.getString(R.string.no_changelog_available)
+                    } else {
+                        targetRelease.optString("body", context.getString(R.string.no_changelog_available))
+                    }
                     
                     val imageRegex = Regex("!\\[(.*?)\\]\\((.*?)\\)")
                     val match = imageRegex.find(body)
