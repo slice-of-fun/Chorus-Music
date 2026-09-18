@@ -1029,8 +1029,7 @@ fun HomeScreen(
                                 horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp),
                                 modifier = Modifier.animateItem()
                             ) {
-                                items(localSongs, key = { it.id }) { item ->
-                                    val song = item as pushkar.chorus.music.db.entities.Song
+                                items(localSongs, key = { song: pushkar.chorus.music.db.entities.Song -> song.id }) { song ->
                                     ytGridItem(
                                         com.music.innertube.models.SongItem(
                                             id = song.id,
