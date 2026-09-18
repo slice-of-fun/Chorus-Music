@@ -4,11 +4,12 @@
     --text-secondary: rgba(255, 255, 255, 0.7);
     --text-tertiary: rgba(255, 255, 255, 0.4);
     
-    --glass-bg: rgba(20, 20, 20, 0.4);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-highlight: rgba(255, 255, 255, 0.12);
+    --panel-bg: #0A0A0A;
+    --card-bg: #111111;
+    --border-color: #333333;
+    --highlight: #222222;
 
-    --primary-color: #FF2D55; /* Apple Music Pink/Red */
+    --primary-color: #FFFFFF;
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
@@ -28,73 +29,25 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Ambient Background Animation */
-.ambient-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    overflow: hidden;
-    background: #000;
-}
 
-.ambient-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.6;
-    animation: drift 20s infinite alternate ease-in-out;
-}
-
-.color-1 {
-    top: -10%; left: -10%;
-    width: 70vw; height: 70vw;
-    background: radial-gradient(circle, #ff2d55 0%, transparent 70%);
-}
-
-.color-2 {
-    bottom: -20%; right: -10%;
-    width: 60vw; height: 60vw;
-    background: radial-gradient(circle, #5e5ce6 0%, transparent 70%);
-    animation-delay: -5s;
-}
-
-.color-3 {
-    top: 40%; left: 40%;
-    width: 50vw; height: 50vw;
-    background: radial-gradient(circle, #ff9f0a 0%, transparent 70%);
-    animation-delay: -10s;
-}
-
-@keyframes drift {
-    0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(10vw, 5vh) scale(1.1); }
-    100% { transform: translate(-5vw, 15vh) scale(0.9); }
-}
-
-/* Glass Utilities */
+/* Solid Panel Utilities */
 .glass-panel {
-    background: var(--glass-bg);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border: 1px solid var(--glass-border);
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
 }
 
 .glass-card {
-    background: linear-gradient(180deg, rgba(30, 30, 30, 0.5) 0%, rgba(15, 15, 15, 0.4) 100%);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 1px solid var(--glass-border);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     border-radius: 24px;
     padding: 32px;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
 .glass-card:hover {
     transform: translateY(-4px);
-    border-color: var(--glass-highlight);
+    border-color: #555;
+    background: var(--highlight);
 }
 
 /* Top App Bar */
@@ -106,7 +59,7 @@ body {
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .top-app-bar-content {
@@ -173,9 +126,7 @@ body {
     line-height: 1.05;
     letter-spacing: -2px;
     margin-bottom: 24px;
-    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-primary);
 }
 
 .hero-text .body-text {
@@ -224,14 +175,14 @@ body {
 }
 
 .secondary-button {
-    background: var(--glass-bg);
+    background: var(--card-bg);
     color: var(--text-primary);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
 }
 
 .secondary-button:hover {
-    background: var(--glass-highlight);
+    background: var(--highlight);
+    border-color: #555;
     transform: scale(1.02);
 }
 
@@ -246,20 +197,8 @@ body {
 .hero-image-container {
     padding: 40px;
     border-radius: 40px;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-    position: relative;
-}
-
-.hero-image-container::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: 41px;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.8);
 }
 
 .hero-image {
@@ -477,7 +416,7 @@ body {
 footer {
     text-align: center;
     padding: 40px 24px;
-    border-top: 1px solid var(--glass-border);
+    border-top: 1px solid var(--border-color);
     color: var(--text-tertiary);
     font-size: 14px;
 }
