@@ -484,7 +484,7 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     color: var(--text-secondary);
     font-size: 14px;
